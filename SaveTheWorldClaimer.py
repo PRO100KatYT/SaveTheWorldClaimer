@@ -127,6 +127,15 @@ if "errorMessage" in reqClaimCollectedResourcesText:
     print(f"\nERROR: {reqClaimCollectedResourcesText['errorMessage']}")
     input("\nPress ENTER to close the program.\n")
     exit()
+try:
+    reqClaimCollectedResourcesText['notifications']
+except:
+    for key in reqCampaignProfileCheckItems:
+        if reqCampaignProfileCheckItems[f'{key}']['templateId'] == "Token:collectionresource_nodegatetoken01":
+            totalItemGuid = key
+    print(f"ERROR: Failed to claim {reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{tokenToClaim}']['attributes']['stored_value']} Research Points because you have the maximum number of accumulated Research Points at once ({reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']})\n")
+    input("Press ENTER to close the program.\n")
+    exit()
 totalItemGuid = reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['itemGuid']
 print(f"Claimed {reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
 input("Press ENTER to close the program.\n")
