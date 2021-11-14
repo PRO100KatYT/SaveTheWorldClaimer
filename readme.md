@@ -3,6 +3,12 @@
 This program allows you to claim Save the World Daily Reward and Research Points without opening the game.
 
 ---
+### Changelog:
+The new 1.1.0 update introduces:
+- The ability to automatically spend points on purchasing F.O.R.T. stats when the maximum amount is accumulated.
+  - To enable it, change the value in config.json from false to true.
+- Tweaked the item list and the program's code a little bit.
+---
 
 ### How to use it?
 
