@@ -8,7 +8,7 @@ class links:
     getDeviceAuth = "https://account-public-service-prod.ol.epicgames.com/account/api/public/account/{0}/deviceAuth"
     profileRequest = "https://fortnite-public-service-prod11.ol.epicgames.com/fortnite/api/game/v2/profile/{0}/client/{1}?profileId={2}"
 
-print("Fortnite StW Daily Reward & Research Points claimer v1.1.0 by PRO100KatYT\n")
+print("Fortnite StW Daily Reward & Research Points claimer v1.1.1 by PRO100KatYT\n")
 
 # Creating and/or reading the auth.json file.
 authPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "auth.json")
@@ -153,7 +153,7 @@ except:
             print(f"You have the maximum number of accumulated Research Points at once ({rpStored}).\nStarting to automatically spend Research Points...\n")
             while True:
                 reqFORTLevelsCheck = requests.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}")
-                reqFORTLevelsCheckText = json.loads(reqCampaignProfileCheck.text)['profileChanges'][0]['profile']['stats']['attributes']['research_levels']
+                reqFORTLevelsCheckText = json.loads(reqFORTLevelsCheck.text)['profileChanges'][0]['profile']['stats']['attributes']['research_levels']
                 levelsList = [int(reqFORTLevelsCheckText['fortitude']), int(reqFORTLevelsCheckText['offense']), int(reqFORTLevelsCheckText['resistance']), int(reqFORTLevelsCheckText['technology'])]
                 lowestLevel = min(levelsList)
                 for key in reqFORTLevelsCheckText:
