@@ -1,4 +1,4 @@
-print("Fortnite StW Daily Reward & Research Points claimer v1.2.0 by PRO100KatYT\n")
+print("Fortnite StW Daily Reward & Research Points claimer v1.2.1 by PRO100KatYT\n")
 try:
     import json
     import requests
@@ -81,7 +81,7 @@ configPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.i
 if not os.path.exists(configPath):
     print("Starting to generate the config.ini file.\n")
     configFile = open(configPath, "a")
-    configFile.write("[StW_Claimer_Config]\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\nSpend_Research_Points = false \n\n# Do you want the program to search for free Llamas and open them if they are avaiable?\nOpen_Free_Llamas = true")
+    configFile.write("[StW_Claimer_Config]\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\nSpend_Research_Points = false\n\n# Do you want the program to search for free Llamas and open them if they are avaiable?\nOpen_Free_Llamas = true")
     configFile.close()
     print("The config.ini file was generated successfully.\n")
 try:
@@ -184,8 +184,6 @@ else:
                     reqClaimCollectedResourcesText = json.loads(reqClaimCollectedResources.text)
                     totalItemGuid = reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['itemGuid']
                     print(f"Claimed {reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
-                input("Press ENTER to close the program.\n")
-                exit()
         totalItemGuid = reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['itemGuid']
         print(f"Claimed {reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
 
@@ -201,8 +199,10 @@ if bOpenFreeLlamas == "true":
         else: cpspStorefront = []
     if not cpspStorefront: print("ERROR: Failed to find the Llama shop. Is it even possible? Maybe a new Fortnite update could break it, but it's very unlikely...\n")
     else:
+        reqPopulateLlamas = requests.post(links.profileRequest.format(accountId, "PopulatePrerolledOffers", "campaign"), headers=headers, data="{}")
+        reqPopulateLlamasText = json.loads(reqPopulateLlamas.text)
         for key in cpspStorefront:
-            if ("Free" in key['devName']) and (key['prices'][0]['finalPrice'] == 0):
+            if (not "always" in key['devName'].lower()) and (key['prices'][0]['finalPrice'] == 0):
                 llamaToClaimOfferId = key['offerId']
                 try: llamaToClaimTitle = key['title']
                 except: llamaToClaimTitle = []
@@ -217,15 +217,14 @@ if bOpenFreeLlamas == "true":
                 try: llamaToClaimName = getStringList['Llama names'][f'{llamaToClaimCPId}']
                 except: llamaToClaimName = llamaToClaimCPId
             openedLlamas = 0
-            for key in getStringList['Item names']: print("\"" + key.lower()+ "\": " + "\"" + getStringList['Item names'][f'{key}'] + "\",")
+            alreadyOpenedFreeLlamas = []
             while True:
                 reqPopulateLlamas = requests.post(links.profileRequest.format(accountId, "PopulatePrerolledOffers", "campaign"), headers=headers, data="{}")
                 reqBuyFreeLlama = requests.post(links.profileRequest.format(accountId, "PurchaseCatalogEntry", "common_core"), headers=headers, json={"offerId": f"{llamaToClaimOfferId}", "purchaseQuantity": 1, "currency": "MtxCurrency", "currencySubType": "", "expectedTotalPrice": 0, "gameContext": "Frontend.None"})
                 reqBuyFreeLlamaText = json.loads(reqBuyFreeLlama.text)
-                input(reqBuyFreeLlamaText)
                 if "errorMessage" in reqBuyFreeLlamaText:
-                    if "is not allowed because it would exceed the daily limit of" in reqBuyFreeLlamaText['errorMessage']: alreadyOpenedFreeLlamas = 1
-                    else: alreadyOpenedFreeLlamas = []
+                    if "is not allowed because it would exceed the daily limit of" in reqBuyFreeLlamaText['errorMessage']:
+                        if (openedLlamas == 0): alreadyOpenedFreeLlamas = 1
                     break
                 else:
                     print(f"\nOpening: {llamaToClaimName}")
@@ -244,6 +243,6 @@ if bOpenFreeLlamas == "true":
                 if int(openedLlamas) == 1: llamasWord = "Llama"
                 print(f"\nSuccessfully opened {openedLlamas} free {llamasWord}.\n")
             else:
-                print(f"\nFree Llamas that are currently avaiable in the shop have been already opened on this account. ({displayName})")
+                print(f"\nFree Llamas that are currently avaiable in the shop have been already opened on this account. Remember that you can open a maximum of 2 free Llamas in 24 hours.\n")
 input("Press ENTER to close the program.\n")
 exit()
