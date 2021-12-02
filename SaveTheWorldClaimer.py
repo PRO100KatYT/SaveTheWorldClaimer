@@ -1,4 +1,4 @@
-print("Fortnite StW Daily Reward & Research Points claimer v1.2.1 by PRO100KatYT\n")
+print("Fortnite StW Daily Reward & Research Points claimer v1.2.2 by PRO100KatYT\n")
 try:
     import json
     import requests
@@ -85,7 +85,7 @@ if not os.path.exists(configPath):
     configFile.close()
     print("The config.ini file was generated successfully.\n")
 try:
-    getConfigIni = config.read('config.ini')
+    getConfigIni = config.read(configPath)
     bSpendAutoResearch = config['StW_Claimer_Config']['Spend_Research_Points']
     bOpenFreeLlamas = config['StW_Claimer_Config']['Open_Free_Llamas']
 except:
@@ -199,8 +199,6 @@ if bOpenFreeLlamas == "true":
         else: cpspStorefront = []
     if not cpspStorefront: print("ERROR: Failed to find the Llama shop. Is it even possible? Maybe a new Fortnite update could break it, but it's very unlikely...\n")
     else:
-        reqPopulateLlamas = requests.post(links.profileRequest.format(accountId, "PopulatePrerolledOffers", "campaign"), headers=headers, data="{}")
-        reqPopulateLlamasText = json.loads(reqPopulateLlamas.text)
         for key in cpspStorefront:
             if (not "always" in key['devName'].lower()) and (key['prices'][0]['finalPrice'] == 0):
                 llamaToClaimOfferId = key['offerId']
