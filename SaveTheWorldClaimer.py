@@ -1,57 +1,137 @@
-print("Fortnite StW Daily Reward & Research Points claimer v1.2.2 by PRO100KatYT\n")
+print("Fortnite StW Daily Reward & Research Points claimer v1.3.0 by PRO100KatYT\n")
 try:
     import json
     import requests
     import os
     from configparser import ConfigParser
+    from datetime import datetime
+    import webbrowser
 except Exception as emsg:
     input(f"ERROR: {emsg}. To run this program, please install it.\n\nPress ENTER to close the program.")
     exit()
 
 # Links that will be used in the later part of code.
 class links:
-    getToken = "https://account-public-service-prod.ol.epicgames.com/account/api/oauth/token"
+    loginLink1 = "https://www.epicgames.com/id/api/redirect?clientId={0}&responseType=code"
+    loginLink2 = "https://www.epicgames.com/id/logout?redirectUrl=https%3A%2F%2Fwww.epicgames.com%2Fid%2Flogin%3FredirectUrl%3Dhttps%253A%252F%252Fwww.epicgames.com%252Fid%252Fapi%252Fredirect%253FclientId%253D{0}%2526responseType%253Dcode"
+    getOAuth = "https://account-public-service-prod.ol.epicgames.com/account/api/oauth/{0}"
     getDeviceAuth = "https://account-public-service-prod.ol.epicgames.com/account/api/public/account/{0}/deviceAuth"
     getStorefront = "https://fortnite-public-service-prod11.ol.epicgames.com/fortnite/api/storefront/v2/catalog"
     profileRequest = "https://fortnite-public-service-prod11.ol.epicgames.com/fortnite/api/game/v2/profile/{0}/client/{1}?profileId={2}"
 
+# Creating and/or reading the config.ini file.
+config = ConfigParser()
+configPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.ini")
+if not os.path.exists(configPath):
+    print("Starting to generate the config.ini file.\n")
+    configFile = open(configPath, "a")
+    configFile.write("[StW_Claimer_Config]\n\n# Which authentication method do you want the program to use? Valid vaules: token, device.\n# Token auth metod generates a refresh token to log in. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\n# Device auth method generates authorization credentials that don't have an expiration date, but can after some time cause epic to ask you to change your password.\nAuthorization_Type = token\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation? Valid vaules: true, false.\nSpend_Research_Points = false\n\n# Do you want the program to search for free Llamas and open them if they are avaiable? Valid vaules: true, false.\nOpen_Free_Llamas = true")
+    configFile.close()
+    print("The config.ini file was generated successfully.\n")
+try:
+    getConfigIni = config.read(configPath)
+    authType = config['StW_Claimer_Config']['Authorization_Type'].lower()
+    bSpendAutoResearch = config['StW_Claimer_Config']['Spend_Research_Points'].lower()
+    bOpenFreeLlamas = config['StW_Claimer_Config']['Open_Free_Llamas'].lower()
+except:
+    print("ERROR: The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.\n")
+    input("Press ENTER to close the program.\n")
+    exit()
+if not (bSpendAutoResearch == "true" or bSpendAutoResearch == "false"):
+    print(f"ERROR: You set the wrong \"Spend_Research_Points\" value in config.ini ({bSpendAutoResearch}). Valid values: true, false. Change it and run this program again.\n")
+    input("Press ENTER to close the program.\n")
+    exit()
+if not (bOpenFreeLlamas == "true" or bOpenFreeLlamas == "false"):
+    print(f"ERROR: You set the wrong \"Open_Free_Llamas\" value in config.ini ({bOpenFreeLlamas}). Valid values: true, false. Change it and run this program again.\n")
+    input("Press ENTER to close the program.\n")
+    exit()
+if not (authType == "token" or authType == "device"):
+    print(f"ERROR: You set the wrong \"Authorization_Type\" value in config.ini ({authType}). Valid values: token, device. Change it and run this program again.\n")
+    input("Press ENTER to close the program.\n")
+    exit()
+
 # Creating and/or reading the auth.json file.
 authPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "auth.json")
 if not os.path.exists(authPath):
-    print("Starting to generate the auth.json file.\n")
-    reqToken = requests.post(links.getToken, headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")})
-    reqTokenText = json.loads(reqToken.text)
-    if "errorMessage" in reqTokenText:
-        print(f"\nERROR: {reqTokenText['errorMessage']}\n")
-        input("Press ENTER to close the program.\n") 
-        exit()
-    else:
-        accessToken = reqTokenText["access_token"]
-        accountId = reqTokenText["account_id"]
-    reqDeviceAuth = requests.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={})
-    reqDeviceAuthText = json.loads(reqDeviceAuth.text)
-    if "errorMessage" in reqDeviceAuthText:
-        print(f"\nERROR: {reqDeviceAuthText['errorMessage']}\n")
-        input("Press ENTER to close the program.\n") 
-        exit()
-    else:
-        deviceId = reqDeviceAuthText["deviceId"]
-        secret = reqDeviceAuthText["secret"]
-        jsontosave = ("{\"WARNING\": \"Don't show anyone the contents of this file, because it contains information with which the program logs into the account.\", \"deviceId\":\"{deviceId}\", \"accountId\":\"{account_id}\", \"secret\":\"{secret}\"}")
-        firstjsonreplace = jsontosave.replace("{deviceId}", deviceId)
-        secondjsonreplace = firstjsonreplace.replace("{account_id}", accountId)
-        thirdjsonreplace = secondjsonreplace.replace("{secret}", secret)
-        json.dump(json.loads(thirdjsonreplace), open(authPath, "w"), indent = 2)
-        print("\nThe auth.json file was generated successfully.\n")
+    isLoggedIn = input("Starting to generate the auth.json file.\n\nAre you logged into your Epic account that you would like the program to use in your browser?\nType 1 if yes and press ENTER.\nType 2 if no and press ENTER.\n")
+    while True:
+        if (isLoggedIn == "1" or isLoggedIn == "2"): break
+        else: isLoggedIn = input("\nYou priovided a wrong value. Please input it again.\n")
+    input("\nThe program is going to open an Epic Games webpage.\nTo continue, press ENTER.\n")
+    if authType == "token":
+        if isLoggedIn == "1": loginLink = links.loginLink1
+        else: loginLink = links.loginLink2
+        webbrowser.open_new_tab(loginLink.format("34a02cf8f4414e29b15921876da36f9a"))
+        print(f"If the program didnt open it, copy this link to your browser: {loginLink}\n")
+        reqToken = requests.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")})
+        reqTokenText = json.loads(reqToken.text)
+        if "errorMessage" in reqTokenText:
+            print(f"\nERROR: {reqTokenText['errorMessage']}\n")
+            input("Press ENTER to close the program.\n") 
+            exit()
+        else:
+            refreshToken = reqTokenText["refresh_token"]
+            accountId = reqTokenText["account_id"]
+            expirationDate = reqTokenText["refresh_expires_at"]
+            jsontosave = ("{\"WARNING\": \"Don't show anyone the contents of this file, because it contains information with which the program logs into the account.\", \"authType\":\"token\", \"refreshToken\":\"{refresh_token}\", \"accountId\":\"{account_id}\", \"refresh_expires_at\":\"{refresh_expires_at}\"}")
+            firstjsonreplace = jsontosave.replace("{refresh_token}", refreshToken)
+            secondjsonreplace = firstjsonreplace.replace("{account_id}", accountId)
+            thirdjsonreplace = secondjsonreplace.replace("{refresh_expires_at}", expirationDate)
+            json.dump(json.loads(thirdjsonreplace), open(authPath, "w"), indent = 2)
+    if authType == "device":
+        if isLoggedIn == "1": loginLink = links.loginLink1
+        else: loginLink = links.loginLink2
+        webbrowser.open_new_tab(loginLink.format("3446cd72694c4a4485d81b77adbb2141"))
+        print(f"If the program didnt open it, copy this link to your browser: {loginLink}\n")
+        reqToken = requests.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")})
+        reqTokenText = json.loads(reqToken.text)
+        if "errorMessage" in reqTokenText:
+            print(f"\nERROR: {reqTokenText['errorMessage']}\n")
+            input("Press ENTER to close the program.\n") 
+            exit()
+        else:
+            accessToken = reqTokenText["access_token"]
+            accountId = reqTokenText["account_id"]
+        reqDeviceAuth = requests.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={})
+        reqDeviceAuthText = json.loads(reqDeviceAuth.text)
+        if "errorMessage" in reqDeviceAuthText:
+            print(f"\nERROR: {reqDeviceAuthText['errorMessage']}\n")
+            input("Press ENTER to close the program.\n") 
+            exit()
+        else:
+            deviceId = reqDeviceAuthText["deviceId"]
+            secret = reqDeviceAuthText["secret"]
+            jsontosave = ("{\"WARNING\": \"Don't show anyone the contents of this file, because it contains information with which the program logs into the account.\", \"authType\":\"device\",  \"deviceId\":\"{deviceId}\", \"accountId\":\"{account_id}\", \"secret\":\"{secret}\"}")
+            firstjsonreplace = jsontosave.replace("{deviceId}", deviceId)
+            secondjsonreplace = firstjsonreplace.replace("{account_id}", accountId)
+            thirdjsonreplace = secondjsonreplace.replace("{secret}", secret)
+            json.dump(json.loads(thirdjsonreplace), open(authPath, "w"), indent = 2)
+    print("\nThe auth.json file was generated successfully.\n")
 try:
     getAuthJson = json.loads(open(authPath, "r").read())
-    deviceId = getAuthJson["deviceId"]
+    if authType == "token":
+        if getAuthJson["authType"] == "device":
+            input("The authorization type in config is set to token, but the auth.json file contains device auth credentials.\nDelete the auth.json file and run this program again to generate a token one or change authorization type back to device in config.ini.\n\nPress ENTER to close the program.\n")
+            exit = 1
+        expirationDate = getAuthJson["refresh_expires_at"]
+        if expirationDate < datetime.now().isoformat():
+            input("The refresh token has expired. Delete the auth.json file and run this program again to generate a new one.\n\nPress ENTER to close the program.\n")
+            exit = 1
+        refreshToken = getAuthJson["refreshToken"]
+    if authType == "device":
+        if getAuthJson["authType"] == "token":
+            input("The authorization type in config is set to device, but the auth.json file contains token auth credentials.\nDelete the auth.json file and run this program again to generate a device one or change authorization type back to token in config.ini.\n\nPress ENTER to close the program.\n")
+            exit = 1
+        deviceId = getAuthJson["deviceId"]
+        secret = getAuthJson["secret"]
     accountId = getAuthJson["accountId"]
-    secret = getAuthJson["secret"]
 except:
+    if exit == 1: exit()
     print("ERROR: The program is unable to read the auth.json file. Delete the auth.json file and run this program again to generate a new one.\n")
     input("Press ENTER to close the program.\n")
     exit()
+if exit == 1: exit()
+
 stringListPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "stringlist.json")
 if not os.path.exists(stringListPath):
     print("ERROR: The stringlist.json file doesn't exist. Get it from this program's repository on Github, add it back and run this program again.\n")
@@ -62,45 +142,38 @@ except:
     print("ERROR: The program is unable to read the stringlist.json file. Delete the stringlist.json file, download it from this program's repository on Github, add it back here and run this program again.\n")
     input("Press ENTER to close the program.\n")
     exit()
-reqToken = requests.post(links.getToken, headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"})
+
+# Logging in.
+if authType == "token": # Shoutout to BayGamerYT for telling me about this login method.
+    reqRefreshToken = requests.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "refresh_token", "refresh_token": refreshToken})
+    reqRefreshTokenText = json.loads(reqRefreshToken.text)
+    if "errorMessage" in reqRefreshTokenText:
+        print(f"ERROR: At least one variable in the auth.json file is no longer valid. Delete the auth.json file and run this program again to generate a new one.\n")
+        input("Press ENTER to close the program.\n") 
+        exit()
+    getAuthFile = open(authPath, "r").read()
+    authReplaceToken = getAuthFile.replace(refreshToken, reqRefreshTokenText["refresh_token"])
+    authReplaceDate = authReplaceToken.replace(expirationDate, reqRefreshTokenText["refresh_expires_at"])
+    authFile = open(authPath, "w")
+    authFile.write(authReplaceDate)
+    authFile.close()
+    accessToken = reqRefreshTokenText["access_token"]
+    reqExchange = requests.get(links.getOAuth.format("exchange"), headers={"Authorization": f"bearer {accessToken}"}, data={"grant_type": "authorization_code"})
+    reqExchangeText = json.loads(reqExchange.text)
+    exchangeCode = reqExchangeText["code"]
+    reqToken = requests.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "exchange_code", "exchange_code": exchangeCode, "token_type": "eg1"})
+if authType == "device":
+    reqToken = requests.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"})
 reqTokenText = json.loads(reqToken.text)
 if "errorMessage" in reqTokenText:
     print(f"ERROR: At least one variable in the auth.json file is no longer valid. Delete the auth.json file and run this program again to generate a new one.\n")
     input("Press ENTER to close the program.\n") 
     exit()
-else:
-    accessToken = reqTokenText['access_token']
-    displayName = reqTokenText['displayName']
+accessToken = reqTokenText['access_token']
+displayName = reqTokenText['displayName']
 print(f"Logged in as {displayName}.\n")
 
 headers = {"Authorization": f"bearer {accessToken}", "Content-Type": "application/json"}
-
-# Creating and/or reading the config.ini file.
-config = ConfigParser()
-configPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.ini")
-if not os.path.exists(configPath):
-    print("Starting to generate the config.ini file.\n")
-    configFile = open(configPath, "a")
-    configFile.write("[StW_Claimer_Config]\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\nSpend_Research_Points = false\n\n# Do you want the program to search for free Llamas and open them if they are avaiable?\nOpen_Free_Llamas = true")
-    configFile.close()
-    print("The config.ini file was generated successfully.\n")
-try:
-    getConfigIni = config.read(configPath)
-    bSpendAutoResearch = config['StW_Claimer_Config']['Spend_Research_Points']
-    bOpenFreeLlamas = config['StW_Claimer_Config']['Open_Free_Llamas']
-except:
-    print("ERROR: The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.\n")
-    input("Press ENTER to close the program.\n")
-    exit()
-if not (bSpendAutoResearch == "true" or bSpendAutoResearch == "false"):
-    print(f"ERROR: You set the wrong \"Automatically spend Research Points\" value in config.ini ({bSpendAutoResearch}). Valid values: true, false. Change it and run this program again.\n")
-    input("Press ENTER to close the program.\n")
-    exit()
-if not (bOpenFreeLlamas == "true" or bOpenFreeLlamas == "false"):
-    print(f"ERROR: You set the wrong \"Open Free Llamas\" value in config.ini ({bOpenFreeLlamas}). Valid values: true, false. Change it and run this program again.\n")
-    input("Press ENTER to close the program.\n")
-    exit()
-
 
 # Checking whether the account has the campaign access token and founder's token. The founder's token is not required, but instead of V-Bucks the account will recieve X-Ray Tickets.
 reqCommonCoreProfileCheck = requests.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}")
@@ -153,7 +226,9 @@ else:
     if "errorMessage" in reqClaimCollectedResourcesText:
         print(f"ERROR: {reqClaimCollectedResourcesText['errorMessage']}\n")
     else:
-        try: reqClaimCollectedResourcesText['notifications']
+        try:
+            totalItemGuid = reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['itemGuid']
+            print(f"Claimed {reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
         except:
             for key in reqCampaignProfileCheckItems:
                 if reqCampaignProfileCheckItems[f'{key}']['templateId'] == "Token:collectionresource_nodegatetoken01":
@@ -184,8 +259,6 @@ else:
                     reqClaimCollectedResourcesText = json.loads(reqClaimCollectedResources.text)
                     totalItemGuid = reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['itemGuid']
                     print(f"Claimed {reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
-        totalItemGuid = reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['itemGuid']
-        print(f"Claimed {reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
 
 # Searching for a free Llama and opening it if available
 if bOpenFreeLlamas == "true":
