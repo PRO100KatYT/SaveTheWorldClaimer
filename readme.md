@@ -40,3 +40,5 @@ or this:
 - Congratulations! You just claimed your Daily Reward, Research Points and opened free Llamas if they were avaiable!
 
 - Next time you start the program, you will not need to enter a new auth code, because the login credentials have been saved in the auth.json file.
+---
+If you want to receive notifications about free llamas, I recommend joining [the r/FORTnITE discord server](https://discord.gg/PjqZaDmV8D "Here is the link :D") and giving yourself the freellamas role on the #role-assignment channel.

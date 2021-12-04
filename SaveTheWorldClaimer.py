@@ -1,4 +1,4 @@
-print("Fortnite StW Daily Reward & Research Points claimer v1.3.0 by PRO100KatYT\n")
+print("Fortnite StW Daily Reward & Research Points claimer v1.3.1 by PRO100KatYT\n")
 try:
     import json
     import requests
@@ -58,11 +58,12 @@ if not os.path.exists(authPath):
         if (isLoggedIn == "1" or isLoggedIn == "2"): break
         else: isLoggedIn = input("\nYou priovided a wrong value. Please input it again.\n")
     input("\nThe program is going to open an Epic Games webpage.\nTo continue, press ENTER.\n")
+    if isLoggedIn == "1": loginLink = links.loginLink1
+    else: loginLink = links.loginLink2
     if authType == "token":
-        if isLoggedIn == "1": loginLink = links.loginLink1
-        else: loginLink = links.loginLink2
-        webbrowser.open_new_tab(loginLink.format("34a02cf8f4414e29b15921876da36f9a"))
-        print(f"If the program didnt open it, copy this link to your browser: {loginLink}\n")
+        loginLink = loginLink.format("34a02cf8f4414e29b15921876da36f9a")
+        webbrowser.open_new_tab(loginLink)
+        print(f"If the program didnt open it, copy this link to your browser: {(loginLink)}\n")
         reqToken = requests.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")})
         reqTokenText = json.loads(reqToken.text)
         if "errorMessage" in reqTokenText:
@@ -79,9 +80,8 @@ if not os.path.exists(authPath):
             thirdjsonreplace = secondjsonreplace.replace("{refresh_expires_at}", expirationDate)
             json.dump(json.loads(thirdjsonreplace), open(authPath, "w"), indent = 2)
     if authType == "device":
-        if isLoggedIn == "1": loginLink = links.loginLink1
-        else: loginLink = links.loginLink2
-        webbrowser.open_new_tab(loginLink.format("3446cd72694c4a4485d81b77adbb2141"))
+        loginLink = loginLink.format("3446cd72694c4a4485d81b77adbb2141")
+        webbrowser.open_new_tab(loginLink)
         print(f"If the program didnt open it, copy this link to your browser: {loginLink}\n")
         reqToken = requests.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")})
         reqTokenText = json.loads(reqToken.text)
