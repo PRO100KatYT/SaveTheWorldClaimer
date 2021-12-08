@@ -25,7 +25,7 @@ configPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.i
 if not os.path.exists(configPath):
     print("Starting to generate the config.ini file.\n")
     configFile = open(configPath, "a")
-    configFile.write("[StW_Claimer_Config]\n\n# Which authentication method do you want the program to use? Valid vaules: token, device.\n# Token auth metod generates a refresh token to log in. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\n# Device auth method generates authorization credentials that don't have an expiration date, but can after some time cause epic to ask you to change your password.\nAuthorization_Type = token\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation? Valid vaules: true, false.\nSpend_Research_Points = false\n\n# Do you want the program to search for free Llamas and open them if they are avaiable? Valid vaules: true, false.\nOpen_Free_Llamas = true")
+    configFile.write("[StW_Claimer_Config]\n\n# Which authentication method do you want the program to use? Valid vaules: token, device.\n# Token auth metod generates a refresh token to log in. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\n# Device auth method generates authorization credentials that don't have an expiration date, but can after some time cause epic to ask you to change your password.\nAuthorization_Type = token\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation? Valid vaules: true, false.\nSpend_Research_Points = true\n\n# Do you want the program to search for free Llamas and open them if they are avaiable? Valid vaules: true, false.\nOpen_Free_Llamas = true")
     configFile.close()
     print("The config.ini file was generated successfully.\n")
 try:
@@ -34,20 +34,16 @@ try:
     bSpendAutoResearch = config['StW_Claimer_Config']['Spend_Research_Points'].lower()
     bOpenFreeLlamas = config['StW_Claimer_Config']['Open_Free_Llamas'].lower()
 except:
-    print("ERROR: The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.\n")
-    input("Press ENTER to close the program.\n")
+    input("ERROR: The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.\n\nPress ENTER to close the program.\n")
     exit()
 if not (bSpendAutoResearch == "true" or bSpendAutoResearch == "false"):
-    print(f"ERROR: You set the wrong \"Spend_Research_Points\" value in config.ini ({bSpendAutoResearch}). Valid values: true, false. Change it and run this program again.\n")
-    input("Press ENTER to close the program.\n")
+    input(f"ERROR: You set the wrong \"Spend_Research_Points\" value in config.ini ({bSpendAutoResearch}). Valid values: true, false. Change it and run this program again.\n\nPress ENTER to close the program.\n")
     exit()
 if not (bOpenFreeLlamas == "true" or bOpenFreeLlamas == "false"):
-    print(f"ERROR: You set the wrong \"Open_Free_Llamas\" value in config.ini ({bOpenFreeLlamas}). Valid values: true, false. Change it and run this program again.\n")
-    input("Press ENTER to close the program.\n")
+    input(f"ERROR: You set the wrong \"Open_Free_Llamas\" value in config.ini ({bOpenFreeLlamas}). Valid values: true, false. Change it and run this program again.\n\nPress ENTER to close the program.\n")
     exit()
 if not (authType == "token" or authType == "device"):
-    print(f"ERROR: You set the wrong \"Authorization_Type\" value in config.ini ({authType}). Valid values: token, device. Change it and run this program again.\n")
-    input("Press ENTER to close the program.\n")
+    input(f"ERROR: You set the wrong \"Authorization_Type\" value in config.ini ({authType}). Valid values: token, device. Change it and run this program again.\n\nPress ENTER to close the program.\n")
     exit()
 
 # Creating and/or reading the auth.json file.
@@ -67,8 +63,7 @@ if not os.path.exists(authPath):
         reqToken = requests.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")})
         reqTokenText = json.loads(reqToken.text)
         if "errorMessage" in reqTokenText:
-            print(f"\nERROR: {reqTokenText['errorMessage']}\n")
-            input("Press ENTER to close the program.\n") 
+            input(f"\nERROR: {reqTokenText['errorMessage']}\n\nPress ENTER to close the program.\n") 
             exit()
         else:
             refreshToken = reqTokenText["refresh_token"]
@@ -86,8 +81,7 @@ if not os.path.exists(authPath):
         reqToken = requests.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")})
         reqTokenText = json.loads(reqToken.text)
         if "errorMessage" in reqTokenText:
-            print(f"\nERROR: {reqTokenText['errorMessage']}\n")
-            input("Press ENTER to close the program.\n") 
+            input(f"\nERROR: {reqTokenText['errorMessage']}\n\nPress ENTER to close the program.\n") 
             exit()
         else:
             accessToken = reqTokenText["access_token"]
@@ -95,8 +89,7 @@ if not os.path.exists(authPath):
         reqDeviceAuth = requests.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={})
         reqDeviceAuthText = json.loads(reqDeviceAuth.text)
         if "errorMessage" in reqDeviceAuthText:
-            print(f"\nERROR: {reqDeviceAuthText['errorMessage']}\n")
-            input("Press ENTER to close the program.\n") 
+            input(f"\nERROR: {reqDeviceAuthText['errorMessage']}\n\nPress ENTER to close the program.\n") 
             exit()
         else:
             deviceId = reqDeviceAuthText["deviceId"]
@@ -127,20 +120,17 @@ try:
     accountId = getAuthJson["accountId"]
 except:
     if exit == 1: exit()
-    print("ERROR: The program is unable to read the auth.json file. Delete the auth.json file and run this program again to generate a new one.\n")
-    input("Press ENTER to close the program.\n")
+    input("ERROR: The program is unable to read the auth.json file. Delete the auth.json file and run this program again to generate a new one.\n\nPress ENTER to close the program.\n")
     exit()
 if exit == 1: exit()
 
 stringListPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "stringlist.json")
 if not os.path.exists(stringListPath):
-    print("ERROR: The stringlist.json file doesn't exist. Get it from this program's repository on Github, add it back and run this program again.\n")
-    input("Press ENTER to close the program.\n")
+    input("ERROR: The stringlist.json file doesn't exist. Get it from this program's repository on Github, add it back and run this program again.\n\nPress ENTER to close the program.\n")
     exit()
 try: getStringList = json.loads(open(stringListPath, "r").read())
 except:
-    print("ERROR: The program is unable to read the stringlist.json file. Delete the stringlist.json file, download it from this program's repository on Github, add it back here and run this program again.\n")
-    input("Press ENTER to close the program.\n")
+    input("ERROR: The program is unable to read the stringlist.json file. Delete the stringlist.json file, download it from this program's repository on Github, add it back here and run this program again.\n\nPress ENTER to close the program.\n")
     exit()
 
 # Logging in.
@@ -148,8 +138,7 @@ if authType == "token": # Shoutout to BayGamerYT for telling me about this login
     reqRefreshToken = requests.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "refresh_token", "refresh_token": refreshToken})
     reqRefreshTokenText = json.loads(reqRefreshToken.text)
     if "errorMessage" in reqRefreshTokenText:
-        print(f"ERROR: At least one variable in the auth.json file is no longer valid. Delete the auth.json file and run this program again to generate a new one.\n")
-        input("Press ENTER to close the program.\n") 
+        input(f"ERROR: At least one variable in the auth.json file is no longer valid. Delete the auth.json file and run this program again to generate a new one.\n\nPress ENTER to close the program.\n") 
         exit()
     getAuthFile = open(authPath, "r").read()
     authReplaceToken = getAuthFile.replace(refreshToken, reqRefreshTokenText["refresh_token"])
@@ -166,8 +155,7 @@ if authType == "device":
     reqToken = requests.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"})
 reqTokenText = json.loads(reqToken.text)
 if "errorMessage" in reqTokenText:
-    print(f"ERROR: At least one variable in the auth.json file is no longer valid. Delete the auth.json file and run this program again to generate a new one.\n")
-    input("Press ENTER to close the program.\n") 
+    input(f"ERROR: At least one variable in the auth.json file is no longer valid. Delete the auth.json file and run this program again to generate a new one.\n\nPress ENTER to close the program.\n") 
     exit()
 accessToken = reqTokenText['access_token']
 displayName = reqTokenText['displayName']
@@ -182,8 +170,7 @@ bFounder = 0
 if "Token:campaignaccess" in reqCommonCoreProfileCheck.text: bCampaignAccess = 1
 if "Token:founderspack" in reqCommonCoreProfileCheck.text: bFounder = 1
 if bCampaignAccess == 0:
-    print(f"ERROR: {displayName} doesn't have access to Save the World.\n")
-    input("Press ENTER to close the program.\n")
+    input(f"ERROR: {displayName} doesn't have access to Save the World.\n\nPress ENTER to close the program.\n")
     exit()
 
 # Claiming the Daily Reward.
@@ -191,8 +178,7 @@ print("Claiming the Daily Reward...\n")
 reqClaimDailyReward = requests.post(links.profileRequest.format(accountId, "ClaimLoginReward", "campaign"), headers=headers, data="{}")
 reqClaimDailyRewardText = json.loads(reqClaimDailyReward.text)
 if "errorMessage" in reqClaimDailyRewardText:
-    print(f"ERROR: {reqClaimDailyRewardText['errorMessage']}\n")
-    input("Press ENTER to close the program.\n")
+    input(f"ERROR: {reqClaimDailyRewardText['errorMessage']}\n\nPress ENTER to close the program.\n")
     exit()
 cdrItems = reqClaimDailyRewardText['notifications'][0]['items']
 cdrDaysLoggedIn = reqClaimDailyRewardText['notifications'][0]['daysLoggedIn']
@@ -201,11 +187,9 @@ if cdrDaysModified == 0: cdrDaysModified = 336
 if not cdrItems:
     print(f"The daily reward for {displayName} has been already claimed today!")
 else: print(f"Today's daily reward for {displayName} has been successfully claimed!")
-getReward = getStringList['Daily Rewards'][f'{cdrDaysModified}']
-if "V-Bucks" in getReward:
-    if bFounder == 0: reward = getReward.replace("V-Bucks", "X-Ray Tickets")
-    else: reward = getReward
-else: reward = getReward
+reward = getStringList['Daily Rewards'][f'{cdrDaysModified}']
+if "V-Bucks" in reward:
+    if bFounder == 0: reward = reward.replace("V-Bucks", "X-Ray Tickets")
 print(f"Day: {cdrDaysLoggedIn}\nReward: {reward}\n")
 
 # Claiming and automatic spending the Research Points
