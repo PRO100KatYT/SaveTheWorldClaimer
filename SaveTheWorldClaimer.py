@@ -1,4 +1,4 @@
-print("Fortnite StW Daily Reward & Research Points claimer v1.3.1 by PRO100KatYT\n")
+print("Fortnite StW Daily Reward & Research Points claimer v1.3.2 by PRO100KatYT\n")
 try:
     import json
     import requests
@@ -256,48 +256,55 @@ if bOpenFreeLlamas == "true":
         else: cpspStorefront = []
     if not cpspStorefront: print("ERROR: Failed to find the Llama shop. Is it even possible? Maybe a new Fortnite update could break it, but it's very unlikely...\n")
     else:
+        freeLlamas = []
         for key in cpspStorefront:
             if (not "always" in key['devName'].lower()) and (key['prices'][0]['finalPrice'] == 0):
-                llamaToClaimOfferId = key['offerId']
-                try: llamaToClaimTitle = key['title']
-                except: llamaToClaimTitle = []
-                llamaToClaimCPId = key['itemGrants'][0]['templateId']
-                break
-            else: llamaToClaimOfferId = []
-        if not llamaToClaimOfferId: print("There are no free Llamas available at the moment.\n")
+                freeLlamas.append(key)
+        freeLlamasCount = len(freeLlamas)
+        if not freeLlamas: print("There are no free Llamas available at the moment.\n")
         else:
             print(f"There are free llamas avaiable!")
-            if llamaToClaimTitle: llamaToClaimName = llamaToClaimTitle
-            else:
-                try: llamaToClaimName = getStringList['Llama names'][f'{llamaToClaimCPId}']
-                except: llamaToClaimName = llamaToClaimCPId
             openedLlamas = 0
-            alreadyOpenedFreeLlamas = []
-            while True:
-                reqPopulateLlamas = requests.post(links.profileRequest.format(accountId, "PopulatePrerolledOffers", "campaign"), headers=headers, data="{}")
-                reqBuyFreeLlama = requests.post(links.profileRequest.format(accountId, "PurchaseCatalogEntry", "common_core"), headers=headers, json={"offerId": f"{llamaToClaimOfferId}", "purchaseQuantity": 1, "currency": "MtxCurrency", "currencySubType": "", "expectedTotalPrice": 0, "gameContext": "Frontend.None"})
-                reqBuyFreeLlamaText = json.loads(reqBuyFreeLlama.text)
-                if "errorMessage" in reqBuyFreeLlamaText:
-                    if "is not allowed because it would exceed the daily limit of" in reqBuyFreeLlamaText['errorMessage']:
-                        if (openedLlamas == 0): alreadyOpenedFreeLlamas = 1
-                    break
+            alreadyOpenedFreeLlamas = 0
+            for llama in freeLlamas:
+                llamaToClaimOfferId = llama['offerId']
+                try: llamaToClaimTitle = llama['title']
+                except: llamaToClaimTitle = []
+                llamaToClaimCPId = llama['itemGrants'][0]['templateId']
+                if llamaToClaimTitle: llamaToClaimName = llamaToClaimTitle
                 else:
-                    print(f"\nOpening: {llamaToClaimName}")
-                    llamaLoot = reqBuyFreeLlamaText['notifications'][0]['lootResult']['items']
-                    openedLlamas += 1
-                    llamaLootCount = 0
-                    print(f"Loot result:")
-                    for key in llamaLoot:
-                        itemType = key['itemType']
-                        try: itemName = getStringList['Item names'][f'{itemType}']
-                        except: itemName = itemType
-                        llamaLootCount += 1
-                        print(f"{llamaLootCount}: {key['quantity']}x {itemName}")
-            if not alreadyOpenedFreeLlamas:
+                    try: llamaToClaimName = getStringList['Llama names'][f'{llamaToClaimCPId}']
+                    except: llamaToClaimName = llamaToClaimCPId
+                while True:
+                    reqPopulateLlamas = requests.post(links.profileRequest.format(accountId, "PopulatePrerolledOffers", "campaign"), headers=headers, data="{}")
+                    reqPopulateLlamasText = json.loads(reqPopulateLlamas.text)
+                    llamaTier = []
+                    for key in reqPopulateLlamasText['profileChanges'][0]['profile']['items']:
+                        if (reqPopulateLlamasText['profileChanges'][0]['profile']['items'][f'{key}']['templateId'].lower().startswith("prerolldata") and reqPopulateLlamasText['profileChanges'][0]['profile']['items'][f'{key}']['attributes']['offerId'] == llamaToClaimOfferId):
+                            llamaTier = reqPopulateLlamasText['profileChanges'][0]['profile']['items'][f'{key}']['attributes']['highest_rarity']
+                            llamaTier = getStringList['Llama tiers'][f'{llamaTier}']
+                    reqBuyFreeLlama = requests.post(links.profileRequest.format(accountId, "PurchaseCatalogEntry", "common_core"), headers=headers, json={"offerId": f"{llamaToClaimOfferId}", "purchaseQuantity": 1, "currency": "MtxCurrency", "currencySubType": "", "expectedTotalPrice": 0, "gameContext": "Frontend.None"})
+                    reqBuyFreeLlamaText = json.loads(reqBuyFreeLlama.text)
+                    if "errorMessage" in reqBuyFreeLlamaText:
+                        if "is not allowed because it would exceed the daily limit of" in reqBuyFreeLlamaText['errorMessage']:
+                            if openedLlamas == 0: alreadyOpenedFreeLlamas += 1
+                        break
+                    else:
+                        print(f"\nOpening: {llamaToClaimName}\nTier: {llamaTier}\nLoot result:")
+                        llamaLoot = reqBuyFreeLlamaText['notifications'][0]['lootResult']['items']
+                        openedLlamas += 1
+                        llamaLootCount = 0
+                        for key in llamaLoot:
+                            itemType = key['itemType']
+                            try: itemName = getStringList['Item names'][f'{itemType}']
+                            except: itemName = itemType
+                            llamaLootCount += 1
+                            print(f"{llamaLootCount}: {key['quantity']}x {itemName}")
+            if int(alreadyOpenedFreeLlamas) == freeLlamasCount:
+                print(f"\nFree Llamas that are currently avaiable in the shop have been already opened on this account. Remember that you can open a maximum of 2 free one hour rotation Llamas in 24 hours.\n")
+            else:
                 llamasWord = "Llamas"
                 if int(openedLlamas) == 1: llamasWord = "Llama"
                 print(f"\nSuccessfully opened {openedLlamas} free {llamasWord}.\n")
-            else:
-                print(f"\nFree Llamas that are currently avaiable in the shop have been already opened on this account. Remember that you can open a maximum of 2 free Llamas in 24 hours.\n")
 input("Press ENTER to close the program.\n")
 exit()

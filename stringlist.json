@@ -391,8 +391,13 @@
       "CardPack:cardpack_rare_personnel": "Super People Llama",
       "CardPack:cardpack_rare_ranged": "Super Ranged Llama"
    },
+   "Llama tiers": {
+      "0": "Normal (1)",
+      "1": "Silver (2)",
+      "2": "Gold (3)"
+   },
    "Item names": {
-      "disclaimer": "Item names list by PRO100KatYT",
+      "author": "Item names list by PRO100KatYT",
       "Schematic:sid_ceiling_electric_aoe_r_t01": "Rare Ceiling Electric Field Schematic",
       "Schematic:sid_ceiling_electric_aoe_sr_t01": "Legendary Ceiling Electric Field Schematic",
       "Schematic:sid_ceiling_electric_aoe_vr_t01": "Epic Ceiling Electric Field Schematic",

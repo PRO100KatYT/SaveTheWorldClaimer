@@ -37,7 +37,7 @@ or this:
 
 - Now the program will proceed to claim the rewards, points and search for free Llamas.
 
-- Congratulations! You just claimed your Daily Reward, Research Points and opened free Llamas if they were avaiable!
+- Congratulations! You just claimed your Daily Reward, Research Points and opened free Llamas if they were available!
 
 - Next time you start the program, you will not need to enter a new auth code, because the login credentials have been saved in the auth.json file.
 ---
