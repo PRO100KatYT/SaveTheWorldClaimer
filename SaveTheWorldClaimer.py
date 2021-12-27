@@ -1,4 +1,4 @@
-print("Fortnite StW Daily Reward & Research Points claimer v1.3.2 by PRO100KatYT\n")
+print("Fortnite StW Daily Reward & Research Points claimer v1.4.0 by PRO100KatYT\n")
 try:
     import json
     import requests
@@ -19,32 +19,51 @@ class links:
     getStorefront = "https://fortnite-public-service-prod11.ol.epicgames.com/fortnite/api/storefront/v2/catalog"
     profileRequest = "https://fortnite-public-service-prod11.ol.epicgames.com/fortnite/api/game/v2/profile/{0}/client/{1}?profileId={2}"
 
+# Automatic llama loot recycling variables.
+class autoRecycling:
+    rarities = {"off": "nic", "common": "common", "uncommon": "common, uncommon", "rare": "common, uncommon, rare", "epic": "common, uncommon, rare, epic"}
+    itemRarities = ""
+    recycleResources = ["AccountResource:heroxp", "AccountResource:personnelxp", "AccountResource:phoenixxp", "AccountResource:phoenixxp_reward", "AccountResource:reagent_alteration_ele_fire", "AccountResource:reagent_alteration_ele_nature", "AccountResource:reagent_alteration_ele_water", "AccountResource:reagent_alteration_gameplay_generic", "AccountResource:reagent_alteration_generic", "AccountResource:reagent_alteration_upgrade_r", "AccountResource:reagent_alteration_upgrade_sr", "AccountResource:reagent_alteration_upgrade_uc", "AccountResource:reagent_alteration_upgrade_vr", "AccountResource:reagent_c_t01", "AccountResource:reagent_c_t02", "AccountResource:reagent_c_t03", "AccountResource:reagent_c_t04", "AccountResource:reagent_evolverarity_r", "AccountResource:reagent_evolverarity_sr", "AccountResource:reagent_evolverarity_vr", "AccountResource:reagent_people", "AccountResource:reagent_promotion_heroes", "AccountResource:reagent_promotion_survivors", "AccountResource:reagent_promotion_traps", "AccountResource:reagent_promotion_weapons", "AccountResource:reagent_traps", "AccountResource:reagent_weapons", "AccountResource:schematicxp"]
+
 # Creating and/or reading the config.ini file.
 config = ConfigParser()
 configPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.ini")
 if not os.path.exists(configPath):
     print("Starting to generate the config.ini file.\n")
     configFile = open(configPath, "a")
-    configFile.write("[StW_Claimer_Config]\n\n# Which authentication method do you want the program to use? Valid vaules: token, device.\n# Token auth metod generates a refresh token to log in. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\n# Device auth method generates authorization credentials that don't have an expiration date, but can after some time cause epic to ask you to change your password.\nAuthorization_Type = token\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation? Valid vaules: true, false.\nSpend_Research_Points = true\n\n# Do you want the program to search for free Llamas and open them if they are avaiable? Valid vaules: true, false.\nOpen_Free_Llamas = true")
+    configFile.write("[StW_Claimer_Config]\n\n# Which authentication method do you want the program to use? Valid vaules: token, device.\n# Token auth metod generates a refresh token to log in. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\n# Device auth method generates authorization credentials that don't have an expiration date, but can after some time cause epic to ask you to change your password.\nAuthorization_Type = token\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation? Valid vaules: true, false.\nSpend_Research_Points = true\n\n# Do you want the program to search for free Llamas and open them if they are avaiable? Valid vaules: true, false.\nOpen_Free_Llamas = true\n\n[Automatic_Recycle/Retire]\n\n# Automatically recycle Weapon schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Weapons = off\n\n# Automatically recycle Trap schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Traps = off\n\n# Automatically retire Survivors at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Survivors = off\n\n# Automatically retire Defenders at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Defenders = off\n\n# Automatically retire Heroes at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Heroes = off\n\n[Config_Version]\n\nVersion = STWC_1.4.0")
     configFile.close()
     print("The config.ini file was generated successfully.\n")
 try:
     getConfigIni = config.read(configPath)
+    configVer = config['Config_Version']['Version']
     authType = config['StW_Claimer_Config']['Authorization_Type'].lower()
     bSpendAutoResearch = config['StW_Claimer_Config']['Spend_Research_Points'].lower()
     bOpenFreeLlamas = config['StW_Claimer_Config']['Open_Free_Llamas'].lower()
+    autoRecycling.itemRarities = {"weapon": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Weapons'].lower()].split(", "), "trap": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Traps'].lower()].split(", "), "survivor": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Survivors'].lower()].split(", "), "defender": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Defenders'].lower()].split(", "), "hero": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Heroes'].lower()].split(", ")}
 except:
     input("ERROR: The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.\n\nPress ENTER to close the program.\n")
     exit()
-if not (bSpendAutoResearch == "true" or bSpendAutoResearch == "false"):
-    input(f"ERROR: You set the wrong \"Spend_Research_Points\" value in config.ini ({bSpendAutoResearch}). Valid values: true, false. Change it and run this program again.\n\nPress ENTER to close the program.\n")
-    exit()
-if not (bOpenFreeLlamas == "true" or bOpenFreeLlamas == "false"):
-    input(f"ERROR: You set the wrong \"Open_Free_Llamas\" value in config.ini ({bOpenFreeLlamas}). Valid values: true, false. Change it and run this program again.\n\nPress ENTER to close the program.\n")
+if not (configVer == "STWC_1.4.0"):
+    input("ERROR: The config file is outdated. Delete the config.ini file and run this program again to generate a new one.\n\nPress ENTER to close the program.\n")
     exit()
 if not (authType == "token" or authType == "device"):
     input(f"ERROR: You set the wrong \"Authorization_Type\" value in config.ini ({authType}). Valid values: token, device. Change it and run this program again.\n\nPress ENTER to close the program.\n")
     exit()
+boolOptions = ["Spend_Research_Points", "Open_Free_Llamas"]
+for key in boolOptions:
+    keyValue = config['StW_Claimer_Config'][f'{key}'].lower()
+    if not (keyValue in ("true", "false")):
+        input(f"ERROR: You set the wrong {key} value in config.ini ({keyValue}). Valid values: true, false. Change it and run this program again.\n\nPress ENTER to close the program.\n")
+        exit()
+recycleOptions = ["Recycle_Weapons", "Recycle_Traps", "Retire_Survivors", "Retire_Defenders", "Retire_Heroes"]
+recycleOn = 0
+for key in recycleOptions:
+    keyValue = config['Automatic_Recycle/Retire'][f'{key}'].lower()
+    if not (keyValue == "off"): recycleOn += 1
+    if not (keyValue in ("off", "common", "uncommon", "rare", "epic")):
+        input(f"ERROR: You set the wrong {key} value in config.ini ({keyValue}). Valid values: off, common, uncommon, rare, epic. Change it and run this program again.\n\nPress ENTER to close the program.\n")
+        exit()
 
 # Creating and/or reading the auth.json file.
 authPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "auth.json")
@@ -69,11 +88,8 @@ if not os.path.exists(authPath):
             refreshToken = reqTokenText["refresh_token"]
             accountId = reqTokenText["account_id"]
             expirationDate = reqTokenText["refresh_expires_at"]
-            jsontosave = ("{\"WARNING\": \"Don't show anyone the contents of this file, because it contains information with which the program logs into the account.\", \"authType\":\"token\", \"refreshToken\":\"{refresh_token}\", \"accountId\":\"{account_id}\", \"refresh_expires_at\":\"{refresh_expires_at}\"}")
-            firstjsonreplace = jsontosave.replace("{refresh_token}", refreshToken)
-            secondjsonreplace = firstjsonreplace.replace("{account_id}", accountId)
-            thirdjsonreplace = secondjsonreplace.replace("{refresh_expires_at}", expirationDate)
-            json.dump(json.loads(thirdjsonreplace), open(authPath, "w"), indent = 2)
+            jsontosave = {"WARNING": "Don't show anyone the contents of this file, because it contains information with which the program logs into the account.", "authType": "token", "refreshToken": refreshToken, "accountId": accountId, "refresh_expires_at": expirationDate}
+            json.dump(jsontosave, open(authPath, "w"), indent = 2)
     if authType == "device":
         loginLink = loginLink.format("3446cd72694c4a4485d81b77adbb2141")
         webbrowser.open_new_tab(loginLink)
@@ -94,11 +110,8 @@ if not os.path.exists(authPath):
         else:
             deviceId = reqDeviceAuthText["deviceId"]
             secret = reqDeviceAuthText["secret"]
-            jsontosave = ("{\"WARNING\": \"Don't show anyone the contents of this file, because it contains information with which the program logs into the account.\", \"authType\":\"device\",  \"deviceId\":\"{deviceId}\", \"accountId\":\"{account_id}\", \"secret\":\"{secret}\"}")
-            firstjsonreplace = jsontosave.replace("{deviceId}", deviceId)
-            secondjsonreplace = firstjsonreplace.replace("{account_id}", accountId)
-            thirdjsonreplace = secondjsonreplace.replace("{secret}", secret)
-            json.dump(json.loads(thirdjsonreplace), open(authPath, "w"), indent = 2)
+            jsontosave = {"WARNING": "Don't show anyone the contents of this file, because it contains information with which the program logs into the account.", "authType": "device",  "deviceId": deviceId, "accountId": accountId, "secret": secret}
+            json.dump(jsontosave, open(authPath, "w"), indent = 2)
     print("\nThe auth.json file was generated successfully.\n")
 try:
     getAuthJson = json.loads(open(authPath, "r").read())
@@ -220,7 +233,7 @@ else:
                     break
             rpToClaim = reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{tokenToClaim}']['attributes']['stored_value']
             rpStored = reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']
-            if int(rpToClaim) < 1: input(f"The program is unable to claim {rpToClaim} Research Point because in order to collect it, at least 1 point must be available for claiming. In other words, just wait a few seconds and run this program again.\n\nPress ENTER to close the program.\n")
+            if int(rpToClaim) < 1: print(f"The program is unable to claim {rpToClaim} Research Point because in order to collect it, at least 1 point must be available for claiming. In other words, just wait a few seconds and run this program again.\n")
             else:
                 if bSpendAutoResearch == "false": print(f"The program is unable to claim {rpToClaim} Research Points because you have the maximum number of accumulated Research Points at once ({rpStored}).\nIn this situation if you want to automatically spend them, change the Spend_Research_Points value in config.ini from false to true and run this program again.\n")
                 else:
@@ -264,6 +277,7 @@ if bOpenFreeLlamas == "true":
         if not freeLlamas: print("There are no free Llamas available at the moment.\n")
         else:
             print(f"There are free llamas avaiable!")
+            itemsfromLlamas = []
             openedLlamas = 0
             alreadyOpenedFreeLlamas = 0
             for llama in freeLlamas:
@@ -286,7 +300,7 @@ if bOpenFreeLlamas == "true":
                     reqBuyFreeLlama = requests.post(links.profileRequest.format(accountId, "PurchaseCatalogEntry", "common_core"), headers=headers, json={"offerId": f"{llamaToClaimOfferId}", "purchaseQuantity": 1, "currency": "MtxCurrency", "currencySubType": "", "expectedTotalPrice": 0, "gameContext": "Frontend.None"})
                     reqBuyFreeLlamaText = json.loads(reqBuyFreeLlama.text)
                     if "errorMessage" in reqBuyFreeLlamaText:
-                        if "is not allowed because it would exceed the daily limit of" in reqBuyFreeLlamaText['errorMessage']:
+                        if "limit of" in reqBuyFreeLlamaText['errorMessage']:
                             if openedLlamas == 0: alreadyOpenedFreeLlamas += 1
                         break
                     else:
@@ -295,16 +309,69 @@ if bOpenFreeLlamas == "true":
                         openedLlamas += 1
                         llamaLootCount = 0
                         for key in llamaLoot:
-                            itemType = key['itemType']
-                            try: itemName = getStringList['Item names'][f'{itemType}']
-                            except: itemName = itemType
+                            templateId = key['itemType']
+                            itemGuid = key['itemGuid']
+                            itemQuantity = key['quantity']
+                            try: itemName = getStringList['Item names'][f'{templateId}']
+                            except: itemName = templateId
+                            itemRarity = itemName.split(" ")[0].lower()
+                            if templateId.startswith("Schematic:"):
+                                if (templateId.startswith("Schematic:sid_ceiling") or templateId.startswith("Schematic:sid_floor") or templateId.startswith("Schematic:sid_wall")): itemType = "trap"
+                                else: itemType = "weapon"
+                            elif templateId.startswith("Hero:"): itemType = "hero"
+                            elif templateId.startswith("Worker:"): itemType = "survivor"
+                            elif templateId.startswith("Defender:"): itemType = "defender"
+                            else: itemType = "niewiemjaktakmozebyc"
                             llamaLootCount += 1
-                            print(f"{llamaLootCount}: {key['quantity']}x {itemName}")
+                            if itemRarity.lower() in ("common", "uncommon", "rare", "epic"):
+                                itemsfromLlamas.append({"itemName": itemName, "itemType": itemType, "templateId": templateId, "itemGuid": itemGuid, "itemRarity": itemRarity, "itemQuantity": itemQuantity})
+                            print(f"{llamaLootCount}: {itemQuantity}x {itemName}")
             if int(alreadyOpenedFreeLlamas) == freeLlamasCount:
                 print(f"\nFree Llamas that are currently avaiable in the shop have been already opened on this account. Remember that you can open a maximum of 2 free one hour rotation Llamas in 24 hours.\n")
             else:
                 llamasWord = "Llamas"
                 if int(openedLlamas) == 1: llamasWord = "Llama"
-                print(f"\nSuccessfully opened {openedLlamas} free {llamasWord}.\n")
+                print(f"\nSuccesfully opened {openedLlamas} free {llamasWord}.\n")
+
+# Automatic selected llama loot recycling.
+if (not (recycleOn == 0)) and (not(int(alreadyOpenedFreeLlamas) == freeLlamasCount)):
+    itemsToRecycle = []
+    itemGuidsToRecycle = []
+    recycleResources = []
+    recycledItemsCount = 0
+    recycleResourcesCount = 0
+    for item in itemsfromLlamas:
+        itemType = item['itemType']
+        itemRarity = item['itemRarity']
+        itemGuid = item['itemGuid']
+        if itemRarity in autoRecycling.itemRarities[f'{itemType}']:
+            itemGuidsToRecycle.append(itemGuid)
+            itemsToRecycle.append(item)
+    if not (len(itemGuidsToRecycle) == 0):
+        print(f"Recycling/Retiring selected items from {openedLlamas} free {llamasWord}...\n")
+        reqGetResources = requests.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}")
+        reqGetResourcesText = json.loads(reqGetResources.text)
+        for resource in autoRecycling.recycleResources:
+            for item in reqGetResourcesText['profileChanges'][0]['profile']['items']:
+                if reqGetResourcesText['profileChanges'][0]['profile']['items'][f'{item}']['templateId'] == resource:
+                    recycleResources.append({"itemGuid": item, "templateId": resource, "itemName": getStringList['Item names'][f'{resource}'], "quantity": reqGetResourcesText['profileChanges'][0]['profile']['items'][f'{item}']['quantity']})
+        reqRecycleItems = requests.post(links.profileRequest.format(accountId, "RecycleItemBatch", "campaign"), headers=headers, json={"targetItemIds": itemGuidsToRecycle})
+        reqRecycleItemsText = json.loads(reqRecycleItems.text)
+        if "errorMessage" in reqRecycleItemsText:
+            input(f"ERROR: {reqRecycleItemsText['errorMessage']}\n\nPress ENTER to close the program.\n")
+            exit()
+        print("The following items have been succesfully Recycled/Retired:")
+        for item in itemsToRecycle:
+            recycledItemsCount += 1
+            print(f"{recycledItemsCount}: {item['itemQuantity']}x {item['itemName']}")
+        reqGetResources2 = requests.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}")
+        reqGetResources2Text = json.loads(reqGetResources2.text)
+        print("\nResources received:")
+        for resource in recycleResources:
+            resourceQuantity = int(reqGetResources2Text['profileChanges'][0]['profile']['items'][resource['itemGuid']]['quantity']) - int(resource['quantity'])
+            if resourceQuantity > 0:
+                recycleResourcesCount += 1
+                print(f"{recycleResourcesCount}: {resourceQuantity}x {resource['itemName']}. Total amount: {reqGetResources2Text['profileChanges'][0]['profile']['items'][resource['itemGuid']]['quantity']}")
+        print("") # Extra newline
 input("Press ENTER to close the program.\n")
 exit()

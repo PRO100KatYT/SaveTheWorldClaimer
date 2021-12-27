@@ -3,15 +3,26 @@
 This program allows you to claim Save the World Daily Reward, Research Points and open free Llamas without opening the game.
 
 ---
+### Features:
+- Two login methods: refresh token and device auth.
+  - You can choose the method via the config.ini file.
+- Daily reward claiming.
+- Research Points claiming.
+- Automatic Research Points spending.
+  - You can disable this feature via the config.ini file.
+- Claiming free Llamas.
+  - You can disable this feature via the config.ini file.
+- Automatic free Llama loot recycling.
+  - You can enable this feature via the config.ini file.
+---
 ### Changelog:
-What's new in the 1.3.0 update:
-- New login method using Refresh Token.
-  - Starting with this update, the default login method is Refresh Token.
-  - If you want to use the device login method (the previous one), you can set it in the config file.
-  - Shoutout to BayGamerYT for telling me about this login method.
-- The program is now able to automatically open webpages for the auth code.
-- Added another link to get the auth token if you're already logged in your browser.
-- Fixed a crash after trying to claim Research Points, when a maximum amount of them is accumulated when the auto Research Points spend options was set to false.
+What's new in the 1.4.0 update:
+- Automatic free llama loot recycling!
+  - You can choose which items of which rarity are to be automatically recycled.
+  - This feature is disabled by default. You can turn it on via the config.ini file.
+- Added config version to the config.ini file.
+- Fixed the program showing "Succesfully opened 0 free Llamas." in certain circumstances.
+- Added Features list to the Readme.
 - Tweaked the program's code a little bit.
 ---
 
