@@ -9,20 +9,20 @@ This program allows you to claim Save the World Daily Reward, Research Points an
 - Daily reward claiming.
 - Research Points claiming.
 - Automatic Research Points spending.
-  - You can disable this feature via the config.ini file.
+  - You can choose the method or disable this feature via the config.ini file.
 - Claiming free Llamas.
   - You can disable this feature via the config.ini file.
 - Automatic free Llama loot recycling.
   - You can enable this feature via the config.ini file.
 ---
 ### Changelog:
-What's new in the 1.4.0 update:
-- Automatic free llama loot recycling!
-  - You can choose which items of which rarity are to be automatically recycled.
-  - This feature is disabled by default. You can turn it on via the config.ini file.
-- Added config version to the config.ini file.
-- Fixed the program showing "Succesfully opened 0 free Llamas." in certain circumstances.
-- Added Features list to the Readme.
+What's new in the 1.5.0 update:
+- New Research Points spending method - everyten!
+  - This method makes the program search for a level that is the closest to reaching a full decimal level, e.g. 20, 30, 70.
+  - This method is not enabled by default. You can choose it via the config.ini file.
+- The program is now going to automatically spend Research Points (if the option is turned on) when after claiming them there are some stored left.
+- Fixed the program crashing when there are 0 free llamas available in certain circumstances.
+- Fixed some of the item IDs in the stringlist.json file.
 - Tweaked the program's code a little bit.
 ---
 
