@@ -16,19 +16,18 @@ This program allows you to claim Save the World Daily Reward, Research Points an
   - You can enable this feature via the config.ini file.
 ---
 ### Changelog:
-What's new in the 1.5.0 update:
-- New Research Points spending method - everyten!
-  - This method makes the program search for a level that is the closest to reaching a full decimal level, e.g. 20, 30, 70.
-  - This method is not enabled by default. You can choose it via the config.ini file.
-- The program is now going to automatically spend Research Points (if the option is turned on) when after claiming them there are some stored left.
-- Fixed the program crashing when there are 0 free llamas available in certain circumstances.
-- Fixed some of the item IDs in the stringlist.json file.
+What's new in the 1.6.0 update:
+- The program's performance is significantly better.
+- Added an option to use the config setup or use the default config values.
+- Added rarity and type information to items in itemlist.
 - Tweaked the program's code a little bit.
 ---
 
 ### How to use it?
 
-- After starting the SaveTheWorldClaimer.py for the first time (or after deleting the auth.json file), you will be asked if you are logged into your Epic account in your browser. If yes, type 1, if no, type 2.
+- After starting the SaveTheWorldClaimer.py for the first time (or after deleting the config.ini file) you will be asked if you want to start the config setup process or use the default config values. If you want to start the setup, type 1, if no, type 2.
+
+- Next, you will be asked if you are logged into your Epic account in your browser. If yes, type 1, if no, type 2.
 
 - After you'll press ENTER, an Epic Games website will open. From there, login if you are not already logged into your Epic account.
 
