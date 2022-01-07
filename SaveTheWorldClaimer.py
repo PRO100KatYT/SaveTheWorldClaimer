@@ -1,4 +1,4 @@
-version = "1.6.0"
+version = "1.6.1"
 configVersion = "1.5.0"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 try:
@@ -23,7 +23,7 @@ class links:
 
 # Automatic llama loot recycling variables.
 class autoRecycling:
-    rarities = {"common": "common", "uncommon": "common, uncommon", "rare": "common, uncommon, rare", "epic": "common, uncommon, rare, epic"}
+    rarities = {"off": "", "common": "common", "uncommon": "common, uncommon", "rare": "common, uncommon, rare", "epic": "common, uncommon, rare, epic"}
     itemRarities = ""
     recycleResources = ["AccountResource:heroxp", "AccountResource:personnelxp", "AccountResource:phoenixxp", "AccountResource:phoenixxp_reward", "AccountResource:reagent_alteration_ele_fire", "AccountResource:reagent_alteration_ele_nature", "AccountResource:reagent_alteration_ele_water", "AccountResource:reagent_alteration_gameplay_generic", "AccountResource:reagent_alteration_generic", "AccountResource:reagent_alteration_upgrade_r", "AccountResource:reagent_alteration_upgrade_sr", "AccountResource:reagent_alteration_upgrade_uc", "AccountResource:reagent_alteration_upgrade_vr", "AccountResource:reagent_c_t01", "AccountResource:reagent_c_t02", "AccountResource:reagent_c_t03", "AccountResource:reagent_c_t04", "AccountResource:reagent_evolverarity_r", "AccountResource:reagent_evolverarity_sr", "AccountResource:reagent_evolverarity_vr", "AccountResource:reagent_people", "AccountResource:reagent_promotion_heroes", "AccountResource:reagent_promotion_survivors", "AccountResource:reagent_promotion_traps", "AccountResource:reagent_promotion_weapons", "AccountResource:reagent_traps", "AccountResource:reagent_weapons", "AccountResource:schematicxp"]
 
@@ -55,10 +55,10 @@ def requestText(request, bCheckForErrors):
     return requestText
 
 # Send token request.
-def reqToken(loginLink):
+def reqToken(loginLink, authHeader):
     webbrowser.open_new_tab(loginLink)
     print(f"If the program didnt open it, copy this link to your browser: {(loginLink)}\n")
-    reqTokenText = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")}), True)
+    reqTokenText = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {authHeader}"}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")}), True)
     return reqTokenText
 
 # Create and/or read the config.ini file.
@@ -105,11 +105,11 @@ if not os.path.exists(authPath):
     if isLoggedIn == "1": loginLink = links.loginLink1
     else: loginLink = links.loginLink2
     if authType == "token":
-        reqTokenText = reqToken(loginLink.format("34a02cf8f4414e29b15921876da36f9a"))
+        reqTokenText = reqToken(loginLink.format("34a02cf8f4414e29b15921876da36f9a"), "MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
         refreshToken, accountId, expirationDate = [reqTokenText["refresh_token"], reqTokenText["account_id"], reqTokenText["refresh_expires_at"]]
         with open(authPath, "w") as authFile: json.dump({"WARNING": "Don't show anyone the contents of this file, because it contains information with which the program logs into the account.", "authType": "token", "refreshToken": refreshToken, "accountId": accountId, "refresh_expires_at": expirationDate}, authFile, indent = 2)
     else:
-        reqTokenText = reqToken(loginLink.format("3446cd72694c4a4485d81b77adbb2141"))
+        reqTokenText = reqToken(loginLink.format("3446cd72694c4a4485d81b77adbb2141"), "MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE=")
         accessToken, accountId = [reqTokenText["access_token"], reqTokenText["account_id"]]
         reqDeviceAuthText = requestText(session.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={}), True)
         deviceId, secret = [reqDeviceAuthText["deviceId"], reqDeviceAuthText["secret"]]
