@@ -5,7 +5,7 @@ This program allows you to claim Save the World Daily Reward, Research Points an
 ---
 ### Features:
 - Two login methods: refresh token and device auth.
-  - You can choose the method via the config.ini file.
+  - You can see more info about them and choose the method via the config.ini file.
 - Daily reward claiming.
 - Research Points claiming.
 - Automatic Research Points spending.
@@ -16,10 +16,13 @@ This program allows you to claim Save the World Daily Reward, Research Points an
   - You can enable this feature via the config.ini file.
 ---
 ### Changelog:
-What's new in the 1.6.0 update:
-- The program's performance is significantly better.
-- Added an option to use the config setup or use the default config values.
-- Added rarity and type information to items in itemlist.
+What's new in the 1.6.2 update:
+- The program now displays the total amount of earned Currency, Account Resource or Consumable Account Item after claiming the daily reward.
+- The program now looks for the receivemtxcurrency token instead of the founder's token to determine whether the account can earn V-Bucks from StW or not.
+- Rewritten Daily Rewards list in stringlist.json
+- Removed the "Skipping Research Points claiming because ... has max F.O.R.T. stats." message.
+- Added "Found a bug?" section to the readme.
+- Added link to this repository to messages mentioning it.
 - Tweaked the program's code a little bit.
 ---
 
@@ -51,4 +54,10 @@ or this:
 
 - Next time you start the program, you will not need to enter a new auth code, because the login credentials have been saved in the auth.json file.
 ---
+
+### Found a bug?
+Feel free to [open an issue](https://github.com/PRO100KatYT/SaveTheWorldClaimer/issues/new "Click here if you want to open an issue.") if you encounter any bugs or just have a question.
+
+---
+
 If you want to receive notifications about free llamas, I recommend joining [the r/FORTnITE discord server](https://discord.gg/PjqZaDmV8D "Here is the link :D") and giving yourself the freellamas role on the #role-assignment channel.

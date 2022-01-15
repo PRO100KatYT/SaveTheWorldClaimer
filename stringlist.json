@@ -1,342 +1,2958 @@
 {
    "Daily Rewards": {
-      "credits": "Daily rewards list by dippyshere, modified by PRO100KatYT",
-      "1": "300 Hero XP",
-      "2": "2 Mini Reward Llamas",
-      "3": "Rare Hero",
-      "4": "Rare Ranged Weapon Schematic",
-      "5": "Rare Melee Weapon Schematic",
-      "6": "5 Pure Drops of Rain",
-      "7": "Rare Freedom's Herald Pistol",
-      "8": "Rare Trap Schematic",
-      "9": "Rare Defender",
-      "10": "Epic Hero",
-      "11": "50 V-Bucks",
-      "12": "Epic Lead Survivor",
-      "13": "3 XP Boosts",
-      "14": "Epic Survivor",
-      "15": "Mini Reward Llama",
-      "16": "20 Gold",
-      "17": "15 Pure Drops of Rain",
-      "18": "Upgrade Llama",
-      "19": "Rare Trap Schematic",
-      "20": "5 Lightning in a Bottle",
-      "21": "Legendary Hero",
-      "22": "15 Pure Drops of Rain",
-      "23": "20 Gold",
-      "24": "2 Mini Reward Llamas",
-      "25": "Rare Melee Weapon Schematic",
-      "26": "Upgrade Llama",
-      "27": "5 Eye of the Storm",
-      "28": "300 V-Bucks",
-      "29": "2 Mini Reward Llamas",
-      "30": "10 Pure Drops of Rain",
-      "31": "Rare Hero",
-      "32": "20 Gold",
-      "33": "Upgrade Llama",
-      "34": "3 XP Boosts",
-      "35": "150 V-Bucks",
-      "36": "20 Gold",
-      "37": "10 Pure Drops of Rain",
-      "38": "Rare Ranged Weapon Schematic",
-      "39": "5 Lightning in a Bottle",
-      "40": "Upgrade Llama",
-      "41": "3 Teammate XP Boosts",
-      "42": "Epic Lead Survivor",
-      "43": "2 Mini Reward Llamas",
-      "44": "20 Gold",
-      "45": "15 Pure Drops of Rain",
-      "46": "Upgrade Llama",
-      "47": "Rare Trap Schematic",
-      "48": "5 Lightning in a Bottle",
-      "49": "150 V-Bucks",
-      "50": "15 Pure Drops of Rain",
-      "51": "20 Gold",
-      "52": "2 Mini Reward Llamas",
-      "53": "Rare Melee Weapon Schematic",
-      "54": "Upgrade Llama",
-      "55": "5 Eye of the Storm",
-      "56": "300 V-Bucks",
-      "57": "2 Mini Reward Llamas",
-      "58": "10 Pure Drops of Rain",
-      "59": "Rare Hero",
-      "60": "20 Gold",
-      "61": "Upgrade Llama",
-      "62": "3 XP Boosts",
-      "63": "Legendary Survivor",
-      "64": "20 Gold",
-      "65": "10 Pure Drops of Rain",
-      "66": "Rare Ranged Weapon Schematic",
-      "67": "5 Lightning in a Bottle",
-      "68": "Upgrade Llama",
-      "69": "3 Teammate XP Boosts",
-      "70": "150 V-Bucks",
-      "71": "2 Mini Reward Llamas",
-      "72": "20 Gold",
-      "73": "15 Pure Drops of Rain",
-      "74": "Upgrade Llama",
-      "75": "Rare Trap Schematic",
-      "76": "5 Lightning in a Bottle",
-      "77": "150 V-Bucks",
-      "78": "15 Pure Drops of Rain",
-      "79": "20 Gold",
-      "80": "2 Mini Reward Llamas",
-      "81": "Legendary Survivor",
-      "82": "Upgrade Llama",
-      "83": "5 Eye of the Storm",
-      "84": "300 V-Bucks",
-      "85": "2 Mini Reward Llamas",
-      "86": "10 Pure Drops of Rain",
-      "87": "Rare Hero",
-      "88": "20 Gold",
-      "89": "Upgrade Llama",
-      "90": "3 XP Boosts",
-      "91": "150 V-Bucks",
-      "92": "20 Gold",
-      "93": "10 Pure Drops of Rain",
-      "94": "Rare Ranged Weapon Schematic",
-      "95": "5 Lightning in a Bottle",
-      "96": "Upgrade Llama",
-      "97": "3 Teammate XP Boosts",
-      "98": "150 V-Bucks",
-      "99": "2 Mini Reward Llamas",
-      "100": "Legendary Hero",
-      "101": "15 Pure Drops of Rain",
-      "102": "Upgrade Llama",
-      "103": "Rare Trap Schematic",
-      "104": "5 Lightning in a Bottle",
-      "105": "150 V-Bucks",
-      "106": "15 Pure Drops of Rain",
-      "107": "20 Gold",
-      "108": "2 Mini Reward Llamas",
-      "109": "Rare Melee Weapon Schematic",
-      "110": "Upgrade Llama",
-      "111": "5 Eye of the Storm",
-      "112": "800 V-Bucks",
-      "113": "2 Mini Reward Llamas",
-      "114": "10 Pure Drops of Rain",
-      "115": "Rare Hero",
-      "116": "20 Gold",
-      "117": "Upgrade Llama",
-      "118": "3 XP Boosts",
-      "119": "150 V-Bucks",
-      "120": "20 Gold",
-      "121": "10 Pure Drops of Rain",
-      "122": "Rare Ranged Weapon Schematic",
-      "123": "5 Lightning in a Bottle",
-      "124": "Upgrade Llama",
-      "125": "3 Teammate XP Boosts",
-      "126": "150 V-Bucks",
-      "127": "2 Mini Reward Llamas",
-      "128": "20 Gold",
-      "129": "15 Pure Drops of Rain",
-      "130": "Upgrade Llama",
-      "131": "Rare Trap Schematic",
-      "132": "5 Lightning in a Bottle",
-      "133": "150 V-Bucks",
-      "134": "15 Pure Drops of Rain",
-      "135": "20 Gold",
-      "136": "2 Mini Reward Llamas",
-      "137": "Rare Melee Weapon Schematic",
-      "138": "Upgrade Llama",
-      "139": "5 Eye of the Storm",
-      "140": "300 V-Bucks",
-      "141": "2 Mini Reward Llamas",
-      "142": "10 Pure Drops of Rain",
-      "143": "Rare Hero",
-      "144": "20 Gold",
-      "145": "Upgrade Llama",
-      "146": "3 XP Boosts",
-      "147": "150 V-Bucks",
-      "148": "20 Gold",
-      "149": "10 Pure Drops of Rain",
-      "150": "Rare Ranged Weapon Schematic",
-      "151": "5 Lightning in a Bottle",
-      "152": "Upgrade Llama",
-      "153": "3 Teammate XP Boosts",
-      "154": "150 V-Bucks",
-      "155": "2 Mini Reward Llamas",
-      "156": "20 Gold",
-      "157": "15 Pure Drops of Rain",
-      "158": "Upgrade Llama",
-      "159": "Rare Trap Schematic",
-      "160": "5 Lightning in a Bottle",
-      "161": "150 V-Bucks",
-      "162": "15 Pure Drops of Rain",
-      "163": "20 Gold",
-      "164": "2 Mini Reward Llamas",
-      "165": "Rare Melee Weapon Schematic",
-      "166": "Upgrade Llama",
-      "167": "5 Eye of the Storm",
-      "168": "300 V-Bucks",
-      "169": "2 Mini Reward Llamas",
-      "170": "10 Pure Drops of Rain",
-      "171": "Rare Hero",
-      "172": "20 Gold",
-      "173": "Upgrade Llama",
-      "174": "3 XP Boosts",
-      "175": "150 V-Bucks",
-      "176": "20 Gold",
-      "177": "10 Pure Drops of Rain",
-      "178": "Rare Ranged Weapon Schematic",
-      "179": "5 Lightning in a Bottle",
-      "180": "Upgrade Llama",
-      "181": "3 Teammate XP Boosts",
-      "182": "150 V-Bucks",
-      "183": "2 Mini Reward Llamas",
-      "184": "20 Gold",
-      "185": "15 Pure Drops of Rain",
-      "186": "Upgrade Llama",
-      "187": "Rare Trap Schematic",
-      "188": "5 Lightning in a Bottle",
-      "189": "150 V-Bucks",
-      "190": "15 Pure Drops of Rain",
-      "191": "20 Gold",
-      "192": "2 Mini Reward Llamas",
-      "193": "Rare Melee Weapon Schematic",
-      "194": "Upgrade Llama",
-      "195": "5 Eye of the Storm",
-      "196": "300 V-Bucks",
-      "197": "2 Mini Reward Llamas",
-      "198": "10 Pure Drops of Rain",
-      "199": "Rare Hero",
-      "200": "20 Gold",
-      "201": "Upgrade Llama",
-      "202": "3 XP Boosts",
-      "203": "150 V-Bucks",
-      "204": "20 Gold",
-      "205": "10 Pure Drops of Rain",
-      "206": "Rare Ranged Weapon Schematic",
-      "207": "5 Lightning in a Bottle",
-      "208": "Upgrade Llama",
-      "209": "3 Teammate XP Boosts",
-      "210": "150 V-Bucks",
-      "211": "2 Mini Reward Llamas",
-      "212": "20 Gold",
-      "213": "15 Pure Drops of Rain",
-      "214": "Upgrade Llama",
-      "215": "Rare Trap Schematic",
-      "216": "5 Lightning in a Bottle",
-      "217": "150 V-Bucks",
-      "218": "15 Pure Drops of Rain",
-      "219": "20 Gold",
-      "220": "2 Mini Reward Llamas",
-      "221": "Rare Melee Weapon Schematic",
-      "222": "Upgrade Llama",
-      "223": "5 Eye of the Storm",
-      "224": "800 V-Bucks",
-      "225": "2 Mini Reward Llamas",
-      "226": "10 Pure Drops of Rain",
-      "227": "Rare Hero",
-      "228": "20 Gold",
-      "229": "Upgrade Llama",
-      "230": "3 XP Boosts",
-      "231": "150 V-Bucks",
-      "232": "20 Gold",
-      "233": "10 Pure Drops of Rain",
-      "234": "Rare Ranged Weapon Schematic",
-      "235": "5 Lightning in a Bottle",
-      "236": "Upgrade Llama",
-      "237": "3 Teammate XP Boosts",
-      "238": "150 V-Bucks",
-      "239": "2 Mini Reward Llamas",
-      "240": "20 Gold",
-      "241": "15 Pure Drops of Rain",
-      "242": "Upgrade Llama",
-      "243": "Rare Trap Schematic",
-      "244": "5 Lightning in a Bottle",
-      "245": "150 V-Bucks",
-      "246": "15 Pure Drops of Rain",
-      "247": "20 Gold",
-      "248": "2 Mini Reward Llamas",
-      "249": "Rare Melee Weapon Schematic",
-      "250": "Upgrade Llama",
-      "251": "5 Eye of the Storm",
-      "252": "300 V-Bucks",
-      "253": "2 Mini Reward Llamas",
-      "254": "10 Pure Drops of Rain",
-      "255": "Rare Hero",
-      "256": "20 Gold",
-      "257": "Upgrade Llama",
-      "258": "3 XP Boosts",
-      "259": "150 V-Bucks",
-      "260": "20 Gold",
-      "261": "10 Pure Drops of Rain",
-      "262": "Rare Ranged Weapon Schematic",
-      "263": "5 Lightning in a Bottle",
-      "264": "Upgrade Llama",
-      "265": "3 Teammate XP Boosts",
-      "266": "150 V-Bucks",
-      "267": "2 Mini Reward Llamas",
-      "268": "20 Gold",
-      "269": "15 Pure Drops of Rain",
-      "270": "Upgrade Llama",
-      "271": "Rare Trap Schematic",
-      "272": "5 Lightning in a Bottle",
-      "273": "150 V-Bucks",
-      "274": "15 Pure Drops of Rain",
-      "275": "20 Gold",
-      "276": "2 Mini Reward Llamas",
-      "277": "Rare Melee Weapon Schematic",
-      "278": "Upgrade Llama",
-      "279": "5 Eye of the Storm",
-      "280": "300 V-Bucks",
-      "281": "2 Mini Reward Llamas",
-      "282": "10 Pure Drops of Rain",
-      "283": "Rare Hero",
-      "284": "20 Gold",
-      "285": "Upgrade Llama",
-      "286": "3 XP Boosts",
-      "287": "150 V-Bucks",
-      "288": "20 Gold",
-      "289": "10 Pure Drops of Rain",
-      "290": "Rare Ranged Weapon Schematic",
-      "291": "5 Lightning in a Bottle",
-      "292": "Upgrade Llama",
-      "293": "3 Teammate XP Boosts",
-      "294": "150 V-Bucks",
-      "295": "2 Mini Reward Llamas",
-      "296": "20 Gold",
-      "297": "15 Pure Drops of Rain",
-      "298": "Upgrade Llama",
-      "299": "Rare Trap Schematic",
-      "300": "5 Lightning in a Bottle",
-      "301": "150 V-Bucks",
-      "302": "15 Pure Drops of Rain",
-      "303": "20 Gold",
-      "304": "2 Mini Reward Llamas",
-      "305": "Rare Melee Weapon Schematic",
-      "306": "Upgrade Llama",
-      "307": "5 Eye of the Storm",
-      "308": "300 V-Bucks",
-      "309": "2 Mini Reward Llamas",
-      "310": "10 Pure Drops of Rain",
-      "311": "Rare Hero",
-      "312": "20 Gold",
-      "313": "Upgrade Llama",
-      "314": "3 XP Boosts",
-      "315": "150 V-Bucks",
-      "316": "20 Gold",
-      "317": "10 Pure Drops of Rain",
-      "318": "Rare Ranged Weapon Schematic",
-      "319": "5 Lightning in a Bottle",
-      "320": "Upgrade Llama",
-      "321": "3 Teammate XP Boosts",
-      "322": "150 V-Bucks",
-      "323": "2 Mini Reward Llamas",
-      "324": "20 Gold",
-      "325": "15 Pure Drops of Rain",
-      "326": "Upgrade Llama",
-      "327": "Rare Trap Schematic",
-      "328": "5 Lightning in a Bottle",
-      "329": "150 V-Bucks",
-      "330": "15 Pure Drops of Rain",
-      "331": "20 Gold",
-      "332": "2 Mini Reward Llamas",
-      "333": "Rare Melee Weapon Schematic",
-      "334": "Upgrade Llama",
-      "335": "5 Eye of the Storm",
-      "336": "1000 V-Bucks"
+      "author": "Daily rewards list by PRO100KatYT",
+      "1": {
+         "templateId": "AccountResource:heroxp",
+         "quantity": 300,
+         "name": {
+            "singular": "Hero XP",
+            "plural": "Hero XP"
+         }
+      },
+      "2": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "3": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "4": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "5": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "6": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 5,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "7": {
+         "templateId": "Schematic:sid_pistol_firecracker_r_ore_t01",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Freedom's Herald Pistol",
+            "plural": "Rare Freedom's Herald Pistols"
+         }
+      },
+      "8": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "9": {
+         "templateId": "CardPack:cardpack_defender_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Defender",
+            "plural": "Rare Defenders"
+         }
+      },
+      "10": {
+         "templateId": "CardPack:cardpack_hero_vr",
+         "quantity": 1,
+         "name": {
+            "singular": "Epic Hero",
+            "plural": "Epic Heroes"
+         }
+      },
+      "11": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 50,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "12": {
+         "templateId": "CardPack:cardpack_manager_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Epic Lead Survivor",
+            "plural": "Epic Lead Survivors"
+         }
+      },
+      "13": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "14": {
+         "templateId": "CardPack:cardpack_worker_vr",
+         "quantity": 1,
+         "name": {
+            "singular": "Epic Survivor",
+            "plural": "Epic Survivors"
+         }
+      },
+      "15": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 1,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "16": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "17": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "18": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "19": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "20": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "21": {
+         "templateId": "CardPack:cardpack_hero_sr",
+         "quantity": 1,
+         "name": {
+            "singular": "Legendary Hero",
+            "plural": "Legendary Heroes"
+         }
+      },
+      "22": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "23": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "24": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "25": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "26": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "27": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "28": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 300,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "29": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "30": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "31": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "32": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "33": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "34": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "35": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "36": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "37": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "38": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "39": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "40": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "41": {
+         "templateId": "ConsumableAccountItem:smallxpboost_gift",
+         "quantity": 3,
+         "name": {
+            "singular": "Teammate XP Boost",
+            "plural": "Teammate XP Boosts"
+         }
+      },
+      "42": {
+         "templateId": "CardPack:cardpack_manager_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Epic Lead Survivor",
+            "plural": "Epic Lead Survivors"
+         }
+      },
+      "43": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "44": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "45": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "46": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "47": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "48": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "49": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "50": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "51": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "52": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "53": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "54": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "55": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "56": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 300,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "57": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "58": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "59": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "60": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "61": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "62": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "63": {
+         "templateId": "CardPack:cardpack_worker_sr",
+         "quantity": 1,
+         "name": {
+            "singular": "Legendary Survivor",
+            "plural": "Legendary Survivors"
+         }
+      },
+      "64": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "65": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "66": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "67": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "68": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "69": {
+         "templateId": "ConsumableAccountItem:smallxpboost_gift",
+         "quantity": 3,
+         "name": {
+            "singular": "Teammate XP Boost",
+            "plural": "Teammate XP Boosts"
+         }
+      },
+      "70": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "71": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "72": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "73": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "74": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "75": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "76": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "77": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "78": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "79": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "80": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "81": {
+         "templateId": "CardPack:cardpack_worker_sr",
+         "quantity": 1,
+         "name": {
+            "singular": "Legendary Survivor",
+            "plural": "Legendary Survivors"
+         }
+      },
+      "82": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "83": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "84": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 300,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "85": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "86": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "87": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "88": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "89": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "90": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "91": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "92": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "93": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "94": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "95": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "96": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "97": {
+         "templateId": "ConsumableAccountItem:smallxpboost_gift",
+         "quantity": 3,
+         "name": {
+            "singular": "Teammate XP Boost",
+            "plural": "Teammate XP Boosts"
+         }
+      },
+      "98": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "99": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "100": {
+         "templateId": "CardPack:cardpack_hero_sr",
+         "quantity": 1,
+         "name": {
+            "singular": "Legendary Hero",
+            "plural": "Legendary Heroes"
+         }
+      },
+      "101": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "102": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "103": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "104": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "105": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "106": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "107": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "108": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "109": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "110": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "111": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "112": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 800,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "113": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "114": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "115": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "116": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "117": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "118": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "119": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "120": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "121": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "122": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "123": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "124": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "125": {
+         "templateId": "ConsumableAccountItem:smallxpboost_gift",
+         "quantity": 3,
+         "name": {
+            "singular": "Teammate XP Boost",
+            "plural": "Teammate XP Boosts"
+         }
+      },
+      "126": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "127": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "128": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "129": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "130": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "131": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "132": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "133": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "134": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "135": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "136": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "137": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "138": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "139": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "140": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 300,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "141": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "142": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "143": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "144": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "145": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "146": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "147": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "148": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "149": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "150": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "151": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "152": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "153": {
+         "templateId": "ConsumableAccountItem:smallxpboost_gift",
+         "quantity": 3,
+         "name": {
+            "singular": "Teammate XP Boost",
+            "plural": "Teammate XP Boosts"
+         }
+      },
+      "154": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "155": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "156": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "157": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "158": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "159": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "160": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "161": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "162": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "163": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "164": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "165": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "166": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "167": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "168": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 300,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "169": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "170": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "171": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "172": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "173": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "174": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "175": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "176": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "177": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "178": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "179": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "180": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "181": {
+         "templateId": "ConsumableAccountItem:smallxpboost_gift",
+         "quantity": 3,
+         "name": {
+            "singular": "Teammate XP Boost",
+            "plural": "Teammate XP Boosts"
+         }
+      },
+      "182": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "183": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "184": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "185": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "186": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "187": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "188": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "189": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "190": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "191": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "192": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "193": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "194": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "195": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "196": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 300,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "197": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "198": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "199": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "200": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "201": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "202": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "203": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "204": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "205": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "206": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "207": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "208": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "209": {
+         "templateId": "ConsumableAccountItem:smallxpboost_gift",
+         "quantity": 3,
+         "name": {
+            "singular": "Teammate XP Boost",
+            "plural": "Teammate XP Boosts"
+         }
+      },
+      "210": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "211": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "212": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "213": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "214": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "215": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "216": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "217": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "218": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "219": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "220": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "221": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "222": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "223": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "224": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 800,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "225": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "226": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "227": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "228": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "229": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "230": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "231": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "232": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "233": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "234": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "235": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "236": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "237": {
+         "templateId": "ConsumableAccountItem:smallxpboost_gift",
+         "quantity": 3,
+         "name": {
+            "singular": "Teammate XP Boost",
+            "plural": "Teammate XP Boosts"
+         }
+      },
+      "238": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "239": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "240": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "241": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "242": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "243": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "244": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "245": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "246": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "247": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "248": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "249": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "250": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "251": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "252": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 300,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "253": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "254": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "255": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "256": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "257": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "258": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "259": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "260": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "261": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "262": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "263": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "264": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "265": {
+         "templateId": "ConsumableAccountItem:smallxpboost_gift",
+         "quantity": 3,
+         "name": {
+            "singular": "Teammate XP Boost",
+            "plural": "Teammate XP Boosts"
+         }
+      },
+      "266": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "267": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "268": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "269": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "270": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "271": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "272": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "273": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "274": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "275": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "276": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "277": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "278": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "279": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "280": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 300,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "281": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "282": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "283": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "284": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "285": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "286": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "287": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "288": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "289": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "290": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "291": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "292": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "293": {
+         "templateId": "ConsumableAccountItem:smallxpboost_gift",
+         "quantity": 3,
+         "name": {
+            "singular": "Teammate XP Boost",
+            "plural": "Teammate XP Boosts"
+         }
+      },
+      "294": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "295": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "296": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "297": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "298": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "299": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "300": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "301": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "302": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "303": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "304": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "305": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "306": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "307": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "308": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 300,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "309": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "310": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "311": {
+         "templateId": "CardPack:cardpack_hero_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Hero",
+            "plural": "Rare Heroes"
+         }
+      },
+      "312": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "313": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "314": {
+         "templateId": "ConsumableAccountItem:smallxpboost",
+         "quantity": 3,
+         "name": {
+            "singular": "XP Boost",
+            "plural": "XP Boosts"
+         }
+      },
+      "315": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "316": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "317": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 10,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "318": {
+         "templateId": "CardPack:cardpack_ranged_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Ranged Weapon Schematic",
+            "plural": "Rare Ranged Weapon Schematics"
+         }
+      },
+      "319": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "320": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "321": {
+         "templateId": "ConsumableAccountItem:smallxpboost_gift",
+         "quantity": 3,
+         "name": {
+            "singular": "Teammate XP Boost",
+            "plural": "Teammate XP Boosts"
+         }
+      },
+      "322": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "323": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "324": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "325": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "326": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "327": {
+         "templateId": "CardPack:cardpack_trap_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Trap Schematic",
+            "plural": "Rare Trap Schematics"
+         }
+      },
+      "328": {
+         "templateId": "AccountResource:reagent_c_t02",
+         "quantity": 5,
+         "name": {
+            "singular": "Lightning in a Bottle",
+            "plural": "Lightning in a Bottle"
+         }
+      },
+      "329": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 150,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      },
+      "330": {
+         "templateId": "AccountResource:reagent_c_t01",
+         "quantity": 15,
+         "name": {
+            "singular": "Pure Drop of Rain",
+            "plural": "Pure Drops of Rain"
+         }
+      },
+      "331": {
+         "templateId": "AccountResource:eventcurrency_scaling",
+         "quantity": 20,
+         "name": {
+            "singular": "Gold",
+            "plural": "Gold"
+         }
+      },
+      "332": {
+         "templateId": "AccountResource:voucher_basicpack",
+         "quantity": 2,
+         "name": {
+            "singular": "Mini Reward Llama",
+            "plural": "Mini Reward Llamas"
+         }
+      },
+      "333": {
+         "templateId": "CardPack:cardpack_melee_r",
+         "quantity": 1,
+         "name": {
+            "singular": "Rare Melee Weapon Schematic",
+            "plural": "Rare Melee Weapon Schematics"
+         }
+      },
+      "334": {
+         "templateId": "CardPack:cardpack_bronze",
+         "quantity": 1,
+         "name": {
+            "singular": "Upgrade Llama",
+            "plural": "Upgrade Llamas"
+         }
+      },
+      "335": {
+         "templateId": "AccountResource:reagent_c_t03",
+         "quantity": 5,
+         "name": {
+            "singular": "Eye of the Storm",
+            "plural": "Eyes of the Storm"
+         }
+      },
+      "336": {
+         "templateId": "ConditionalResource:currency_mtxswap",
+         "quantity": 1000,
+         "name": [
+            {
+               "singular": "V-Buck",
+               "plural": "V-Bucks"
+            },
+            {
+               "singular": "X-Ray Ticket",
+               "plural": "X-Ray Tickets"
+            }
+         ]
+      }
    },
    "Llama names": {
       "CardPack:cardpack_basic": "Mini Reward Llama",

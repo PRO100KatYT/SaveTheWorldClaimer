@@ -1,4 +1,4 @@
-version = "1.6.1"
+version = "1.6.2"
 configVersion = "1.5.0"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 try:
@@ -24,7 +24,7 @@ class links:
 # Automatic llama loot recycling variables.
 class autoRecycling:
     rarities = {"off": "", "common": "common", "uncommon": "common, uncommon", "rare": "common, uncommon, rare", "epic": "common, uncommon, rare, epic"}
-    itemRarities = ""
+    itemRarities = []
     recycleResources = ["AccountResource:heroxp", "AccountResource:personnelxp", "AccountResource:phoenixxp", "AccountResource:phoenixxp_reward", "AccountResource:reagent_alteration_ele_fire", "AccountResource:reagent_alteration_ele_nature", "AccountResource:reagent_alteration_ele_water", "AccountResource:reagent_alteration_gameplay_generic", "AccountResource:reagent_alteration_generic", "AccountResource:reagent_alteration_upgrade_r", "AccountResource:reagent_alteration_upgrade_sr", "AccountResource:reagent_alteration_upgrade_uc", "AccountResource:reagent_alteration_upgrade_vr", "AccountResource:reagent_c_t01", "AccountResource:reagent_c_t02", "AccountResource:reagent_c_t03", "AccountResource:reagent_c_t04", "AccountResource:reagent_evolverarity_r", "AccountResource:reagent_evolverarity_sr", "AccountResource:reagent_evolverarity_vr", "AccountResource:reagent_people", "AccountResource:reagent_promotion_heroes", "AccountResource:reagent_promotion_survivors", "AccountResource:reagent_promotion_traps", "AccountResource:reagent_promotion_weapons", "AccountResource:reagent_traps", "AccountResource:reagent_weapons", "AccountResource:schematicxp"]
 
 # Start a new requests session.
@@ -55,11 +55,11 @@ def requestText(request, bCheckForErrors):
     return requestText
 
 # Send token request.
-def reqToken(loginLink, authHeader):
+def reqTokenText(loginLink, authHeader):
     webbrowser.open_new_tab(loginLink)
     print(f"If the program didnt open it, copy this link to your browser: {(loginLink)}\n")
-    reqTokenText = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {authHeader}"}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")}), True)
-    return reqTokenText
+    reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {authHeader}"}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")}), True)
+    return reqToken
 
 # Create and/or read the config.ini file.
 config = ConfigParser()
@@ -68,7 +68,7 @@ if not os.path.exists(configPath):
     print("Starting to generate the config.ini file.\n")
     bStartSetup = validInput("Type 1 if you want to start the config setup and press ENTER.\nType 2 if you want to use the default config values and press ENTER.", ["1", "2"])
     if bStartSetup == "1":
-        iAuthorization_Type = validInput("Which authentication method do you want the program to use?\nToken auth metod generates a refresh token to log in. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\nDevice auth method generates authorization credentials that don't have an expiration date, but can after some time cause epic to ask you to change your password.\nValid vaules: token, device.", ["token", "device"])
+        iAuthorization_Type = validInput("Which authentication method do you want the program to use?\nToken auth metod generates a refresh token to log in. The limit per IP is 1. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\nDevice auth method generates authorization credentials that don't have an expiration date and limit per IP, but can after some time cause epic to ask you to change your password.\nValid vaules: token, device.", ["token", "device"])
         iSpend_Research_Points = validInput("Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\nThe \"lowest\" method makes the program search for a Research stat with the lowest level.\nThe \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\nValid vaules: off, lowest, everyten.", ["off", "lowest", "everyten"])
         iOpen_Free_Llamas = validInput("Do you want the program to search for free Llamas and open them if they are avaiable?\nValid vaules: true, false.", ["true", "false"])
         bAutomaticRecycle = validInput("Do you want to Automatically recycle unwanted free Llama loot?\nValid vaules: true, false.", ["true", "false"])
@@ -79,7 +79,7 @@ if not os.path.exists(configPath):
             for itemType in itemTypeJson: iList.append(validInput(f"Input the rarity of {itemTypeJson[itemType]['name']} you want the program to automatically {itemTypeJson[itemType]['recycleWord']} at it or below.\nValid values: off, common, uncommon, rare, epic.", ["off", "common", "uncommon", "rare", "epic"]))
             iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes = iList  
     else: iAuthorization_Type, iSpend_Research_Points, iOpen_Free_Llamas, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes = ["token", "lowest", "true", "uncommon", "uncommon", "rare", "rare", "uncommon"]           
-    with open(configPath, "w") as configFile: configFile.write(f"[StW_Claimer_Config]\n\n# Which authentication method do you want the program to use?\n# Token auth metod generates a refresh token to log in. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\n# Device auth method generates authorization credentials that don't have an expiration date, but can after some time cause epic to ask you to change your password.\n# Valid vaules: token, device.\nAuthorization_Type = {iAuthorization_Type}\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\n# The \"lowest\" method makes the program search for a Research stat with the lowest level.\n# The \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\n# Valid vaules: off, lowest, everyten.\nSpend_Research_Points = {iSpend_Research_Points}\n\n# Do you want the program to search for free Llamas and open them if they are avaiable?\n# Valid vaules: true, false.\nOpen_Free_Llamas = {iOpen_Free_Llamas}\n\n[Automatic_Recycle/Retire]\n\n# Automatically recycle Weapon schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Weapons = {iRecycle_Weapons}\n\n# Automatically recycle Trap schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Traps = {iRecycle_Traps}\n\n# Automatically retire Survivors at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Survivors = {iRetire_Survivors}\n\n# Automatically retire Defenders at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Defenders = {iRetire_Defenders}\n\n# Automatically retire Heroes at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Heroes = {iRetire_Heroes}\n\n[Config_Version]\n\nVersion = STWC_{configVersion}")
+    with open(configPath, "w") as configFile: configFile.write(f"[StW_Claimer_Config]\n\n# Which authentication method do you want the program to use?\n# Token auth metod generates a refresh token to log in. The limit per IP is 1. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\n# Device auth method generates authorization credentials that don't have an expiration date and limit per IP, but can after some time cause epic to ask you to change your password.\n# Valid vaules: token, device.\nAuthorization_Type = {iAuthorization_Type}\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\n# The \"lowest\" method makes the program search for a Research stat with the lowest level.\n# The \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\n# Valid vaules: off, lowest, everyten.\nSpend_Research_Points = {iSpend_Research_Points}\n\n# Do you want the program to search for free Llamas and open them if they are avaiable?\n# Valid vaules: true, false.\nOpen_Free_Llamas = {iOpen_Free_Llamas}\n\n[Automatic_Recycle/Retire]\n\n# Automatically recycle Weapon schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Weapons = {iRecycle_Weapons}\n\n# Automatically recycle Trap schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Traps = {iRecycle_Traps}\n\n# Automatically retire Survivors at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Survivors = {iRetire_Survivors}\n\n# Automatically retire Defenders at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Defenders = {iRetire_Defenders}\n\n# Automatically retire Heroes at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Heroes = {iRetire_Heroes}\n\n[Config_Version]\n\nVersion = STWC_{configVersion}")
     print("The config.ini file was generated successfully.\n")
 try:
     config.read(configPath)
@@ -105,14 +105,14 @@ if not os.path.exists(authPath):
     if isLoggedIn == "1": loginLink = links.loginLink1
     else: loginLink = links.loginLink2
     if authType == "token":
-        reqTokenText = reqToken(loginLink.format("34a02cf8f4414e29b15921876da36f9a"), "MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
-        refreshToken, accountId, expirationDate = [reqTokenText["refresh_token"], reqTokenText["account_id"], reqTokenText["refresh_expires_at"]]
+        reqToken = reqTokenText(loginLink.format("34a02cf8f4414e29b15921876da36f9a"), "MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
+        refreshToken, accountId, expirationDate = [reqToken["refresh_token"], reqToken["account_id"], reqToken["refresh_expires_at"]]
         with open(authPath, "w") as authFile: json.dump({"WARNING": "Don't show anyone the contents of this file, because it contains information with which the program logs into the account.", "authType": "token", "refreshToken": refreshToken, "accountId": accountId, "refresh_expires_at": expirationDate}, authFile, indent = 2)
     else:
-        reqTokenText = reqToken(loginLink.format("3446cd72694c4a4485d81b77adbb2141"), "MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE=")
-        accessToken, accountId = [reqTokenText["access_token"], reqTokenText["account_id"]]
-        reqDeviceAuthText = requestText(session.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={}), True)
-        deviceId, secret = [reqDeviceAuthText["deviceId"], reqDeviceAuthText["secret"]]
+        reqToken = reqTokenText(loginLink.format("3446cd72694c4a4485d81b77adbb2141"), "MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE=")
+        accessToken, accountId = [reqToken["access_token"], reqToken["account_id"]]
+        reqDeviceAuth = requestText(session.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={}), True)
+        deviceId, secret = [reqDeviceAuth["deviceId"], reqDeviceAuth["secret"]]
         with open(authPath, "w") as authFile: json.dump({"WARNING": "Don't show anyone the contents of this file, because it contains information with which the program logs into the account.", "authType": "device",  "deviceId": deviceId, "accountId": accountId, "secret": secret}, authFile, indent = 2)
     print("\nThe auth.json file was generated successfully.\n")
 try:
@@ -130,72 +130,82 @@ except:
 
 # Load the stringlist.json file.
 stringListPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "stringlist.json")
-if not os.path.exists(stringListPath): customError("The stringlist.json file doesn't exist. Get it from this program's repository on Github, add it back and run this program again.")
+if not os.path.exists(stringListPath): customError("The stringlist.json file doesn't exist. Get it from this program's repository on Github (https://github.com/PRO100KatYT/SaveTheWorldClaimer), add it back and run this program again.")
 try: getStringList = json.loads(open(stringListPath, "r").read())
-except: customError("The program is unable to read the stringlist.json file. Delete the stringlist.json file, download it from this program's repository on Github, add it back here and run this program again.")
+except: customError("The program is unable to read the stringlist.json file. Delete the stringlist.json file, download it from this program's repository on Github (https://github.com/PRO100KatYT/SaveTheWorldClaimer), add it back here and run this program again.")
 
 # Log in.
 if authType == "token": # Shoutout to BayGamerYT for telling me about this login method.
-    reqRefreshTokenText = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "refresh_token", "refresh_token": refreshToken}), True)
+    reqRefreshToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "refresh_token", "refresh_token": refreshToken}), True)
     with open(authPath, "r") as getAuthFile: authFile = json.loads(getAuthFile.read())
-    authFile['refreshToken'], authFile['refresh_expires_at'] = [reqRefreshTokenText["refresh_token"], reqRefreshTokenText["refresh_expires_at"]]
+    authFile['refreshToken'], authFile['refresh_expires_at'] = [reqRefreshToken["refresh_token"], reqRefreshToken["refresh_expires_at"]]
     with open(authPath, "w") as getAuthFile: json.dump(authFile, getAuthFile, indent = 2)
-    reqExchangeText = requestText(session.get(links.getOAuth.format("exchange"), headers={"Authorization": f"bearer {reqRefreshTokenText['access_token']}"}, data={"grant_type": "authorization_code"}), True)
-    reqTokenText = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "exchange_code", "exchange_code": reqExchangeText["code"], "token_type": "eg1"}), True)
-if authType == "device": reqTokenText = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"}), True)
-accessToken, displayName = [reqTokenText['access_token'], reqTokenText['displayName']]
+    reqExchange = requestText(session.get(links.getOAuth.format("exchange"), headers={"Authorization": f"bearer {reqRefreshToken['access_token']}"}, data={"grant_type": "authorization_code"}), True)
+    reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "exchange_code", "exchange_code": reqExchange["code"], "token_type": "eg1"}), True)
+if authType == "device": reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"}), True)
+accessToken, displayName = [reqToken['access_token'], reqToken['displayName']]
 print(f"Logged in as {displayName}.\n")
 
 # Headers for MCP requests.
 headers = {"Authorization": f"bearer {accessToken}", "Content-Type": "application/json"}
 
-# Check whether the account has the campaign access token and founder's token.
-# The founder's token is not required, but instead of V-Bucks the account will recieve X-Ray Tickets.
-reqCheckTokensText = json.dumps(requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False))
-bCampaignAccess = False
-bFounder = False
-if "Token:campaignaccess" in reqCheckTokensText: bCampaignAccess = True
-if "Token:founderspack" in reqCheckTokensText: bFounder = True
-if not bCampaignAccess: customError(f"{displayName} doesn't have access to Save the World.")
+# Check whether the account has the campaign access token and is able to receive V-Bucks.
+# The receivemtxcurrency token is not required, but instead of V-Bucks the account will recieve X-Ray Tickets.
+reqCheckTokens = [json.dumps(requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), False))]
+bReceiveMtx = False
+if not ("Token:campaignaccess" in reqCheckTokens[0]): customError(f"{displayName} doesn't have access to Save the World.")
+if "Token:receivemtxcurrency" in reqCheckTokens[1]: bReceiveMtx = True
 
 # Claim the Daily Reward.
-reqClaimDailyRewardText = requestText(session.post(links.profileRequest.format(accountId, "ClaimLoginReward", "campaign"), headers=headers, data="{}"), True)
-cdrItems, cdrDaysLoggedIn = [reqClaimDailyRewardText['notifications'][0]['items'], reqClaimDailyRewardText['notifications'][0]['daysLoggedIn']]
+reqClaimDailyReward = requestText(session.post(links.profileRequest.format(accountId, "ClaimLoginReward", "campaign"), headers=headers, data="{}"), True)
+cdrItems, cdrDaysLoggedIn, totalAmount = [reqClaimDailyReward['notifications'][0]['items'], reqClaimDailyReward['notifications'][0]['daysLoggedIn'], 0]
 cdrDaysModified = int(cdrDaysLoggedIn) % 336 # Credit to dippyshere for this and the next line of code.
 if cdrDaysModified == 0: cdrDaysModified = 336
-if not cdrItems: print(f"The daily reward for {displayName} has been already claimed today!")
-else: print(f"Today's daily reward for {displayName} has been successfully claimed!")
-reward = getStringList['Daily Rewards'][f'{cdrDaysModified}']
-if (("V-Bucks" in reward) and (not bFounder)): reward = reward.replace("V-Bucks", "X-Ray Tickets")
-print(f"Day: {cdrDaysLoggedIn}\nReward: {reward}\n")
+reward, rewardName, rewardTemplateId = [getStringList['Daily Rewards'][f'{cdrDaysModified}']['quantity'], getStringList['Daily Rewards'][f'{cdrDaysModified}']['name'], getStringList['Daily Rewards'][f'{cdrDaysModified}']['templateId']]
+if rewardTemplateId.startswith("ConditionalResource:"):
+    if bReceiveMtx == True: rewardName = rewardName[0]
+    else: rewardName, rewardTemplateId = [rewardName[1], "AccountResource:currency_xrayllama"]
+if int(reward) == 1: reward = rewardName['singular']
+else: reward = f"{reward} {rewardName['plural']}"
+if not cdrItems: dailyMessage = f"The daily reward for {displayName} has been already claimed today!\nDay: {cdrDaysLoggedIn}\nReward: {reward}"
+else: dailyMessage = f"Today's daily reward for {displayName} has been successfully claimed!\nDay: {cdrDaysLoggedIn}\nReward: {reward}"
+if rewardTemplateId.startswith(("ConditionalResource:", "AccountResource:", "ConsumableAccountItem:")):
+    if rewardTemplateId.startswith("ConditionalResource:"):
+        reqGetCommonCore = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), True)
+        for item in reqGetCommonCore['profileChanges'][0]['profile']['items']:
+            if reqGetCommonCore['profileChanges'][0]['profile']['items'][item]['templateId'].lower().startswith("currency:mtx"): totalAmount += int(reqGetCommonCore['profileChanges'][0]['profile']['items'][item]['quantity'])     
+    else:
+        for item in reqClaimDailyReward['profileChanges'][0]['profile']['items']:
+            if reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['templateId'] == rewardTemplateId: totalAmount = int(reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['quantity'])
+    dailyMessage += f"\nTotal {rewardName['plural']}: {totalAmount}"
+print(f"{dailyMessage}\n")
 
 # Claim and automatically spend the Research Points.
-reqCampaignProfileCheckText = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
-reqCampaignProfileCheckResearchLevels = reqCampaignProfileCheckText['profileChanges'][0]['profile']['stats']['attributes']['research_levels']
-if (reqCampaignProfileCheckResearchLevels['fortitude'] == 120 and reqCampaignProfileCheckResearchLevels['offense'] == 120 and reqCampaignProfileCheckResearchLevels['resistance'] == 120 and reqCampaignProfileCheckResearchLevels['technology'] == 120): print(f"Skipping Research Points claiming because {displayName} has max F.O.R.T. stats.\n")
-else:
-    reqCampaignProfileCheckItems = reqCampaignProfileCheckText['profileChanges'][0]['profile']['items']
+reqCampaignProfileCheck = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
+reqCampaignProfileCheckResearchLevels = reqCampaignProfileCheck['profileChanges'][0]['profile']['stats']['attributes']['research_levels']
+if not (reqCampaignProfileCheckResearchLevels['fortitude'] == 120 and reqCampaignProfileCheckResearchLevels['offense'] == 120 and reqCampaignProfileCheckResearchLevels['resistance'] == 120 and reqCampaignProfileCheckResearchLevels['technology'] == 120):
+    reqCampaignProfileCheckItems = reqCampaignProfileCheck['profileChanges'][0]['profile']['items']
     for key in reqCampaignProfileCheckItems: # Credit to Lawin for helping me figuring out how to write this and the next line of code.
         if reqCampaignProfileCheckItems[key]['templateId'] == "CollectedResource:Token_collectionresource_nodegatetoken01":
             tokenToClaim = key
             break
-    reqClaimCollectedResourcesText = requestText(session.post(links.profileRequest.format(accountId, "ClaimCollectedResources", "campaign"), headers=headers, json={"collectorsToClaim": [tokenToClaim]}), False)
-    if "errorMessage" in reqClaimCollectedResourcesText: print(f"ERROR: {reqClaimCollectedResourcesText['errorMessage']}\n") # Error without exit()
+    reqClaimCollectedResources = requestText(session.post(links.profileRequest.format(accountId, "ClaimCollectedResources", "campaign"), headers=headers, json={"collectorsToClaim": [tokenToClaim]}), False)
+    if "errorMessage" in reqClaimCollectedResources: print(f"ERROR: {reqClaimCollectedResources['errorMessage']}\n") # Error without exit()
     else:
         storedMaxPoints = False
         try:
-            totalItemGuid, rpToClaim = [reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['itemGuid'], reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][tokenToClaim]['attributes']['stored_value']]
-            rpStored, rpClaimedQuantity = [reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity'], int(reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['quantity'])]
+            totalItemGuid, rpToClaim = [reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['itemGuid'], reqClaimCollectedResources['profileChanges'][0]['profile']['items'][tokenToClaim]['attributes']['stored_value']]
+            rpStored, rpClaimedQuantity = [reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity'], int(reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity'])]
             if float(rpToClaim) >= 1: storedMaxPoints = True
             pointsWord = "Points"
             if rpClaimedQuantity == 1: pointsWord = "Point"
-            print(f"Claimed {rpClaimedQuantity} Research {pointsWord}. Total Research Points: {reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
+            print(f"Claimed {rpClaimedQuantity} Research {pointsWord}. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
         except:
             for key in reqCampaignProfileCheckItems:
                 if reqCampaignProfileCheckItems[key]['templateId'] == "Token:collectionresource_nodegatetoken01":
                     totalItemGuid = key
                     break
-            rpToClaim, rpStored, storedMaxPoints = [reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{tokenToClaim}']['attributes']['stored_value'], reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity'], True]
+            rpToClaim, rpStored, storedMaxPoints = [reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{tokenToClaim}']['attributes']['stored_value'], reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity'], True]
             if int(rpToClaim) < 1:
                 storedMaxPoints = False
                 print(f"The program is unable to claim {round(rpToClaim, 2)} Research Point because in order to collect it, at least 1 point must be available for claiming. In other words, just wait a few seconds and run this program again.\n")
@@ -204,36 +214,36 @@ else:
             else:
                 print(f"You have the maximum number of accumulated Research Points at once ({rpStored}).\nStarting to automatically spend Research Points...\n")
                 while True:
-                    reqFORTLevelsCheckText = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)['profileChanges'][0]['profile']['stats']['attributes']['research_levels']
+                    reqFORTLevelsCheck = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)['profileChanges'][0]['profile']['stats']['attributes']['research_levels']
                     if spendAutoResearch == "lowest":
-                        levelsList = [int(reqFORTLevelsCheckText['fortitude']), int(reqFORTLevelsCheckText['offense']), int(reqFORTLevelsCheckText['resistance']), int(reqFORTLevelsCheckText['technology'])]
+                        levelsList = [int(reqFORTLevelsCheck['fortitude']), int(reqFORTLevelsCheck['offense']), int(reqFORTLevelsCheck['resistance']), int(reqFORTLevelsCheck['technology'])]
                         level = min(levelsList)
                     elif spendAutoResearch == "everyten":
-                        levelsList, levelsJson = [[int(reqFORTLevelsCheckText['fortitude']) % 10, int(reqFORTLevelsCheckText['offense']) % 10, int(reqFORTLevelsCheckText['resistance']) % 10, int(reqFORTLevelsCheckText['technology']) % 10], {int(reqFORTLevelsCheckText['fortitude']) % 10: int(reqFORTLevelsCheckText['fortitude']), int(reqFORTLevelsCheckText['offense']) % 10: int(reqFORTLevelsCheckText['offense']), int(reqFORTLevelsCheckText['resistance']) % 10: int(reqFORTLevelsCheckText['resistance']), int(reqFORTLevelsCheckText['technology']) % 10: int(reqFORTLevelsCheckText['technology'])}]
+                        levelsList, levelsJson = [[int(reqFORTLevelsCheck['fortitude']) % 10, int(reqFORTLevelsCheck['offense']) % 10, int(reqFORTLevelsCheck['resistance']) % 10, int(reqFORTLevelsCheck['technology']) % 10], {int(reqFORTLevelsCheck['fortitude']) % 10: int(reqFORTLevelsCheck['fortitude']), int(reqFORTLevelsCheck['offense']) % 10: int(reqFORTLevelsCheck['offense']), int(reqFORTLevelsCheck['resistance']) % 10: int(reqFORTLevelsCheck['resistance']), int(reqFORTLevelsCheck['technology']) % 10: int(reqFORTLevelsCheck['technology'])}]
                         level = levelsJson[max(levelsList)]
-                    for key in reqFORTLevelsCheckText:
-                        if reqFORTLevelsCheckText[key] == int(level):
+                    for key in reqFORTLevelsCheck:
+                        if reqFORTLevelsCheck[key] == int(level):
                             statToClaim = key
                             break
-                    reqPurchaseResearchStatUpgradeText = requestText(session.post(links.profileRequest.format(accountId, "PurchaseResearchStatUpgrade", "campaign"), headers=headers, json={"statId": f'{statToClaim}'}), False)
-                    if "errorMessage" in reqPurchaseResearchStatUpgradeText: break # Error without exit()
-                    else: print(f"Bought 1 {statToClaim.capitalize()} level. New level: {reqPurchaseResearchStatUpgradeText['profileChanges'][0]['profile']['stats']['attributes']['research_levels'][statToClaim]}.")
+                    reqPurchaseResearchStatUpgrade = requestText(session.post(links.profileRequest.format(accountId, "PurchaseResearchStatUpgrade", "campaign"), headers=headers, json={"statId": f'{statToClaim}'}), False)
+                    if "errorMessage" in reqPurchaseResearchStatUpgrade: break # Error without exit()
+                    else: print(f"Bought 1 {statToClaim.capitalize()} level. New level: {reqPurchaseResearchStatUpgrade['profileChanges'][0]['profile']['stats']['attributes']['research_levels'][statToClaim]}.")
                 print("\nCannot buy more F.O.R.T. levels.\n")
-                reqClaimCollectedResourcesText = requestText(session.post(links.profileRequest.format(accountId, "ClaimCollectedResources", "campaign"), headers=headers, json={"collectorsToClaim": [tokenToClaim]}), True)
+                reqClaimCollectedResources = requestText(session.post(links.profileRequest.format(accountId, "ClaimCollectedResources", "campaign"), headers=headers, json={"collectorsToClaim": [tokenToClaim]}), True)
                 try:
-                    totalItemGuid = reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['itemGuid']
-                    print(f"Claimed {reqClaimCollectedResourcesText['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResourcesText['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity']}\n")
+                    totalItemGuid = reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['itemGuid']
+                    print(f"Claimed {reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity']}\n")
                 except: []
 
 # Search for a free Llama and open it if available.
 alreadyOpenedFreeLlamas, freeLlamasCount, cpspStorefront = [0, 0, []]
 if bOpenFreeLlamas == "true":
-    reqGetStorefrontText = requestText(session.get(links.getStorefront, headers=headers, data={}), True)['storefronts']
-    for key in reqGetStorefrontText:
+    reqGetStorefront = requestText(session.get(links.getStorefront, headers=headers, data={}), True)['storefronts']
+    for key in reqGetStorefront:
         if key['name'] == "CardPackStorePreroll":
             cpspStorefront = key['catalogEntries']
             break
-    if not cpspStorefront: print("ERROR: Failed to find the Llama shop. Is it even possible? Maybe a new Fortnite update could break it, but it's very unlikely...\n")
+    if not cpspStorefront: customError("Failed to find the Llama shop. Is it even possible? Maybe a new Fortnite update could break it, but it's very unlikely...")
     else:
         freeLlamas = []
         for key in cpspStorefront:
@@ -253,20 +263,20 @@ if bOpenFreeLlamas == "true":
                     try: llamaToClaimName = getStringList['Llama names'][llamaToClaimCPId]
                     except: llamaToClaimName = llamaToClaimCPId
                 while True:
-                    reqPopulateLlamasText = requestText(session.post(links.profileRequest.format(accountId, "PopulatePrerolledOffers", "campaign"), headers=headers, data="{}"), True)
+                    reqPopulateLlamas = requestText(session.post(links.profileRequest.format(accountId, "PopulatePrerolledOffers", "campaign"), headers=headers, data="{}"), True)
                     llamaTier = []
-                    for key in reqPopulateLlamasText['profileChanges'][0]['profile']['items']:
-                        if (reqPopulateLlamasText['profileChanges'][0]['profile']['items'][key]['templateId'].lower().startswith("prerolldata") and reqPopulateLlamasText['profileChanges'][0]['profile']['items'][key]['attributes']['offerId'] == llamaToClaimOfferId):
-                            llamaTier = reqPopulateLlamasText['profileChanges'][0]['profile']['items'][key]['attributes']['highest_rarity']
+                    for key in reqPopulateLlamas['profileChanges'][0]['profile']['items']:
+                        if (reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['templateId'].lower().startswith("prerolldata") and reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['offerId'] == llamaToClaimOfferId):
+                            llamaTier = reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['highest_rarity']
                             llamaTier = getStringList['Llama tiers'][f'{llamaTier}']
-                    reqBuyFreeLlamaText = requestText(session.post(links.profileRequest.format(accountId, "PurchaseCatalogEntry", "common_core"), headers=headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "MtxCurrency", "currencySubType": "", "expectedTotalPrice": 0, "gameContext": "Frontend.None"}), False)
-                    if "errorMessage" in reqBuyFreeLlamaText:
-                        if "limit of" in reqBuyFreeLlamaText['errorMessage']:
+                    reqBuyFreeLlama = requestText(session.post(links.profileRequest.format(accountId, "PurchaseCatalogEntry", "common_core"), headers=headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "MtxCurrency", "currencySubType": "", "expectedTotalPrice": 0, "gameContext": "Frontend.None"}), False)
+                    if "errorMessage" in reqBuyFreeLlama:
+                        if "limit of" in reqBuyFreeLlama['errorMessage']:
                             if openedLlamas == 0: alreadyOpenedFreeLlamas += 1
                         break
                     else:
                         print(f"\nOpening: {llamaToClaimName}\nTier: {llamaTier}\nLoot result:")
-                        llamaLoot, llamaLootCount = [reqBuyFreeLlamaText['notifications'][0]['lootResult']['items'], 0]
+                        llamaLoot, llamaLootCount = [reqBuyFreeLlama['notifications'][0]['lootResult']['items'], 0]
                         openedLlamas += 1
                         for key in llamaLoot:
                             templateId, itemGuid, itemQuantity = [key['itemType'], key['itemGuid'], key['quantity']]
@@ -295,23 +305,24 @@ if (recycleOn) and (not(int(alreadyOpenedFreeLlamas) == freeLlamasCount)):
         except: []
     if not (len(itemGuidsToRecycle) == 0):
         print(f"Recycling/Retiring selected items from {openedLlamas} free {llamasWord}...\n")
-        reqGetResourcesText = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
+        reqGetResources = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
         for resource in autoRecycling.recycleResources:
-            for item in reqGetResourcesText['profileChanges'][0]['profile']['items']:
-                if reqGetResourcesText['profileChanges'][0]['profile']['items'][item]['templateId'] == resource: recycleResources.append({"itemGuid": item, "templateId": resource, "itemName": getStringList['Items'][resource]['name'], "quantity": reqGetResourcesText['profileChanges'][0]['profile']['items'][item]['quantity']})
-        reqRecycleItemsText = requestText(session.post(links.profileRequest.format(accountId, "RecycleItemBatch", "campaign"), headers=headers, json={"targetItemIds": itemGuidsToRecycle}), True)
-        print("The following items have been succesfully Recycled/Retired:")
+            for item in reqGetResources['profileChanges'][0]['profile']['items']:
+                if reqGetResources['profileChanges'][0]['profile']['items'][item]['templateId'] == resource: recycleResources.append({"itemGuid": item, "templateId": resource, "itemName": getStringList['Items'][resource]['name'], "quantity": reqGetResources['profileChanges'][0]['profile']['items'][item]['quantity']})
+        reqRecycleItems = requestText(session.post(links.profileRequest.format(accountId, "RecycleItemBatch", "campaign"), headers=headers, json={"targetItemIds": itemGuidsToRecycle}), True)
+        recycleMessage = "The following items have been succesfully Recycled/Retired:\n"
         for item in itemsToRecycle:
             recycledItemsCount += 1
-            print(f"{recycledItemsCount}: {item['itemQuantity']}x {item['itemName']}")
-        reqGetResources2Text = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
-        print("\nResources received:")
+            recycleMessage += f"{recycledItemsCount}: {item['itemQuantity']}x {item['itemName']}\n"
+        print(f"{recycleMessage}\n")
+        reqGetResources2 = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
+        resourcesMessage = "Resources received:\n"
         for resource in recycleResources:
-            resourceQuantity = int(reqGetResources2Text['profileChanges'][0]['profile']['items'][resource['itemGuid']]['quantity']) - int(resource['quantity'])
+            resourceQuantity = int(reqGetResources2['profileChanges'][0]['profile']['items'][resource['itemGuid']]['quantity']) - int(resource['quantity'])
             if resourceQuantity > 0:
                 recycleResourcesCount += 1
-                print(f"{recycleResourcesCount}: {resourceQuantity}x {resource['itemName']}. Total amount: {reqGetResources2Text['profileChanges'][0]['profile']['items'][resource['itemGuid']]['quantity']}")
-        print() # Extra newline
+                resourcesMessage += f"{recycleResourcesCount}: {resourceQuantity}x {resource['itemName']}. Total amount: {reqGetResources2['profileChanges'][0]['profile']['items'][resource['itemGuid']]['quantity']}\n"
+        print(f"{resourcesMessage}\n")
 
 input("Press ENTER to close the program.\n")
 exit()
