@@ -14,15 +14,20 @@ This program allows you to claim Save the World Daily Reward, Research Points an
   - You can disable this feature via the config.ini file.
 - Automatic free Llama loot recycling.
   - You can enable this feature via the config.ini file.
+- Program Looping.
+  - You can set the time (in minutes) after the program will run again in the config file.
+  - The looping is set to 0 (disabled) by default.
 ---
 ### Changelog:
-What's new in the 1.6.2 update:
-- The program now displays the total amount of earned Currency, Account Resource or Consumable Account Item after claiming the daily reward.
-- The program now looks for the receivemtxcurrency token instead of the founder's token to determine whether the account can earn V-Bucks from StW or not.
-- Rewritten Daily Rewards list in stringlist.json
-- Removed the "Skipping Research Points claiming because ... has max F.O.R.T. stats." message.
-- Added "Found a bug?" section to the readme.
-- Added link to this repository to messages mentioning it.
+What's new in the 1.7.0 update:
+- Program looping!
+  - You can now set the time (in minutes) after the program will run again in the config file in the \[Loop\] section.
+  - This feature is set to 0 (disabled) by default.
+- Changed the way program behaves if an account doesn't have access to Save the World so now in this case the program doesn't display an error, but:
+  - Daily Reward claiming is being skipped because it cannot be performed by the program without access to Save the World.
+  - Research Points claiming and spending is being skipped if the account doesn't have access to the Research Lab.
+  - Free llamas aren't able to be opened if the account hasn't made enough progress in the campaign.
+- Fixed the program not recycling free llama loot when it should.
 - Tweaked the program's code a little bit.
 ---
 
