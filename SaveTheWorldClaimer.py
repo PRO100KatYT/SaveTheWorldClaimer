@@ -1,4 +1,4 @@
-version = "1.7.0"
+version = "1.7.1"
 configVersion = "1.7.0"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 try:
@@ -45,6 +45,7 @@ def validInput(text, values):
     print()
     while True:
         if values == "digit":
+            if "," in response: response = response.replace(",", ".")
             if response.isdigit(): break
         elif response in values: break
         response = input("You priovided a wrong value. Please input it again.\n")
@@ -81,15 +82,15 @@ if not os.path.exists(configPath):
             itemTypeJson = {"Recycle_Weapons": {"name": "Weapon Schematics", "recycleWord": "recycle"}, "Recycle_Traps": {"name": "Trap Schematics", "recycleWord": "recycle"}, "Recycle_Survivors": {"name": "Survivors", "recycleWord": "retire"}, "Recycle_Defenders": {"name": "Defenders", "recycleWord": "retire"}, "Recycle_Heroes": {"name": "Heroes", "recycleWord": "retire"}}
             for itemType in itemTypeJson: iList.append(validInput(f"Input the rarity of {itemTypeJson[itemType]['name']} you want the program to automatically {itemTypeJson[itemType]['recycleWord']} at it or below.\nValid values: off, common, uncommon, rare, epic.", ["off", "common", "uncommon", "rare", "epic"]))
             iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes = iList  
-        iLoop_Time = float(validInput("Do you want the progam to loop itself every X minutes?\nSet this to 0 to not loop the program.\nValid values: a number (1, 15, 60, etc.).", "digit"))
+        iLoop_Time = validInput("Do you want the progam to loop itself every X minutes?\nSet this to 0 to not loop the program.\nValid values: a number (1, 15, 60, etc.).", "digit")
     else: iAuthorization_Type, iSpend_Research_Points, iOpen_Free_Llamas, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iLoop_Time = ["token", "lowest", "true", "uncommon", "uncommon", "rare", "rare", "uncommon", 0]           
     with open(configPath, "w") as configFile: configFile.write(f"[StW_Claimer_Config]\n\n# Which authentication method do you want the program to use?\n# Token auth metod generates a refresh token to log in. The limit per IP is 1. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\n# Device auth method generates authorization credentials that don't have an expiration date and limit per IP, but can after some time cause epic to ask you to change your password.\n# Valid vaules: token, device.\nAuthorization_Type = {iAuthorization_Type}\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\n# The \"lowest\" method makes the program search for a Research stat with the lowest level.\n# The \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\n# Valid vaules: off, lowest, everyten.\nSpend_Research_Points = {iSpend_Research_Points}\n\n# Do you want the program to search for free Llamas and open them if they are avaiable?\n# Valid vaules: true, false.\nOpen_Free_Llamas = {iOpen_Free_Llamas}\n\n[Automatic_Recycle/Retire]\n\n# Automatically recycle Weapon schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Weapons = {iRecycle_Weapons}\n\n# Automatically recycle Trap schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Traps = {iRecycle_Traps}\n\n# Automatically retire Survivors at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Survivors = {iRetire_Survivors}\n\n# Automatically retire Defenders at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Defenders = {iRetire_Defenders}\n\n# Automatically retire Heroes at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Heroes = {iRetire_Heroes}\n\n[Loop]\n\n# Do you want the progam to loop itself every X minutes?\n# Set this to 0 to not loop the program.\n# Valid values: a number (1, 15, 60, etc.).\nLoop_Minutes = {iLoop_Time}\n\n[Config_Version]\n\nVersion = STWC_{configVersion}")
     print("The config.ini file was generated successfully.\n")
 try:
     config.read(configPath)
-    configVer, authType, spendAutoResearch, bOpenFreeLlamas, loopMinutes = [config['Config_Version']['Version'], config['StW_Claimer_Config']['Authorization_Type'].lower(), config['StW_Claimer_Config']['Spend_Research_Points'].lower(), config['StW_Claimer_Config']['Open_Free_Llamas'].lower(), float(config['Loop']['Loop_Minutes'])]
+    configVer, authType, spendAutoResearch, bOpenFreeLlamas, loopMinutes = [config['Config_Version']['Version'], config['StW_Claimer_Config']['Authorization_Type'].lower(), config['StW_Claimer_Config']['Spend_Research_Points'].lower(), config['StW_Claimer_Config']['Open_Free_Llamas'].lower(), config['Loop']['Loop_Minutes']]
     autoRecycling.itemRarities = {"weapon": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Weapons'].lower()].split(", "), "trap": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Traps'].lower()].split(", "), "survivor": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Survivors'].lower()].split(", "), "defender": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Defenders'].lower()].split(", "), "hero": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Heroes'].lower()].split(", ")}
-except: customError("The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.\n\nPress ENTER to close the program.\n")
+except: customError("The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.")
 if not (configVer == f"STWC_{configVersion}"): customError("The config file is outdated. Delete the config.ini file and run this program again to generate a new one.")
 checkValuesJson = {"Authorization_Type": {"value": authType, "validValues": ["token", "device"]}, "Spend_Research_Points": {"value": spendAutoResearch, "validValues": ["off", "lowest", "everyten"]}, "Open_Free_Llamas": {"value": bOpenFreeLlamas, "validValues": ["true", "false"]}}
 for option in checkValuesJson:
@@ -100,6 +101,10 @@ for key in recycleOptions:
     keyValue = config['Automatic_Recycle/Retire'][f'{key}'].lower()
     if not (keyValue == "off"): recycleOn = True
     if not (keyValue in ("off", "common", "uncommon", "rare", "epic")): configError(key, keyValue, "off, common, uncommon, rare, epic")
+try:
+    if not (("," in loopMinutes) or ("." in loopMinutes)): loopMinutes = float(f"{loopMinutes}.0")
+    else: loopMinutes = float(loopMinutes.replace(",", "."))
+except: configError("Loop_Minutes", loopMinutes, "a number (1, 15, 60, etc.)")
 
 # Load the stringlist.json file.
 stringListPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "stringlist.json")
