@@ -39,6 +39,11 @@ def customError(text):
 # Error for invalid config values.
 def configError(key, value, validValues): customError(f"You set the wrong {key} value in config.ini ({value}). Valid values: {validValues}. Please change it and run this program again.")
 
+# Get the current date and time and neatly format it | by Salty-Coder :)
+def getDateTime():
+    dateTimeObj = datetime.now()
+    return "[{:4d}/{:02d}/{:02d} {:02d}:{:02d}:{:02d}] ".format(dateTimeObj.year,dateTimeObj.month,dateTimeObj.day, dateTimeObj.hour,dateTimeObj.minute,dateTimeObj.second) #space at the end of str to make it less annoying :)
+
 # Input loop until it's one of the correct values.
 def validInput(text, values):
     response = input(f"{text}\n")
@@ -155,7 +160,8 @@ def main():
         reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "exchange_code", "exchange_code": reqExchange["code"], "token_type": "eg1"}), True)
     if authType == "device": reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"}), True)
     accessToken, displayName = [reqToken['access_token'], reqToken['displayName']]
-    print(f"Logged in as {displayName}.\n")
+
+    print(getDateTime() + f"Logged in as {displayName}.\n")
 
     # Headers for MCP requests.
     headers = {"Authorization": f"bearer {accessToken}", "Content-Type": "application/json"}
@@ -179,7 +185,7 @@ def main():
             else: rewardName, rewardTemplateId = [rewardName[1], "AccountResource:currency_xrayllama"]
         if int(reward) == 1: reward = rewardName['singular']
         else: reward = f"{reward} {rewardName['plural']}"
-        if not cdrItems: dailyMessage = f"The daily reward for {displayName} has been already claimed today!\nDay: {cdrDaysLoggedIn}\nReward: {reward}"
+        if not cdrItems: dailyMessage = f"The daily reward for {displayName} has been already claimed today!\n     Day: {cdrDaysLoggedIn}\n     Reward: {reward}"
         else: dailyMessage = f"Today's daily reward for {displayName} has been successfully claimed!\nDay: {cdrDaysLoggedIn}\nReward: {reward}"
         if rewardTemplateId.startswith(("ConditionalResource:", "AccountResource:", "ConsumableAccountItem:")):
             if rewardTemplateId.startswith("ConditionalResource:"):
@@ -189,9 +195,9 @@ def main():
             else:
                 for item in reqClaimDailyReward['profileChanges'][0]['profile']['items']:
                     if reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['templateId'] == rewardTemplateId: totalAmount = int(reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['quantity'])
-            dailyMessage += f"\nTotal {rewardName['plural']}: {totalAmount}"
-        print(f"{dailyMessage}\n")
-    else: print(f"Skipping Daily Reward claiming because {displayName} doesn't have access to Save the World.\n")
+            dailyMessage += f"\n     Total {rewardName['plural']}: {totalAmount}"
+        print(getDateTime() + f"{dailyMessage}\n")
+    else: print(getDateTime() + f"Skipping Daily Reward claiming because {displayName} doesn't have access to Save the World.\n")
 
     # Claim and automatically spend the Research Points.
     reqCampaignProfileCheck = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
@@ -216,7 +222,7 @@ def main():
                     if float(rpToClaim) >= 1: storedMaxPoints = True
                     pointsWord = "Points"
                     if rpClaimedQuantity == 1: pointsWord = "Point"
-                    print(f"Claimed {rpClaimedQuantity} Research {pointsWord}. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
+                    print(getDateTime() + f"Claimed {rpClaimedQuantity} Research {pointsWord}. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
                 except:
                     for key in reqCampaignProfileCheckItems:
                         if reqCampaignProfileCheckItems[key]['templateId'] == "Token:collectionresource_nodegatetoken01":
@@ -225,11 +231,11 @@ def main():
                     rpToClaim, rpStored, storedMaxPoints = [reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{tokenToClaim}']['attributes']['stored_value'], reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity'], True]
                     if int(rpToClaim) < 1:
                         storedMaxPoints = False
-                        print(f"The program is unable to claim {round(rpToClaim, 2)} Research Point because in order to collect it, at least 1 point must be available for claiming. In other words, just wait a few seconds and run this program again.\n")
+                        print(getDateTime() + f"The program is unable to claim {round(rpToClaim, 2)} Research Point because in order to collect it, at least 1 point must be available for claiming. In other words, just wait a few seconds and run this program again.\n")
                 if storedMaxPoints == True:
-                    if spendAutoResearch == "off": print(f"The program is unable to claim {round(rpToClaim, 2)} Research Points because you have the maximum number of accumulated Research Points at once ({rpStored}).\nIn this situation if you want to automatically spend them, change the Spend_Research_Points value in config.ini to lowest or everyten and run this program again.\n")
+                    if spendAutoResearch == "off": print(getDateTime() + f"The program is unable to claim {round(rpToClaim, 2)} Research Points because you have the maximum number of accumulated Research Points at once ({rpStored}).\nIn this situation if you want to automatically spend them, change the Spend_Research_Points value in config.ini to lowest or everyten and run this program again.\n")
                     else:
-                        print(f"You have the maximum number of accumulated Research Points at once ({rpStored}).\nStarting to automatically spend Research Points...\n")
+                        print(getDateTime() + f"You have the maximum number of accumulated Research Points at once ({rpStored}).\nStarting to automatically spend Research Points...\n")
                         while True:
                             reqFORTLevelsCheck = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)['profileChanges'][0]['profile']['stats']['attributes']['research_levels']
                             if spendAutoResearch == "lowest":
@@ -244,14 +250,14 @@ def main():
                                     break
                             reqPurchaseResearchStatUpgrade = requestText(session.post(links.profileRequest.format(accountId, "PurchaseResearchStatUpgrade", "campaign"), headers=headers, json={"statId": f'{statToClaim}'}), False)
                             if "errorMessage" in reqPurchaseResearchStatUpgrade: break # Error without exit()
-                            else: print(f"Bought 1 {statToClaim.capitalize()} level. New level: {reqPurchaseResearchStatUpgrade['profileChanges'][0]['profile']['stats']['attributes']['research_levels'][statToClaim]}.")
-                        print("\nCannot buy more F.O.R.T. levels.\n")
+                            else: print(getDateTime() + f"Bought 1 {statToClaim.capitalize()} level. New level: {reqPurchaseResearchStatUpgrade['profileChanges'][0]['profile']['stats']['attributes']['research_levels'][statToClaim]}.")
+                        print("\n" + getDateTime() + "Cannot buy more F.O.R.T. levels.\n")
                         reqClaimCollectedResources = requestText(session.post(links.profileRequest.format(accountId, "ClaimCollectedResources", "campaign"), headers=headers, json={"collectorsToClaim": [tokenToClaim]}), True)
                         try:
                             totalItemGuid = reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['itemGuid']
-                            print(f"Claimed {reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity']}\n")
+                            print(getDateTime() + f"Claimed {reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity']}\n")
                         except: []
-        else: print(f"Skipping Research Points claiming because {displayName} doesn't have access to the Research Lab.\n")
+        else: print(getDateTime() + f"Skipping Research Points claiming because {displayName} doesn't have access to the Research Lab.\n")
 
     # Search for a free Llama and open it if available.
     alreadyOpenedFreeLlamas, freeLlamasCount, cpspStorefront = [0, 0, []]
@@ -261,15 +267,15 @@ def main():
             if key['name'] == "CardPackStorePreroll":
                 cpspStorefront = key['catalogEntries']
                 break
-        if not cpspStorefront: customError("Failed to find the Llama shop. Is it even possible? Maybe a new Fortnite update could break it, but it's very unlikely...")
+        if not cpspStorefront: customError(getDateTime() + "Failed to find the Llama shop. Is it even possible? Maybe a new Fortnite update could break it, but it's very unlikely...")
         else:
             freeLlamas = []
             for key in cpspStorefront:
                 if (not "always" in key['devName'].lower()) and (key['prices'][0]['finalPrice'] == 0): freeLlamas.append(key)
             freeLlamasCount = len(freeLlamas)
-            if not freeLlamas: print("There are no free Llamas available at the moment.\n")
+            if not freeLlamas: print(getDateTime() + "There are no free Llamas available at the moment.\n")
             else:
-                print(f"There are free llamas avaiable!")
+                print(getDateTime() + f"There are free llamas avaiable!")
                 itemsfromLlamas, openedLlamas = [[], 0]
                 for llama in freeLlamas:
                     llamaToClaimOfferId = llama['offerId']
@@ -291,10 +297,10 @@ def main():
                         if "errorMessage" in reqBuyFreeLlama:
                             if "limit of" in reqBuyFreeLlama['errorMessage']:
                                 if openedLlamas == 0: alreadyOpenedFreeLlamas += 1
-                            if "because fulfillment" in reqBuyFreeLlama['errorMessage']: print(f"\n{displayName} is unable to claim the free {llamaToClaimTitle}.\n")
+                            if "because fulfillment" in reqBuyFreeLlama['errorMessage']: print(getDateTime() + f"\n{displayName} is unable to claim the free {llamaToClaimTitle}.\n")
                             break
                         else:
-                            print(f"\nOpening: {llamaToClaimName}\nTier: {llamaTier}\nLoot result:")
+                            print(getDateTime() + f"\nOpening: {llamaToClaimName}\nTier: {llamaTier}\nLoot result:")
                             llamaLoot, llamaLootCount = [reqBuyFreeLlama['notifications'][0]['lootResult']['items'], 0]
                             openedLlamas += 1
                             for key in llamaLoot:
@@ -304,13 +310,13 @@ def main():
                                 itemRarity, itemType = [getStringList['Items'][templateId]['rarity'], getStringList['Items'][templateId]['type']]
                                 llamaLootCount += 1
                                 if itemRarity in ("common", "uncommon", "rare", "epic"): itemsfromLlamas.append({"itemName": itemName, "itemType": itemType, "templateId": templateId, "itemGuid": itemGuid, "itemRarity": itemRarity, "itemQuantity": itemQuantity})
-                                print(f"{llamaLootCount}: {itemQuantity}x {itemName}")
+                                print(getDateTime() + f"{llamaLootCount}: {itemQuantity}x {itemName}")
                 if int(alreadyOpenedFreeLlamas) == freeLlamasCount:
-                    print(f"\nFree Llamas that are currently avaiable in the shop have been already opened on this account. Remember that you can open a maximum of 2 free one hour rotation Llamas per one shop rotation.\n")
+                    print(getDateTime() + f"\nFree Llamas that are currently avaiable in the shop have been already opened on this account. Remember that you can open a maximum of 2 free one hour rotation Llamas per one shop rotation.\n")
                 else:
                     llamasWord = "Llamas"
                     if int(openedLlamas) == 1: llamasWord = "Llama"
-                    if openedLlamas > 0: print(f"\nSuccesfully opened {openedLlamas} free {llamasWord}.\n")
+                    if openedLlamas > 0: print(getDateTime() + f"\nSuccesfully opened {openedLlamas} free {llamasWord}.\n")
 
     # Automatically recycle selected llama loot.
     if (recycleOn) and (not(int(alreadyOpenedFreeLlamas) == freeLlamasCount)):
@@ -323,7 +329,7 @@ def main():
                     itemsToRecycle.append(item)
             except: []
         if not (len(itemGuidsToRecycle) == 0):
-            print(f"Recycling/Retiring selected items from {openedLlamas} free {llamasWord}...\n")
+            print(getDateTime() + f"Recycling/Retiring selected items from {openedLlamas} free {llamasWord}...\n")
             reqGetResources = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
             for resource in autoRecycling.recycleResources:
                 for item in reqGetResources['profileChanges'][0]['profile']['items']:
@@ -333,7 +339,7 @@ def main():
             for item in itemsToRecycle:
                 recycledItemsCount += 1
                 recycleMessage += f"{recycledItemsCount}: {item['itemQuantity']}x {item['itemName']}\n"
-            print(f"{recycleMessage}\n")
+            print(getDateTime() + f"{recycleMessage}\n")
             reqGetResources2 = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
             resourcesMessage = "Resources received:\n"
             for resource in recycleResources:
@@ -341,7 +347,7 @@ def main():
                 if resourceQuantity > 0:
                     recycleResourcesCount += 1
                     resourcesMessage += f"{recycleResourcesCount}: {resourceQuantity}x {resource['itemName']}. Total amount: {reqGetResources2['profileChanges'][0]['profile']['items'][resource['itemGuid']]['quantity']}\n"
-            print(f"{resourcesMessage}\n")
+            print(getDateTime() + f" {resourcesMessage}\n")
 
 # Start the program.
 if loopMinutes > 0:
