@@ -19,16 +19,10 @@ This program allows you to claim Save the World Daily Reward, Research Points an
   - The looping is set to 0 (disabled) by default.
 ---
 ### Changelog:
-What's new in the 1.7.0 update:
-- Program looping!
-  - You can now set the time (in minutes) after the program will run again in the config file in the \[Loop\] section.
-  - This feature is set to 0 (disabled) by default.
-- Changed the way program behaves if an account doesn't have access to Save the World so now in this case the program doesn't display an error, but:
-  - Daily Reward claiming is being skipped because it cannot be performed by the program without access to Save the World.
-  - Research Points claiming and spending is being skipped if the account doesn't have access to the Research Lab.
-  - Free llamas aren't able to be opened if the account hasn't made enough progress in the campaign.
-- Fixed the program not recycling free llama loot when it should.
-- Tweaked the program's code a little bit.
+What's new in the 1.7.2 update:
+- The program can now show date and time when sending messages.
+  - This feature was added by Salty-Coder.
+  - You can enable it by setting the Show_Date_Time value to true in the config.
 ---
 
 ### How to use it?

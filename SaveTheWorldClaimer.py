@@ -1,5 +1,5 @@
-version = "1.7.1"
-configVersion = "1.7.0"
+version = "1.7.2"
+configVersion = "1.7.2"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 try:
     import json
@@ -31,18 +31,19 @@ class autoRecycling:
 # Start a new requests session.
 session = requests.Session()
 
+# Get the current date and time and neatly format it | by Salty-Coder :)
+def getDateTimeString():
+    dateTimeObj = datetime.now()
+    return "[{:4d}/{:02d}/{:02d} {:02d}:{:02d}:{:02d}]".format(dateTimeObj.year,dateTimeObj.month,dateTimeObj.day, dateTimeObj.hour,dateTimeObj.minute,dateTimeObj.second)
+
 # Error with a custom message.
 def customError(text):
-    input(f"ERROR: {text}\n\nPress ENTER to close the program.\n")
+    if bShowDateTime == "true": input(f"{getDateTimeString()} ERROR: {text}\n\nPress ENTER to close the program.\n")
+    else: input(f"ERROR: {text}\n\nPress ENTER to close the program.\n")
     exit()
 
 # Error for invalid config values.
 def configError(key, value, validValues): customError(f"You set the wrong {key} value in config.ini ({value}). Valid values: {validValues}. Please change it and run this program again.")
-
-# Get the current date and time and neatly format it | by Salty-Coder :)
-def getDateTime():
-    dateTimeObj = datetime.now()
-    return "[{:4d}/{:02d}/{:02d} {:02d}:{:02d}:{:02d}] ".format(dateTimeObj.year,dateTimeObj.month,dateTimeObj.day, dateTimeObj.hour,dateTimeObj.minute,dateTimeObj.second) #space at the end of str to make it less annoying :)
 
 # Input loop until it's one of the correct values.
 def validInput(text, values):
@@ -70,11 +71,17 @@ def reqTokenText(loginLink, authHeader):
     reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {authHeader}"}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")}), True)
     return reqToken
 
+def message(string):
+    if bShowDateTime == "true":
+        string = string.replace("\n", "\n     ")
+        print(f"{getDateTimeString()} {string}")
+    else: print(string)
+
 # Create and/or read the config.ini file.
 config = ConfigParser()
 configPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.ini")
 if not os.path.exists(configPath):
-    print("Starting to generate the config.ini file.\n")
+    message("Starting to generate the config.ini file.\n")
     bStartSetup = validInput("Type 1 if you want to start the config setup and press ENTER.\nType 2 if you want to use the default config values and press ENTER.", ["1", "2"])
     if bStartSetup == "1":
         iAuthorization_Type = validInput("Which authentication method do you want the program to use?\nToken auth metod generates a refresh token to log in. The limit per IP is 1. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\nDevice auth method generates authorization credentials that don't have an expiration date and limit per IP, but can after some time cause epic to ask you to change your password.\nValid vaules: token, device.", ["token", "device"])
@@ -88,16 +95,17 @@ if not os.path.exists(configPath):
             for itemType in itemTypeJson: iList.append(validInput(f"Input the rarity of {itemTypeJson[itemType]['name']} you want the program to automatically {itemTypeJson[itemType]['recycleWord']} at it or below.\nValid values: off, common, uncommon, rare, epic.", ["off", "common", "uncommon", "rare", "epic"]))
             iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes = iList  
         iLoop_Time = validInput("Do you want the progam to loop itself every X minutes?\nSet this to 0 to not loop the program.\nValid values: a number (1, 15, 60, etc.).", "digit")
-    else: iAuthorization_Type, iSpend_Research_Points, iOpen_Free_Llamas, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iLoop_Time = ["token", "lowest", "true", "uncommon", "uncommon", "rare", "rare", "uncommon", 0]           
-    with open(configPath, "w") as configFile: configFile.write(f"[StW_Claimer_Config]\n\n# Which authentication method do you want the program to use?\n# Token auth metod generates a refresh token to log in. The limit per IP is 1. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\n# Device auth method generates authorization credentials that don't have an expiration date and limit per IP, but can after some time cause epic to ask you to change your password.\n# Valid vaules: token, device.\nAuthorization_Type = {iAuthorization_Type}\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\n# The \"lowest\" method makes the program search for a Research stat with the lowest level.\n# The \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\n# Valid vaules: off, lowest, everyten.\nSpend_Research_Points = {iSpend_Research_Points}\n\n# Do you want the program to search for free Llamas and open them if they are avaiable?\n# Valid vaules: true, false.\nOpen_Free_Llamas = {iOpen_Free_Llamas}\n\n[Automatic_Recycle/Retire]\n\n# Automatically recycle Weapon schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Weapons = {iRecycle_Weapons}\n\n# Automatically recycle Trap schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Traps = {iRecycle_Traps}\n\n# Automatically retire Survivors at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Survivors = {iRetire_Survivors}\n\n# Automatically retire Defenders at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Defenders = {iRetire_Defenders}\n\n# Automatically retire Heroes at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Heroes = {iRetire_Heroes}\n\n[Loop]\n\n# Do you want the progam to loop itself every X minutes?\n# Set this to 0 to not loop the program.\n# Valid values: a number (1, 15, 60, etc.).\nLoop_Minutes = {iLoop_Time}\n\n[Config_Version]\n\nVersion = STWC_{configVersion}")
-    print("The config.ini file was generated successfully.\n")
+        iShow_Date_Time = validInput("Do you want the program to show the date and time when sending messages?\nValid vaules: true, false.", ["true", "false"])
+    else: iAuthorization_Type, iSpend_Research_Points, iOpen_Free_Llamas, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iLoop_Time, iShow_Date_Time = ["token", "lowest", "true", "uncommon", "uncommon", "rare", "rare", "uncommon", 0, "false"]           
+    with open(configPath, "w") as configFile: configFile.write(f"[StW_Claimer_Config]\n\n# Which authentication method do you want the program to use?\n# Token auth metod generates a refresh token to log in. The limit per IP is 1. After 23 days of not using this program this token will expire and you will have to regenerate the auth file.\n# Device auth method generates authorization credentials that don't have an expiration date and limit per IP, but can after some time cause epic to ask you to change your password.\n# Valid vaules: token, device.\nAuthorization_Type = {iAuthorization_Type}\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\n# The \"lowest\" method makes the program search for a Research stat with the lowest level.\n# The \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\n# Valid vaules: off, lowest, everyten.\nSpend_Research_Points = {iSpend_Research_Points}\n\n# Do you want the program to search for free Llamas and open them if they are avaiable?\n# Valid vaules: true, false.\nOpen_Free_Llamas = {iOpen_Free_Llamas}\n\n[Automatic_Recycle/Retire]\n\n# Automatically recycle Weapon schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Weapons = {iRecycle_Weapons}\n\n# Automatically recycle Trap schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Traps = {iRecycle_Traps}\n\n# Automatically retire Survivors at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Survivors = {iRetire_Survivors}\n\n# Automatically retire Defenders at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Defenders = {iRetire_Defenders}\n\n# Automatically retire Heroes at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Heroes = {iRetire_Heroes}\n\n[Loop]\n\n# Do you want the progam to loop itself every X minutes?\n# Set this to 0 to not loop the program.\n# Valid values: a number (1, 15, 60, etc.).\nLoop_Minutes = {iLoop_Time}\n\n[Misc]\n\n# Do you want the program to show the date and time when sending messages?\n# Valid vaules: true, false.\nShow_Date_Time = {iShow_Date_Time}\n\n[Config_Version]\n\nVersion = STWC_{configVersion}")
+    message("The config.ini file was generated successfully.\n")
 try:
     config.read(configPath)
-    configVer, authType, spendAutoResearch, bOpenFreeLlamas, loopMinutes = [config['Config_Version']['Version'], config['StW_Claimer_Config']['Authorization_Type'].lower(), config['StW_Claimer_Config']['Spend_Research_Points'].lower(), config['StW_Claimer_Config']['Open_Free_Llamas'].lower(), config['Loop']['Loop_Minutes']]
+    configVer, authType, spendAutoResearch, bOpenFreeLlamas, loopMinutes, bShowDateTime = [config['Config_Version']['Version'], config['StW_Claimer_Config']['Authorization_Type'].lower(), config['StW_Claimer_Config']['Spend_Research_Points'].lower(), config['StW_Claimer_Config']['Open_Free_Llamas'].lower(), config['Loop']['Loop_Minutes'], config['Misc']['Show_Date_Time'].lower()]
     autoRecycling.itemRarities = {"weapon": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Weapons'].lower()].split(", "), "trap": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Traps'].lower()].split(", "), "survivor": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Survivors'].lower()].split(", "), "defender": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Defenders'].lower()].split(", "), "hero": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Heroes'].lower()].split(", ")}
 except: customError("The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.")
 if not (configVer == f"STWC_{configVersion}"): customError("The config file is outdated. Delete the config.ini file and run this program again to generate a new one.")
-checkValuesJson = {"Authorization_Type": {"value": authType, "validValues": ["token", "device"]}, "Spend_Research_Points": {"value": spendAutoResearch, "validValues": ["off", "lowest", "everyten"]}, "Open_Free_Llamas": {"value": bOpenFreeLlamas, "validValues": ["true", "false"]}}
+checkValuesJson = {"Authorization_Type": {"value": authType, "validValues": ["token", "device"]}, "Spend_Research_Points": {"value": spendAutoResearch, "validValues": ["off", "lowest", "everyten"]}, "Open_Free_Llamas": {"value": bOpenFreeLlamas, "validValues": ["true", "false"]}, "Show_Date_Time": {"value": bShowDateTime, "validValues": ["true", "false"]}}
 for option in checkValuesJson:
     if not (checkValuesJson[option]['value'] in checkValuesJson[option]['validValues']): configError(option, checkValuesJson[option]['value'], ", ".join(checkValuesJson[option]['validValues']))
 recycleOptions = ["Recycle_Weapons", "Recycle_Traps", "Retire_Survivors", "Retire_Defenders", "Retire_Heroes"]
@@ -136,7 +144,7 @@ def main():
             reqDeviceAuth = requestText(session.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={}), True)
             deviceId, secret = [reqDeviceAuth["deviceId"], reqDeviceAuth["secret"]]
             with open(authPath, "w") as authFile: json.dump({"WARNING": "Don't show anyone the contents of this file, because it contains information with which the program logs into the account.", "authType": "device",  "deviceId": deviceId, "accountId": accountId, "secret": secret}, authFile, indent = 2)
-        print("\nThe auth.json file was generated successfully.\n")
+        message("\nThe auth.json file was generated successfully.\n")
     try:
         getAuthJson = json.loads(open(authPath, "r").read())
         if authType == "token":
@@ -160,8 +168,7 @@ def main():
         reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "exchange_code", "exchange_code": reqExchange["code"], "token_type": "eg1"}), True)
     if authType == "device": reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"}), True)
     accessToken, displayName = [reqToken['access_token'], reqToken['displayName']]
-
-    print(getDateTime() + f"Logged in as {displayName}.\n")
+    message(f"Logged in as {displayName}.\n")
 
     # Headers for MCP requests.
     headers = {"Authorization": f"bearer {accessToken}", "Content-Type": "application/json"}
@@ -185,7 +192,7 @@ def main():
             else: rewardName, rewardTemplateId = [rewardName[1], "AccountResource:currency_xrayllama"]
         if int(reward) == 1: reward = rewardName['singular']
         else: reward = f"{reward} {rewardName['plural']}"
-        if not cdrItems: dailyMessage = f"The daily reward for {displayName} has been already claimed today!\n     Day: {cdrDaysLoggedIn}\n     Reward: {reward}"
+        if not cdrItems: dailyMessage = f"The daily reward for {displayName} has been already claimed today!\nDay: {cdrDaysLoggedIn}\nReward: {reward}"
         else: dailyMessage = f"Today's daily reward for {displayName} has been successfully claimed!\nDay: {cdrDaysLoggedIn}\nReward: {reward}"
         if rewardTemplateId.startswith(("ConditionalResource:", "AccountResource:", "ConsumableAccountItem:")):
             if rewardTemplateId.startswith("ConditionalResource:"):
@@ -195,9 +202,9 @@ def main():
             else:
                 for item in reqClaimDailyReward['profileChanges'][0]['profile']['items']:
                     if reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['templateId'] == rewardTemplateId: totalAmount = int(reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['quantity'])
-            dailyMessage += f"\n     Total {rewardName['plural']}: {totalAmount}"
-        print(getDateTime() + f"{dailyMessage}\n")
-    else: print(getDateTime() + f"Skipping Daily Reward claiming because {displayName} doesn't have access to Save the World.\n")
+            dailyMessage += f"\nTotal {rewardName['plural']}: {totalAmount}"
+        message(f"{dailyMessage}\n")
+    else: message(f"Skipping Daily Reward claiming because {displayName} doesn't have access to Save the World.\n")
 
     # Claim and automatically spend the Research Points.
     reqCampaignProfileCheck = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
@@ -213,7 +220,7 @@ def main():
                 break
         if tokenToClaim:
             reqClaimCollectedResources = requestText(session.post(links.profileRequest.format(accountId, "ClaimCollectedResources", "campaign"), headers=headers, json={"collectorsToClaim": [tokenToClaim]}), False)
-            if "errorMessage" in reqClaimCollectedResources: print(f"ERROR: {reqClaimCollectedResources['errorMessage']}\n") # Error without exit()
+            if "errorMessage" in reqClaimCollectedResources: message(f"ERROR: {reqClaimCollectedResources['errorMessage']}\n") # Error without exit()
             else:
                 storedMaxPoints = False
                 try:
@@ -222,7 +229,7 @@ def main():
                     if float(rpToClaim) >= 1: storedMaxPoints = True
                     pointsWord = "Points"
                     if rpClaimedQuantity == 1: pointsWord = "Point"
-                    print(getDateTime() + f"Claimed {rpClaimedQuantity} Research {pointsWord}. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
+                    message(f"Claimed {rpClaimedQuantity} Research {pointsWord}. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']}\n")
                 except:
                     for key in reqCampaignProfileCheckItems:
                         if reqCampaignProfileCheckItems[key]['templateId'] == "Token:collectionresource_nodegatetoken01":
@@ -231,11 +238,11 @@ def main():
                     rpToClaim, rpStored, storedMaxPoints = [reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{tokenToClaim}']['attributes']['stored_value'], reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity'], True]
                     if int(rpToClaim) < 1:
                         storedMaxPoints = False
-                        print(getDateTime() + f"The program is unable to claim {round(rpToClaim, 2)} Research Point because in order to collect it, at least 1 point must be available for claiming. In other words, just wait a few seconds and run this program again.\n")
+                        message(f"The program is unable to claim {round(rpToClaim, 2)} Research Point because in order to collect it, at least 1 point must be available for claiming. In other words, just wait a few seconds and run this program again.\n")
                 if storedMaxPoints == True:
-                    if spendAutoResearch == "off": print(getDateTime() + f"The program is unable to claim {round(rpToClaim, 2)} Research Points because you have the maximum number of accumulated Research Points at once ({rpStored}).\nIn this situation if you want to automatically spend them, change the Spend_Research_Points value in config.ini to lowest or everyten and run this program again.\n")
+                    if spendAutoResearch == "off": message(f"The program is unable to claim {round(rpToClaim, 2)} Research Points because you have the maximum number of accumulated Research Points at once ({rpStored}).\nIn this situation if you want to automatically spend them, change the Spend_Research_Points value in config.ini to lowest or everyten and run this program again.\n")
                     else:
-                        print(getDateTime() + f"You have the maximum number of accumulated Research Points at once ({rpStored}).\nStarting to automatically spend Research Points...\n")
+                        message(f"You have the maximum number of accumulated Research Points at once ({rpStored}).\nStarting to automatically spend Research Points...\n")
                         while True:
                             reqFORTLevelsCheck = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)['profileChanges'][0]['profile']['stats']['attributes']['research_levels']
                             if spendAutoResearch == "lowest":
@@ -250,14 +257,14 @@ def main():
                                     break
                             reqPurchaseResearchStatUpgrade = requestText(session.post(links.profileRequest.format(accountId, "PurchaseResearchStatUpgrade", "campaign"), headers=headers, json={"statId": f'{statToClaim}'}), False)
                             if "errorMessage" in reqPurchaseResearchStatUpgrade: break # Error without exit()
-                            else: print(getDateTime() + f"Bought 1 {statToClaim.capitalize()} level. New level: {reqPurchaseResearchStatUpgrade['profileChanges'][0]['profile']['stats']['attributes']['research_levels'][statToClaim]}.")
-                        print("\n" + getDateTime() + "Cannot buy more F.O.R.T. levels.\n")
+                            else: message(f"Bought 1 {statToClaim.capitalize()} level. New level: {reqPurchaseResearchStatUpgrade['profileChanges'][0]['profile']['stats']['attributes']['research_levels'][statToClaim]}.")
+                        message("Cannot buy more F.O.R.T. levels.\n")
                         reqClaimCollectedResources = requestText(session.post(links.profileRequest.format(accountId, "ClaimCollectedResources", "campaign"), headers=headers, json={"collectorsToClaim": [tokenToClaim]}), True)
                         try:
                             totalItemGuid = reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['itemGuid']
-                            print(getDateTime() + f"Claimed {reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity']}\n")
+                            message(f"Claimed {reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity']}\n")
                         except: []
-        else: print(getDateTime() + f"Skipping Research Points claiming because {displayName} doesn't have access to the Research Lab.\n")
+        else: message(f"Skipping Research Points claiming because {displayName} doesn't have access to the Research Lab.\n")
 
     # Search for a free Llama and open it if available.
     alreadyOpenedFreeLlamas, freeLlamasCount, cpspStorefront = [0, 0, []]
@@ -267,15 +274,15 @@ def main():
             if key['name'] == "CardPackStorePreroll":
                 cpspStorefront = key['catalogEntries']
                 break
-        if not cpspStorefront: customError(getDateTime() + "Failed to find the Llama shop. Is it even possible? Maybe a new Fortnite update could break it, but it's very unlikely...")
+        if not cpspStorefront: customError("Failed to find the Llama shop. Is it even possible? Maybe a new Fortnite update could break it, but it's very unlikely...")
         else:
             freeLlamas = []
             for key in cpspStorefront:
                 if (not "always" in key['devName'].lower()) and (key['prices'][0]['finalPrice'] == 0): freeLlamas.append(key)
             freeLlamasCount = len(freeLlamas)
-            if not freeLlamas: print(getDateTime() + "There are no free Llamas available at the moment.\n")
+            if not freeLlamas: message("There are no free Llamas available at the moment.\n")
             else:
-                print(getDateTime() + f"There are free llamas avaiable!")
+                message(f"There are free llamas avaiable!")
                 itemsfromLlamas, openedLlamas = [[], 0]
                 for llama in freeLlamas:
                     llamaToClaimOfferId = llama['offerId']
@@ -297,10 +304,10 @@ def main():
                         if "errorMessage" in reqBuyFreeLlama:
                             if "limit of" in reqBuyFreeLlama['errorMessage']:
                                 if openedLlamas == 0: alreadyOpenedFreeLlamas += 1
-                            if "because fulfillment" in reqBuyFreeLlama['errorMessage']: print(getDateTime() + f"\n{displayName} is unable to claim the free {llamaToClaimTitle}.\n")
+                            if "because fulfillment" in reqBuyFreeLlama['errorMessage']: message(f"\n{displayName} is unable to claim the free {llamaToClaimTitle}.\n")
                             break
                         else:
-                            print(getDateTime() + f"\nOpening: {llamaToClaimName}\nTier: {llamaTier}\nLoot result:")
+                            message(f"\nOpening: {llamaToClaimName}\nTier: {llamaTier}\nLoot result:")
                             llamaLoot, llamaLootCount = [reqBuyFreeLlama['notifications'][0]['lootResult']['items'], 0]
                             openedLlamas += 1
                             for key in llamaLoot:
@@ -310,13 +317,13 @@ def main():
                                 itemRarity, itemType = [getStringList['Items'][templateId]['rarity'], getStringList['Items'][templateId]['type']]
                                 llamaLootCount += 1
                                 if itemRarity in ("common", "uncommon", "rare", "epic"): itemsfromLlamas.append({"itemName": itemName, "itemType": itemType, "templateId": templateId, "itemGuid": itemGuid, "itemRarity": itemRarity, "itemQuantity": itemQuantity})
-                                print(getDateTime() + f"{llamaLootCount}: {itemQuantity}x {itemName}")
+                                message(f"{llamaLootCount}: {itemQuantity}x {itemName}")
                 if int(alreadyOpenedFreeLlamas) == freeLlamasCount:
-                    print(getDateTime() + f"\nFree Llamas that are currently avaiable in the shop have been already opened on this account. Remember that you can open a maximum of 2 free one hour rotation Llamas per one shop rotation.\n")
+                    message(f"\nFree Llamas that are currently avaiable in the shop have been already opened on this account. Remember that you can open a maximum of 2 free one hour rotation Llamas per one shop rotation.\n")
                 else:
                     llamasWord = "Llamas"
                     if int(openedLlamas) == 1: llamasWord = "Llama"
-                    if openedLlamas > 0: print(getDateTime() + f"\nSuccesfully opened {openedLlamas} free {llamasWord}.\n")
+                    if openedLlamas > 0: message(f"\nSuccesfully opened {openedLlamas} free {llamasWord}.\n")
 
     # Automatically recycle selected llama loot.
     if (recycleOn) and (not(int(alreadyOpenedFreeLlamas) == freeLlamasCount)):
@@ -329,7 +336,7 @@ def main():
                     itemsToRecycle.append(item)
             except: []
         if not (len(itemGuidsToRecycle) == 0):
-            print(getDateTime() + f"Recycling/Retiring selected items from {openedLlamas} free {llamasWord}...\n")
+            message(f"Recycling/Retiring selected items from {openedLlamas} free {llamasWord}...\n")
             reqGetResources = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
             for resource in autoRecycling.recycleResources:
                 for item in reqGetResources['profileChanges'][0]['profile']['items']:
@@ -339,7 +346,7 @@ def main():
             for item in itemsToRecycle:
                 recycledItemsCount += 1
                 recycleMessage += f"{recycledItemsCount}: {item['itemQuantity']}x {item['itemName']}\n"
-            print(getDateTime() + f"{recycleMessage}\n")
+            message(f"{recycleMessage}\n")
             reqGetResources2 = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
             resourcesMessage = "Resources received:\n"
             for resource in recycleResources:
@@ -347,7 +354,7 @@ def main():
                 if resourceQuantity > 0:
                     recycleResourcesCount += 1
                     resourcesMessage += f"{recycleResourcesCount}: {resourceQuantity}x {resource['itemName']}. Total amount: {reqGetResources2['profileChanges'][0]['profile']['items'][resource['itemGuid']]['quantity']}\n"
-            print(getDateTime() + f" {resourcesMessage}\n")
+            message(f"{resourcesMessage}\n")
 
 # Start the program.
 if loopMinutes > 0:
