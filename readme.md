@@ -19,10 +19,12 @@ This program allows you to claim Save the World Daily Reward, Research Points an
   - The looping is set to 0 (disabled) by default.
 ---
 ### Changelog:
-What's new in the 1.7.2 update:
-- The program can now show date and time when sending messages.
-  - This feature was added by Salty-Coder.
-  - You can enable it by setting the Show_Date_Time value to true in the config.
+What's new in the 1.8.0 update:
+- The program can now display Fortnite item names in Arabic, German, English, Spanish, Latin American Spanish, French, Italian, Japanese, Korean, Polish, Brazilian Portugese, Russian, Turkish, Simplified Chinese and Traditional Chinese.
+  - You change the language by changing the Language value in the config file.
+- After logging in, the program now sends a ClientQuestLogin request instead of a QueryProfile one.
+  - In other words, the program will now get you a new daily quest, event quests, etc.
+- Tweaked the program's code a little bit.
 ---
 
 ### How to use it?
