@@ -1,4 +1,4 @@
-version = "1.8.0"
+version = "1.8.1"
 configVersion = "1.8.0"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 try:
@@ -188,24 +188,31 @@ def main():
         cdrItems, cdrDaysLoggedIn, totalAmount = [reqClaimDailyReward['notifications'][0]['items'], reqClaimDailyReward['notifications'][0]['daysLoggedIn'], 0]
         cdrDaysModified = int(cdrDaysLoggedIn) % 336 # Credit to dippyshere for this and the next line of code.
         if cdrDaysModified == 0: cdrDaysModified = 336
-        rewardTemplateId, rewardQuantity, rewardName, reward = [getStringList['Daily Rewards'][f'{cdrDaysModified}']['templateId'], getStringList['Daily Rewards'][f'{cdrDaysModified}']['quantity'], getStringList['Items'][getStringList['Daily Rewards'][f'{cdrDaysModified}']['templateId']]['name'][lang], ""]
-        if rewardTemplateId.startswith("ConditionalResource:"):
-            if bReceiveMtx == True: rewardName = rewardName['PassedConditionItem']
-            else: rewardName, rewardTemplateId = [rewardName['FailedConditionItem'], "AccountResource:currency_xrayllama"]
-        if rewardQuantity == 1: reward = f'{getStringList["Item Rarities"][getStringList["Items"][rewardTemplateId]["rarity"]][lang]} | {getStringList["Item Types"][getStringList["Items"][rewardTemplateId]["type"]][lang]}: {rewardName}'
-        else: reward = f'{getStringList["Item Rarities"][getStringList["Items"][rewardTemplateId]["rarity"]][lang]} | {getStringList["Item Types"][getStringList["Items"][rewardTemplateId]["type"]][lang]}: {rewardQuantity}x {rewardName}'
-        if not cdrItems: dailyMessage = f"The daily reward for {displayName} has been already claimed today!\nDay: {cdrDaysLoggedIn}\nReward: {reward}"
-        else: dailyMessage = f"Today's daily reward for {displayName} has been successfully claimed!\nDay: {cdrDaysLoggedIn}\nReward: {reward}"
-        if rewardTemplateId.startswith(("ConditionalResource:", "AccountResource:", "ConsumableAccountItem:")):
+        rewardTemplateIds, rewardWord, rewardName = [[getStringList['Daily Rewards'][f'{cdrDaysModified}']['templateId']], "Reward", getStringList['Items'][getStringList['Daily Rewards'][f'{cdrDaysModified}']['templateId']]['name'][lang]]
+        if rewardTemplateIds[0].startswith("ConditionalResource:"):
+            if bReceiveMtx == True: rewardTemplateIds.append("AccountResource:currency_xrayllama")
+            else: rewardTemplateIds = ["AccountResource:currency_xrayllama"]
+        if len(rewardTemplateIds) > 1: rewardWord = "Rewards"
+        if not cdrItems: dailyMessage = f"The daily reward for {displayName} has been already claimed today!\nDay: {cdrDaysLoggedIn}\n{rewardWord}: "
+        else: dailyMessage = f"Today's daily reward for {displayName} has been successfully claimed!\nDay: {cdrDaysLoggedIn}\n{rewardWord} "
+        for rewardTemplateId in rewardTemplateIds:
+            rewardQuantity, rewardName = [getStringList['Daily Rewards'][f'{cdrDaysModified}']['quantity'], getStringList['Items'][rewardTemplateId]['name'][lang]]
             if rewardTemplateId.startswith("ConditionalResource:"):
-                reqGetCommonCore = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), True)
-                for item in reqGetCommonCore['profileChanges'][0]['profile']['items']:
-                    if reqGetCommonCore['profileChanges'][0]['profile']['items'][item]['templateId'].lower().startswith("currency:mtx"): totalAmount += int(reqGetCommonCore['profileChanges'][0]['profile']['items'][item]['quantity'])     
-            else:
-                for item in reqClaimDailyReward['profileChanges'][0]['profile']['items']:
-                    if reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['templateId'] == rewardTemplateId: totalAmount = int(reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['quantity'])
-            dailyMessage += f"\nTotal amount: {totalAmount}"
-        message(f"{dailyMessage}\n")
+                if bReceiveMtx == True: rewardName = rewardName['PassedConditionItem']
+                else: rewardName = rewardName['FailedConditionItem']
+            if rewardQuantity == 1: dailyMessage += f'{getStringList["Item Rarities"][getStringList["Items"][rewardTemplateId]["rarity"]][lang]} | {getStringList["Item Types"][getStringList["Items"][rewardTemplateId]["type"]][lang]}: {rewardName}'
+            else: dailyMessage += f'{getStringList["Item Rarities"][getStringList["Items"][rewardTemplateId]["rarity"]][lang]} | {getStringList["Item Types"][getStringList["Items"][rewardTemplateId]["type"]][lang]}: {rewardQuantity}x {rewardName}'
+            if rewardTemplateId.startswith(("ConditionalResource:", "AccountResource:", "ConsumableAccountItem:")):
+                if rewardTemplateId.startswith("ConditionalResource:"):
+                    reqGetCommonCore = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), True)
+                    for item in reqGetCommonCore['profileChanges'][0]['profile']['items']:
+                        if reqGetCommonCore['profileChanges'][0]['profile']['items'][item]['templateId'].lower().startswith("currency:mtx"): totalAmount += int(reqGetCommonCore['profileChanges'][0]['profile']['items'][item]['quantity'])     
+                else:
+                    for item in reqClaimDailyReward['profileChanges'][0]['profile']['items']:
+                        if reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['templateId'] == rewardTemplateId: totalAmount = int(reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['quantity'])
+                dailyMessage += f". Total amount: {totalAmount}\n"
+            else: reward += "\n"
+        message(f"{dailyMessage}")
     else: message(f"Skipping Daily Reward claiming because {displayName} doesn't have access to Save the World.\n")
 
     # Claim and automatically spend the Research Points.
