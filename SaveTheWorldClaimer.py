@@ -211,7 +211,7 @@ def main():
                     for item in reqClaimDailyReward['profileChanges'][0]['profile']['items']:
                         if reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['templateId'] == rewardTemplateId: totalAmount = int(reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['quantity'])
                 dailyMessage += f". Total amount: {totalAmount}\n"
-            else: reward += "\n"
+            #else: reward += "\n" // TEMPORARY FIX
         message(f"{dailyMessage}")
     else: message(f"Skipping Daily Reward claiming because {displayName} doesn't have access to Save the World.\n")
 
