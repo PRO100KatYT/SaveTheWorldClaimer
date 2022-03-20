@@ -19,11 +19,8 @@ This program allows you to claim Save the World Daily Reward, Research Points an
   - The looping is set to 0 (disabled) by default.
 ---
 ### Changelog:
-What's new in the 1.8.0 update:
-- The program can now display Fortnite item names in Arabic, German, English, Spanish, Latin American Spanish, French, Italian, Japanese, Korean, Polish, Brazilian Portugese, Russian, Turkish, Simplified Chinese and Traditional Chinese.
-  - You change the language by changing the Language value in the config file.
-- After logging in, the program now sends a ClientQuestLogin request instead of a QueryProfile one.
-  - In other words, the program will now get you a new daily quest, event quests, etc.
+What's new in the 1.8.1 update:
+- Changed the Founders currency_mtxswap Daily Reward notification to display the reward as V-Bucks and X-Ray Tickets. (Introduced in v20.00)
 - Tweaked the program's code a little bit.
 ---
 
