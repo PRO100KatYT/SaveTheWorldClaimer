@@ -19,8 +19,9 @@ This program allows you to claim Save the World Daily Reward, Research Points an
   - The looping is set to 0 (disabled) by default.
 ---
 ### Changelog:
-What's new in the 1.8.1 update:
+What's new in the 1.8.1 & 1.8.2 updates:
 - Changed the Founders currency_mtxswap Daily Reward notification to display the reward as V-Bucks and X-Ray Tickets. (Introduced in v20.00)
+- Fixed the program being unable to open Free Llamas.
 - Tweaked the program's code a little bit.
 ---
 

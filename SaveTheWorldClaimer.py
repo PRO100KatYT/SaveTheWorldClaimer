@@ -1,4 +1,4 @@
-version = "1.8.1"
+version = "1.8.2"
 configVersion = "1.8.0"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 try:
@@ -211,7 +211,7 @@ def main():
                     for item in reqClaimDailyReward['profileChanges'][0]['profile']['items']:
                         if reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['templateId'] == rewardTemplateId: totalAmount = int(reqClaimDailyReward['profileChanges'][0]['profile']['items'][item]['quantity'])
                 dailyMessage += f". Total amount: {totalAmount}\n"
-            #else: reward += "\n" // TEMPORARY FIX
+            else: dailyMessage += "\n"
         message(f"{dailyMessage}")
     else: message(f"Skipping Daily Reward claiming because {displayName} doesn't have access to Save the World.\n")
 
@@ -309,7 +309,7 @@ def main():
                             if (reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['templateId'].lower().startswith("prerolldata") and reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['offerId'] == llamaToClaimOfferId):
                                 llamaTier = reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['highest_rarity']
                                 llamaTier = getStringList['Llama tiers'][f'{llamaTier}']
-                        reqBuyFreeLlama = requestText(session.post(links.profileRequest.format(accountId, "PurchaseCatalogEntry", "common_core"), headers=headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "MtxCurrency", "currencySubType": "", "expectedTotalPrice": 0, "gameContext": "Frontend.None"}), False)
+                        reqBuyFreeLlama = requestText(session.post(links.profileRequest.format(accountId, "PurchaseCatalogEntry", "common_core"), headers=headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "GameItem", "currencySubType": "AccountResource:currency_xrayllama", "expectedTotalPrice": 0, "gameContext": "Frontend.None"}), False)
                         if "errorMessage" in reqBuyFreeLlama:
                             if "limit of" in reqBuyFreeLlama['errorMessage']:
                                 if openedLlamas == 0: alreadyOpenedFreeLlamas += 1
