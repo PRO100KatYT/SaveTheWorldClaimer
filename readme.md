@@ -2,10 +2,11 @@
 
 This program allows you to claim Save the World Daily Reward, Research Points and open free Llamas without opening the game.
 
+[![](https://img.shields.io/badge/python-3.9.5+-blue.svg)](https://www.python.org/downloads/)
 ---
 ### Features:
-- Two login methods: refresh token and device auth.
-  - You can see more info about them and choose the method via the config.ini file.
+- Multiple account support with two login methods: refresh token and device auth.
+  - You can see more info about them and choose the method when adding an account.
 - Daily reward claiming.
 - Research Points claiming.
 - Automatic Research Points spending.
@@ -17,11 +18,17 @@ This program allows you to claim Save the World Daily Reward, Research Points an
 - Program Looping.
   - You can set the time (in minutes) after the program will run again in the config file.
   - The looping is set to 0 (disabled) by default.
+- Many languages support for Fortnite item names.
 ---
 ### Changelog:
-What's new in the 1.8.1 & 1.8.2 updates:
-- Changed the Founders currency_mtxswap Daily Reward notification to display the reward as V-Bucks and X-Ray Tickets. (Introduced in v20.00)
-- Fixed the program being unable to open Free Llamas.
+What's new in the 1.9.0 update:
+- Multiple accounts support!
+  - You can now add multiple accounts to the program using the new Account Manager.
+  - Because of this, when you start the program, in order to launch the main part of it (claiming, etc.), you have to type 1 and press ENTER.
+  - After you update, you'll have to remove your old auth.json file and generate a new one using the program, because some things about this file were changed.
+- Removed the Authorization_Type from config.
+  - The program now asks for it whenever you add a an account.
+- If the ```Sorry the authorization code you supplied was not found. It is possible that it was no longer valid.``` error message will pop up, the program will no longer close. It will ask you to input the code again instead.
 - Tweaked the program's code a little bit.
 ---
 
@@ -51,7 +58,7 @@ or this:
 
 - Congratulations! You just claimed your Daily Reward, Research Points and opened free Llamas if they were available!
 
-- Next time you start the program, you will not need to enter a new auth code, because the login credentials have been saved in the auth.json file.
+- Next time you launch the program, to start claiming rewards, type 1 and press ENTER. You will not need to enter a new auth code because the login credentials have been saved in the auth.json file.
 ---
 
 ### Found a bug?
