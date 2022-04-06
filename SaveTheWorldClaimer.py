@@ -53,6 +53,8 @@ def validInput(text, values):
         if values == "digit":
             if "," in response: response = response.replace(",", ".")
             if response.isdigit(): break
+        if values == "url": # For Discord webhook | Salty-Coder
+            if response.startswith("https://discord.com/api/webhooks/"): break
         elif response in values: break
         response = input("You priovided a wrong value. Please input it again.\n")
         print()
@@ -81,8 +83,23 @@ def reqTokenText(loginLink, altLoginLink, authHeader):
 def message(string):
     if bShowDateTime == "true":
         string = string.replace("\n", "\n     ")
-        print(f"{getDateTimeString()} {string}")
-    else: print(string)
+        string = f"{getDateTimeString()} {string}"
+    print(string)
+    if bDiscordWebhookURL: # Check for Discord webhook
+        webhook(bDiscordWebhookURL, string) # Send the webhook
+
+def webhook(url, string): # Sending Discord webhooks :) | Salty-Coder
+    data = {
+    "content" : string,
+    "username" : "Save The World Claimer"
+    }
+    result = requests.post(url, json = data)
+    try:
+        result.raise_for_status()
+    except requests.exceptions.HTTPError as err:
+        return err
+    else:
+        return True
 
 # Create and/or read the config.ini file.
 config, configPath = [ConfigParser(), os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.ini")]
@@ -103,12 +120,16 @@ if not os.path.exists(configPath):
             iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes = iList  
         iLoop_Time = validInput("Do you want the progam to loop itself every X minutes?\nSet this to 0 to not loop the program.\nValid values: a number (1, 15, 60, etc.).", "digit")
         iShow_Date_Time = validInput("Do you want the program to show the date and time when sending messages?\nValid vaules: true, false.", boolValues)
-    else: iLanguage, iSpend_Research_Points, iOpen_Free_Llamas, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iLoop_Time, iShow_Date_Time = ["en", "lowest", "true", "uncommon", "uncommon", "rare", "rare", "uncommon", 0, "false"]           
-    with open(configPath, "w") as configFile: configFile.write(f"[StW_Claimer_Config]\n\n# What language do you want the Fortnite item names to be?\n# Valid vaules: ar, de, en, es, es-419, fr, it, ja, ko, pl, pt-BR, ru, tr, zh-CN, zh-Hant.\nLanguage = {iLanguage}\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\n# The \"lowest\" method makes the program search for a Research stat with the lowest level.\n# The \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\n# Valid vaules: off, lowest, everyten.\nSpend_Research_Points = {iSpend_Research_Points}\n\n# Do you want the program to search for free Llamas and open them if they are avaiable?\n# Valid vaules: true, false.\nOpen_Free_Llamas = {iOpen_Free_Llamas}\n\n[Automatic_Recycle/Retire]\n\n# Automatically recycle Weapon schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Weapons = {iRecycle_Weapons}\n\n# Automatically recycle Trap schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Traps = {iRecycle_Traps}\n\n# Automatically retire Survivors at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Survivors = {iRetire_Survivors}\n\n# Automatically retire Defenders at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Defenders = {iRetire_Defenders}\n\n# Automatically retire Heroes at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Heroes = {iRetire_Heroes}\n\n[Loop]\n\n# Do you want the progam to loop itself every X minutes?\n# Set this to 0 to not loop the program.\n# Valid values: a number (1, 15, 60, etc.).\nLoop_Minutes = {iLoop_Time}\n\n[Misc]\n\n# Do you want the program to show the date and time when sending messages?\n# Valid vaules: true, false.\nShow_Date_Time = {iShow_Date_Time}\n\n[Config_Version]\n\nVersion = STWC_{configVersion}")
+        iDiscord_Webhook = validInput("Do you want the program to post output to a Discord webhook?\nValid vaules: true, false.", boolValues)
+        iDiscord_Webhook_URL = ""
+        if iDiscord_Webhook == "true":
+            iDiscord_Webhook_URL = validInput("Discord webhook URL:", "url")
+    else: iLanguage, iSpend_Research_Points, iOpen_Free_Llamas, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iLoop_Time, iShow_Date_Time, iDiscord_Webhook, iDiscord_Webhook_URL = ["en", "lowest", "true", "uncommon", "uncommon", "rare", "rare", "uncommon", 0, "false", "false", ""]           
+    with open(configPath, "w") as configFile: configFile.write(f"[StW_Claimer_Config]\n\n# What language do you want the Fortnite item names to be?\n# Valid vaules: ar, de, en, es, es-419, fr, it, ja, ko, pl, pt-BR, ru, tr, zh-CN, zh-Hant.\nLanguage = {iLanguage}\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\n# The \"lowest\" method makes the program search for a Research stat with the lowest level.\n# The \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\n# Valid vaules: off, lowest, everyten.\nSpend_Research_Points = {iSpend_Research_Points}\n\n# Do you want the program to search for free Llamas and open them if they are avaiable?\n# Valid vaules: true, false.\nOpen_Free_Llamas = {iOpen_Free_Llamas}\n\n[Automatic_Recycle/Retire]\n\n# Automatically recycle Weapon schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Weapons = {iRecycle_Weapons}\n\n# Automatically recycle Trap schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Traps = {iRecycle_Traps}\n\n# Automatically retire Survivors at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Survivors = {iRetire_Survivors}\n\n# Automatically retire Defenders at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Defenders = {iRetire_Defenders}\n\n# Automatically retire Heroes at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Heroes = {iRetire_Heroes}\n\n[Loop]\n\n# Do you want the progam to loop itself every X minutes?\n# Set this to 0 to not loop the program.\n# Valid values: a number (1, 15, 60, etc.).\nLoop_Minutes = {iLoop_Time}\n\n[Misc]\n\n# Do you want the program to show the date and time when sending messages?\n# Valid vaules: true, false.\nShow_Date_Time = {iShow_Date_Time}\n\n# Do you want the program to post output to a Discord webhook?\nDiscord_Webhook_URL = {iDiscord_Webhook_URL}\n\n[Config_Version]\n\nVersion = STWC_{configVersion}")
     print("The config.ini file was generated successfully.\n")
 try:
     config.read(configPath)
-    configVer, lang, spendAutoResearch, bOpenFreeLlamas, loopMinutes, bShowDateTime = [config['Config_Version']['Version'], config['StW_Claimer_Config']['Language'].lower(), config['StW_Claimer_Config']['Spend_Research_Points'].lower(), config['StW_Claimer_Config']['Open_Free_Llamas'].lower(), config['Loop']['Loop_Minutes'], config['Misc']['Show_Date_Time'].lower()]
+    configVer, lang, spendAutoResearch, bOpenFreeLlamas, loopMinutes, bShowDateTime, bDiscordWebhookURL = [config['Config_Version']['Version'], config['StW_Claimer_Config']['Language'].lower(), config['StW_Claimer_Config']['Spend_Research_Points'].lower(), config['StW_Claimer_Config']['Open_Free_Llamas'].lower(), config['Loop']['Loop_Minutes'], config['Misc']['Show_Date_Time'].lower(), config['Misc']['Discord_Webhook_URL']]
     autoRecycling.itemRarities = {"weapon": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Weapons'].lower()].split(", "), "trap": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Traps'].lower()].split(", "), "survivor": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Survivors'].lower()].split(", "), "defender": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Defenders'].lower()].split(", "), "hero": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Heroes'].lower()].split(", ")}
 except: customError("The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.")
 if not (configVer == f"STWC_{configVersion}"): customError("The config file is outdated. Delete the config.ini file and run this program again to generate a new one.")
