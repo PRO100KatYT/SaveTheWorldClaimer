@@ -1,5 +1,5 @@
 {
-  "author": "This stringlist.json file was made by PRO100KatYT.",
+  "author": "This file was made by PRO100KatYT.",
   "Daily Rewards": {
     "1": {
       "templateId": "AccountResource:heroxp",
@@ -1347,6 +1347,7 @@
     }
   },
   "Llama tiers": {
+    "-1": "Unknown",
     "0": "Normal (1)",
     "1": "Silver (2)",
     "2": "Gold (3)"

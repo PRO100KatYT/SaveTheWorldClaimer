@@ -1,4 +1,4 @@
-version = "1.9.0"
+version = "1.9.1"
 configVersion = "1.8.0"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 try:
@@ -34,7 +34,7 @@ session = requests.Session()
 # Get the current date and time and neatly format it | by Salty-Coder :)
 def getDateTimeString():
     dateTimeObj = datetime.now()
-    return "[{:4d}/{:02d}/{:02d} {:02d}:{:02d}:{:02d}]".format(dateTimeObj.year,dateTimeObj.month,dateTimeObj.day, dateTimeObj.hour,dateTimeObj.minute,dateTimeObj.second)
+    return f"[{dateTimeObj.year}/{dateTimeObj.month}/{dateTimeObj.day} {dateTimeObj.hour}:{dateTimeObj.minute}:{dateTimeObj.second}]"
 
 # Error with a custom message.
 def customError(text):
@@ -54,7 +54,7 @@ def validInput(text, values):
             if "," in response: response = response.replace(",", ".")
             if response.isdigit(): break
         elif response in values: break
-        response = input("You priovided a wrong value. Please input it again.\n")
+        response = input("You provided a wrong value. Please input it again.\n")
         print()
     return response
 
@@ -71,7 +71,7 @@ def reqTokenText(loginLink, altLoginLink, authHeader):
         count += 1
         if count > 1: loginLink = altLoginLink
         webbrowser.open_new_tab(loginLink)
-        print(f"If the program didnt open it, copy this link to your browser: {(loginLink)}\n")
+        print(f"If the program didn't open it, copy this link to your browser: {(loginLink)}\n")
         reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {authHeader}"}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")}), False)
         if not "errorMessage" in reqToken: break
         else: input(f"\n{reqToken['errorMessage']}.\nPress ENTER to open the website again and get the code.\n")
@@ -80,7 +80,7 @@ def reqTokenText(loginLink, altLoginLink, authHeader):
 # Print a message with or without the date and time.
 def message(string):
     if bShowDateTime == "true":
-        string = string.replace("\n", "\n     ")
+        string = string.replace("\n", "\n"+" "*((len(getDateTimeString()))+1))
         print(f"{getDateTimeString()} {string}")
     else: print(string)
 
@@ -91,20 +91,20 @@ if not os.path.exists(configPath):
     print("Starting to generate the config.ini file.\n") # Don't want to initiate message() before bShowDateTime exists... - Salty-Coder
     bStartSetup = validInput("Type 1 if you want to start the config setup and press ENTER.\nType 2 if you want to use the default config values and press ENTER.", ["1", "2"])
     if bStartSetup == "1":
-        iLanguage = validInput(f"What language do you want the Fortnite item names to be?\nValid vaules: {', '.join(langValues)}", langValues)
-        iSpend_Research_Points = validInput("Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\nThe \"lowest\" method makes the program search for a Research stat with the lowest level.\nThe \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\nValid vaules: off, lowest, everyten.", ["off", "lowest", "everyten"])
-        iOpen_Free_Llamas = validInput("Do you want the program to search for free Llamas and open them if they are avaiable?\nValid vaules: true, false.", boolValues)
-        bAutomaticRecycle = validInput("Do you want to Automatically recycle unwanted free Llama loot?\nValid vaules: true, false.", boolValues)
+        iLanguage = validInput(f"What language do you want the Fortnite item names to be?\nValid values: {', '.join(langValues)}", langValues)
+        iSpend_Research_Points = validInput("Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\nThe \"lowest\" method makes the program search for a Research stat with the lowest level.\nThe \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\nValid values: off, lowest, everyten.", ["off", "lowest", "everyten"])
+        iOpen_Free_Llamas = validInput("Do you want the program to search for free Llamas and open them if they are available?\nValid values: true, false.", boolValues)
+        bAutomaticRecycle = validInput("Do you want to Automatically recycle unwanted free Llama loot?\nValid values: true, false.", boolValues)
         if bAutomaticRecycle == "false": iRecycle_Weapons = iRecycle_Traps = iRetire_Survivors = iRetire_Defenders = iRetire_Heroes = "off"
         else:
             iList = []
             itemTypeJson = {"Recycle_Weapons": {"name": "Weapon Schematics", "recycleWord": "recycle"}, "Recycle_Traps": {"name": "Trap Schematics", "recycleWord": "recycle"}, "Recycle_Survivors": {"name": "Survivors", "recycleWord": "retire"}, "Recycle_Defenders": {"name": "Defenders", "recycleWord": "retire"}, "Recycle_Heroes": {"name": "Heroes", "recycleWord": "retire"}}
             for itemType in itemTypeJson: iList.append(validInput(f"Input the rarity of {itemTypeJson[itemType]['name']} you want the program to automatically {itemTypeJson[itemType]['recycleWord']} at it or below.\nValid values: off, common, uncommon, rare, epic.", ["off", "common", "uncommon", "rare", "epic"]))
             iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes = iList  
-        iLoop_Time = validInput("Do you want the progam to loop itself every X minutes?\nSet this to 0 to not loop the program.\nValid values: a number (1, 15, 60, etc.).", "digit")
-        iShow_Date_Time = validInput("Do you want the program to show the date and time when sending messages?\nValid vaules: true, false.", boolValues)
+        iLoop_Time = validInput("Do you want the program to loop itself every X minutes?\nSet this to 0 to not loop the program.\nValid values: a number (1, 15, 60, etc.).", "digit")
+        iShow_Date_Time = validInput("Do you want the program to show the date and time when sending messages?\nValid values: true, false.", boolValues)
     else: iLanguage, iSpend_Research_Points, iOpen_Free_Llamas, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iLoop_Time, iShow_Date_Time = ["en", "lowest", "true", "uncommon", "uncommon", "rare", "rare", "uncommon", 0, "false"]           
-    with open(configPath, "w") as configFile: configFile.write(f"[StW_Claimer_Config]\n\n# What language do you want the Fortnite item names to be?\n# Valid vaules: ar, de, en, es, es-419, fr, it, ja, ko, pl, pt-BR, ru, tr, zh-CN, zh-Hant.\nLanguage = {iLanguage}\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\n# The \"lowest\" method makes the program search for a Research stat with the lowest level.\n# The \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\n# Valid vaules: off, lowest, everyten.\nSpend_Research_Points = {iSpend_Research_Points}\n\n# Do you want the program to search for free Llamas and open them if they are avaiable?\n# Valid vaules: true, false.\nOpen_Free_Llamas = {iOpen_Free_Llamas}\n\n[Automatic_Recycle/Retire]\n\n# Automatically recycle Weapon schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Weapons = {iRecycle_Weapons}\n\n# Automatically recycle Trap schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Traps = {iRecycle_Traps}\n\n# Automatically retire Survivors at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Survivors = {iRetire_Survivors}\n\n# Automatically retire Defenders at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Defenders = {iRetire_Defenders}\n\n# Automatically retire Heroes at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Heroes = {iRetire_Heroes}\n\n[Loop]\n\n# Do you want the progam to loop itself every X minutes?\n# Set this to 0 to not loop the program.\n# Valid values: a number (1, 15, 60, etc.).\nLoop_Minutes = {iLoop_Time}\n\n[Misc]\n\n# Do you want the program to show the date and time when sending messages?\n# Valid vaules: true, false.\nShow_Date_Time = {iShow_Date_Time}\n\n[Config_Version]\n\nVersion = STWC_{configVersion}")
+    with open(configPath, "w") as configFile: configFile.write(f"[StW_Claimer_Config]\n\n# What language do you want the Fortnite item names to be?\n# Valid values: ar, de, en, es, es-419, fr, it, ja, ko, pl, pt-BR, ru, tr, zh-CN, zh-Hant.\nLanguage = {iLanguage}\n\n# Do you want to automatically spend your Research Points whenever the program is unable to collect them because of their max accumulation?\n# The \"lowest\" method makes the program search for a Research stat with the lowest level.\n# The \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.\n# Valid values: off, lowest, everyten.\nSpend_Research_Points = {iSpend_Research_Points}\n\n# Do you want the program to search for free Llamas and open them if they are available?\n# Valid values: true, false.\nOpen_Free_Llamas = {iOpen_Free_Llamas}\n\n[Automatic_Recycle/Retire]\n\n# Automatically recycle Weapon schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Weapons = {iRecycle_Weapons}\n\n# Automatically recycle Trap schematics at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRecycle_Traps = {iRecycle_Traps}\n\n# Automatically retire Survivors at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Survivors = {iRetire_Survivors}\n\n# Automatically retire Defenders at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Defenders = {iRetire_Defenders}\n\n# Automatically retire Heroes at this rarity or below.\n# Valid values: off, common, uncommon, rare, epic.\nRetire_Heroes = {iRetire_Heroes}\n\n[Loop]\n\n# Do you want the program to loop itself every X minutes?\n# Set this to 0 to not loop the program.\n# Valid values: a number (1, 15, 60, etc.).\nLoop_Minutes = {iLoop_Time}\n\n[Misc]\n\n# Do you want the program to show the date and time when sending messages?\n# Valid values: true, false.\nShow_Date_Time = {iShow_Date_Time}\n\n[Config_Version]\n\nVersion = STWC_{configVersion}")
     print("The config.ini file was generated successfully.\n")
 try:
     config.read(configPath)
@@ -143,7 +143,7 @@ def startup():
         if bGoBack: isLoggedIn = validInput("Are you logged into your Epic account that you would like the program to use in your browser?\nType 1 if yes and press ENTER.\nType 2 if no and press ENTER.\nType 3 to go back and press ENTER.\n", ["1", "2", "3"])
         else: isLoggedIn = validInput("Are you logged into your Epic account that you would like the program to use in your browser?\nType 1 if yes and press ENTER.\nType 2 if no and press ENTER.\n", ["1", "2"])
         if isLoggedIn != "3":
-            authType = validInput("Which authentication method do you want the program to use?\nToken auth metod generates a refresh token to log in. The limit per IP is 1. It's recommended if you plan to use only one account.\nDevice auth method generates authorization credentials that don't have an expiration date and limit per IP, but can after some time cause epic to ask you to change your password. It's recommended if you plan to use multiple accounts.\nValid vaules: token, device.", ["token", "device"])
+            authType = validInput("Which authentication method do you want the program to use?\nToken auth method generates a refresh token to log in. The limit per IP is 1. It's recommended if you plan to use only one account.\nDevice auth method generates authorization credentials that don't have an expiration date and limit per IP, but can after some time cause epic to ask you to change your password. It's recommended if you plan to use multiple accounts.\nValid values: token, device.", ["token", "device"])
             input("The program is going to open an Epic Games webpage.\nTo continue, press ENTER.\n")
             if isLoggedIn == "1": loginLink = links.loginLink1
             elif isLoggedIn == "2": loginLink = links.loginLink2
@@ -233,7 +233,7 @@ def main():
         headers = {"User-Agent": "Fortnite/++Fortnite+Release-19.40-CL-19215531 Windows/10.0.19043.1.768.64bit", "Authorization": f"bearer {accessToken}", "Content-Type": "application/json"}
 
         # Check whether the account has the campaign access token and is able to receive V-Bucks.
-        # The receivemtxcurrency token is not required, but instead of V-Bucks the account will recieve X-Ray Tickets.
+        # The receivemtxcurrency token is not required, but instead of V-Bucks the account will receive X-Ray Tickets.
         reqCheckTokens = [json.dumps(requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(session.post(links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False))]
         bCampaignAccess = bReceiveMtx = False
         if "Token:campaignaccess" in reqCheckTokens[0]: bCampaignAccess = True
@@ -348,7 +348,7 @@ def main():
                 freeLlamasCount = len(freeLlamas)
                 if not freeLlamas: message("There are no free Llamas available at the moment.\n")
                 else:
-                    message(f"There are free llamas avaiable!")
+                    message(f"There are free llamas available!")
                     itemsfromLlamas, openedLlamas = [[], 0]
                     for llama in freeLlamas:
                         llamaToClaimOfferId, llamaToClaimName = [llama['offerId'], []]
@@ -364,7 +364,8 @@ def main():
                             llamaTier = []
                             for key in reqPopulateLlamas['profileChanges'][0]['profile']['items']:
                                 if (reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['templateId'].lower().startswith("prerolldata") and reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['offerId'] == llamaToClaimOfferId):
-                                    llamaTier = reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['highest_rarity']
+                                    try: llamaTier = reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['highest_rarity']
+                                    except: llamaTier = -1
                                     llamaTier = stringList['Llama tiers'][f'{llamaTier}']
                             reqBuyFreeLlama = requestText(session.post(links.profileRequest.format(accountId, "PurchaseCatalogEntry", "common_core"), headers=headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "GameItem", "currencySubType": "AccountResource:currency_xrayllama", "expectedTotalPrice": 0, "gameContext": "Frontend.None"}), False)
                             if "errorMessage" in reqBuyFreeLlama:
@@ -385,11 +386,11 @@ def main():
                                     if itemRarity in ("common", "uncommon", "rare", "epic"): itemsfromLlamas.append({"itemName": itemName, "itemType": itemType, "templateId": templateId, "itemGuid": itemGuid, "itemRarity": itemRarity, "itemQuantity": itemQuantity})
                                     message(f"{llamaLootCount}: {stringList['Item Rarities'][stringList['Items'][templateId]['rarity']][lang]} | {stringList['Item Types'][stringList['Items'][templateId]['type']][lang]}: {itemQuantity}x {itemName}")
                     if int(alreadyOpenedFreeLlamas) == freeLlamasCount:
-                        message(f"\nFree Llamas that are currently avaiable in the shop have been already opened on this account. Remember that you can open a maximum of 2 free one hour rotation Llamas per one shop rotation.\n")
+                        message(f"\nFree Llamas that are currently available in the shop have been already opened on this account. Remember that you can open a maximum of 2 free one hour rotation Llamas per one shop rotation.\n")
                     else:
                         llamasWord = "Llamas"
                         if int(openedLlamas) == 1: llamasWord = "Llama"
-                        if openedLlamas > 0: message(f"\nSuccesfully opened {openedLlamas} free {llamasWord}.\n")
+                        if openedLlamas > 0: message(f"\nSuccessfully opened {openedLlamas} free {llamasWord}.\n")
 
         # Automatically recycle selected llama loot.
         if (recycleOn) and (not(int(alreadyOpenedFreeLlamas) == freeLlamasCount)):
@@ -408,7 +409,7 @@ def main():
                     for item in reqGetResources['profileChanges'][0]['profile']['items']:
                         if reqGetResources['profileChanges'][0]['profile']['items'][item]['templateId'] == resource: recycleResources.append({"itemGuid": item, "templateId": resource, "itemName": stringList['Items'][resource]['name'][lang], "quantity": reqGetResources['profileChanges'][0]['profile']['items'][item]['quantity']})
                 requestText(session.post(links.profileRequest.format(accountId, "RecycleItemBatch", "campaign"), headers=headers, json={"targetItemIds": itemGuidsToRecycle}), True)
-                recycleMessage = "The following items have been succesfully Recycled/Retired:\n"
+                recycleMessage = "The following items have been successfully Recycled/Retired:\n"
                 for item in itemsToRecycle:
                     recycledItemsCount += 1
                     recycleMessage += f"{recycledItemsCount}: {stringList['Item Rarities'][item['itemRarity']][lang]} | {stringList['Item Types'][item['itemType']][lang]}: {item['itemQuantity']}x {item['itemName']}\n"

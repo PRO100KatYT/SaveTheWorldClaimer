@@ -10,25 +10,21 @@ This program allows you to claim Save the World Daily Reward, Research Points an
 - Daily reward claiming.
 - Research Points claiming.
 - Automatic Research Points spending.
-  - You can choose the method or disable this feature via the config.ini file.
+  - You can choose the method or toggle this feature via the config.ini file.
 - Claiming free Llamas.
-  - You can disable this feature via the config.ini file.
+  - You can toggle this feature via the config.ini file.
 - Automatic free Llama loot recycling.
-  - You can enable this feature via the config.ini file.
+  - You can toggle this feature via the config.ini file.
 - Program Looping.
   - You can set the time (in minutes) after the program will run again in the config file.
   - The looping is set to 0 (disabled) by default.
-- Many languages support for Fortnite item names.
+- 15 languages support for Fortnite item names.
 ---
 ### Changelog:
-What's new in the 1.9.0 update:
-- Multiple accounts support!
-  - You can now add multiple accounts to the program using the new Account Manager.
-  - Because of this, when you start the program, in order to launch the main part of it (claiming, etc.), you have to type 1 and press ENTER.
-  - After you update, you'll have to remove your old auth.json file and generate a new one using the program, because some things about this file were changed.
-- Removed the Authorization_Type from config.
-  - The program now asks for it whenever you add a an account.
-- If the ```Sorry the authorization code you supplied was not found. It is possible that it was no longer valid.``` error message will pop up, the program will no longer close. It will ask you to input the code again instead.
+What's new in the 1.9.1 update:
+- When the program can't find the llama rarity, it will now display the rarity as `Unknown` and no longer crash.
+- Aligned the multi-line messages more precisely when the show date and time config option is enabled.
+- Fixed some typos.
 - Tweaked the program's code a little bit.
 ---
 
