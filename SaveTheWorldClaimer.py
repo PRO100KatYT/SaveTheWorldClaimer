@@ -6,7 +6,7 @@ try:
     import requests
     import os
     from configparser import ConfigParser
-    from datetime import datetime
+    from datetime import datetime, timedelta
     import webbrowser
     import time
 except Exception as emsg:
@@ -424,13 +424,22 @@ def main():
 
 # Start the program.
 startup()
+
+
+def nextrun(loopMinutes): # Salty-Coder :)
+    now = datetime.now()
+    nextrun = now + timedelta(minutes = loopMinutes)
+    return "{:4d}/{:02d}/{:02d} {:02d}:{:02d}:{:02d}".format(nextrun.year,nextrun.month,nextrun.day, nextrun.hour,nextrun.minute,nextrun.second)
+
+
 if loopMinutes > 0:
     while True:
         main()
         if str(loopMinutes).endswith(".0"): loopMinutes = int(str(loopMinutes).split(".")[0])
         minutesWord = "minutes"
         if loopMinutes == 1: minutesWord = "minute"
-        print(f"The program will run again in {loopMinutes} {minutesWord}.\n")
+        nextrun = nextrun(loopMinutes)
+        print(f"The program will run again in {loopMinutes} {minutesWord}. ({nextrun})\n")
         time.sleep(loopMinutes * 60)
 else: main()
 
