@@ -1,6 +1,6 @@
 # Fortnite Save the World Daily Reward, Research Points & free Llama Claimer
 
-This program allows you to claim Save the World Daily Reward, Research Points and open free Llamas without opening the game.
+This program allows you to claim Save the World Daily Reward, Research Points, open free Llamas and even skip the tutorial mission without opening the game.
 
 [![](https://img.shields.io/badge/python-3.9.5+-blue.svg)](https://www.python.org/downloads/)
 ---
@@ -9,6 +9,7 @@ This program allows you to claim Save the World Daily Reward, Research Points an
   - You can see more info about them and choose the method when adding an account.
 - Daily reward claiming.
 - Research Points claiming.
+- Tutorial mission skipping (Unlocks the Save the World music pack even if you don't own StW).
 - Automatic Research Points spending.
   - You can choose the method or toggle this feature via the config.ini file.
 - Claiming free Llamas.
@@ -21,14 +22,18 @@ This program allows you to claim Save the World Daily Reward, Research Points an
 - 15 languages support for Fortnite item names.
 ---
 ### Changelog:
-What's new in the 1.9.1 update:
-- When the program can't find the llama rarity, it will now display the rarity as `Unknown` and no longer crash.
-- Aligned the multi-line messages more precisely when the show date and time config option is enabled.
-- Fixed some typos.
+What's new in the 1.9.2 update:
+- New feature: Tutorial mission skipping!
+  - The program is now able to skip the campaign tutorial mission for both those who own and don't own Save the World
+  - After the tutorial will be skipped the account will receive the Save the World music pack.
+- Fixed the program crashing when the account doesn't have access to the Research Lab.
 - Tweaked the program's code a little bit.
 ---
 
 ### How to use it?
+- Install `Python 3.9.5` or newer.
+
+- If you didn't do it yet, install the `requests` module. You can do it using the `pip install requests` console command.
 
 - After starting the SaveTheWorldClaimer.py for the first time (or after deleting the config.ini file) you will be asked if you want to start the config setup process or use the default config values. If you want to start the setup, type 1, if no, type 2.
 

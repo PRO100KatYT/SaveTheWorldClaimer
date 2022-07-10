@@ -1,4 +1,4 @@
-version = "1.9.1"
+version = "1.9.2"
 configVersion = "1.8.0"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 try:
@@ -234,10 +234,22 @@ def main():
 
         # Check whether the account has the campaign access token and is able to receive V-Bucks.
         # The receivemtxcurrency token is not required, but instead of V-Bucks the account will receive X-Ray Tickets.
-        reqCheckTokens = [json.dumps(requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(session.post(links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False))]
+        reqQueryProfiles = [json.dumps(requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(session.post(links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False))]
         bCampaignAccess = bReceiveMtx = False
-        if "Token:campaignaccess" in reqCheckTokens[0]: bCampaignAccess = True
-        if "Token:receivemtxcurrency" in reqCheckTokens[1]: bReceiveMtx = True
+        if "Token:campaignaccess" in reqQueryProfiles[0]: bCampaignAccess = True
+        if "Token:receivemtxcurrency" in reqQueryProfiles[1]: bReceiveMtx = True
+
+        # Skip the StW tutorial if it hasn't been completed yet. Works for accounts that don't own StW too. It will get the account the StW music pack.
+        campaignProfile = json.loads(reqQueryProfiles[1])['profileChanges'][0]['profile']
+        for item in campaignProfile['items']:
+            if campaignProfile['items'][item]['templateId'].lower() == "quest:homebaseonboarding":
+                if campaignProfile['items'][item]['attributes']['quest_state'].lower() != "claimed":
+                    message(f"{displayName} didn't complete the StW tutorial mission yet. Skipping the tutorial...\n")
+                    session.post(links.profileRequest.format(accountId, "SkipTutorial", "campaign"), headers=headers, data="{}") # Completes the hbonboarding_completezone objective
+                    reqUpdateObjectives = requestText(session.post(links.profileRequest.format(accountId, "UpdateQuestClientObjectives", "campaign"), headers=headers, json={"advance": [{"statName": "hbonboarding_watchsatellitecine", "count": 1, "timestampOffset": 0}, {"statName": "hbonboarding_namehomebase", "count": 1, "timestampOffset": 0}]}), True) # Completes the rest of the quest objectives
+                    if reqUpdateObjectives['profileChanges'][0]['profile']['items'][item]['attributes']['quest_state'].lower() == "claimed": message(f"Successfully skipped {displayName}'s Save the World tutorial mission.\n")
+                    else: message(f"Something went wrong and the program wasn't able to skip {displayName}'s Save the World tutorial mission.\n")
+                break
 
         # Claim the Daily Reward.
         if bCampaignAccess == True:
@@ -274,7 +286,8 @@ def main():
 
         # Claim and automatically spend the Research Points.
         reqCampaignProfileCheck = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
-        reqCampaignProfileCheckResearchLevels, bTryToClaimRP, tokenToClaim = [reqCampaignProfileCheck['profileChanges'][0]['profile']['stats']['attributes']['research_levels'], True, []]
+        try: reqCampaignProfileCheckResearchLevels, bTryToClaimRP, tokenToClaim = [reqCampaignProfileCheck['profileChanges'][0]['profile']['stats']['attributes']['research_levels'], True, []]
+        except: bTryToClaimRP = False
         try:
             if (reqCampaignProfileCheckResearchLevels['fortitude'] == 120 and reqCampaignProfileCheckResearchLevels['offense'] == 120 and reqCampaignProfileCheckResearchLevels['resistance'] == 120 and reqCampaignProfileCheckResearchLevels['technology'] == 120): bTryToClaimRP = False
         except: []
@@ -330,7 +343,7 @@ def main():
                                 totalItemGuid = reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['itemGuid']
                                 message(f"Claimed {reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity']}\n")
                             except: []
-            else: message(f"Skipping Research Points claiming because {displayName} doesn't have access to the Research Lab.\n")
+        else: message(f"Skipping Research Points claiming because {displayName} doesn't have access to the Research Lab.\n")
 
         # Search for a free Llama and open it if available.
         alreadyOpenedFreeLlamas, freeLlamasCount, cpspStorefront = [0, 0, []]
