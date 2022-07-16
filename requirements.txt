@@ -1,4 +1,3 @@
 requests
 configparser
 datetime
-webbrowser
