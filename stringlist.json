@@ -1347,7 +1347,7 @@
     }
   },
   "Llama tiers": {
-    "-1": "Unknown",
+    "-1": "Normal (1)",
     "0": "Normal (1)",
     "1": "Silver (2)",
     "2": "Gold (3)"
@@ -42760,6 +42760,111 @@
         "tr": "Destansı Felaketzede",
         "zh-CN": "史诗幸存者",
         "zh-Hant": "史詩倖存者"
+      },
+      "rarity": "epic",
+      "type": "cardpack"
+    },
+    "CardPack:cardpack_choice_anniversary_heroes_sr": {
+      "name": {
+        "ar": "عنصر أسطوري",
+        "de": "Legendärer Gegenstand",
+        "en": "Legendary Item",
+        "es": "Objeto legendario",
+        "es-419": "Objeto legendario",
+        "fr": "Objet légendaire",
+        "it": "Oggetto leggendario",
+        "ja": "アイテム(レジェンド)",
+        "ko": "전설 아이템",
+        "pl": "Legendarny przedmiot",
+        "pt-BR": "Item Lendário",
+        "ru": "Легендарный предмет",
+        "tr": "Efsanevi Eşya",
+        "zh-CN": "传奇道具",
+        "zh-Hant": "傳奇道具"
+      },
+      "rarity": "legendary",
+      "type": "cardpack"
+    },
+    "CardPack:cardpack_choice_anniversary_heroes_ur": {
+      "name": {
+        "ar": "عنصر خرافي",
+        "de": "Mythischer Gegenstand",
+        "en": "Mythic Item",
+        "es": "Objeto mítico",
+        "es-419": "Objeto mítico",
+        "fr": "Objet mythique",
+        "it": "Oggetto mitico",
+        "ja": "ミシックアイテム",
+        "ko": "신화 아이템",
+        "pl": "Przedmiot mityczny",
+        "pt-BR": "Item Mítico",
+        "ru": "Мифический предмет",
+        "tr": "Eşsiz Eşya",
+        "zh-CN": "神秘物品",
+        "zh-Hant": "神秘物品"
+      },
+      "rarity": "mythic",
+      "type": "cardpack"
+    },
+    "CardPack:cardpack_choice_anniversary_heroes_vr": {
+      "name": {
+        "ar": "عنصر ملحمي",
+        "de": "Epischer Gegenstand",
+        "en": "Epic Item",
+        "es": "Objeto épico",
+        "es-419": "Objeto épico",
+        "fr": "Objet épique",
+        "it": "Oggetto epico",
+        "ja": "エピックアイテム",
+        "ko": "에픽 아이템",
+        "pl": "Epicki przedmiot",
+        "pt-BR": "Item Épico",
+        "ru": "Эпический предмет",
+        "tr": "Destansı Eşya",
+        "zh-CN": "史诗道具",
+        "zh-Hant": "史詩道具"
+      },
+      "rarity": "epic",
+      "type": "cardpack"
+    },
+    "CardPack:cardpack_choice_anniversary_schematic_sr": {
+      "name": {
+        "ar": "عنصر أسطوري",
+        "de": "Legendärer Gegenstand",
+        "en": "Legendary Item",
+        "es": "Objeto legendario",
+        "es-419": "Objeto legendario",
+        "fr": "Objet légendaire",
+        "it": "Oggetto leggendario",
+        "ja": "アイテム(レジェンド)",
+        "ko": "전설 아이템",
+        "pl": "Legendarny przedmiot",
+        "pt-BR": "Item Lendário",
+        "ru": "Легендарный предмет",
+        "tr": "Efsanevi Eşya",
+        "zh-CN": "传奇道具",
+        "zh-Hant": "傳奇道具"
+      },
+      "rarity": "legendary",
+      "type": "cardpack"
+    },
+    "CardPack:cardpack_choice_anniversary_schematic_vr": {
+      "name": {
+        "ar": "عنصر ملحمي",
+        "de": "Epischer Gegenstand",
+        "en": "Epic Item",
+        "es": "Objeto épico",
+        "es-419": "Objeto épico",
+        "fr": "Objet épique",
+        "it": "Oggetto epico",
+        "ja": "エピックアイテム",
+        "ko": "에픽 아이템",
+        "pl": "Epicki przedmiot",
+        "pt-BR": "Item Épico",
+        "ru": "Эпический предмет",
+        "tr": "Destansı Eşya",
+        "zh-CN": "史诗道具",
+        "zh-Hant": "史詩道具"
       },
       "rarity": "epic",
       "type": "cardpack"

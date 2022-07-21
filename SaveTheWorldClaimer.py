@@ -1,4 +1,4 @@
-version = "1.9.2"
+version = "1.9.3"
 configVersion = "1.8.0"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 try:
@@ -394,12 +394,14 @@ def main():
                                     templateId, itemGuid, itemQuantity = [key['itemType'], key['itemGuid'], key['quantity']]
                                     try: itemName = stringList['Items'][templateId]['name'][lang]
                                     except: itemName = templateId
-                                    itemRarity, itemType = [stringList['Items'][templateId]['rarity'], stringList['Items'][templateId]['type']]
+                                    try: itemRarity, itemType = [stringList['Items'][templateId]['rarity'], stringList['Items'][templateId]['type']]
+                                    except: itemRarity, itemType = ["Unknown rarity", "Unknown type"]
                                     llamaLootCount += 1
                                     if itemRarity in ("common", "uncommon", "rare", "epic"): itemsfromLlamas.append({"itemName": itemName, "itemType": itemType, "templateId": templateId, "itemGuid": itemGuid, "itemRarity": itemRarity, "itemQuantity": itemQuantity})
-                                    message(f"{llamaLootCount}: {stringList['Item Rarities'][stringList['Items'][templateId]['rarity']][lang]} | {stringList['Item Types'][stringList['Items'][templateId]['type']][lang]}: {itemQuantity}x {itemName}")
+                                    try: message(f"{llamaLootCount}: {stringList['Item Rarities'][stringList['Items'][templateId]['rarity']][lang]} | {stringList['Item Types'][stringList['Items'][templateId]['type']][lang]}: {itemQuantity}x {itemName}")
+                                    except: message(f"{llamaLootCount}: {itemRarity} | {itemType}: {itemQuantity}x {itemName}")
                     if int(alreadyOpenedFreeLlamas) == freeLlamasCount:
-                        message(f"\nFree Llamas that are currently available in the shop have been already opened on this account. Remember that you can open a maximum of 2 free one hour rotation Llamas per one shop rotation.\n")
+                        message(f"\nFree Llamas that are currently available in the shop have been already opened on this account. Remember that you can open a maximum of 2 free one hour rotation Upgrade Llamas per shop rotation.\n")
                     else:
                         llamasWord = "Llamas"
                         if int(openedLlamas) == 1: llamasWord = "Llama"

@@ -22,11 +22,10 @@ This program allows you to claim Save the World Daily Reward, Research Points, o
 - 15 languages support for Fortnite item names.
 ---
 ### Changelog:
-What's new in the 1.9.2 update:
-- New feature: Tutorial mission skipping!
-  - The program is now able to skip the campaign tutorial mission for both those who own and don't own Save the World
-  - After the tutorial will be skipped the account will receive the Save the World music pack.
-- Fixed the program crashing when the account doesn't have access to the Research Lab.
+What's new in the 1.9.3 update:
+- The program will no longer crash when the stringlist file doesn't contain any information about an item from llama.
+  - This could occur e.g. when opening the free Birthday Llama from the X-Ray store.
+- The program will now display the unknown llama rarity as `Normal (1)`.
 - Tweaked the program's code a little bit.
 ---
 
