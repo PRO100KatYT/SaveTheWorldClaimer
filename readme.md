@@ -22,10 +22,10 @@ This program allows you to claim Save the World Daily Reward, Research Points, o
 - 15 languages support for Fortnite item names.
 ---
 ### Changelog:
-What's new in the 1.9.3 update:
-- The program will no longer crash when the stringlist file doesn't contain any information about an item from llama.
-  - This could occur e.g. when opening the free Birthday Llama from the X-Ray store.
-- The program will now display the unknown llama rarity as `Normal (1)`.
+What's new in the 1.9.4 update:
+- If enabled, the date and time in front of the messages now have a leading 0 next to a digit, making it look nicer.
+- Removed the `Skipping Research Points claiming because {displayName} doesn't have access to the Research Lab.` message.
+- Added Gia and Fennix heroes to the stringlist.
 - Tweaked the program's code a little bit.
 ---
 

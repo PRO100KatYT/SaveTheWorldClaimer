@@ -1,4 +1,4 @@
-version = "1.9.3"
+version = "1.9.4"
 configVersion = "1.8.0"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 try:
@@ -34,7 +34,7 @@ session = requests.Session()
 # Get the current date and time and neatly format it | by Salty-Coder :)
 def getDateTimeString():
     dateTimeObj = datetime.now()
-    return f"[{dateTimeObj.year}/{dateTimeObj.month}/{dateTimeObj.day} {dateTimeObj.hour}:{dateTimeObj.minute}:{dateTimeObj.second}]"
+    return f"[{dateTimeObj.year:02d}/{dateTimeObj.month:02d}/{dateTimeObj.day:02d} {dateTimeObj.hour:02d}:{dateTimeObj.minute:02d}:{dateTimeObj.second:02d}]"
 
 # Error with a custom message.
 def customError(text):
@@ -343,9 +343,8 @@ def main():
                                 totalItemGuid = reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['itemGuid']
                                 message(f"Claimed {reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity']} Research Points. Total Research Points: {reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity']}\n")
                             except: []
-        else: message(f"Skipping Research Points claiming because {displayName} doesn't have access to the Research Lab.\n")
 
-        # Search for a free Llama and open it if available.
+        # Search for free Llamas and open them if they're available.
         alreadyOpenedFreeLlamas, freeLlamasCount, cpspStorefront = [0, 0, []]
         if bOpenFreeLlamas == "true":
             reqGetStorefront = requestText(session.get(links.getStorefront, headers=headers, data={}), True)['storefronts']
@@ -378,7 +377,7 @@ def main():
                             for key in reqPopulateLlamas['profileChanges'][0]['profile']['items']:
                                 if (reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['templateId'].lower().startswith("prerolldata") and reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['offerId'] == llamaToClaimOfferId):
                                     try: llamaTier = reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['highest_rarity']
-                                    except: llamaTier = -1
+                                    except: llamaTier = 0
                                     llamaTier = stringList['Llama tiers'][f'{llamaTier}']
                             reqBuyFreeLlama = requestText(session.post(links.profileRequest.format(accountId, "PurchaseCatalogEntry", "common_core"), headers=headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "GameItem", "currencySubType": "AccountResource:currency_xrayllama", "expectedTotalPrice": 0, "gameContext": "Frontend.None"}), False)
                             if "errorMessage" in reqBuyFreeLlama:

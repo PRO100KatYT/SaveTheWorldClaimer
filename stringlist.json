@@ -1347,7 +1347,6 @@
     }
   },
   "Llama tiers": {
-    "-1": "Normal (1)",
     "0": "Normal (1)",
     "1": "Silver (2)",
     "2": "Gold (3)"
@@ -17283,6 +17282,48 @@
         "tr": "Simyacı Sarah",
         "zh-CN": "炼金术士莎拉",
         "zh-Hant": "煉金術士莎拉"
+      },
+      "rarity": "legendary",
+      "type": "hero"
+    },
+    "Hero:hid_outlander_041_dinocollector_sr_t01": {
+      "name": {
+        "ar": "جيا",
+        "de": "Gia",
+        "en": "Gia",
+        "es": "Gia",
+        "es-419": "Gia",
+        "fr": "Gia",
+        "it": "Gia",
+        "ja": "ジーア",
+        "ko": "지아",
+        "pl": "Gia",
+        "pt-BR": "Gia",
+        "ru": "Гиа",
+        "tr": "İlkel Savaşçı",
+        "zh-CN": "吉娅",
+        "zh-Hant": "吉婭"
+      },
+      "rarity": "legendary",
+      "type": "hero"
+    },
+    "Hero:hid_ninja_044_fennix_sr_t01": {
+      "name": {
+        "ar": "فينكس",
+        "de": "Fennix",
+        "en": "Fennix",
+        "es": "Fennix",
+        "es-419": "Fennix",
+        "fr": "Goupil",
+        "it": "Fennix",
+        "ja": "フェニックス",
+        "ko": "페닉스",
+        "pl": "Fennix",
+        "pt-BR": "Fênnix",
+        "ru": "Агент Фокс",
+        "tr": "Kurnaz Tilki",
+        "zh-CN": "菲尼克斯",
+        "zh-Hant": "費尼克斯"
       },
       "rarity": "legendary",
       "type": "hero"
