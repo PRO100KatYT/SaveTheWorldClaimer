@@ -20,6 +20,7 @@ This program allows you to claim Save the World Daily Reward, Research Points, o
   - You can set the time (in minutes) after the program will run again in the config file.
   - The looping is set to 0 (disabled) by default.
 - 15 languages support for Fortnite item names.
+- Discord Webhook notification on token expiration 
 ---
 ### Changelog:
 What's new in the 1.9.4 update:
@@ -30,6 +31,25 @@ What's new in the 1.9.4 update:
 ---
 
 ### How to use it?
+
+## [Docker](https://hub.docker.com/repository/docker/probablypablito/savetheworldclaimer)
+
+- Create a volume. `sudo docker volume create savetheworldclaimer`
+
+- Run the setup in the container. `sudo docker run -it -v savetheworldclaimer:/app/data --name=SaveTheWorldClaimer --restart="always" probablypablito/savetheworldclaimer`
+
+  - You may optionally add a Discord Webhook URL by adding `-e "discord_webhook_url=<url here>"` between `run` and `-it`. 
+  
+  - For help with setup, refer to the without Docker instructions.
+
+- Use CTRL+C to exit the container once setup is done.
+
+- Stop the container. `sudo docker stop SaveTheWorldClaimer`
+
+- Run the container. `sudo docker start SaveTheWorldClaimer`
+
+## Without Docker
+
 - Install `Python 3.9.5` or newer.
 
 - If you didn't do it yet, install the `requests` module. You can do it using the `pip install requests` console command.

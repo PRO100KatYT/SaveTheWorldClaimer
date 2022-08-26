@@ -9,6 +9,7 @@ try:
     from datetime import datetime
     import webbrowser
     import time
+    import sys
 except Exception as emsg:
     input(f"ERROR: {emsg}. To run this program, please install it.\n\nPress ENTER to close the program.")
     exit()
@@ -85,7 +86,7 @@ def message(string):
     else: print(string)
 
 # Create and/or read the config.ini file.
-config, configPath = [ConfigParser(), os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.ini")]
+config, configPath = [ConfigParser(), os.path.join(os.path.split(os.path.abspath(__file__))[0], "data/config.ini")]
 langValues, boolValues = [["ar", "de", "en", "es", "es-419", "fr", "it", "ja", "ko", "pl", "pt-BR", "ru", "tr", "zh-CN", "zh-Hant"], ["true", "false"]]
 if not os.path.exists(configPath):
     print("Starting to generate the config.ini file.\n") # Don't want to initiate message() before bShowDateTime exists... - Salty-Coder
@@ -127,7 +128,7 @@ try:
 except: configError("Loop_Minutes", loopMinutes, "a number (1, 15, 60, etc.)")
 
 # Load the stringlist.json file and create and load the auth.json file.
-stringListPath, authPath = [os.path.join(os.path.split(os.path.abspath(__file__))[0], "stringlist.json"), os.path.join(os.path.split(os.path.abspath(__file__))[0], "auth.json")]
+stringListPath, authPath = [os.path.join(os.path.split(os.path.abspath(__file__))[0], "stringlist.json"), os.path.join(os.path.split(os.path.abspath(__file__))[0], "data/auth.json")]
 if not os.path.exists(stringListPath): customError("The stringlist.json file doesn't exist. Get it from this program's repository on Github (https://github.com/PRO100KatYT/SaveTheWorldClaimer), add it back and run this program again.")
 try: stringList = json.loads(open(stringListPath, "r", encoding = "utf-8").read())
 except: customError("The program is unable to read the stringlist.json file. Delete the stringlist.json file, download it from this program's repository on Github (https://github.com/PRO100KatYT/SaveTheWorldClaimer), add it back here and run this program again.")
@@ -188,8 +189,11 @@ def startup():
 
     while True:
         if not authJson: addAccount(False)
-        bStartClaimer = validInput("Main menu:\nType 1 if you want to start this program and press ENTER.\nType 2 if you want to go the Account Manager and press ENTER.", ["1", "2"])
-        if bStartClaimer == "1": break
+        try:
+             bStartClaimer = False if sys.argv[1]=='--account' else True
+        except IndexError:
+            bStartClaimer = True
+        if bStartClaimer: break
         else:
             while True:
                 whatToDo = validInput("Account Manager:\nType 1 if you want to add an account to this program and press ENTER.\nType 2 if you want to remove an account from this program and press ENTER.\nType 3 if you want to see the list of accounts added to this program and press ENTER.\nType 4 to go back and press ENTER.", ["1", "2", "3", "4"])
@@ -210,7 +214,15 @@ def main():
             except: displayName = "(unknown display name)"
             if authType == "token":
                 expirationDate, refreshToken = [account["refresh_expires_at"], account["refreshToken"]]
-                if expirationDate < datetime.now().isoformat(): customError(f"The refresh token has expired. To fix this issue, remove {displayName} from the account list and add this account back. If this problem persists try to log in using the device auth type.")
+                if expirationDate < datetime.now().isoformat():
+                    if "discord_webhook_url" in os.environ:
+                        try:
+                            url = os.getenv("discord_webhook_url")
+                            data = {'content': f"The refresh token has expired. To fix this issue, remove {displayName} from the account list and add this account back. If this problem persists try to log in using the device auth type." }
+                            requests.post(url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
+                        except:
+                            print("Error sending Discord Webhook! Maybe invalid URL?")
+                    customError(f"The refresh token has expired. To fix this issue, remove {displayName} from the account list and add this account back. If this problem persists try to log in using the device auth type.")
             if authType == "device":
                 deviceId, secret = [account["deviceId"], account["secret"]]
         except:
