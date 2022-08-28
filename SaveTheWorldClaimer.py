@@ -1,18 +1,20 @@
 version = "1.9.4"
 configVersion = "1.8.0"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
+import sys
+import subprocess
+import os
 try:
     import json
     import requests
-    import os
     from configparser import ConfigParser
     from datetime import datetime
     import webbrowser
     import time
 except Exception as emsg:
-    input(f"ERROR: {emsg}. To run this program, please install it.\n\nPress ENTER to close the program.")
-    exit()
-
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'requests'])
+    subprocess.call([sys.executable, os.path.realpath(__file__)] + sys.argv[1:])
+    
 # Links that will be used in the later part of code.
 class links:
     loginLink1 = "https://www.epicgames.com/id/api/redirect?clientId={0}&responseType=code"
