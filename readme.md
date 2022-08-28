@@ -19,22 +19,29 @@ This program allows you to claim Save the World Daily Reward, Research Points, o
 - Program Looping.
   - You can set the time (in minutes) after the program will run again in the config file.
   - The looping is set to 0 (disabled) by default.
+- Multi-language support.
+  - Currently supported languages the program can be displayed in are: English and Polish.
 - 15 languages support for Fortnite item names.
 ---
 ### Changelog:
-What's new in the 1.9.4 update:
-- If enabled, the date and time in front of the messages now have a leading 0 next to a digit, making it look nicer.
-- Removed the `Skipping Research Points claiming because {displayName} doesn't have access to the Research Lab.` message.
-- Added Gia and Fennix heroes to the stringlist.
+What's new in the 1.10.0 update:
+- Multi-language support!
+  - You can now select Polish as language the program be displayed in.
+  - Note: this is a seperate config option from the Fortnite item names one.
+- Auto installing the `requests` module added by [Playeereq](https://github.com/Playeereq).
+- Showing next loop run time added by [Salty-Coder](https://github.com/Salty-Coder).
+- Added an option to skip the Main Menu to the reward claiming stage. Suggested by [probablypablito](https://github.com/probablypablito)
+  - You can toggle this via the config.ini file only. Set to false by default.
+- Fixed being unable to input a float when setting the Loop_Minutes value via the config setup.
 - Tweaked the program's code a little bit.
 ---
 
 ### How to use it?
 - Install `Python 3.9.5` or newer.
 
-- If you didn't do it yet, install the `requests` module. You can do it using the `pip install requests` console command.
+- If you didn't do it yet, the program will try to automatically install the `requests` module. If the program fails to do it, install it using the `pip install requests` console command.
 
-- After starting the SaveTheWorldClaimer.py for the first time (or after deleting the config.ini file) you will be asked if you want to start the config setup process or use the default config values. If you want to start the setup, type 1, if no, type 2.
+- After starting the SaveTheWorldClaimer.py for the first time (or after deleting the config.ini file) you will be asked if you want to start the config setup process (recommended) or use the default config values. If you want to start the setup, type 1, if no, type 2.
 
 - Next, you will be asked if you are logged into your Epic account in your browser. If yes, type 1, if no, type 2.
 
