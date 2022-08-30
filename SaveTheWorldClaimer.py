@@ -1,7 +1,8 @@
 version = "1.10.0"
 configVersion = "1.10.0"
-print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
+# print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n") #! This is now in the clearShell decorator
 
+from ast import arg
 import os
 try:
     import sys
@@ -12,6 +13,8 @@ try:
     from datetime import datetime, timedelta
     import webbrowser
     import time
+    import locale
+    import ctypes
 except Exception:
     print(f"The program will now try to install the requests module.\n")
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'requests'])
@@ -19,8 +22,48 @@ except Exception:
     else: os.system('cls')
     subprocess.call([sys.executable, os.path.realpath(__file__)] + sys.argv[1:])
 
-# Default program language value.
-language = "en"
+# Getting the language of the os system
+def getSystemLocale():
+    """
+    If the operating system is POSIX, return the first two characters of the default locale. If the
+    operating system is Windows, return the first two characters of the default UI language. If the
+    operating system is neither POSIX nor Windows, return 'en'
+    :return: The locale of the system.
+    """
+
+    if os.name == 'posix':
+        return locale.getdefaultlocale()[0][:2]
+    elif os.name == 'nt':
+        return locale.windows_locale[ctypes.windll.kernel32.GetUserDefaultUILanguage()].split('_')[0]
+    else: return 'en'
+
+
+def clearShell(func):
+    """
+    It clears the shell before running the function
+    
+    :param func: The function that will be decorated
+    :return: The wrapper function.
+    """
+    ignoreStrings = ['main.dailyreward.message1', 'main.dailyreward.message2', 'main.research.max.off', 'main.freellamas.nollamas', 'loop.message']
+    def wrapper(*args, **kwargs):
+        if args[0] not in ignoreStrings:
+            if os.name == 'posix': os.system('clear')
+            else: os.system('cls')
+            if os.name == 'posix': os.system('clear')
+            print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
+        return func(*args, **kwargs)
+    return wrapper
+
+
+
+# loads the json file and gets the available languages
+with open("stringlist.json", encoding="utf-8") as f:
+    languages = list(json.load(f)['Strings'].keys())
+
+systemLang = getSystemLocale()
+language = systemLang if systemLang in languages else 'en'
+
 
 # Links that will be used in the later part of code.
 class links:
@@ -65,6 +108,7 @@ except:
     exit()
 
 # Get a string in currently selected language.
+@clearShell
 def getString(string):
     try: return stringList['Strings'][language][f'{string}']
     except: return stringList['Strings']['en'][f'{string}']
@@ -133,7 +177,7 @@ def message(string):
 
 # Create and/or read the config.ini file.
 config, configPath = [ConfigParser(), os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.ini")]
-itemLangValues, langValues, boolValues = [["ar", "de", "en", "es", "es-419", "fr", "it", "ja", "ko", "pl", "pt-BR", "ru", "tr", "zh-CN", "zh-Hant"], ["en", "pl"], ["true", "false"]]
+itemLangValues, langValues, boolValues = [["ar", "de", "en", "es", "es-419", "fr", "it", "ja", "ko", "pl", "pt-BR", "ru", "tr", "zh-CN", "zh-Hant"], languages, ["true", "false"]]
 if not os.path.exists(configPath):
     message(getString("config.startgenerating"))
     bStartSetup = validInput(getString("config.bstartsetup"), ["1", "2"])
