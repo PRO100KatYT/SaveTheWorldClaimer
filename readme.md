@@ -24,15 +24,12 @@ This program allows you to claim Save the World Daily Reward, Research Points, o
 - 15 languages support for Fortnite item names.
 ---
 ### Changelog:
-What's new in the 1.10.0 update:
-- Multi-language support!
-  - You can now select Polish as language the program be displayed in.
-  - Note: this is a seperate config option from the Fortnite item names one.
-- Auto installing the `requests` module added by [Playeereq](https://github.com/Playeereq).
-- Showing next loop run time added by [Salty-Coder](https://github.com/Salty-Coder).
-- Added an option to skip the Main Menu to the reward claiming stage. Suggested by [probablypablito](https://github.com/probablypablito)
-  - You can toggle this via the config.ini file only. Set to false by default.
-- Fixed being unable to input a float when setting the Loop_Minutes value via the config setup.
+What's new in the 1.10.1 update:
+- Added a `Fortnite Save the World Claimer` title to the program's window if the program is running on Windows.
+- Made the StW tutorial skip feature toggleable via the config file.
+  - Default value: false.
+- Fixed the [Issue #20](https://github.com/PRO100KatYT/SaveTheWorldClaimer/issues/20).
+- Made user input not case-sensitive.
 - Tweaked the program's code a little bit.
 ---
 
