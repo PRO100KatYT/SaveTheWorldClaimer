@@ -15,7 +15,9 @@ When your auth token expires, it will send you a message on Discord via a webhoo
 
 - Set up the config how you want it to be by inputting the values. There are 1440 minutes in a day.
 
-- Once done, press CTRL+C to exit out of the interactive session. The container will keep running (which is good).
+- Once done, press CTRL+C to exit out of the interactive session.
+
+- Restart the container. `sudo docker restart SaveTheWorldClaimer`
 
 - This will map your hosts port 8080 to the website. If you want to listen on a different port, change the (first) port.
 
