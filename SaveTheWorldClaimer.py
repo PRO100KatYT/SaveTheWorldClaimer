@@ -51,7 +51,6 @@ def configError(key, value, validValues): customError(f"You set the wrong {key} 
 # Send Discord webhook
 def discordWebhook(text):
     if "discord_webhook_url" in os.environ:
-            print("discord worked")
             try:
                 url = os.getenv("discord_webhook_url")
                 data = {'content': text }
