@@ -7,12 +7,14 @@ try:
     import os
     from configparser import ConfigParser
     from datetime import datetime
-    import webbrowser
     import time
     import sys
 except Exception as emsg:
-    input(f"ERROR: {emsg}. To run this program, please install it.\n\nPress ENTER to close the program.")
+    print(f"ERROR: {emsg}. To run this program, please install it.\n")
     exit()
+
+# Set website
+website = os.getenv("website") if "website" in os.environ else ""
 
 # Links that will be used in the later part of code.
 class links:
@@ -39,12 +41,23 @@ def getDateTimeString():
 
 # Error with a custom message.
 def customError(text):
-    if bShowDateTime == "true": input(f"{getDateTimeString()} ERROR: {text}\n\nPress ENTER to close the program.\n")
-    else: input(f"ERROR: {text}\n\nPress ENTER to close the program.\n")
+    if bShowDateTime == "true": print(f"{getDateTimeString()} ERROR: {text}\n")
     exit()
 
 # Error for invalid config values.
 def configError(key, value, validValues): customError(f"You set the wrong {key} value in config.ini ({value}). Valid values: {validValues}. Please change it and run this program again.")
+
+
+# Send Discord webhook
+def discordWebhook(text):
+    if "discord_webhook_url" in os.environ:
+            print("discord worked")
+            try:
+                url = os.getenv("discord_webhook_url")
+                data = {'content': text }
+                requests.post(url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
+            except:
+                print("Error sending Discord Webhook! Maybe invalid URL or no website?")
 
 # Input loop until it's one of the correct values.
 def validInput(text, values):
@@ -66,16 +79,21 @@ def requestText(request, bCheckForErrors):
     return requestText
 
 # Send token request.
-def reqTokenText(loginLink, altLoginLink, authHeader):
-    count = 0
+def reqTokenText(authHeader):
     while True:
-        count += 1
-        if count > 1: loginLink = altLoginLink
-        webbrowser.open_new_tab(loginLink)
-        print(f"If the program didn't open it, copy this link to your browser: {(loginLink)}\n")
-        reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {authHeader}"}, data={"grant_type": "authorization_code", "code": input("Insert the auth code:\n")}), False)
-        if not "errorMessage" in reqToken: break
-        else: input(f"\n{reqToken['errorMessage']}.\nPress ENTER to open the website again and get the code.\n")
+        message("Submit an auth token!")
+        while not os.path.exists("webserver/token.txt"): time.sleep(1)
+        # Get token from file
+        f = open("webserver/token.txt", "r")
+        epicToken = f.readline().strip()
+        f.close()
+        reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {authHeader}"}, data={"grant_type": "authorization_code", "code": epicToken}), False)
+        os.remove("webserver/token.txt")
+        print(f"reqtoken {reqToken}")
+        if not "errorMessage" in reqToken: break 
+
+        message("Failed logging in. Submit another auth token.")
+        discordWebhook("Failed logging in. Submit another auth token.")
     return reqToken
 
 # Print a message with or without the date and time.
@@ -141,19 +159,19 @@ if not isinstance(authJson, list): customError("Your auth.json file is in the pr
 # Startup (Account Manager)
 def startup():
     def addAccount(bGoBack = True):
-        if bGoBack: isLoggedIn = validInput("Are you logged into your Epic account that you would like the program to use in your browser?\nType 1 if yes and press ENTER.\nType 2 if no and press ENTER.\nType 3 to go back and press ENTER.\n", ["1", "2", "3"])
-        else: isLoggedIn = validInput("Are you logged into your Epic account that you would like the program to use in your browser?\nType 1 if yes and press ENTER.\nType 2 if no and press ENTER.\n", ["1", "2"])
+        if bGoBack: isLoggedIn = 2 # validInput("Are you logged into your Epic account that you would like the program to use in your browser?\nType 1 if yes and press ENTER.\nType 2 if no and press ENTER.\nType 3 to go back and press ENTER.\n", ["1", "2", "3"])
+        else: isLoggedIn = 2 # validInput("Are you logged into your Epic account that you would like the program to use in your browser?\nType 1 if yes and press ENTER.\nType 2 if no and press ENTER.\n", ["1", "2"])
         if isLoggedIn != "3":
-            authType = validInput("Which authentication method do you want the program to use?\nToken auth method generates a refresh token to log in. The limit per IP is 1. It's recommended if you plan to use only one account.\nDevice auth method generates authorization credentials that don't have an expiration date and limit per IP, but can after some time cause epic to ask you to change your password. It's recommended if you plan to use multiple accounts.\nValid values: token, device.", ["token", "device"])
-            input("The program is going to open an Epic Games webpage.\nTo continue, press ENTER.\n")
+            authType = "token" #validInput("Which authentication method do you want the program to use?\nToken auth method generates a refresh token to log in. The limit per IP is 1. It's recommended if you plan to use only one account.\nDevice auth method generates authorization credentials that don't have an expiration date and limit per IP, but can after some time cause epic to ask you to change your password. It's recommended if you plan to use multiple accounts.\nValid values: token, device.", ["token", "device"])
+            #input("The program is going to open an Epic Games webpage.\nTo continue, press ENTER.\n")
             if isLoggedIn == "1": loginLink = links.loginLink1
             elif isLoggedIn == "2": loginLink = links.loginLink2
             if authType == "token":
-                reqToken = reqTokenText(loginLink.format("34a02cf8f4414e29b15921876da36f9a"), links.loginLink1.format("34a02cf8f4414e29b15921876da36f9a"), "MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
+                reqToken = reqTokenText("MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
                 refreshToken, accountId, displayName, expirationDate = [reqToken["refresh_token"], reqToken["account_id"], reqToken["displayName"], reqToken["refresh_expires_at"]]
                 jsonToAppend = {"WARNING": "Don't show anyone the contents of this file, because it contains information with which the program logs into the account.", "authType": "token", "refreshToken": refreshToken, "accountId": accountId, "displayName": displayName, "refresh_expires_at": expirationDate}
             else:
-                reqToken = reqTokenText(loginLink.format("3446cd72694c4a4485d81b77adbb2141"), links.loginLink1.format("3446cd72694c4a4485d81b77adbb2141"), "MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE=")
+                reqToken = reqTokenText("MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE=")
                 accessToken, accountId, displayName = [reqToken["access_token"], reqToken["account_id"], reqToken["displayName"]]
                 reqDeviceAuth = requestText(session.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={}), True)
                 deviceId, secret = [reqDeviceAuth["deviceId"], reqDeviceAuth["secret"]]
@@ -201,7 +219,6 @@ def startup():
                 elif whatToDo == "2": removeAccount()
                 elif whatToDo == "3":
                     listAccounts()
-                    input("Press ENTER to continue.\n")
                 else: break
 
 # The main part of the program that can be looped.
@@ -215,14 +232,17 @@ def main():
             if authType == "token":
                 expirationDate, refreshToken = [account["refresh_expires_at"], account["refreshToken"]]
                 if expirationDate < datetime.now().isoformat():
-                    if "discord_webhook_url" in os.environ:
-                        try:
-                            url = os.getenv("discord_webhook_url")
-                            data = {'content': f"The refresh token has expired. To fix this issue, remove {displayName} from the account list and add this account back. If this problem persists try to log in using the device auth type." }
-                            requests.post(url, data=json.dumps(data), headers={'Content-Type': 'application/json'})
-                        except:
-                            print("Error sending Discord Webhook! Maybe invalid URL?")
-                    customError(f"The refresh token has expired. To fix this issue, remove {displayName} from the account list and add this account back. If this problem persists try to log in using the device auth type.")
+                    # Send Discord webhook
+                    text = f"The refresh token has expired, please update it.\n {website}"
+                    discordWebhook(text)
+                    # Request new token
+                    reqToken = reqTokenText("MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
+                    refreshToken, accountId, displayName, expirationDate = [reqToken["refresh_token"], reqToken["account_id"], reqToken["displayName"], reqToken["refresh_expires_at"]]
+                    jsonToAppend = {"WARNING": "Don't show anyone the contents of this file, because it contains information with which the program logs into the account.", "authType": "token", "refreshToken": refreshToken, "accountId": accountId, "displayName": displayName, "refresh_expires_at": expirationDate}
+                    authJson.append(jsonToAppend)
+                    with open(authPath, "w", encoding = "utf-8") as authFile: json.dump(authJson, authFile, indent = 2, ensure_ascii = False)
+                    message(f"\nYour account's token has been successfully renewed.\n")
+                    #customError(f"The refresh token has expired. To fix this issue, remove {displayName} from the account list and add this account back. If this problem persists try to log in using the device auth type.")
             if authType == "device":
                 deviceId, secret = [account["deviceId"], account["secret"]]
         except:
@@ -294,6 +314,8 @@ def main():
                     dailyMessage += f". Total amount: {totalAmount}\n"
                 else: dailyMessage += "\n"
             message(f"{dailyMessage}")
+            discordWebhook(f"{dailyMessage}")
+
         else: message(f"Skipping Daily Reward claiming because {displayName} doesn't have access to Save the World.\n")
 
         # Claim and automatically spend the Research Points.
@@ -461,5 +483,4 @@ if loopMinutes > 0:
         time.sleep(loopMinutes * 60)
 else: main()
 
-input("Press ENTER to close the program.\n")
 exit()

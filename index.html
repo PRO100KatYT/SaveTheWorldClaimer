@@ -1,0 +1,26 @@
+<form id="form" onsubmit="return false;">
+    <input type="text" id="userInput" />
+    <input type="submit" onclick="processinput();" />
+</form>
+
+    
+
+<script type ="text/javascript">
+    function WriteToFile(passForm) {
+   
+       let fso = CreateObject("Scripting.FileSystemObject");  
+       let s = fso.CreateTextFile("F:/Documents/GitHub/SaveTheWorldClaimer/SaveTheWorldClaimer", True);
+       s.writeline(document.passForm.input1.value);
+       s.Close();
+    }
+    
+    function processinput() {
+    
+    var data = document.getElementById("userInput").value;
+    alert(data);
+    
+    WriteToFile(data);
+
+    }
+
+</script>
