@@ -296,9 +296,6 @@ def main():
                     if campaignProfile['items'][item]['attributes']['quest_state'].lower() != "claimed":
                         message(getString("main.skiptutorial.start").format(displayName))
                         session.post(links.profileRequest.format(accountId, "SkipTutorial", "campaign"), headers=headers, data="{}") # Completes the hbonboarding_completezone objective
-                        reqUpdateObjectives = requestText(session.post(links.profileRequest.format(accountId, "UpdateQuestClientObjectives", "campaign"), headers=headers, json={"advance": [{"statName": "hbonboarding_watchsatellitecine", "count": 1, "timestampOffset": 0}, {"statName": "hbonboarding_namehomebase", "count": 1, "timestampOffset": 0}]}), True) # Completes the rest of the quest objectives
-                        if reqUpdateObjectives['profileChanges'][0]['profile']['items'][item]['attributes']['quest_state'].lower() == "claimed": message(getString("main.skiptutorial.success").format(displayName))
-                        else: message(getString("main.skiptutorial.error").format(displayName))
                     break
 
         # Claim the Daily Reward.
