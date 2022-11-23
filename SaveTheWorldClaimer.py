@@ -231,8 +231,8 @@ def main():
             if authType == "token":
                 expirationDate, refreshToken = [account["refresh_expires_at"], account["refreshToken"]]
                 if expirationDate < datetime.now().isoformat():
-                    # Send Discord webhook
                     text = f"The refresh token has expired, please update it.\n {website}"
+                    if os.path.exists("webserver/token.txt"): os.remove("webserver/token.txt")
                     discordWebhook(text)
                     # Request new token
                     reqToken = reqTokenText("MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
