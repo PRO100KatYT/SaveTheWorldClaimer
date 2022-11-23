@@ -232,7 +232,6 @@ def main():
                 expirationDate, refreshToken = [account["refresh_expires_at"], account["refreshToken"]]
                 if expirationDate < datetime.now().isoformat():
                     text = f"The refresh token has expired, please update it.\n {website}"
-                    if os.path.exists("webserver/token.txt"): os.remove("webserver/token.txt")
                     discordWebhook(text)
                     # Request new token
                     reqToken = reqTokenText("MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
@@ -251,7 +250,9 @@ def main():
         message(f"Logging in as {displayName}...")
         if authType == "token": # Shoutout to BayGamerYT for telling me about this login method.
             reqRefreshToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "refresh_token", "refresh_token": refreshToken}), False)
-            if "errorMessage" in reqRefreshToken: customError(f"{reqRefreshToken['errorMessage']}. To fix this issue, remove {displayName} from the account list and add this account back. If this problem persists try to log in using the device auth type.")
+            if "errorMessage" in reqRefreshToken:
+                if os.path.exists("data/auth.json"): os.remove("auth.json")
+                customError(f"{reqRefreshToken['errorMessage']}. To fix this issue, remove {displayName} from the account list and add this account back. If this problem persists try to log in using the device auth type.")
             account['refreshToken'], account['refresh_expires_at'] = [reqRefreshToken["refresh_token"], reqRefreshToken["refresh_expires_at"]]
             with open(authPath, "w", encoding = "utf-8") as saveAuthFile: json.dump(authJson, saveAuthFile, indent = 2, ensure_ascii = False)
             reqExchange = requestText(session.get(links.getOAuth.format("exchange"), headers={"Authorization": f"bearer {reqRefreshToken['access_token']}"}, data={"grant_type": "authorization_code"}), True)
