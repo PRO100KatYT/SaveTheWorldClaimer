@@ -251,7 +251,7 @@ def main():
         if authType == "token": # Shoutout to BayGamerYT for telling me about this login method.
             reqRefreshToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "refresh_token", "refresh_token": refreshToken}), False)
             if "errorMessage" in reqRefreshToken:
-                if os.path.exists("data/auth.json"): os.remove("auth.json")
+                if os.path.exists("data/auth.json"): os.remove("data/auth.json")
                 customError(f"{reqRefreshToken['errorMessage']}. To fix this issue, remove {displayName} from the account list and add this account back. If this problem persists try to log in using the device auth type.")
             account['refreshToken'], account['refresh_expires_at'] = [reqRefreshToken["refresh_token"], reqRefreshToken["refresh_expires_at"]]
             with open(authPath, "w", encoding = "utf-8") as saveAuthFile: json.dump(authJson, saveAuthFile, indent = 2, ensure_ascii = False)
