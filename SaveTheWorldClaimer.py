@@ -1,4 +1,4 @@
-version = "1.11.0"
+version = "1.11.1"
 configVersion = "1.10.1"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 
@@ -185,7 +185,7 @@ def startup():
         authType = validInput(getString("startup.addaccount.authtype"), ["token", "device"])
         input(getString("startup.addaccount.openwebsiteinfo"))
         loginLink = links.loginLink1 if isLoggedIn == "1" else links.loginLink2
-        if authType == "token":
+        if authType == "token": # Shoutout to BayGamerYT for telling me about this login method.
             reqToken = reqTokenText(loginLink.format("34a02cf8f4414e29b15921876da36f9a"), links.loginLink1.format("34a02cf8f4414e29b15921876da36f9a"), "MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
             refreshToken, accountId, displayName, expirationDate = [reqToken["refresh_token"], reqToken["account_id"], reqToken["displayName"], reqToken["refresh_expires_at"]]
             jsonToAppend = {getString("authjson.warning.header"): getString("authjson.warning.text"), "authType": "token", "refreshToken": refreshToken, "accountId": accountId, "displayName": displayName, "refresh_expires_at": expirationDate}
@@ -247,7 +247,6 @@ def main():
             elif authType == "device": deviceId, secret = account["deviceId"], account["secret"]
         except: customError(getString("main.auth.readerror").format(displayName))
 
-
         # Log in.
         message(getString("main.login.start").format(displayName))
         if authType == "token":
@@ -261,16 +260,19 @@ def main():
         accessToken, displayName = reqToken['access_token'], reqToken['displayName']
         message(getString("main.login.success"))
 
-
         # Headers for MCP requests.
         headers = {"User-Agent": "Fortnite/++Fortnite+Release-19.40-CL-19215531 Windows/10.0.19043.1.768.64bit", "Authorization": f"bearer {accessToken}", "Content-Type": "application/json"}
 
-        # Receive a new daily quest.
-        reqClientQuestLogin = requestText(session.post(links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), True)
+        # Check whether the account has the campaign access token and is able to receive V-Bucks.
+        # The receivemtxcurrency token is not required, but if it's not in the profile, the account will receive X-Ray Tickets instead of V-Bucks.
+        reqQueryProfiles = [json.dumps(requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(session.post(links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False))]
+        campaignProfile = json.loads(reqQueryProfiles[1])['profileChanges'][0]['profile']
+        bCampaignAccess = bReceiveMtx = False
+        if "Token:campaignaccess" in reqQueryProfiles[0]: bCampaignAccess = True
+        if "Token:receivemtxcurrency" in reqQueryProfiles[1]: bReceiveMtx = True
 
         # Skip the StW tutorial if it hasn't been completed yet. Works for accounts that don't own StW too. It will get the account the StW music pack.
         if bSkipTutorial == "true":
-            campaignProfile = reqClientQuestLogin['profileChanges'][0]['profile']
             for item in campaignProfile['items']:
                 if campaignProfile['items'][item]['templateId'].lower() != "quest:homebaseonboarding": continue
                 if campaignProfile['items'][item]['attributes']['quest_state'].lower() == "claimed": break
@@ -281,6 +283,36 @@ def main():
                 else: message(getString("main.skiptutorial.error").format(displayName))
                 break
 
+        # Display current daily challenges, their rewards and progress if there is any.
+        message(getString("main.dailies.searching"))
+        found = False
+        questNumber = 1
+        for item in campaignProfile['items']:
+            itemData = campaignProfile['items'][item]
+            if itemData['templateId'].lower().startswith("quest:daily_") and itemData['attributes']['quest_state'].lower() == "active":
+                found = True
+                templateId = itemData['templateId']
+                questName = stringList['Items'][templateId]['name'][itemsLang]
+                objectives = stringList['Items'][templateId]['objectives']
+                progressMess = ""
+                for objective in objectives:
+                    objData = objectives[objective]
+                    objName, objCount = objData['name'][itemsLang], objData['count']
+                    completionCount = itemData['attributes'].get(f'completion_{objective}', 0)
+                    progressMess += f" {completionCount}/{objCount} {objName},"
+                progressMess = progressMess[:-1]
+                rewards = stringList['Items'][templateId]['rewards']
+                rewardsMess = ""
+                for reward in rewards:
+                    rewardQuantity, rewardName = [rewards[reward], stringList['Items'][reward]['name'][itemsLang]]
+                    if reward.startswith("ConditionalResource:"):
+                        if bReceiveMtx == True: rewardsMess += f" {rewardQuantity}x {rewardName['PassedConditionItem']},"
+                        rewardName = rewardName['FailedConditionItem']
+                    rewardsMess += f" {rewardQuantity}x {rewardName},"
+                rewardsMess = rewardsMess[:-1]
+                message(getString("main.dailies.info").format(questNumber, questName, progressMess, rewardsMess))
+                questNumber += 1
+        if not found: message(getString("main.dailies.notfound"))
 
         # Claim and automatically spend the Research Points.
         reqCampaignProfileCheck = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)

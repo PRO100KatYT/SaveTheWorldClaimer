@@ -41563,6 +41563,1792 @@
       },
       "rarity": "epic",
       "type": "cardpack"
+    },
+    "Quest:daily_destroyarcademachines": {
+      "name": {
+        "ar": "تدمير يومي (آلة آركيد)",
+        "de": "Tägliche Zerstörung (Spielautomaten)",
+        "en": "Daily Destroy (Arcade Machines)",
+        "es": "Destrucción diaria (máquinas recreativas)",
+        "es-419": "Destrucción diaria (máquinas de videojuegos)",
+        "fr": "Destruction quotidienne (bornes d'arcade)",
+        "it": "Distruzione quotidiana (postazioni arcade)",
+        "ja": "デイリー破壊任務(アーケードマシン)",
+        "ko": "일일 파괴 (오락기)",
+        "pl": "Demolka dnia (automaty do gier)",
+        "pt-BR": "Destruição Diária (Máquinas de Fliperama)",
+        "ru": "Ежедневный погром (игровые автоматы)",
+        "tr": "Günlük Yok Etme (Oyun Makineleri)",
+        "zh-CN": "每日摧毁(街机)",
+        "zh-Hant": "每日摧毀(街機)"
+      },
+      "objectives": {
+        "quest_reactive_destroyarcade_v4": {
+          "name": {
+            "ar": "تم تدمير آلات آركيد",
+            "de": "Spielautomaten zerstört",
+            "en": "Arcade Machines destroyed",
+            "es": "Máquinas recreativas destruidas",
+            "es-419": "Máquinas de videojuegos destruidas",
+            "fr": "Bornes d'arcade détruites",
+            "it": "Postazioni arcade distrutte",
+            "ja": "アーケードマシンを破壊する",
+            "ko": "오락기 파괴",
+            "pl": "Automaty do gier zniszczone",
+            "pt-BR": "Máquinas de Fliperama destruídas",
+            "ru": "Уничтожьте игровые автоматы",
+            "tr": "Yok edilen Oyun Makineleri",
+            "zh-CN": "街机已摧毁",
+            "zh-Hant": "毀掉遊戲機器"
+          },
+          "count": 3
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_destroybears": {
+      "name": {
+        "ar": "تدمير يومي (الدب تيدي)",
+        "de": "Tägliche Zerstörung (Teddybären)",
+        "en": "Daily Destroy (Teddy Bears)",
+        "es": "Destrucción diaria (ositos de peluche)",
+        "es-419": "Destrucción diaria (ositos de peluche)",
+        "fr": "Destruction quotidienne (nounours)",
+        "it": "Distruzione quotidiana (orsacchiotti)",
+        "ja": "デイリー破壊任務(テディベア)",
+        "ko": "일일 파괴 (테디 베어)",
+        "pl": "Demolka dnia (pluszowe misie)",
+        "pt-BR": "Destruição Diária (Ursos de Pelúcia)",
+        "ru": "Ежедневный погром (плюшевые медведи)",
+        "tr": "Günlük Yok Etme (Oyuncak Ayı)",
+        "zh-CN": "每日摧毁(泰迪熊)",
+        "zh-Hant": "每日摧毀(泰迪熊)"
+      },
+      "objectives": {
+        "quest_reactive_destroybear_v3": {
+          "name": {
+            "ar": "تم تدمير الدب تيدي",
+            "de": "Teddybären zerstört",
+            "en": "Teddy Bears destroyed",
+            "es": "Ositos de peluche destruidos",
+            "es-419": "Ositos de peluche destruidos",
+            "fr": "Nounours détruits",
+            "it": "Orsacchiotti distrutti",
+            "ja": "テディベアを破壊する",
+            "ko": "테디 베어 파괴",
+            "pl": "Pluszowe misie zlikwidowane",
+            "pt-BR": "Ursos de Pelúcia destruídos",
+            "ru": "Уничтожьте плюшевых медведей",
+            "tr": "Yok edilen Oyuncak Ayılar",
+            "zh-CN": "泰迪熊已摧毁",
+            "zh-Hant": "泰迪熊已摧毀"
+          },
+          "count": 8
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_destroyfiretrucks": {
+      "name": {
+        "ar": "تدمير يومي (شاحنات النار)",
+        "de": "Tägliche Zerstörung (Feuerwehrautos)",
+        "en": "Daily Destroy (Fire Trucks)",
+        "es": "Destrucción diaria (camiones de bomberos)",
+        "es-419": "Destrucción diaria (camiones de bomberos)",
+        "fr": "Destruction quotidienne (camions de pompier)",
+        "it": "Distruzione quotidiana (camion dei pompieri)",
+        "ja": "デイリー破壊任務(消防車)",
+        "ko": "일일 파괴 (소방차)",
+        "pl": "Dzienne przedmioty do zniszczenia (wozy strażackie)",
+        "pt-BR": "Destruição Diária (Carros de Bombeiro)",
+        "ru": "Ежедневный погром (пожарные машины)",
+        "tr": "Günlük Yok Etme (İtfaiye Kamyonu)",
+        "zh-CN": "每日摧毁(消防车)",
+        "zh-Hant": "每日摧毀(消防車)"
+      },
+      "objectives": {
+        "quest_reactive_destroyfiretruck_v2": {
+          "name": {
+            "ar": "تم تدمير شاحنات النار",
+            "de": "Feuerwehrauto zerstört",
+            "en": "Fire Truck destroyed",
+            "es": "Camión de bomberos destruido",
+            "es-419": "Camión de bomberos destruido",
+            "fr": "Camion de pompier détruit",
+            "it": "Camion dei pompieri distrutto",
+            "ja": "消防車を破壊する",
+            "ko": "소방차 파괴",
+            "pl": "Wóz strażacki zniszczony",
+            "pt-BR": "Caminhão de Bombeiro destruído",
+            "ru": "Уничтожьте пожарные машины",
+            "tr": "İtfaiye Kamyonu yok edildi",
+            "zh-CN": "救火车已摧毁",
+            "zh-Hant": "救火車已摧毀"
+          },
+          "count": 3
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_destroygnomes": {
+      "name": {
+        "ar": "تدمير يومي (أقزام الحديقة)",
+        "de": "Tägliche Zerstörung (Gartenzwerge)",
+        "en": "Daily Destroy (Garden Gnomes)",
+        "es": "Destrucción diaria (gnomos de jardín)",
+        "es-419": "Destrucción diaria (gnomos de jardín)",
+        "fr": "Destruction quotidienne (nains de jardin)",
+        "it": "Distruzione quotidiana (gnomi da giardino)",
+        "ja": "デイリー破壊任務(ガーデンノーム)",
+        "ko": "일일 파괴 (정원 요정 상)",
+        "pl": "Demolka dnia (gnomy ogrodowe)",
+        "pt-BR": "Destruição Diária (Gnomos de Jardim)",
+        "ru": "Ежедневный погром (садовые гномы)",
+        "tr": "Günlük Yok Etme (Bahçe Cüceleri)",
+        "zh-CN": "每日摧毁(花园地精)",
+        "zh-Hant": "每日摧毀（花園地精）"
+      },
+      "objectives": {
+        "quest_reactive_destroygnome_v2": {
+          "name": {
+            "ar": "تم تدمير أقزام الحديقة",
+            "de": "Gartenzwerge zerstört",
+            "en": "Garden Gnomes destroyed",
+            "es": "Gnomos de jardín destruidos",
+            "es-419": "Gnomos de jardín destruidos",
+            "fr": "Nains de jardin détruits",
+            "it": "Gnomi da giardino distrutti",
+            "ja": "ガーデンノームを破壊する",
+            "ko": "정원 요정 상 파괴",
+            "pl": "Zniszczone gnomy ogrodowe",
+            "pt-BR": "Gnomos de Jardim destruídos",
+            "ru": "Уничтожьте садовых гномов",
+            "tr": "Yok Edilen Bahçe Cüceleri",
+            "zh-CN": "花园地精被摧毁",
+            "zh-Hant": "花園地精被摧毀"
+          },
+          "count": 3
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_destroypropanetanks": {
+      "name": {
+        "ar": "تدمير يومي (دبابات البروبان)",
+        "de": "Tägliche Zerstörung (Propantanks)",
+        "en": "Daily Destroy (Propane Tanks)",
+        "es": "Destrucción diaria (tanques de propano)",
+        "es-419": "Destrucción diaria (tanques de propano)",
+        "fr": "Destruction quotidienne (bonbonnes de gaz)",
+        "it": "Distruzione quotidiana (taniche di propano)",
+        "ja": "デイリー破壊任務(プロパンタンク)",
+        "ko": "일일 파괴 (프로판 가스통)",
+        "pl": "Demolka dnia (butle z gazem)",
+        "pt-BR": "Destruição Diária (Tanques de Propano)",
+        "ru": "Ежедневный погром (баллоны с пропаном)",
+        "tr": "Günlük Yok Etme (Gaz Tankları)",
+        "zh-CN": "每日摧毁(丙烷罐)",
+        "zh-Hant": "每日摧毀（丙烷罐）"
+      },
+      "objectives": {
+        "quest_reactive_destroypropane_v2": {
+          "name": {
+            "ar": "تم تدمير دبابات البروبان",
+            "de": "Propantanks zerstört",
+            "en": "Propane Tanks destroyed",
+            "es": "Tanques de propano destruidos",
+            "es-419": "Tanques de propano destruidos",
+            "fr": "Bonbonnes de gaz détruites",
+            "it": "Bombole di propano distrutte",
+            "ja": "プロパンタンクを破壊する",
+            "ko": "프로판 가스통 파괴",
+            "pl": "Zniszczone butle z gazem",
+            "pt-BR": "Tanques de Propano destruídos",
+            "ru": "Уничтожьте баллоны с пропаном",
+            "tr": "Yok Edilen Gaz Tankları",
+            "zh-CN": "丙烷罐已破坏",
+            "zh-Hant": "丙烷罐已破壞"
+          },
+          "count": 10
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_destroyseesaws": {
+      "name": {
+        "ar": "تدمير يومي (أرجوحة الحديقة)",
+        "de": "Tägliche Zerstörung (Wippen)",
+        "en": "Daily Destroy (Park Seesaws)",
+        "es": "Destrucción diaria (balancines)",
+        "es-419": "Destrucción diaria (sube y baja)",
+        "fr": "Destruction quotidienne (balançoires)",
+        "it": "Distruzione quotidiana (altalene da parco)",
+        "ja": "デイリー破壊任務(公園のシーソー)",
+        "ko": "일일 파괴 (공원 시소)",
+        "pl": "Demolka dnia (huśtawki w parku)",
+        "pt-BR": "Destruição Diária (Gangorras de Parque)",
+        "ru": "Ежедневный погром (парковые качели)",
+        "tr": "Günlük Yok Etme (Tahterevalli)",
+        "zh-CN": "每日摧毁(公园跷跷板)",
+        "zh-Hant": "每日摧毀(公園蹺蹺板)"
+      },
+      "objectives": {
+        "quest_reactive_destroyseesaw_v3": {
+          "name": {
+            "ar": "تم تدمير أرجوحات الحديقة",
+            "de": "Wippen zerstört",
+            "en": "Park Seesaws destroyed",
+            "es": "Balancines destruidos",
+            "es-419": "Sube y bajas destruidos",
+            "fr": "Balançoires détruites",
+            "it": "Altalene da parco distrutte",
+            "ja": "公園のシーソーを破壊する",
+            "ko": "공원 시소 파괴",
+            "pl": "Huśtawki zniszczone",
+            "pt-BR": "Gangorras de Parque destruídas",
+            "ru": "Уничтожьте парковые качели",
+            "tr": "Yok Edilen Tahterevalliler",
+            "zh-CN": "已摧毁公园跷跷板",
+            "zh-Hant": "已摧毀公園秋千"
+          },
+          "count": 6
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_destroyserverracks": {
+      "name": {
+        "ar": "تدمير يومي (حوامل الخادم)",
+        "de": "Tägliche Zerstörung (Serverschränke)",
+        "en": "Daily Destroy (Server Racks)",
+        "es": "Destrucción diaria (grupos de servidores)",
+        "es-419": "Destrucción diaria (estantes de servidores)",
+        "fr": "Destruction quotidienne (baies à serveur)",
+        "it": "Distruzione quotidiana (rack di server)",
+        "ja": "デイリー破壊任務(サーバーラック)",
+        "ko": "일일 파괴 (서버 랙)",
+        "pl": "Demolka dnia (szafy serwerowe)",
+        "pt-BR": "Destruição Diária (Armários de Servidor)",
+        "ru": "Ежедневный погром (серверные стойки)",
+        "tr": "Günlük Yok Etme (Sunucu Kabinleri)",
+        "zh-CN": "每日摧毁(服务器机架)",
+        "zh-Hant": "每日摧毀(伺服器機架)"
+      },
+      "objectives": {
+        "quest_reactive_destroyserverrack_v2": {
+          "name": {
+            "ar": "تم تدمير حوامل الخادم",
+            "de": "Serverschränke zerstört",
+            "en": "Server Racks destroyed",
+            "es": "Grupos de servidores destruidos",
+            "es-419": "Estantes de servidores destruidos",
+            "fr": "Baies à serveur détruites",
+            "it": "Rack di server distrutti",
+            "ja": "サーバーラックを破壊する",
+            "ko": "서버 랙 파괴",
+            "pl": "Szafy serwerowe zniszczone",
+            "pt-BR": "Armários de Servidor destruídos",
+            "ru": "Уничтожьте серверные стойки",
+            "tr": "Yok edilen Sunucu Kabinleri",
+            "zh-CN": "服务器机架已破坏",
+            "zh-Hant": "伺服器機架已破壞"
+          },
+          "count": 4
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_destroytransformers": {
+      "name": {
+        "ar": "التدمير اليومي (المتحولون)",
+        "de": "Tägliche Zerstörung (Transformatoren)",
+        "en": "Daily Destroy (Transformers)",
+        "es": "Destrucción diaria (transformadores)",
+        "es-419": "Destrucción diaria (transformadores)",
+        "fr": "Destruction quotidienne (transformateurs)",
+        "it": "Distruzione quotidiana (trasformatori)",
+        "ja": "デイリー破壊任務(変圧器)",
+        "ko": "일일 파괴 (변압기)",
+        "pl": "Dzienne przedmioty do zniszczenia (transformatory)",
+        "pt-BR": "Destruição Diária (Transformadores)",
+        "ru": "Ежедневный погром (трансформаторы)",
+        "tr": "Günlük Yok Etme (Trafolar)",
+        "zh-CN": "每日摧毁(电力变压器)",
+        "zh-Hant": "每日摧毀(轉化金剛)"
+      },
+      "objectives": {
+        "quest_reactive_destroytransform_v3": {
+          "name": {
+            "ar": "تم تدمير محولات الطاقة الصناعية",
+            "de": "Industrie-Energieumwandler zerstört",
+            "en": "Industrial Power Transformers destroyed",
+            "es": "Transformadores industriales destruidos",
+            "es-419": "Transformadores de energía industriales destruidos",
+            "fr": "Transformateurs industriels détruits",
+            "it": "Trasformatori industriali distrutti",
+            "ja": "工業用電力変圧器を破壊する",
+            "ko": "산업용 변압기 파괴",
+            "pl": "Przemysłowe transformatory zniszczone",
+            "pt-BR": "Transformadores de Força Industriais destruídos",
+            "ru": "Уничтожьте промышленные трансформаторы",
+            "tr": "Yok edilen Endüstriyel Güç Trafoları",
+            "zh-CN": "已摧毁工业电力变压器",
+            "zh-Hant": "已摧毀工業動力轉化器"
+          },
+          "count": 2
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_destroytvs": {
+      "name": {
+        "ar": "التدمير اليومي (أجهزة التليفزيون)",
+        "de": "Tägliche Zerstörung (Fernseher)",
+        "en": "Daily Destroy (TVs)",
+        "es": "Destrucción diaria (televisores)",
+        "es-419": "Destrucción diaria (televisores)",
+        "fr": "Destruction quotidienne (télévisions)",
+        "it": "Distruzione quotidiana (TV)",
+        "ja": "デイリー破壊任務(テレビ)",
+        "ko": "일일 파괴 (TV)",
+        "pl": "Demolka dnia (telewizory)",
+        "pt-BR": "Destruição Diária (TVs)",
+        "ru": "Ежедневный погром (телевизоры)",
+        "tr": "Günlük Yok Etme (Televizyonlar)",
+        "zh-CN": "每日摧毁(电视)",
+        "zh-Hant": "每日摧毀(電視)"
+      },
+      "objectives": {
+        "quest_reactive_destroytv_v2": {
+          "name": {
+            "ar": "تم تدمير أجهزة التليفزيون",
+            "de": "Fernseher zerstört",
+            "en": "TVs destroyed",
+            "es": "Televisores destruidos",
+            "es-419": "Televisores destruidos",
+            "fr": "Télévisions détruites",
+            "it": "TV distrutte",
+            "ja": "テレビを破壊する",
+            "ko": "TV 파괴",
+            "pl": "Telewizory zniszczone",
+            "pt-BR": "TVs destruídas",
+            "ru": "Уничтожьте телевизоры",
+            "tr": "Yok Edilen Televizyonlar",
+            "zh-CN": "TV已摧毁",
+            "zh-Hant": "TV已摧毀"
+          },
+          "count": 20
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_discovery_industriallocations": {
+      "name": {
+        "ar": "البناء الصناعي الكشفي اليومي",
+        "de": "Tägliche Industriebaustellenaufklärung",
+        "en": "Daily Scouting Industrial Construction",
+        "es": "Exploración diaria de construcción industrial",
+        "es-419": "Exploración de construcción industrial diaria",
+        "fr": "Exploration quotidienne (industrie)",
+        "it": "Ricognizione giornaliera: costruzioni industriali",
+        "ja": "デイリー工業建設偵察",
+        "ko": "일일 정찰 (산업 지역)",
+        "pl": "Codzienny zwiad - budowy przemysłowe",
+        "pt-BR": "Vigilância Diária de Construção Industrial",
+        "ru": "Ежедневная разведка: промышленные стройки",
+        "tr": "Günlük Keşif Endüstriyel İnşa",
+        "zh-CN": "日常侦查工业建筑",
+        "zh-Hant": "日常偵查工業建築"
+      },
+      "objectives": {
+        "quest_reactive_discoverconstruction_v2": {
+          "name": {
+            "ar": "تم اكتشاف موقع البناء",
+            "de": "Ort der Baustelle entdeckt",
+            "en": "Construction Location Discovered",
+            "es": "Ubicación de construcción descubierta",
+            "es-419": "Ubicación de la construcción descubierta",
+            "fr": "Chantiers de construction découverts",
+            "it": "Luogo di costruzione scoperto",
+            "ja": "建設現場を発見する",
+            "ko": "건설 지역 발견",
+            "pl": "Odnaleziono plac budowy",
+            "pt-BR": "Local de Construção Descoberto",
+            "ru": "Стройплощадка обнаружена",
+            "tr": "İnşaat Konumu Keşfedildi",
+            "zh-CN": "已发现建筑物位置",
+            "zh-Hant": "已發現建築物位置"
+          },
+          "count": 3
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_discovery_rurallocations": {
+      "name": {
+        "ar": "الكشف اليومي للمناطق الريفية ",
+        "de": "Tägliche Landaufklärung ",
+        "en": "Daily Scouting Rural ",
+        "es": "Exploración diaria rural ",
+        "es-419": "Exploración rural diaria ",
+        "fr": "Exploration quotidienne (campagne)",
+        "it": "Ricognizione giornaliera: rurale ",
+        "ja": "デイリー農村偵察",
+        "ko": "일일 정찰 (교외)",
+        "pl": "Codzienny zwiad - wieś ",
+        "pt-BR": "Vigilância Diária Rural ",
+        "ru": "Ежедневная разведка: сельская местность ",
+        "tr": "Günlük Kırsal Keşifleri",
+        "zh-CN": "日常侦查农村",
+        "zh-Hant": "日常偵查農村"
+      },
+      "objectives": {
+        "quest_reactive_discoverruinedhouses_v2": {
+          "name": {
+            "ar": "تم اكتشاف موقع ريفي",
+            "de": "Ländliche Gegend entdeckt",
+            "en": "Rural Location Discovered",
+            "es": "Ubicación rural descubierta",
+            "es-419": "Ubicación rural descubierta",
+            "fr": "Zones rurales découvertes",
+            "it": "Luogo rurale scoperto",
+            "ja": "農村ロケーションを発見する",
+            "ko": "교외 지역 발견",
+            "pl": "Odnaleziono miejsce na wsi",
+            "pt-BR": "Local Rural Descoberto",
+            "ru": "Сельская постройка обнаружена",
+            "tr": "Kırsal Konum Keşfedildi",
+            "zh-CN": "农村位置发现",
+            "zh-Hant": "農村位置發現"
+          },
+          "count": 3
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_discovery_shelters": {
+      "name": {
+        "ar": "الكشفي اليومي الريفي للمآوي",
+        "de": "Tägliche Schutzbunkeraufklärung",
+        "en": "Daily Scouting Shelters",
+        "es": "Exploración diaria de refugios",
+        "es-419": "Exploración de refugios diaria",
+        "fr": "Exploration quotidienne (refuges)",
+        "it": "Ricognizione giornaliera: rifugi",
+        "ja": "デイリーシェルター偵察",
+        "ko": "일일 정찰 (대피소)",
+        "pl": "Codzienny zwiad - schrony",
+        "pt-BR": "Vigilância Diária de Abrigos",
+        "ru": "Ежедневная разведка: убежища",
+        "tr": "Günlük Keşif Sığınakları",
+        "zh-CN": "日常侦查避难所",
+        "zh-Hant": "日常偵查避難所"
+      },
+      "objectives": {
+        "quest_reactive_discovershelter_v2": {
+          "name": {
+            "ar": "تم اكتشاف موقع المأوى",
+            "de": "Ort des Schutzbunkers entdeckt",
+            "en": "Shelter Location Discovered",
+            "es": "Ubicación de refugio descubierta",
+            "es-419": "Ubicación del refugio descubierta",
+            "fr": "Refuges découverts",
+            "it": "Luogo rifugi scoperto",
+            "ja": "シェルターの場所を発見する",
+            "ko": "대피소 지역 발견",
+            "pl": "Odkryto położenie schronu",
+            "pt-BR": "Local de Abrigo Descoberto",
+            "ru": "Убежище обнаружено",
+            "tr": "Sığınak Konumu Keşfedildi",
+            "zh-CN": "已发现避难所位置",
+            "zh-Hant": "已發現避難所位置"
+          },
+          "count": 4
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_discovery_suburbanlocations": {
+      "name": {
+        "ar": "الكشف اليومي للضواحي",
+        "de": "Tägliche Vorstadtaufklärung",
+        "en": "Daily Scouting Suburbia",
+        "es": "Exploración diaria en suburbios",
+        "es-419": "Exploración de suburbios diaria",
+        "fr": "Exploration quotidienne (banlieue)",
+        "it": "Ricognizione giornaliera: periferia",
+        "ja": "デイリー郊外偵察",
+        "ko": "일일 정찰 (교외)",
+        "pl": "Codzienny zwiad - przedmieścia",
+        "pt-BR": "Vigilância Diária de Subúrbio",
+        "ru": "Ежедневная разведка: пригород",
+        "tr": "Günlük Keşif Banliyöleri",
+        "zh-CN": "日常侦查郊区",
+        "zh-Hant": "日常偵查郊區"
+      },
+      "objectives": {
+        "quest_reactive_discoverfastfood_v2": {
+          "name": {
+            "ar": "تم اكتشاف موقع ضاحية",
+            "de": "Vorstadtort entdeckt",
+            "en": "Suburban Location Discovered",
+            "es": "Ubicación de suburbio descubierta",
+            "es-419": "Ubicación suburbana descubierta",
+            "fr": "Zones de banlieue découvertes",
+            "it": "Luogo periferia scoperto",
+            "ja": "郊外ロケーションを発見する",
+            "ko": "교외 지역 발견",
+            "pl": "Odnaleziono miejsce na przedmieściu",
+            "pt-BR": "Local Suburbano Descoberto",
+            "ru": "Пригородная постройка обнаружена",
+            "tr": "Banliyö Konumu Keşfedildi",
+            "zh-CN": "郊区位置发现",
+            "zh-Hant": "已發現郊區位置"
+          },
+          "count": 10
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_discovery_urbanlocations": {
+      "name": {
+        "ar": "الكشف اليومي الريفي للمدن",
+        "de": "Tägliche Stadtaufklärung",
+        "en": "Daily Scouting Cities",
+        "es": "Exploración diaria de ciudades",
+        "es-419": "Exploración de ciudades diaria",
+        "fr": "Exploration quotidienne (villes)",
+        "it": "Ricognizione giornaliera: città",
+        "ja": "デイリー市街地偵察",
+        "ko": "일일 정찰 (도시)",
+        "pl": "Codzienny zwiad - miasta",
+        "pt-BR": "Vigilância Diária de Cidades",
+        "ru": "Ежедневная разведка: города",
+        "tr": "Günlük Şehir Keşifleri",
+        "zh-CN": "日常侦查城市",
+        "zh-Hant": "日常偵查城市"
+      },
+      "objectives": {
+        "quest_reactive_discoveremergencybuildings_v2": {
+          "name": {
+            "ar": "تم اكتشاف موقع المدينة",
+            "de": "Stadtort entdeckt",
+            "en": "City Location Discovered",
+            "es": "Ubicación de ciudad descubierta",
+            "es-419": "Ubicación de la ciudad descubierta",
+            "fr": "Zones urbaines découvertes",
+            "it": "Luogo città scoperto",
+            "ja": "市街地ロケーションを発見する",
+            "ko": "도시 지역 발견",
+            "pl": "Odnaleziono miejsce w mieście",
+            "pt-BR": "Local na Cidade Descoberto",
+            "ru": "Городская постройка обнаружена",
+            "tr": "Şehir Konumu Keşfedildi",
+            "zh-CN": "已发现城市位置",
+            "zh-Hant": "已發現城市位置"
+          },
+          "count": 8
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_explorezones": {
+      "name": {
+        "ar": "مجموعة الاستكشاف",
+        "de": "Erkundungstruppe",
+        "en": "Exploration Party",
+        "es": "Grupo de exploración",
+        "es-419": "Equipo de exploración",
+        "fr": "Groupe d'exploration",
+        "it": "Gruppo di esplorazione",
+        "ja": "探索パーティー",
+        "ko": "탐사 파티",
+        "pl": "Grupa badawcza",
+        "pt-BR": "Grupo de Exploração",
+        "ru": "Исследовательский отряд",
+        "tr": "Keşif Ekibi",
+        "zh-CN": "探险队",
+        "zh-Hant": "探險隊"
+      },
+      "objectives": {
+        "complete_exploration_1": {
+          "name": {
+            "ar": "المناطق المكتشفة",
+            "de": "Zonen erkundet",
+            "en": "Zones explored",
+            "es": "Zonas exploradas",
+            "es-419": "Zonas exploradas",
+            "fr": "Zones explorées",
+            "it": "Zone esplorate",
+            "ja": "ゾーンを探索する",
+            "ko": "구역 탐험",
+            "pl": "Strefy odkryte",
+            "pt-BR": "Áreas exploradas",
+            "ru": "Исследуйте зоны",
+            "tr": "Keşfedilen bölgeler",
+            "zh-CN": "已探索的区域",
+            "zh-Hant": "已探索的區域"
+          },
+          "count": 3
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_high_priority": {
+      "name": {
+        "ar": "الكل معًا الآن",
+        "de": "Alle zusammen",
+        "en": "All Together Now",
+        "es": "Ahora todos juntos",
+        "es-419": "Ahora todos juntos",
+        "fr": "Attentifs ensemble",
+        "it": "Tutti insieme appassionatamente",
+        "ja": "力を合わせて",
+        "ko": "하나 된 우리",
+        "pl": "Wszyscy razem",
+        "pt-BR": "Todos Juntos Agora",
+        "ru": "А теперь все вместе!",
+        "tr": "Şimdi Hep Beraber",
+        "zh-CN": "同心协力",
+        "zh-Hant": "同心協力"
+      },
+      "objectives": {
+        "questcollect_survivoritemdata": {
+          "name": {
+            "ar": "تم إنقاذ الناجين",
+            "de": "Überlebende gerettet",
+            "en": "Survivors saved",
+            "es": "Supervivientes salvados",
+            "es-419": "Sobrevivientes salvados",
+            "fr": "Survivants sauvés",
+            "it": "Superstiti salvati",
+            "ja": "サバイバーを救助する",
+            "ko": "생존자 구조",
+            "pl": "Ocaleńcy uratowani",
+            "pt-BR": "Sobreviventes salvos",
+            "ru": "Спасите выживших",
+            "tr": "Kurtarılan felaketzedeler",
+            "zh-CN": "幸存者已营救",
+            "zh-Hant": "倖存者已營救"
+          },
+          "count": 50
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 130,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_anyhero": {
+      "name": {
+        "ar": "إبادة المومياء (أي بطل)",
+        "de": "Hüllenausrottung (Beliebiger Held)",
+        "en": "Husk Extermination (Any Hero)",
+        "es": "Exterminación de cáscaras (con cualquier héroe)",
+        "es-419": "Exterminación de descerebrados (cualquier héroe)",
+        "fr": "Extermination de Carcasses (tout héros)",
+        "it": "Sterminio di Abietti (qualsiasi eroe)",
+        "ja": "ハスク駆除(任意のヒーロー)",
+        "ko": "허스크 소탕 (아무 영웅)",
+        "pl": "Eksterminacja pustaków (dowolny bohater)",
+        "pt-BR": "Extermínio de Carcaças (Qualquer Herói)",
+        "ru": "Истребление мозгляков (любой герой)",
+        "tr": "Suratsız Katliamı (Herhangi bir kahramanla)",
+        "zh-CN": "毒尸怪灭绝(任意英雄)",
+        "zh-Hant": "毒屍怪滅絕(任意英雄)"
+      },
+      "objectives": {
+        "kill_husk": {
+          "name": {
+            "ar": "تم تصفية المومياوات",
+            "de": "Hüllen eliminiert",
+            "en": "Husks eliminated",
+            "es": "Cáscaras eliminados",
+            "es-419": "Descerebrados eliminados",
+            "fr": "Carcasses éliminées",
+            "it": "Abietti eliminati",
+            "ja": "ハスクを撃破",
+            "ko": "허스크 처치",
+            "pl": "Pustaki zlikwidowane",
+            "pt-BR": "Carcaças eliminadas",
+            "ru": "Мозгляки уничтожены",
+            "tr": "Avlanan suratsızlar",
+            "zh-CN": "已淘汰毒尸怪",
+            "zh-Hant": "已淘汰毒屍怪"
+          },
+          "count": 500
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_constructor": {
+      "name": {
+        "ar": "إبادة المومياء (البنّاء)",
+        "de": "Hüllenausrottung (Konstrukteur)",
+        "en": "Husk Extermination (Constructor)",
+        "es": "Exterminación de cáscaras (constructor)",
+        "es-419": "Exterminación de descerebrados (constructor)",
+        "fr": "Extermination de Carcasses (Constructeur)",
+        "it": "Sterminio di Abietti (Costruttore)",
+        "ja": "ハスク駆除(コンストラクター)",
+        "ko": "허스크 소탕 (건축가)",
+        "pl": "Tępienie pustaków (Budowniczy)",
+        "pt-BR": "Extermínio de Carcaças (Construtor)",
+        "ru": "Истребление мозгляков (конструктор)",
+        "tr": "Suratsız Katliamı (İnşaatçı)",
+        "zh-CN": "毒尸怪灭绝(建筑师)",
+        "zh-Hant": "毒屍怪滅絕(建築師)"
+      },
+      "objectives": {
+        "kill_husk_constructor_v2": {
+          "name": {
+            "ar": "تم تصفية المومياوات كبنّاء",
+            "de": "Hüllen als Konstrukteur erledigt",
+            "en": "Husks eliminated as a Constructor",
+            "es": "Cáscaras eliminados con un constructor",
+            "es-419": "Descerebrados eliminados como constructor",
+            "fr": "Carcasses éliminées en tant que Constructeur",
+            "it": "Abietti eliminati come Costruttore",
+            "ja": "コンストラクターでハスクを倒す",
+            "ko": "건축가로 허스크 처치",
+            "pl": "Pustaki zlikwidowane jako Budowniczy",
+            "pt-BR": "Carcaças eliminadas como Construtor",
+            "ru": "Мозгляки уничтожены при игре за конструктора",
+            "tr": "İnşaatçı olarak avlanan suratsızlar",
+            "zh-CN": "使用建筑师消灭毒尸怪",
+            "zh-Hant": "使用建築師消滅毒屍怪"
+          },
+          "count": 300
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_melee": {
+      "name": {
+        "ar": "إبادة المومياء (شجار)",
+        "de": "Hüllenausrottung (Nahkampf)",
+        "en": "Husk Extermination (Melee)",
+        "es": "Exterminación de cáscaras (cuerpo a cuerpo)",
+        "es-419": "Exterminación de descerebrados (arma cuerpo a cuerpo)",
+        "fr": "Extermination de Carcasses (mêlée)",
+        "it": "Sterminio di Abietti (Mischia)",
+        "ja": "ハスク駆除(近接)",
+        "ko": "허스크 소탕 (근접)",
+        "pl": "Tępienie pustaków (broń biała)",
+        "pt-BR": "Extermínio de Carcaças (Corpo a Corpo)",
+        "ru": "Истребление мозгляков (холодное оружие)",
+        "tr": "Suratsız Katliamı (Yakın Dövüş)",
+        "zh-CN": "毒尸怪灭绝(近战)",
+        "zh-Hant": "毒尸怪灭绝(近战)"
+      },
+      "objectives": {
+        "kill_husk_melee": {
+          "name": {
+            "ar": "تم تصفية المومياوات بسلاح شجار",
+            "de": "Hüllen mit Nahkampfwaffe erledigt",
+            "en": "Husks eliminated with a melee weapon",
+            "es": "Cáscaras eliminados con un arma cuerpo a cuerpo",
+            "es-419": "Descerebrados eliminados con armas cuerpo a cuerpo",
+            "fr": "Carcasses éliminées avec une arme de mêlée",
+            "it": "Abietti eliminati con un'arma da mischia",
+            "ja": "近接武器でハスクを倒す",
+            "ko": "근접 무기로 허스크 처치",
+            "pl": "Pustaki zlikwidowane bronią białą",
+            "pt-BR": "Carcaças eliminadas com uma arma branca",
+            "ru": "Уничтожьте мозгляков холодным оружием",
+            "tr": "Yakın dövüş silahıyla avlanan suratsızlar",
+            "zh-CN": "用近战武器消灭毒尸怪",
+            "zh-Hant": "用近戰武器消滅毒屍怪"
+          },
+          "count": 300
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_ninja": {
+      "name": {
+        "ar": "إبادة المومياء (النينجا)",
+        "de": "Hüllenausrottung (Ninja)",
+        "en": "Husk Extermination (Ninja)",
+        "es": "Exterminación de cáscaras (ninja)",
+        "es-419": "Exterminación de descerebrados (ninja)",
+        "fr": "Extermination de Carcasses (Ninja)",
+        "it": "Sterminio di Abietti (Ninja)",
+        "ja": "ハスク駆除(ニンジャ)",
+        "ko": "허스크 소탕 (닌자)",
+        "pl": "Tępienie pustaków (Ninja)",
+        "pt-BR": "Extermínio de Carcaças (Ninja)",
+        "ru": "Истребление мозгляков (ниндзя)",
+        "tr": "Suratsız Katliamı (Ninja)",
+        "zh-CN": "毒尸怪灭绝(忍者)",
+        "zh-Hant": "毒屍怪滅絕(忍者)"
+      },
+      "objectives": {
+        "kill_husk_ninja_v2": {
+          "name": {
+            "ar": "تم تصفية المومياء بصفتك نينجا",
+            "de": "Hüllen als Ninja erledigt",
+            "en": "Husk eliminated as a Ninja",
+            "es": "Cáscaras eliminados con un ninja",
+            "es-419": "Descerebrados eliminados como ninja",
+            "fr": "Carcasses éliminées en tant que Ninja",
+            "it": "Abietti eliminati come Ninja",
+            "ja": "ニンジャでハスクを倒す",
+            "ko": "닌자로 허스크 처치",
+            "pl": "Pustaki zlikwidowane jako Ninja",
+            "pt-BR": "Carcaça eliminada como Ninja",
+            "ru": "Мозгляки уничтожены при игре за ниндзя",
+            "tr": "Ninja olarak avlanan suratsızlar",
+            "zh-CN": "作为忍者已消灭毒尸怪",
+            "zh-Hant": "作為忍者已消滅毒屍怪"
+          },
+          "count": 300
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_outlander": {
+      "name": {
+        "ar": "إبادة المومياء (الأجنبي)",
+        "de": "Hüllenausrottung (Entdecker)",
+        "en": "Husk Extermination (Outlander)",
+        "es": "Exterminación de cáscaras (trotamundos)",
+        "es-419": "Descerebrados Extermination (forastero)",
+        "fr": "Extermination de Carcasses (Aventurier)",
+        "it": "Sterminio di Abietti (Straniero)",
+        "ja": "ハスク駆除(アウトランダー)",
+        "ko": "허스크 소탕 (개척자)",
+        "pl": "Tępienie pustaków (Rubieżnik)",
+        "pt-BR": "Extermínio de Carcaças (Forasteiro)",
+        "ru": "Истребление мозгляков (путешественник)",
+        "tr": "Suratsız Katliamı (İzci)",
+        "zh-CN": "毒尸怪灭绝(漂泊者)",
+        "zh-Hant": "毒屍怪滅絕(漂泊者)"
+      },
+      "objectives": {
+        "kill_husk_outlander_v2": {
+          "name": {
+            "ar": "تم تصفية المومياوات بصفتك أجنبي",
+            "de": "Hüllen als Entdecker erledigt",
+            "en": "Husks eliminated as an Outlander",
+            "es": "Cáscaras eliminados con un trotamundos",
+            "es-419": "Descerebrados eliminados como forastero",
+            "fr": "Carcasses éliminées en tant qu'Aventurier",
+            "it": "Abietti eliminati come Straniero",
+            "ja": "アウトランダーでハスクを倒す",
+            "ko": "개척자로 허스크 처치",
+            "pl": "Pustaki zlikwidowane jako Rubieżnik",
+            "pt-BR": "Carcaças eliminadas como Forasteiro",
+            "ru": "Уничтожьте мозгляков, играя за путешественника",
+            "tr": "İzci olarak avlanan suratsızlar",
+            "zh-CN": "作为漂泊者消灭毒尸怪",
+            "zh-Hant": "作為漂泊者消滅毒屍怪"
+          },
+          "count": 300
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_ranged_assault": {
+      "name": {
+        "ar": "إبادة المومياء (البندقية الهجومية)",
+        "de": "Hüllenausrottung (Sturmgewehr)",
+        "en": "Husk Extermination (Assault Rifle)",
+        "es": "Exterminación de cáscaras (fusil de asalto)",
+        "es-419": "Exterminación de descerebrados (rifle de asalto)",
+        "fr": "Extermination de Carcasses (fusil d'assaut)",
+        "it": "Sterminio di Abietti (Fucile d'assalto)",
+        "ja": "ハスク駆除(アサルトライフル)",
+        "ko": "허스크 소탕 (돌격소총)",
+        "pl": "Tępienie pustaków (karabin szturmowy)",
+        "pt-BR": "Extermínio de Carcaças (Rifle de Assalto)",
+        "ru": "Истребление мозгляков (автомат)",
+        "tr": "Suratsız Katliamı (Taarruz Tüfeği)",
+        "zh-CN": "毒尸怪灭绝(突击步枪)",
+        "zh-Hant": "毒尸怪灭绝(突击步枪)"
+      },
+      "objectives": {
+        "kill_husk_assault": {
+          "name": {
+            "ar": "تم تصفية المومياوات ببندقية هجومية",
+            "de": "Hüllen mit Sturmgewehr erledigt",
+            "en": "Husks eliminated with an assault rifle",
+            "es": "Cáscaras eliminados con un fusil de asalto",
+            "es-419": "Descerebrados eliminados con rifles de asalto",
+            "fr": "Carcasses éliminées avec un fusil d'assaut",
+            "it": "Abietti eliminati con un fucile d'assalto",
+            "ja": "アサルトライフルでハスクを倒す",
+            "ko": "돌격소총으로 허스크 처치",
+            "pl": "Pustaki zlikwidowane z karabinu szturmowego",
+            "pt-BR": "Carcaças eliminadas com um rifle de assalto",
+            "ru": "Уничтожьте мозгляков из автомата",
+            "tr": "Taarruz Tüfeğiyle avlanan suratsızlar",
+            "zh-CN": "用突击步枪消灭毒尸怪",
+            "zh-Hant": "用突擊步槍消滅毒屍怪"
+          },
+          "count": 300
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_ranged_pistol": {
+      "name": {
+        "ar": "إبادة المومياء (المسدس)",
+        "de": "Hüllenausrottung (Pistole)",
+        "en": "Husk Extermination (Pistol)",
+        "es": "Exterminación de cáscaras (pistola)",
+        "es-419": "Exterminación de descerebrados (pistola)",
+        "fr": "Extermination de Carcasses (pistolet)",
+        "it": "Sterminio di Abietti (Pistola)",
+        "ja": "ハスク駆除(ピストル)",
+        "ko": "허스크 소탕 (권총)",
+        "pl": "Tępienie pustaków (pistolet)",
+        "pt-BR": "Extermínio de Carcaças (Pistola)",
+        "ru": "Истребление мозгляков (пистолет)",
+        "tr": "Suratsız Katliamı (Tabanca)",
+        "zh-CN": "毒尸怪灭绝(手枪)",
+        "zh-Hant": "毒尸怪灭绝(手枪)"
+      },
+      "objectives": {
+        "kill_husk_pistol": {
+          "name": {
+            "ar": "تم تصفية المومياوات بمسدس",
+            "de": "Hüllen mit Pistole erledigt",
+            "en": "Husks eliminated with a pistol",
+            "es": "Cáscaras eliminados con una pistola",
+            "es-419": "Descerebrados eliminados con pistolas",
+            "fr": "Carcasses éliminées avec un pistolet",
+            "it": "Abietti eliminati con una pistola",
+            "ja": "ピストルでハスクを倒す",
+            "ko": "권총으로 허스크 처치",
+            "pl": "Pustaki zlikwidowane z pistoletu",
+            "pt-BR": "Carcaças eliminadas com uma pistola",
+            "ru": " Мозгляки уничтожены из пистолета",
+            "tr": "Tabancayla avlanan suratsızlar",
+            "zh-CN": "使用手枪消灭毒尸怪",
+            "zh-Hant": "使用手槍消滅毒屍怪"
+          },
+          "count": 300
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_ranged_shotgun": {
+      "name": {
+        "ar": "إبادة المومياء (شوزِن)",
+        "de": "Hüllenausrottung (Schrotflinte)",
+        "en": "Husk Extermination (Shotgun)",
+        "es": "Exterminación de cáscaras (escopeta)",
+        "es-419": "Exterminación de descerebrados (escopeta)",
+        "fr": "Extermination de Carcasses (fusil à pompe)",
+        "it": "Sterminio di Abietti (fucile pesante)",
+        "ja": "ハスク駆除(ショットガン)",
+        "ko": "허스크 소탕 (산탄총)",
+        "pl": "Tępienie pustaków (strzelba)",
+        "pt-BR": "Extermínio de Carcaças (Espingarda)",
+        "ru": "Истребление мозгляков (дробовик)",
+        "tr": "Suratsız Katliamı (Pompalı Tüfek)",
+        "zh-CN": "毒尸怪灭绝(霰弹枪)",
+        "zh-Hant": "毒尸怪灭绝(霰弹枪)"
+      },
+      "objectives": {
+        "kill_husk_shotgun": {
+          "name": {
+            "ar": "تم تصفية المومياوات بشوزِن",
+            "de": "Hüllen mit Schrotflinte erledigt",
+            "en": "Husks eliminated with a shotgun",
+            "es": "Cáscaras eliminados con una escopeta",
+            "es-419": "Descerebrados eliminados con escopetas",
+            "fr": "Carcasses éliminées avec un fusil à pompe",
+            "it": "Abietti eliminati con un fucile pesante",
+            "ja": "ショットガンでハスクを倒す",
+            "ko": "산탄총으로 허스크 처치",
+            "pl": "Pustaki zlikwidowane ze strzelby",
+            "pt-BR": "Carcaças eliminadas com uma espingarda",
+            "ru": "Мозгляки уничтожены из дробовика",
+            "tr": "Pompalı Tüfekle avlanan suratsızlar",
+            "zh-CN": "使用霰弹枪消灭毒尸怪",
+            "zh-Hant": "使用霰彈槍消滅毒屍怪"
+          },
+          "count": 300
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_ranged_smg": {
+      "name": {
+        "ar": "إبادة المومياء (الرشّاش الخفيف)",
+        "de": "Hüllenausrottung (Maschinenpistole)",
+        "en": "Husk Extermination (SMG)",
+        "es": "Exterminación de cáscaras (subfusil)",
+        "es-419": "Exterminación de descerebrados (subfusil)",
+        "fr": "Extermination de Carcasses (pistolet-mitrailleur)",
+        "it": "Sterminio di Abietti (mitraglietta)",
+        "ja": "ハスク駆除(SMG)",
+        "ko": "허스크 소탕 (기관단총)",
+        "pl": "Tępienie pustaków (pistolet maszynowy)",
+        "pt-BR": "Extermínio de Carcaças (SMG)",
+        "ru": "Истребление мозгляков (пистолет-пулемёт)",
+        "tr": "Suratsız Katliamı (Hafif Makineli Tüfek)",
+        "zh-CN": "毒尸终结者（冲锋枪）",
+        "zh-Hant": "毒屍終結者（衝鋒槍）"
+      },
+      "objectives": {
+        "kill_husk_smg": {
+          "name": {
+            "ar": "تم تصفية المومياوات برشّاش خفيف",
+            "de": "Hüllen mit Maschinenpistole erledigt",
+            "en": "Husks eliminated with an SMG",
+            "es": "Cáscaras eliminados con un subfusil",
+            "es-419": "Descerebrados eliminados con un subfusil",
+            "fr": "Carcasses éliminées avec un pistolet-mitrailleur",
+            "it": "Abietti eliminati con una mitraglietta",
+            "ja": "SMGでハスクを倒す",
+            "ko": "기관단총으로 허스크 처치",
+            "pl": "Pustaki zlikwidowane z pistoletu maszynowego",
+            "pt-BR": "Carcaças eliminadas com uma SMG",
+            "ru": "Уничтожьте мозгляков из пистолета-пулемёта",
+            "tr": "Hafif Makineli Tüfek ile avlanan suratsızlar",
+            "zh-CN": "用冲锋枪淘汰的毒尸怪",
+            "zh-Hant": "用衝鋒槍淘汰的毒屍怪"
+          },
+          "count": 300
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_ranged_sniper": {
+      "name": {
+        "ar": "إبادة المومياء (بندقية القنص)",
+        "de": "Hüllenausrottung (Scharfschützengewehr)",
+        "en": "Husk Extermination (Sniper Rifle)",
+        "es": "Exterminación de cáscaras (fusil de tirador)",
+        "es-419": "Exterminación de descerebrados (rifle de francotirador)",
+        "fr": "Extermination de Carcasses (fusil de sniper)",
+        "it": "Sterminio di Abietti (Fucile di precisione)",
+        "ja": "ハスク駆除(スナイパーライフル)",
+        "ko": "허스크 소탕 (저격소총)",
+        "pl": "Tępienie pustaków (karabin snajperski)",
+        "pt-BR": "Extermínio de Carcaças (Rifle de Precisão)",
+        "ru": "Истребление мозгляков (снайперская винтовка)",
+        "tr": "Suratsız Katliamı (Keskin Nişancı Tüfeği)",
+        "zh-CN": "毒尸怪灭绝(狙击枪)",
+        "zh-Hant": "毒尸怪灭绝(狙击枪)"
+      },
+      "objectives": {
+        "kill_husk_sniper": {
+          "name": {
+            "ar": "تم تصفية المومياوات ببندقية قنص",
+            "de": "Hüllen mit Scharfschützengewehr erledigt",
+            "en": "Husks eliminated with a sniper rifle",
+            "es": "Cáscaras eliminados con un fusil de tirador",
+            "es-419": "Descerebrados eliminados con rifles de francotirador",
+            "fr": "Carcasses éliminées avec un fusil de sniper",
+            "it": "Abietti eliminati con un fucile di precisione",
+            "ja": "スナイパーライフルでハスクを倒す",
+            "ko": "저격소총으로 허스크 처치",
+            "pl": "Pustaki zlikwidowane z karabinu snajperskiego",
+            "pt-BR": "Carcaças eliminadas com um rifle de precisão",
+            "ru": "Уничтожьте мозгляков из снайперской винтовки",
+            "tr": "Keskin Nişancı Tüfeğiyle avlanan suratsızlar",
+            "zh-CN": "使用狙击步枪消灭毒尸怪",
+            "zh-Hant": "使用狙擊步槍消滅毒屍怪"
+          },
+          "count": 300
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_soldier": {
+      "name": {
+        "ar": "إبادة المومياء (الجندي)",
+        "de": "Hüllenausrottung (Soldat)",
+        "en": "Husk Extermination (Soldier)",
+        "es": "Exterminación de cáscaras (soldado)",
+        "es-419": "Exterminación de descerebrados (soldado)",
+        "fr": "Extermination de Carcasses (Soldat)",
+        "it": "Sterminio di Abietti (Soldato)",
+        "ja": "ハスク駆除(ソルジャー)",
+        "ko": "허스크 소탕 (군인)",
+        "pl": "Tępienie pustaków (Żołnierz)",
+        "pt-BR": "Extermínio de Carcaças (Soldado)",
+        "ru": "Истребление мозгляков (солдат)",
+        "tr": "Suratsız Katliamı (Asker)",
+        "zh-CN": "毒尸怪灭绝(士兵)",
+        "zh-Hant": "滅絕毒屍怪(士兵)"
+      },
+      "objectives": {
+        "kill_husk_commando_v2": {
+          "name": {
+            "ar": "تم تصفية المومياوات كجندي",
+            "de": "Hüllen als Soldat erledigt",
+            "en": "Husks eliminated as a Soldier",
+            "es": "Cáscaras eliminados con un soldado",
+            "es-419": "Descerebrados eliminados como soldado",
+            "fr": "Carcasses éliminées en tant que Soldat",
+            "it": "Abietti eliminati come Soldato",
+            "ja": "ソルジャーでハスクを倒す",
+            "ko": "군인으로 허스크 처치",
+            "pl": "Pustaki zlikwidowane jako Żołnierz",
+            "pt-BR": "Carcaças eliminadas como Soldado",
+            "ru": "Уничтожьте мозгляков, играя за солдата",
+            "tr": "Asker olarak avlanan suratsızlar",
+            "zh-CN": "作为士兵消灭毒尸怪",
+            "zh-Hant": "作為士兵消滅毒屍怪"
+          },
+          "count": 300
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_huskextermination_trap": {
+      "name": {
+        "ar": "إبادة المومياء (المصيدة)",
+        "de": "Hüllenausrottung (Falle)",
+        "en": "Husk Extermination (Trap)",
+        "es": "Exterminación de cáscaras (trampa)",
+        "es-419": "Exterminación de descerebrados (trampa)",
+        "fr": "Extermination de Carcasses (piège)",
+        "it": "Sterminio di Abietti (Trappola)",
+        "ja": "ハスク駆除(トラップ)",
+        "ko": "허스크 소탕 (함정)",
+        "pl": "Tępienie pustaków (pułapki)",
+        "pt-BR": "Extermínio de Carcaças (Armadilha)",
+        "ru": "Истребление мозгляков (ловушки)",
+        "tr": "Suratsız Katliamı (Tuzak)",
+        "zh-CN": "毒尸怪灭绝(陷阱)",
+        "zh-Hant": "毒尸怪灭绝(陷阱)"
+      },
+      "objectives": {
+        "kill_husk_trap": {
+          "name": {
+            "ar": "تم تصفية المومياوات بمصائد",
+            "de": "Hüllen mit Fallen erledigt",
+            "en": "Husks eliminated with traps",
+            "es": "Cáscaras eliminados con trampas",
+            "es-419": "Descerebrados eliminados con trampas",
+            "fr": "Carcasses éliminées avec des pièges",
+            "it": "Abietti eliminati con trappole",
+            "ja": "トラップでハスクを倒す",
+            "ko": "함정으로 허스크 처치",
+            "pl": "Pustaki zlikwidowane przy użyciu pułapek",
+            "pt-BR": "Carcaças eliminadas com armadilhas",
+            "ru": "Уничтожьте мозгляков с помощью ловушек",
+            "tr": "Tuzaklarla avlanan suratsızlar",
+            "zh-CN": "使用陷阱击破毒尸怪",
+            "zh-Hant": "使用陷阱擊破毒屍怪"
+          },
+          "count": 150
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_mission_buildradar": {
+      "name": {
+        "ar": "بناء برج الرادار",
+        "de": "Bau den Radarturm",
+        "en": "Build the Radar Tower",
+        "es": "Construye la torre del radar",
+        "es-419": "Construye la torre de radar",
+        "fr": "Construire la tour radar",
+        "it": "Costruisci la torre radar",
+        "ja": "レーダー塔の建築",
+        "ko": "레이더 탑 건설",
+        "pl": "Zbuduj wieżę radarową",
+        "pt-BR": "Construa a Torre de Radar",
+        "ru": "Постройте радарную вышку",
+        "tr": "Radar Kulesini inşa et",
+        "zh-CN": "建造雷达塔",
+        "zh-Hant": "建造雷达塔"
+      },
+      "objectives": {
+        "complete_buildradar_1_diff2": {
+          "name": {
+            "ar": "بناء أبراج الرادار",
+            "de": "Radartürme gebaut.",
+            "en": "Radar Towers built",
+            "es": "Torres de radar construidas",
+            "es-419": "Torres de radar construidas",
+            "fr": "Tours radar construites",
+            "it": "Torri radar costruite",
+            "ja": "建築したレーダー塔",
+            "ko": "레이더 탑 건설",
+            "pl": "Wieże radarowe zbudowane",
+            "pt-BR": "Torres de Radar construídas",
+            "ru": "Построенные радарные вышки",
+            "tr": "İnşa edilen Radar Kuleleri",
+            "zh-CN": "雷达塔已建造",
+            "zh-Hant": "雷达塔已建造"
+          },
+          "count": 4
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_mission_specialist_anyhero_1": {
+      "name": {
+        "ar": "أخصائي المهمات (أي بطل)",
+        "de": "Missionsspezialist (beliebiger Held)",
+        "en": "Mission Specialist (Any Hero)",
+        "es": "Enviado espacial (cualquier héroe)",
+        "es-419": "Especialista de misión (cualquier héroe)",
+        "fr": "Spécialiste de mission (tout héros)",
+        "it": "Specialista di missione (qualsiasi eroe)",
+        "ja": "ミッションスペシャリスト(任意のヒーロー)",
+        "ko": "미션 달인 (아무 영웅)",
+        "pl": "Specjalista od misji (dowolny bohater)",
+        "pt-BR": "Especialista em Missões (Qualquer Herói)",
+        "ru": "Миссия выполнима (любой герой)",
+        "tr": "Görev Uzmanı (Herhangi Bir Kahraman)",
+        "zh-CN": "任务专家（任意英雄）",
+        "zh-Hant": "任務專家（任意英雄）"
+      },
+      "objectives": {
+        "complete_primary": {
+          "name": {
+            "ar": "اكتملت المهمات",
+            "de": "Missionen abgeschlossen",
+            "en": "Missions completed",
+            "es": "Misiones completadas",
+            "es-419": "Misiones completadas",
+            "fr": "Missions terminées",
+            "it": "Missioni completate",
+            "ja": "ミッションクリア",
+            "ko": "미션 완료",
+            "pl": "Ukończone misje",
+            "pt-BR": "Missões concluídas",
+            "ru": "Выполните миссии",
+            "tr": "Tamamlanan görevler",
+            "zh-CN": "任务完成",
+            "zh-Hant": "任務完成"
+          },
+          "count": 3
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_mission_specialist_anyhero_2": {
+      "name": {
+        "ar": "خبير المهمات (أي بطل)",
+        "de": "Missionsveteran (beliebiger Held)",
+        "en": "Mission Veteran (Any Hero)",
+        "es": "Veterano de misión (cualquier héroe)",
+        "es-419": "Veterano de misión (cualquier héroe)",
+        "fr": "Vétéran de mission (tout héros)",
+        "it": "Veterano della missione (qualsiasi eroe)",
+        "ja": "ミッションベテラン(任意のヒーロー)",
+        "ko": "미션 베테랑 (아무 영웅)",
+        "pl": "Weteran od misji (dowolny bohater)",
+        "pt-BR": "Veterano em Missões (Qualquer Herói)",
+        "ru": "Любая миссия выполнима (любой герой)",
+        "tr": "Görev Ustası (Herhangi Bir Kahraman)",
+        "zh-CN": "任务老兵（任意英雄）",
+        "zh-Hant": "任務老兵（任意英雄）"
+      },
+      "objectives": {
+        "complete_primary": {
+          "name": {
+            "ar": "اكتملت المهمات",
+            "de": "Missionen abgeschlossen",
+            "en": "Missions completed",
+            "es": "Misiones completadas",
+            "es-419": "Misiones completadas",
+            "fr": "Missions terminées",
+            "it": "Missioni completate",
+            "ja": "ミッションクリア",
+            "ko": "미션 완료",
+            "pl": "Ukończone misje",
+            "pt-BR": "Missões concluídas",
+            "ru": "Выполните миссии",
+            "tr": "Tamamlanan görevler",
+            "zh-CN": "任务完成",
+            "zh-Hant": "任務完成"
+          },
+          "count": 5
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 130,
+        "AccountResource:eventcurrency_scaling": 410
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_mission_specialist_constructor": {
+      "name": {
+        "ar": "أخصائي المهام (البنّاء)",
+        "de": "Missionsspezialist (Konstrukteur)",
+        "en": "Mission Specialist (Constructor)",
+        "es": "Especialista en misiones (constructor)",
+        "es-419": "Especialista de misión (constructor)",
+        "fr": "Spécialiste de mission (Constructeur)",
+        "it": "Specialista di missione (Costruttore)",
+        "ja": "ミッションスペシャリスト(コンストラクター)",
+        "ko": "미션 전문가 (건축가)",
+        "pl": "Specjalista w misji (Budowniczy)",
+        "pt-BR": "Especialista de Missão (Construtor)",
+        "ru": "Миссия выполнима (конструктор)",
+        "tr": "Görev Uzmanı (İnşaatçı)",
+        "zh-CN": "任务专家(建筑师)",
+        "zh-Hant": "任務專家(建築師)"
+      },
+      "objectives": {
+        "complete_constructor": {
+          "name": {
+            "ar": "تم إكمال المهمة as a Constructor",
+            "de": "Mission als Konstrukteur abgeschlossen",
+            "en": "Mission completed as a Constructor",
+            "es": "Misión completada con un constructor",
+            "es-419": "Misión completada como constructor",
+            "fr": "Mission terminée en tant que Constructeur",
+            "it": "Missioni completate come Costruttore",
+            "ja": "コンストラクターでミッションをクリアする",
+            "ko": "건축가로 미션 완료",
+            "pl": "Misje ukończone jako Budowniczy",
+            "pt-BR": "Missões concluídas como Construtor",
+            "ru": "Выполните миссию за конструктора",
+            "tr": "İnşaatçı olarak görev tamamlandı",
+            "zh-CN": "使用建筑师完成任务",
+            "zh-Hant": "使用建築師完成任務"
+          },
+          "count": 3
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_mission_specialist_ninja": {
+      "name": {
+        "ar": "أخصائي المهام (النينجا)",
+        "de": "Missionsspezialist (Ninja)",
+        "en": "Mission Specialist (Ninja)",
+        "es": "Especialista en misiones (ninja)",
+        "es-419": "Especialista de misión (ninja)",
+        "fr": "Spécialiste de mission (Ninja)",
+        "it": "Specialista di missione (Ninja)",
+        "ja": "ミッションスペシャリスト(ニンジャ)",
+        "ko": "미션 전문가 (닌자)",
+        "pl": "Specjalista w misji (Ninja)",
+        "pt-BR": "Especialista de Missão (Ninja)",
+        "ru": "Миссия выполнима (ниндзя)",
+        "tr": "Görev Uzmanı (Ninja)",
+        "zh-CN": "任务专家(忍者)",
+        "zh-Hant": "任務專家(忍者)"
+      },
+      "objectives": {
+        "complete_ninja": {
+          "name": {
+            "ar": "تم إكمال المهام كنينجا",
+            "de": "Missionen als Ninja abgeschlossen",
+            "en": "Missions completed as a Ninja",
+            "es": "Misiones completadas con un ninja",
+            "es-419": "Misiones completadas como ninja",
+            "fr": "Missions terminées en tant que Ninja",
+            "it": "Missioni completate come Ninja",
+            "ja": "ニンジャでミッションをクリアする",
+            "ko": "닌자로 미션 완료",
+            "pl": "Misje ukończone jako Ninja",
+            "pt-BR": "Missões concluídas como Ninja",
+            "ru": "Выполните миссию за ниндзя",
+            "tr": "Ninja olarak tamamlanan görevler",
+            "zh-CN": "使用忍者完成任务",
+            "zh-Hant": "使用忍者完成任務"
+          },
+          "count": 3
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_mission_specialist_outlander": {
+      "name": {
+        "ar": "أخصائي المهام (Outlander)",
+        "de": "Missionsspezialist (Entdecker)",
+        "en": "Mission Specialist (Outlander)",
+        "es": "Especialista en misiones (trotamundos)",
+        "es-419": "Especialista de misión (forastero)",
+        "fr": "Spécialiste de mission (Aventurier)",
+        "it": "Specialista di missione (Straniero)",
+        "ja": "ミッションスペシャリスト(アウトランダー)",
+        "ko": "미션 전문가 (개척자)",
+        "pl": "Specjalista w misji (Rubieżnik)",
+        "pt-BR": "Especialista em Missão (Forasteiro)",
+        "ru": "Миссия выполнима (путешественник)",
+        "tr": "Görev Uzmanı (İzci)",
+        "zh-CN": "任务专家(漂泊者)",
+        "zh-Hant": "任務專家(漂泊者)"
+      },
+      "objectives": {
+        "complete_outlander": {
+          "name": {
+            "ar": "تم إكمال المهام كأجنبي",
+            "de": "Missionen als Entdecker abgeschlossen",
+            "en": "Missions completed as an Outlander",
+            "es": "Misiones completadas con un trotamundos",
+            "es-419": "Misiones completadas como forastero",
+            "fr": "Missions terminées en tant qu'Aventurier",
+            "it": "Missioni completate come Straniero",
+            "ja": "アウトランダーでミッションをクリアする",
+            "ko": "개척자로 미션 완료",
+            "pl": "Misje ukończone jako Rubieżnik",
+            "pt-BR": "Missões concluídas como Forasteiro",
+            "ru": "Выполните миссию за путешественника",
+            "tr": "İzci olarak tamamlanan görevler",
+            "zh-CN": "使用漂泊者完成任务",
+            "zh-Hant": "使用漂泊者完成任務"
+          },
+          "count": 3
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_mission_specialist_soldier": {
+      "name": {
+        "ar": "أخصائي المهام (الجندي)",
+        "de": "Missionsspezialist (Soldat)",
+        "en": "Mission Specialist (Soldier)",
+        "es": "Especialista en misiones (soldado)",
+        "es-419": "Especialista de misión (soldado)",
+        "fr": "Spécialiste de mission (Soldat)",
+        "it": "Specialista di missione (Soldato)",
+        "ja": "ミッションスペシャリスト(ソルジャー)",
+        "ko": "미션 전문가 (군인)",
+        "pl": "Specjalista w misji (Żołnierz)",
+        "pt-BR": "Especialista de Missão (Soldado)",
+        "ru": "Миссия выполнима (солдат)",
+        "tr": "Görev Uzmanı (Asker)",
+        "zh-CN": "任务专家(士兵)",
+        "zh-Hant": "任務專家(士兵)"
+      },
+      "objectives": {
+        "complete_commando": {
+          "name": {
+            "ar": "تم إكمال المهام كجندي",
+            "de": "Missionen als Soldat abgeschlossen",
+            "en": "Missions completed as a Soldier",
+            "es": "Misiones completadas con un soldado",
+            "es-419": "Misiones completadas como soldado",
+            "fr": "Missions terminées en tant que Soldat",
+            "it": "Missioni completate come Soldato",
+            "ja": "ソルジャーでミッションをクリアする",
+            "ko": "군인으로 미션 완료",
+            "pl": "Misje ukończone jako Żołnierz",
+            "pt-BR": "Missões concluídas como Soldado",
+            "ru": "Выполните миссию за солдата",
+            "tr": "Asker olarak tamamlanan görevler",
+            "zh-CN": "使用士兵完成任务",
+            "zh-Hant": "使用士兵完成任務"
+          },
+          "count": 3
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_partyof50": {
+      "name": {
+        "ar": "مجموعة من 25",
+        "de": "25er Gruppe",
+        "en": "Party of 25",
+        "es": "Grupo de 25",
+        "es-419": "Grupo de 25",
+        "fr": "Entre vingt et trente",
+        "it": "Quella sporca venticinquina",
+        "ja": "25人パーティー",
+        "ko": "25개의 생명",
+        "pl": "Grupa 25 osób",
+        "pt-BR": "Grupo de 25",
+        "ru": "25 друзей командира",
+        "tr": "25 Kişilik Grup",
+        "zh-CN": "25人队伍",
+        "zh-Hant": "25人隊伍"
+      },
+      "objectives": {
+        "daily_partyof50": {
+          "name": {
+            "ar": "تم إنقاذ الناجين",
+            "de": "Überlebende gerettet",
+            "en": "Survivors saved",
+            "es": "Supervivientes salvados",
+            "es-419": "Sobrevivientes salvados",
+            "fr": "Survivants sauvés",
+            "it": "Superstiti salvati",
+            "ja": "サバイバーを救助する",
+            "ko": "생존자 구출 완료",
+            "pl": "Ocaleńcy uratowani",
+            "pt-BR": "Sobreviventes salvos",
+            "ru": "Спасите выживших",
+            "tr": "Kurtarılan felaketzedeler",
+            "zh-CN": "幸存者已营救",
+            "zh-Hant": "倖存者已營救"
+          },
+          "count": 25
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_safes": {
+      "name": {
+        "ar": "يلعب بشكل آمن",
+        "de": "Safe ist anders",
+        "en": "Playing It Safe",
+        "es": "Sin riesgos",
+        "es-419": "Sin riesgos",
+        "fr": "Coffrez-moi ça",
+        "it": "Senza correre rischi",
+        "ja": "安全第一",
+        "ko": "금고털이",
+        "pl": "Jak w banku",
+        "pt-BR": "Fanático por Cofres",
+        "ru": "Надёжное место",
+        "tr": "Kasa Kasa Bir Hal Oldun",
+        "zh-CN": "小心行事",
+        "zh-Hant": "小心行事"
+      },
+      "objectives": {
+        "interact_safe": {
+          "name": {
+            "ar": "الخزائن المنهوبة",
+            "de": "Safes geplündert",
+            "en": "Safes looted",
+            "es": "Cajas fuertes saqueadas",
+            "es-419": "Cajas fuertes saqueadas",
+            "fr": "Coffres-forts fouillés",
+            "it": "Casseforti saccheggiate",
+            "ja": "開けた金庫",
+            "ko": "금고 획득",
+            "pl": "Sejfy złupione",
+            "pt-BR": "Cofres saqueados",
+            "ru": "Опустошите сейфы",
+            "tr": "Açılan kasalar",
+            "zh-CN": "保险箱已拾取",
+            "zh-Hant": "保險箱已拾取"
+          },
+          "count": 1
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
+    },
+    "Quest:daily_treasurechests": {
+      "name": {
+        "ar": "كنوز مفقودة",
+        "de": "Vergessene Schätze",
+        "en": "Lost Treasures",
+        "es": "Tesoros perdidos",
+        "es-419": "Tesoros perdidos",
+        "fr": "Trésors perdus",
+        "it": "Tesori perduti",
+        "ja": "失われた財宝",
+        "ko": "잃어버린 보물",
+        "pl": "Stracone skarby",
+        "pt-BR": "Tesouros Perdidos",
+        "ru": "Потерянные сокровища",
+        "tr": "Kayıp Hazineler",
+        "zh-CN": "失落的宝藏",
+        "zh-Hant": "失落的寶藏"
+      },
+      "objectives": {
+        "interact_treasurechest": {
+          "name": {
+            "ar": "صناديق الكنوز المنهوبة",
+            "de": "Schatztruhen geplündert",
+            "en": "Treasure chests looted",
+            "es": "Cofres del tesoro saqueados",
+            "es-419": "Cofres de tesoro saqueados",
+            "fr": "Coffres au trésor fouillés",
+            "it": "Forzieri del tesoro saccheggiati",
+            "ja": "開けた宝箱",
+            "ko": "보물상자 획득",
+            "pl": "Złupione skrzynie ze skarbami",
+            "pt-BR": "Baús de tesouro saqueados",
+            "ru": "Сокровища добыты",
+            "tr": "Açılan hazine sandıkları",
+            "zh-CN": "财宝箱已搜刮",
+            "zh-Hant": "財寶箱已搜刮"
+          },
+          "count": 5
+        }
+      },
+      "rewards": {
+        "ConditionalResource:currency_mtxswap": 80,
+        "AccountResource:eventcurrency_scaling": 250
+      },
+      "rarity": "uncommon",
+      "type": "quest"
     }
   },
   "Strings": {
@@ -41660,6 +43446,9 @@
       "main.skiptutorial.start": "{0} didn't complete the StW tutorial mission yet. Skipping the tutorial...\n",
       "main.skiptutorial.success": "Successfully skipped {0}'s Save the World tutorial mission.\n",
       "main.skiptutorial.error": "Something went wrong and the program wasn't able to skip {0}'s Save the World tutorial mission.\n",
+      "main.dailies.searching": "Searching for active daily challenges...\n",
+      "main.dailies.info": "{0}. {1} | Current progress:{2} | Earnable rewards:{3}\n",
+      "main.dailies.notfound": "No active daily challenges found. Come back tommorow!",
       "main.research.error": "ERROR: {0}\n",
       "main.research.success": "Claimed {0} {1}. Total Research Points: {2}\n",
       "main.research.notenough": "The program is unable to claim {0} Research Point because in order to collect it, at least 1 point must be available for claiming. In other words, the program will be able to claim Research Points again in a few minutes.\n",
@@ -41776,6 +43565,9 @@
       "main.skiptutorial.start": "{0} nie ma jeszcze ukończonego samouczka RŚ. Pomijanie samouczka...\n",
       "main.skiptutorial.success": "Pomyślnie pominięto misję samouczka RŚ na koncie dla {0}.\n",
       "main.skiptutorial.error": "Coś poszło nie tak i program nie mógł pominąć misji samouczka RŚ na koncie {0}.\n",
+      "main.dailies.searching": "Poszukiwanie aktywnych zadań dnia...\n",
+      "main.dailies.info": "{0}. {1} | Aktualny postęp:{2} | Nagrody do zdobycia:{3}\n",
+      "main.dailies.notfound": "Nie znaleziono aktywnych zadań dnia. Zajrzyj tu jutro!",
       "main.research.error": "BŁĄD: {0}\n",
       "main.research.success": "Zebrano {0} {1}. Łączna liczba Punktów Badawczych: {2}\n",
       "main.research.notenough": "Program nie może zebrać {0} Punkta Badawczego, ponieważ aby to zrobić, dostępny musi być co najmniej 1 punkt. Innymi słowy, program będzie mógł ponownie zebrać Punkty Badawcze za kilka minut.\n",
