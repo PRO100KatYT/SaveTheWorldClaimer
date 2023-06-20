@@ -1,13 +1,14 @@
-# Fortnite Save the World Daily Reward, Research Points & free Llama Claimer
+# Fortnite Save the World Research Points & free Llama Claimer
 
-This program allows you to claim Save the World Daily Reward, Research Points, open free Llamas and even skip the tutorial mission without opening the game.
+This program allows you to claim Research Points, open free Llamas and even skip the tutorial mission without opening the game.
+
+NOTE: Due to Epic Games removing the Daily Reward system from Fortnite, the program is no longer able to claim these rewards. Read more [here](https://www.fortnite.com/news/changes-coming-to-fortnite-save-the-worlds-daily-reward-system-in-v25-10). Soon I'll add a new feature which will let you see your current daily challenges.
 
 [![](https://img.shields.io/badge/python-3.9.5+-blue.svg)](https://www.python.org/downloads/)
 ---
 ### Features:
 - Multiple account support with two login methods: refresh token and device auth.
   - You can see more info about them and choose the method when adding an account.
-- Daily reward claiming.
 - Research Points claiming.
 - Tutorial mission skipping (Unlocks the Save the World music pack even if you don't own StW).
 - Automatic Research Points spending.
@@ -24,13 +25,9 @@ This program allows you to claim Save the World Daily Reward, Research Points, o
 - 15 languages support for Fortnite item names.
 ---
 ### Changelog:
-What's new in the 1.10.1 update:
-- Added a `Fortnite Save the World Claimer` title to the program's window if the program is running on Windows.
-- Made the StW tutorial skip feature toggleable via the config file.
-  - Default value: false.
-- Fixed the [Issue #20](https://github.com/PRO100KatYT/SaveTheWorldClaimer/issues/20).
-- Made user input not case-sensitive.
-- Tweaked the program's code a little bit.
+What's new in the 1.11.0 update:
+- 🫡 Removed the Daily Rewards claiming due to Epic Games removing them from Fortnite.
+- Rewritten some parts of the code. If you encounter any new issues, please report them [here](https://github.com/PRO100KatYT/SaveTheWorldClaimer/issues/new "Click here if you want to open an issue.").
 ---
 
 ### How to use it?
