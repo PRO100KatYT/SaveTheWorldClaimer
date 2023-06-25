@@ -1,6 +1,6 @@
 # Fortnite Save the World Research Points & free Llama Claimer
 
-This program allows you to claim Research Points, open free Llamas and even skip the tutorial mission without opening the game.
+This program allows you to claim Research Points, open free Llamas, manage your Daily Quests and even skip the tutorial mission without opening the game.
 
 NOTE: Due to Epic Games removing the Daily Reward system from Fortnite, the program is no longer able to claim these rewards. Read more [here](https://www.fortnite.com/news/changes-coming-to-fortnite-save-the-worlds-daily-reward-system-in-v25-10).
 
@@ -11,6 +11,8 @@ NOTE: Due to Epic Games removing the Daily Reward system from Fortnite, the prog
   - You can see more info about them and choose the method when adding an account.
 - New Daily Quest getting and displaying information about them.
   - The program will display their progress and earnable rewards.
+- Daily Quest replacing
+  - You can access the Daily Quest manager in the Main Menu.
 - Research Points claiming.
 - Tutorial mission skipping (Unlocks the Save the World music pack even if you don't own StW).
 - Automatic Research Points spending.
@@ -27,12 +29,16 @@ NOTE: Due to Epic Games removing the Daily Reward system from Fortnite, the prog
 - 15 languages support for Fortnite item names.
 ---
 ### Changelog:
-What's new in the 1.11.0 update:
-- 🫡 Removed the Daily Rewards claiming due to Epic Games removing them from Fortnite.
-- Rewritten some parts of the code. If you encounter any new issues, please report them [here](https://github.com/PRO100KatYT/SaveTheWorldClaimer/issues/new "Click here if you want to open an issue.").
+What's new in the 1.12.0 update:
+- New feature: Daily Quest replacing! Suggested [here](https://github.com/PRO100KatYT/SaveTheWorldClaimer/issues/25).
+  - You can access the Daily Quest manager in the Main Menu.
+- Corrected the V-Buck and X-Ray Ticket rewards quantity information for Soldier, Constructor, Outlander and Ninja Mission Specialist daily quests.
+- Tweaked the program's code a little bit.
 
-What's new in the 1.11.1 update:
+What's new in the 1.11.0 & 1.11.1 updates:
+- 🫡 Removed the Daily Rewards claiming due to Epic Games removing them from Fortnite.
 - New feature: The program will now get today's daily quest for you & list all your current active ones with their progress and earnable rewards.
+- Rewritten some parts of the code. If you encounter any new issues, please report them [here](https://github.com/PRO100KatYT/SaveTheWorldClaimer/issues/new "Click here if you want to open an issue.").
 ---
 
 ### How to use it?

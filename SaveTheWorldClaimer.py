@@ -1,4 +1,4 @@
-version = "1.11.1"
+version = "1.12.0"
 configVersion = "1.10.1"
 print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
 
@@ -70,7 +70,7 @@ def getString(string):
     try: return stringList['Strings'][language][f'{string}']
     except: return stringList['Strings']['en'][f'{string}']
 
-# Get a correct plural word depending on the int. Improve it's code if possible because it looks messy rn.
+# Get a correct plural word depending on the int.
 def getPluralWord(string, number):
     if number == 1: plural = 'one'
     elif 2 <= number < 5: plural = 'few'
@@ -177,66 +177,9 @@ try: authJson = json.loads(open(authPath, "r", encoding = "utf-8").read())
 except: customError(getString("authjson.readerror"))
 if not isinstance(authJson, list): customError(getString("authjson.oldformat"))
 
-# Startup (Account Manager)
-def startup():
-    def addAccount(bGoBack=True):
-        isLoggedIn = validInput(getString("startup.addaccount.isloggedin1" if bGoBack else "startup.addaccount.isloggedin2"), ["1", "2", "3"])
-        if isLoggedIn == "3": return
-        authType = validInput(getString("startup.addaccount.authtype"), ["token", "device"])
-        input(getString("startup.addaccount.openwebsiteinfo"))
-        loginLink = links.loginLink1 if isLoggedIn == "1" else links.loginLink2
-        if authType == "token": # Shoutout to BayGamerYT for telling me about this login method.
-            reqToken = reqTokenText(loginLink.format("34a02cf8f4414e29b15921876da36f9a"), links.loginLink1.format("34a02cf8f4414e29b15921876da36f9a"), "MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
-            refreshToken, accountId, displayName, expirationDate = [reqToken["refresh_token"], reqToken["account_id"], reqToken["displayName"], reqToken["refresh_expires_at"]]
-            jsonToAppend = {getString("authjson.warning.header"): getString("authjson.warning.text"), "authType": "token", "refreshToken": refreshToken, "accountId": accountId, "displayName": displayName, "refresh_expires_at": expirationDate}
-        else:
-            reqToken = reqTokenText(loginLink.format("3446cd72694c4a4485d81b77adbb2141"), links.loginLink1.format("3446cd72694c4a4485d81b77adbb2141"), "MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE=")
-            accessToken, accountId, displayName = [reqToken["access_token"], reqToken["account_id"], reqToken["displayName"]]
-            reqDeviceAuth = requestText(session.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={}), True)
-            deviceId, secret = [reqDeviceAuth["deviceId"], reqDeviceAuth["secret"]]
-            jsonToAppend = {getString("authjson.warning.header"): getString("authjson.warning.text"), "authType": "device",  "deviceId": deviceId, "accountId": accountId, "displayName": displayName, "secret": secret}
-        bAlreadyLoggedIn = any(account['accountId'] == accountId for account in authJson)
-        if bAlreadyLoggedIn: message(getString("startup.addaccount.alreadyadded").format(displayName))
-        else:
-            authJson.append(jsonToAppend)
-            with open(authPath, "w", encoding="utf-8") as authFile: json.dump(authJson, authFile, indent=2, ensure_ascii=False)
-            message(getString("startup.addaccount.success").format(displayName))
-
-    def listAccounts():
-        message(getString("startup.listaccounts.header"))
-        if not authJson: message(getString("startup.listaccounts.empty"))
-        else:
-            for account in authJson:
-                try: message(f"{authJson.index(account) + 1}: {account['displayName']}")
-                except KeyError: message(f"{authJson.index(account) + 1}: {getString('startup.listaccounts.noname')}")
-
-    def removeAccount():
-        listAccounts()
-        if not authJson: return
-        message(getString("startup.removeaccount.message"))
-        accountCountList = [str(i) for i in range(len(authJson))]
-        accountToRemove = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)]))
-        if accountToRemove != 0:
-            message(getString("startup.removeaccount.success").format(authJson[accountToRemove - 1]['displayName']))
-            authJson.pop(accountToRemove - 1)
-            with open(authPath, "w", encoding="utf-8") as authFile: json.dump(authJson, authFile, indent=2, ensure_ascii=False)
-
-    while True:
-        if not authJson: addAccount(False)
-        bStartClaimer = validInput(getString("mainmenu.message"), ["1", "2"])
-        if bStartClaimer == "1": break
-        while True:
-            whatToDo = validInput(getString("accountmanager.message"), ["1", "2", "3", "4"])
-            if whatToDo == "1": addAccount()
-            elif whatToDo == "2": removeAccount()
-            elif whatToDo == "3":
-                listAccounts()
-                input(getString("accountmanager.pressenter"))
-            else: break
-
-# The main part of the program that can be looped.
-def main():
-    for account in authJson:
+# Log into an account.
+class login:
+    def __init__(self, account):
         # Read the auth.json file.
         try:
             authType, accountId = account['authType'], account["accountId"]
@@ -267,55 +210,164 @@ def main():
         # The receivemtxcurrency token is not required, but if it's not in the profile, the account will receive X-Ray Tickets instead of V-Bucks.
         reqQueryProfiles = [json.dumps(requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(session.post(links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False))]
         campaignProfile = json.loads(reqQueryProfiles[1])['profileChanges'][0]['profile']
-        bCampaignAccess = bReceiveMtx = False
-        if "Token:campaignaccess" in reqQueryProfiles[0]: bCampaignAccess = True
+        bReceiveMtx = False
         if "Token:receivemtxcurrency" in reqQueryProfiles[1]: bReceiveMtx = True
 
+        self.headers, self.accountId, self.displayName, self.campaignProfile, self.bReceiveMtx = headers, accountId, displayName, campaignProfile, bReceiveMtx
+
+# Get an account's Daily Quests
+def getDailyQuests(auth):
+    questNumber = 0
+    questData = {}
+    for item in auth.campaignProfile['items']:
+        itemData = auth.campaignProfile['items'][item]
+        if itemData['templateId'].lower().startswith("quest:daily_") and itemData['attributes']['quest_state'].lower() == "active":
+            templateId = itemData['templateId']
+            questName = stringList['Items'][templateId]['name'][itemsLang]
+            objectives = stringList['Items'][templateId]['objectives']
+            progressMess = ""
+            for objective in objectives:
+                objData = objectives[objective]
+                objName, objCount = objData['name'][itemsLang], objData['count']
+                completionCount = itemData['attributes'].get(f'completion_{objective}', 0)
+                progressMess += f" {completionCount}/{objCount} {objName},"
+            progressMess = progressMess[:-1]
+            rewards = stringList['Items'][templateId]['rewards']
+            rewardsMess = ""
+            for reward in rewards:
+                rewardQuantity, rewardName = [rewards[reward], stringList['Items'][reward]['name'][itemsLang]]
+                if reward.startswith("ConditionalResource:"):
+                    if auth.bReceiveMtx == True: rewardsMess += f" {rewardQuantity}x {rewardName['PassedConditionItem']},"
+                    rewardName = rewardName['FailedConditionItem']
+                rewardsMess += f" {rewardQuantity}x {rewardName},"
+            rewardsMess = rewardsMess[:-1]
+            questNumber += 1
+            questData[item] = {"templateId": templateId, "questNumber": questNumber, "questName": questName, "progress": progressMess, "rewards": rewardsMess}
+    return questData
+
+# Menu (Account & Daily Quest Manager)
+def menu():
+    def addAccount(bGoBack=True):
+        isLoggedIn = validInput(getString("startup.addaccount.isloggedin1" if bGoBack else "startup.addaccount.isloggedin2"), ["1", "2", "3"])
+        if isLoggedIn == "3": return
+        authType = validInput(getString("startup.addaccount.authtype"), ["token", "device"])
+        input(getString("startup.addaccount.openwebsiteinfo"))
+        loginLink = links.loginLink1 if isLoggedIn == "1" else links.loginLink2
+        if authType == "token": # Shoutout to BayGamerYT for telling me about this login method.
+            reqToken = reqTokenText(loginLink.format("34a02cf8f4414e29b15921876da36f9a"), links.loginLink1.format("34a02cf8f4414e29b15921876da36f9a"), "MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
+            refreshToken, accountId, displayName, expirationDate = [reqToken["refresh_token"], reqToken["account_id"], reqToken["displayName"], reqToken["refresh_expires_at"]]
+            jsonToAppend = {getString("authjson.warning.header"): getString("authjson.warning.text"), "authType": "token", "refreshToken": refreshToken, "accountId": accountId, "displayName": displayName, "refresh_expires_at": expirationDate}
+        else:
+            reqToken = reqTokenText(loginLink.format("3446cd72694c4a4485d81b77adbb2141"), links.loginLink1.format("3446cd72694c4a4485d81b77adbb2141"), "MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE=")
+            accessToken, accountId, displayName = [reqToken["access_token"], reqToken["account_id"], reqToken["displayName"]]
+            reqDeviceAuth = requestText(session.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={}), True)
+            deviceId, secret = [reqDeviceAuth["deviceId"], reqDeviceAuth["secret"]]
+            jsonToAppend = {getString("authjson.warning.header"): getString("authjson.warning.text"), "authType": "device",  "deviceId": deviceId, "accountId": accountId, "displayName": displayName, "secret": secret}
+        bAlreadyLoggedIn = any(account['accountId'] == accountId for account in authJson)
+        if bAlreadyLoggedIn: print(getString("startup.addaccount.alreadyadded").format(displayName))
+        else:
+            authJson.append(jsonToAppend)
+            with open(authPath, "w", encoding="utf-8") as authFile: json.dump(authJson, authFile, indent=2, ensure_ascii=False)
+            print(getString("startup.addaccount.success").format(displayName))
+
+    def listAccounts():
+        print(getString("startup.listaccounts.header"))
+        if not authJson: print(getString("startup.listaccounts.empty"))
+        else:
+            for account in authJson:
+                try: print(f"{authJson.index(account) + 1}: {account['displayName']}")
+                except KeyError: print(f"{authJson.index(account) + 1}: {getString('startup.listaccounts.noname')}")
+
+    def removeAccount():
+        listAccounts()
+        if not authJson: return
+        print(getString("startup.removeaccount.message"))
+        accountCountList = [str(i) for i in range(len(authJson))]
+        accountToRemove = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)]))
+        if accountToRemove != 0:
+            print(getString("startup.removeaccount.success").format(authJson[accountToRemove - 1]['displayName']))
+            authJson.pop(accountToRemove - 1)
+            with open(authPath, "w", encoding="utf-8") as authFile: json.dump(authJson, authFile, indent=2, ensure_ascii=False)
+
+    def manageDailyQuests():
+        while authJson:
+            listAccounts()
+            print(getString("startup.managedailyquests.message"))
+            accountCountList = list(map(str, range(len(authJson))))
+            accountIndex = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)]))
+            if accountIndex == 0: break
+            accountToManage = authJson[accountIndex - 1]
+            while True:
+                auth = login(accountToManage)
+                print(getString("startup.managedailyquests.searching"))
+                questData = getDailyQuests(auth)
+                if not questData:
+                    print(getString("startup.managedailyquests.notfound"))
+                    input(getString("startup.managedailyquests.pressenter"))
+                    break
+                else:
+                    for quest in questData: print(getString("startup.managedailyquests.info").format(questData[quest]['questNumber'], questData[quest]['questName'], questData[quest]['progress'], questData[quest]['rewards']))
+                    dailyQuestRerolls = auth.campaignProfile["stats"]["attributes"].get("quest_manager", 0).get("dailyQuestRerolls", 0)
+                    if dailyQuestRerolls <= 0:
+                        print(getString("startup.managedailyquests.norerolls"))
+                        input(getString("startup.managedailyquests.pressenter"))
+                        break
+                    else:
+                        print(getString("startup.managedailyquests.choosequest").format(auth.displayName))
+                        questCountList = list(map(str, range(len(questData))))
+                        questIndex = int(validInput("", questCountList + [str(int(questCountList[-1]) + 1)]))
+                        if questIndex == 0: break
+                        questToReplace = list(questData.keys())[questIndex - 1]
+                        confirmReroll = validInput(getString("startup.managedailyquests.confirm").format(questData[questToReplace]['questName']), ["1", "2"])
+                        if confirmReroll == "1":
+                            reqRerollQuest = requestText(session.post(links.profileRequest.format(auth.accountId, "FortRerollDailyQuest", "campaign"), headers=auth.headers, json={"questId": questToReplace}), True)
+                            newQuestTemplateId = reqRerollQuest.get("notifications", [{}])[0].get("newQuestId")
+                            if newQuestTemplateId:
+                                newQuestName = stringList['Items'].get(newQuestTemplateId, {}).get('name', {}).get(itemsLang, newQuestTemplateId)
+                                print(getString("startup.managedailyquests.success").format(questData[questToReplace]['questName'], newQuestName))
+                                input(getString("startup.managedailyquests.pressenter"))
+
+    while True:
+        if not authJson: addAccount(False)
+        bStartClaimer = validInput(getString("mainmenu.message"), ["1", "2", "3", "4"])
+        if bStartClaimer == "1": break
+        elif bStartClaimer == "2": manageDailyQuests()
+        elif bStartClaimer == "3":
+            while True:
+                whatToDo = validInput(getString("accountmanager.message"), ["1", "2", "3", "4"])
+                if whatToDo == "1": addAccount()
+                elif whatToDo == "2": removeAccount()
+                elif whatToDo == "3":
+                    listAccounts()
+                    input(getString("accountmanager.pressenter"))
+                else: break
+        else: exit()
+
+# The main part of the program that can be looped.
+def main():
+    for account in authJson:
+        auth = login(account)
+        
         # Skip the StW tutorial if it hasn't been completed yet. Works for accounts that don't own StW too. It will get the account the StW music pack.
         if bSkipTutorial == "true":
-            for item in campaignProfile['items']:
-                if campaignProfile['items'][item]['templateId'].lower() != "quest:homebaseonboarding": continue
-                if campaignProfile['items'][item]['attributes']['quest_state'].lower() == "claimed": break
-                message(getString("main.skiptutorial.start").format(displayName))
-                session.post(links.profileRequest.format(accountId, "SkipTutorial", "campaign"), headers=headers, data="{}")
-                reqUpdateObjectives = requestText(session.post(links.profileRequest.format(accountId, "UpdateQuestClientObjectives", "campaign"), headers=headers, json={"advance": [{"statName": "hbonboarding_watchsatellitecine", "count": 1, "timestampOffset": 0}, {"statName": "hbonboarding_namehomebase", "count": 1, "timestampOffset": 0}]}), True)
-                if reqUpdateObjectives['profileChanges'][0]['profile']['items'][item]['attributes']['quest_state'].lower() == "claimed": message(getString("main.skiptutorial.success").format(displayName))
-                else: message(getString("main.skiptutorial.error").format(displayName))
+            for item in auth.campaignProfile['items']:
+                if auth.campaignProfile['items'][item]['templateId'].lower() != "quest:homebaseonboarding": continue
+                if auth.campaignProfile['items'][item]['attributes']['quest_state'].lower() == "claimed": break
+                message(getString("main.skiptutorial.start").format(auth.displayName))
+                session.post(links.profileRequest.format(auth.accountId, "SkipTutorial", "campaign"), headers=auth.headers, data="{}")
+                reqUpdateObjectives = requestText(session.post(links.profileRequest.format(auth.accountId, "UpdateQuestClientObjectives", "campaign"), headers=auth.headers, json={"advance": [{"statName": "hbonboarding_watchsatellitecine", "count": 1, "timestampOffset": 0}, {"statName": "hbonboarding_namehomebase", "count": 1, "timestampOffset": 0}]}), True)
+                if reqUpdateObjectives['profileChanges'][0]['profile']['items'][item]['attributes']['quest_state'].lower() == "claimed": message(getString("main.skiptutorial.success").format(auth.displayName))
+                else: message(getString("main.skiptutorial.error").format(auth.displayName))
                 break
 
         # Display current daily challenges, their rewards and progress if there is any.
         message(getString("main.dailies.searching"))
-        found = False
-        questNumber = 1
-        for item in campaignProfile['items']:
-            itemData = campaignProfile['items'][item]
-            if itemData['templateId'].lower().startswith("quest:daily_") and itemData['attributes']['quest_state'].lower() == "active":
-                found = True
-                templateId = itemData['templateId']
-                questName = stringList['Items'][templateId]['name'][itemsLang]
-                objectives = stringList['Items'][templateId]['objectives']
-                progressMess = ""
-                for objective in objectives:
-                    objData = objectives[objective]
-                    objName, objCount = objData['name'][itemsLang], objData['count']
-                    completionCount = itemData['attributes'].get(f'completion_{objective}', 0)
-                    progressMess += f" {completionCount}/{objCount} {objName},"
-                progressMess = progressMess[:-1]
-                rewards = stringList['Items'][templateId]['rewards']
-                rewardsMess = ""
-                for reward in rewards:
-                    rewardQuantity, rewardName = [rewards[reward], stringList['Items'][reward]['name'][itemsLang]]
-                    if reward.startswith("ConditionalResource:"):
-                        if bReceiveMtx == True: rewardsMess += f" {rewardQuantity}x {rewardName['PassedConditionItem']},"
-                        rewardName = rewardName['FailedConditionItem']
-                    rewardsMess += f" {rewardQuantity}x {rewardName},"
-                rewardsMess = rewardsMess[:-1]
-                message(getString("main.dailies.info").format(questNumber, questName, progressMess, rewardsMess))
-                questNumber += 1
-        if not found: message(getString("main.dailies.notfound"))
+        questData = getDailyQuests(auth)
+        if not questData: message(getString("main.dailies.notfound"))
+        for quest in questData: message(getString("main.dailies.info").format(questData[quest]['questNumber'], questData[quest]['questName'], questData[quest]['progress'], questData[quest]['rewards']))
 
         # Claim and automatically spend the Research Points.
-        reqCampaignProfileCheck = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
+        reqCampaignProfileCheck = requestText(session.post(links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)
         try:
             reqCampaignProfileCheckResearchLevels = reqCampaignProfileCheck['profileChanges'][0]['profile']['stats']['attributes']['research_levels']
             bTryToClaimRP = True
@@ -331,7 +383,7 @@ def main():
                     tokenToClaim = key
                     break
             if tokenToClaim:
-                reqClaimCollectedResources = requestText(session.post(links.profileRequest.format(accountId, "ClaimCollectedResources", "campaign"), headers=headers, json={"collectorsToClaim": [tokenToClaim]}), False)
+                reqClaimCollectedResources = requestText(session.post(links.profileRequest.format(auth.accountId, "ClaimCollectedResources", "campaign"), headers=auth.headers, json={"collectorsToClaim": [tokenToClaim]}), False)
                 if "errorMessage" in reqClaimCollectedResources: message(getString("main.research.error").format(reqClaimCollectedResources['errorMessage'])) # Error without exit()
                 else:
                     storedMaxPoints = False
@@ -357,7 +409,7 @@ def main():
                         else:
                             message(getString("main.research.max.on").format(rpStored))
                             while True:
-                                reqFORTLevelsCheck = {**{"fortitude": 0, "offense": 0, "resistance": 0, "technology": 0}, **requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)['profileChanges'][0]['profile']['stats']['attributes']['research_levels']}
+                                reqFORTLevelsCheck = {**{"fortitude": 0, "offense": 0, "resistance": 0, "technology": 0}, **requestText(session.post(links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)['profileChanges'][0]['profile']['stats']['attributes']['research_levels']}
                                 if spendAutoResearch == "lowest":
                                     levelsList = [int(reqFORTLevelsCheck['fortitude']), int(reqFORTLevelsCheck['offense']), int(reqFORTLevelsCheck['resistance']), int(reqFORTLevelsCheck['technology'])]
                                     level = min(levelsList)
@@ -368,12 +420,12 @@ def main():
                                     if reqFORTLevelsCheck[key] == int(level):
                                         statToClaim = key
                                         break
-                                reqPurchaseResearchStatUpgrade = requestText(session.post(links.profileRequest.format(accountId, "PurchaseResearchStatUpgrade", "campaign"), headers=headers, json={"statId": f'{statToClaim}'}), False)
+                                reqPurchaseResearchStatUpgrade = requestText(session.post(links.profileRequest.format(auth.accountId, "PurchaseResearchStatUpgrade", "campaign"), headers=auth.headers, json={"statId": f'{statToClaim}'}), False)
                                 statName = stringList['Strings'][language]['researchStats'][f'{statToClaim}']
                                 if "errorMessage" in reqPurchaseResearchStatUpgrade: break # Error without exit()
                                 else: message(getString("main.research.spend.success").format(statName, reqPurchaseResearchStatUpgrade['profileChanges'][0]['profile']['stats']['attributes']['research_levels'][statToClaim]))
                             message(getString("main.research.spend.end"))
-                            reqClaimCollectedResources = requestText(session.post(links.profileRequest.format(accountId, "ClaimCollectedResources", "campaign"), headers=headers, json={"collectorsToClaim": [tokenToClaim]}), True)
+                            reqClaimCollectedResources = requestText(session.post(links.profileRequest.format(auth.accountId, "ClaimCollectedResources", "campaign"), headers=auth.headers, json={"collectorsToClaim": [tokenToClaim]}), True)
                             try:
                                 totalItemGuid = reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['itemGuid']
                                 message(getString("main.research.success").format(reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity'], reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity']))
@@ -382,7 +434,7 @@ def main():
         # Search for free Llamas and open them if they're available.
         alreadyOpenedFreeLlamas, freeLlamasCount, cpspStorefront = [0, 0, []]
         if bOpenFreeLlamas == "true":
-            reqGetStorefront = requestText(session.get(links.getStorefront, headers=headers, data={}), True)['storefronts']
+            reqGetStorefront = requestText(session.get(links.getStorefront, headers=auth.headers, data={}), True)['storefronts']
             for key in reqGetStorefront:
                 if key['name'] == "CardPackStorePreroll":
                     cpspStorefront = key['catalogEntries']
@@ -405,17 +457,17 @@ def main():
                             if llamaToClaimTitle: llamaToClaimName = llamaToClaimTitle
                         if not llamaToClaimName: llamaToClaimName = llamaToClaimCPId
                         while True:
-                            reqPopulateLlamas = requestText(session.post(links.profileRequest.format(accountId, "PopulatePrerolledOffers", "campaign"), headers=headers, data="{}"), True)
+                            reqPopulateLlamas = requestText(session.post(links.profileRequest.format(auth.accountId, "PopulatePrerolledOffers", "campaign"), headers=auth.headers, data="{}"), True)
                             for key in reqPopulateLlamas['profileChanges'][0]['profile']['items']:
                                 if (reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['templateId'].lower().startswith("prerolldata") and reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['offerId'] == llamaToClaimOfferId):
                                     try: llamaTier = reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['highest_rarity']
                                     except: llamaTier = 0
                                     llamaTier = stringList['Llama tiers'][f'{llamaTier}'][language]
-                            reqBuyFreeLlama = requestText(session.post(links.profileRequest.format(accountId, "PurchaseCatalogEntry", "common_core"), headers=headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "GameItem", "currencySubType": "AccountResource:currency_xrayllama", "expectedTotalPrice": 0, "gameContext": "Frontend.None"}), False)
+                            reqBuyFreeLlama = requestText(session.post(links.profileRequest.format(auth.accountId, "PurchaseCatalogEntry", "common_core"), headers=auth.headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "GameItem", "currencySubType": "AccountResource:currency_xrayllama", "expectedTotalPrice": 0, "gameContext": "Frontend.None"}), False)
                             if "errorMessage" in reqBuyFreeLlama:
                                 if "limit of" in reqBuyFreeLlama['errorMessage']:
                                     if openedLlamas == 0: alreadyOpenedFreeLlamas += 1
-                                if "because fulfillment" in reqBuyFreeLlama['errorMessage']: message(getString("main.freellamas.cantclaim").format(displayName, llamaToClaimTitle))
+                                if "because fulfillment" in reqBuyFreeLlama['errorMessage']: message(getString("main.freellamas.cantclaim").format(auth.displayName, llamaToClaimTitle))
                                 break
                             else:
                                 message(getString("main.freellamas.start").format(llamaToClaimName, llamaTier))
@@ -444,17 +496,17 @@ def main():
             if len(itemGuidsToRecycle) != 0:
                 freeLlamasWord = getPluralWord("freeLlamasRecycle", openedLlamas)
                 message(getString("main.recycle.start").format(openedLlamas, freeLlamasWord))
-                reqGetResources = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
+                reqGetResources = requestText(session.post(links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)
                 for resource in autoRecycling.recycleResources:
                     for item in reqGetResources['profileChanges'][0]['profile']['items']:
                         if reqGetResources['profileChanges'][0]['profile']['items'][item]['templateId'] == resource: recycleResources.append({"itemGuid": item, "templateId": resource, "itemName": stringList['Items'][resource]['name'][itemsLang], "quantity": reqGetResources['profileChanges'][0]['profile']['items'][item]['quantity']})
-                requestText(session.post(links.profileRequest.format(accountId, "RecycleItemBatch", "campaign"), headers=headers, json={"targetItemIds": itemGuidsToRecycle}), True)
+                requestText(session.post(links.profileRequest.format(auth.accountId, "RecycleItemBatch", "campaign"), headers=auth.headers, json={"targetItemIds": itemGuidsToRecycle}), True)
                 recycleMessage = getString("main.recycle.message")
                 for item in itemsToRecycle:
                     recycledItemsCount += 1
                     recycleMessage += f"{recycledItemsCount}: {stringList['Item Rarities'][item['itemRarity']][itemsLang]} | {stringList['Item Types'][item['itemType']][itemsLang]}: {item['itemQuantity']}x {item['itemName']}\n"
                 message(f"{recycleMessage}")
-                reqGetResources2 = requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "campaign"), headers=headers, data="{}"), True)
+                reqGetResources2 = requestText(session.post(links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)
                 resourcesMessage = getString("main.recycle.resources")
                 for resource in recycleResources:
                     resourceQuantity = int(reqGetResources2['profileChanges'][0]['profile']['items'][resource['itemGuid']]['quantity']) - int(resource['quantity'])
@@ -464,7 +516,7 @@ def main():
                 message(f"{resourcesMessage}")
 
 # Start the program.
-if bSkipMainMenu == "false": startup()
+if bSkipMainMenu == "false": menu()
 if loopMinutes > 0:
     while True:
         main()
