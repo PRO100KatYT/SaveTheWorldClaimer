@@ -1,6 +1,6 @@
-version = "1.12.0"
-configVersion = "1.10.1"
-print(f"Fortnite Save the World Claimer v{version} by PRO100KatYT\n")
+versionNum = 31
+versionStr = "1.13.0"
+configVersion = "1.13.0"
 
 import os
 import sys
@@ -18,7 +18,6 @@ except ImportError:
     if os.name == 'posix': os.system('clear')
     else: os.system('cls')
     subprocess.call([sys.executable, os.path.realpath(__file__)] + sys.argv[1:])
-
 
 # Default program language value.
 language = "en"
@@ -45,15 +44,12 @@ session = Session()
 bShowDateTime = "false"
 
 # Get the current date and time and neatly format it | by Salty-Coder :)
-def getDateTimeString():
-    dateTimeObj = datetime.now()
-    return f"[{dateTimeObj.year:04d}/{dateTimeObj.month:02d}/{dateTimeObj.day:02d} {dateTimeObj.hour:02d}:{dateTimeObj.minute:02d}:{dateTimeObj.second:02d}]"
+def getDateTimeString(): return datetime.now().strftime("[%Y/%m/%d %H:%M:%S]")
 
 # Get the next time program is going to run by Salty-Coder
 def nextrun(loopMinutes):
-    now = datetime.now()
-    nextrun = now + timedelta(minutes = loopMinutes)
-    return f"{nextrun.year:04d}/{nextrun.month:02d}/{nextrun.day:02d} {nextrun.hour:02d}:{nextrun.minute:02d}:{nextrun.second:02d}"
+    nextrun = datetime.now() + timedelta(minutes=loopMinutes)
+    return nextrun.strftime("%Y/%m/%d %H:%M:%S")
 
 # Load the stringlist.json file.
 stringListPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "stringlist.json")
@@ -66,9 +62,7 @@ except:
     exit()
 
 # Get a string in currently selected language.
-def getString(string):
-    try: return stringList['Strings'][language][f'{string}']
-    except: return stringList['Strings']['en'][f'{string}']
+def getString(string): return stringList['Strings'].get(language, stringList['Strings']['en']).get(string, '')
 
 # Get a correct plural word depending on the int.
 def getPluralWord(string, number):
@@ -76,8 +70,7 @@ def getPluralWord(string, number):
     elif 2 <= number < 5: plural = 'few'
     elif number == 0 or number >= 5: plural = 'many'
     else: plural = 'other'
-    try: return stringList['Strings'][language]['words'][string][plural]
-    except KeyError: return stringList['Strings']['en']['words'][string][plural]
+    return stringList['Strings'].get(language, 'en')['words'][string][plural]
 
 # Error with a custom message.
 def customError(text):
@@ -105,23 +98,41 @@ def requestText(request, bCheckForErrors):
 
 # Send token request.
 def reqTokenText(loginLink, altLoginLink, authHeader):
-    count = 0
     while True:
-        count += 1
-        if count > 1: loginLink = altLoginLink
         webbrowser.open_new_tab(loginLink)
         print(getString("reqtoken.message").format(loginLink))
         reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {authHeader}"}, data={"grant_type": "authorization_code", "code": input(getString("reqtoken.insertcode"))}), False)
-        if not "errorMessage" in reqToken: break
+        if "errorMessage" not in reqToken: return reqToken
         else: input(getString("reqtoken.error").format(reqToken['errorMessage']))
-    return reqToken
+        loginLink = altLoginLink
 
-# Print a message with or without the date and time.
+# Print a message with or without the date and time. Send the message to Discord if the webhook url is specified in config.ini.
+webhookUrl = "" # A value will be assigned in the config part of the program.
 def message(string):
+    global webhookUrl
     if bShowDateTime == "true":
-        string = string.replace("\n", "\n"+" "*((len(getDateTimeString()))+1))
-        print(f"{getDateTimeString()} {string}")
-    else: print(string)
+        lines = string.split("\n")
+        for i in range(len(lines)): # fix for when a message starts with newlines
+            if lines[i].strip() != "":
+                lines[i] = f"{getDateTimeString()} {lines[i]}"
+                break
+        string = "\n".join(lines)
+    print(string)
+    if not webhookUrl: return
+    try: session.post(webhookUrl, data=json.dumps({"content": string}), headers={"Content-Type": "application/json"})
+    except Exception as e:
+        print(getString("webhook.error").format(e))
+        webhookUrl = ""
+
+# Check if there is a newer version of this program available.
+def checkUpdate():
+    if bCheckForUpdates == "false": return
+    try:
+        getJson = (session.get("https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/main/SaveTheWorldClaimer.py").text).splitlines()[0:2]
+        latestVerNum = int(getJson[0].split("=")[1].strip())
+        latestVerStr = getJson[1].split("=")[1].strip().strip('"')
+        if latestVerNum > versionNum: message(getString("updatechecker.message").format(latestVerStr))
+    except: []
 
 # Create and/or read the config.ini file.
 config, configPath = [ConfigParser(), os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.ini")]
@@ -144,15 +155,16 @@ if not os.path.exists(configPath):
         iSkip_Tutorial = validInput(getString("config.setup.bskiptutorial"), boolValues)
         iLoop_Time = validInput(getString("config.setup.looptime"), "digit")
         iShow_Date_Time = validInput(getString("config.setup.datetime"), boolValues)
-    else: iLanguage, iItemsLanguage, iSpend_Research_Points, iOpen_Free_Llamas, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iSkip_Tutorial, iLoop_Time, iShow_Date_Time = ["en", "en", "lowest", "true", "uncommon", "uncommon", "rare", "rare", "uncommon", "false", 0, "false"]           
-    with open(configPath, "w") as configFile: configFile.write(getString("config.configfile").format(', '.join(langValues), iLanguage, ', '.join(itemLangValues), iItemsLanguage, iSpend_Research_Points, iOpen_Free_Llamas, iSkip_Tutorial, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iLoop_Time, iShow_Date_Time, configVersion))
+        iCheck_For_Updates = validInput(getString("config.setup.checkupdates"), boolValues)
+    else: iLanguage, iItemsLanguage, iSpend_Research_Points, iOpen_Free_Llamas, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iSkip_Tutorial, iLoop_Time, iShow_Date_Time, iCheck_For_Updates = ["en", "en", "lowest", "true", "uncommon", "uncommon", "rare", "rare", "uncommon", "false", 0, "false", "true"]           
+    with open(configPath, "w", encoding="utf-8") as configFile: configFile.write(getString("config.configfile").format(', '.join(langValues), iLanguage, ', '.join(itemLangValues), iItemsLanguage, iSpend_Research_Points, iOpen_Free_Llamas, iSkip_Tutorial, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iLoop_Time, iShow_Date_Time, iCheck_For_Updates, configVersion))
     print(getString("config.setup.success"))
 config.read(configPath)
 try: configVer = config['Config_Version']['Version']
 except: customError(getString("config.readerror"))
 if configVer != f"STWC_{configVersion}": customError(getString("config.versionerror"))
 try:
-    language, itemsLang, spendAutoResearch, bOpenFreeLlamas, bSkipTutorial, loopMinutes, bShowDateTime, bSkipMainMenu = [config['StW_Claimer_Config']['Language'].lower(), config['StW_Claimer_Config']['ItemsLanguage'].lower(), config['StW_Claimer_Config']['Spend_Research_Points'].lower(), config['StW_Claimer_Config']['Open_Free_Llamas'].lower(), config['StW_Claimer_Config']['Skip_Tutorial'].lower(), config['Loop']['Loop_Minutes'], config['Misc']['Show_Date_Time'].lower(), config['Misc']['Skip_Main_Menu'].lower()]
+    language, itemsLang, spendAutoResearch, bOpenFreeLlamas, bSkipTutorial, loopMinutes, bShowDateTime, bCheckForUpdates, webhookUrl, bSkipMainMenu = [config['StW_Claimer_Config']['Language'].lower(), config['StW_Claimer_Config']['ItemsLanguage'].lower(), config['StW_Claimer_Config']['Spend_Research_Points'].lower(), config['StW_Claimer_Config']['Open_Free_Llamas'].lower(), config['StW_Claimer_Config']['Skip_Tutorial'].lower(), config['Loop']['Loop_Minutes'], config['Misc']['Show_Date_Time'].lower(), config['Misc']['Check_For_Updates'].lower(), config['Misc']['Discord_Webhook_URL'], config['Misc']['Skip_Main_Menu'].lower()]
     autoRecycling.itemRarities = {"weapon": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Weapons'].lower()].split(", "), "trap": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Traps'].lower()].split(", "), "survivor": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Survivors'].lower()].split(", "), "defender": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Defenders'].lower()].split(", "), "hero": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Heroes'].lower()].split(", ")}
 except: customError(getString("config.readerror"))
 checkValuesJson = {"Language": {"value": language, "validValues": langValues}, "ItemsLanguage": {"value": itemsLang, "validValues": itemLangValues}, "Spend_Research_Points": {"value": spendAutoResearch, "validValues": ["off", "lowest", "everyten"]}, "Open_Free_Llamas": {"value": bOpenFreeLlamas, "validValues": boolValues}, "Skip_Tutorial": {"value": bSkipTutorial, "validValues": boolValues}, "Show_Date_Time": {"value": bShowDateTime, "validValues": boolValues}, "Skip_Main_Menu": {"value": bSkipMainMenu, "validValues": boolValues}}
@@ -516,15 +528,20 @@ def main():
                 message(f"{resourcesMessage}")
 
 # Start the program.
+message(f"Fortnite Save the World Claimer v{versionStr} by PRO100KatYT\n")
+checkUpdate()
 if bSkipMainMenu == "false": menu()
-if loopMinutes > 0:
-    while True:
-        main()
-        if str(loopMinutes).endswith(".0"): loopMinutes = int(str(loopMinutes).split(".")[0])
+while True:
+    main()
+    if loopMinutes > 0:
+        loopMinutes = int(loopMinutes) if str(loopMinutes).endswith(".0") else loopMinutes
         minutesWord = getPluralWord("minutes", loopMinutes)
         print(getString("loop.message").format(loopMinutes, minutesWord, nextrun(loopMinutes)))
         time.sleep(loopMinutes * 60)
-else: main()
+    else:
+        if bSkipMainMenu == "true": break
+        whatToDo = validInput(getString("noloop.input"), ["0", ""])
+        if not whatToDo: break
+        menu()
 
-input(getString("exit.pressenter"))
 exit()
