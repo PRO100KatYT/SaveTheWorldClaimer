@@ -1,5 +1,5 @@
-versionNum = 31
-versionStr = "1.13.0"
+versionNum = 32
+versionStr = "1.13.1"
 configVersion = "1.13.0"
 
 import os
@@ -10,6 +10,7 @@ from configparser import ConfigParser
 from datetime import datetime, timedelta
 import webbrowser
 import time
+from threading import Thread
 if os.name == "nt": os.system(f"title Fortnite Save the World Claimer")
 try: from requests import Session
 except ImportError:
@@ -106,8 +107,9 @@ def reqTokenText(loginLink, altLoginLink, authHeader):
         else: input(getString("reqtoken.error").format(reqToken['errorMessage']))
         loginLink = altLoginLink
 
-# Print a message with or without the date and time. Send the message to Discord if the webhook url is specified in config.ini.
+# Print a message with or without the date and time.
 webhookUrl = "" # A value will be assigned in the config part of the program.
+webhookMessagesToSend = []
 def message(string):
     global webhookUrl
     if bShowDateTime == "true":
@@ -119,10 +121,22 @@ def message(string):
         string = "\n".join(lines)
     print(string)
     if not webhookUrl: return
-    try: session.post(webhookUrl, data=json.dumps({"content": string}), headers={"Content-Type": "application/json"})
-    except Exception as e:
-        print(getString("webhook.error").format(e))
-        webhookUrl = ""
+    webhookMessagesToSend.append(string)
+
+# Send webhook messages to a Discord channel if the webhook url is specified in config.ini.
+def webhookLoop():
+    global webhookUrl
+    while True:
+        try:
+            if webhookUrl and webhookMessagesToSend:
+                webhookMessagesToSend2 = ''.join(mess if mess.endswith('\n') else mess+'\n' for mess in webhookMessagesToSend)
+                webhookMessagesToSend.clear()
+                session.post(webhookUrl, data=json.dumps({"content": webhookMessagesToSend2}), headers={"Content-Type": "application/json"})
+            else: time.sleep(0.25)
+        except Exception as e: webhookMessagesToSend.clear()
+t = Thread(target=webhookLoop)
+t.daemon = True # End the thread when program stops.
+t.start()
 
 # Check if there is a newer version of this program available.
 def checkUpdate():
@@ -216,10 +230,9 @@ class login:
         message(getString("main.login.success"))
 
         # Headers for MCP requests.
-        headers = {"User-Agent": "Fortnite/++Fortnite+Release-19.40-CL-19215531 Windows/10.0.19043.1.768.64bit", "Authorization": f"bearer {accessToken}", "Content-Type": "application/json"}
+        headers = {"User-Agent": "Fortnite/++Fortnite+Release-19.40-CL-19215531 Windows/10.0.19043.1.768.64bit", "Authorization": f"bearer {accessToken}", "Content-Type": "application/json", "X-EpicGames-Language": itemsLang, "Accept-Language": itemsLang}
 
-        # Check whether the account has the campaign access token and is able to receive V-Bucks.
-        # The receivemtxcurrency token is not required, but if it's not in the profile, the account will receive X-Ray Tickets instead of V-Bucks.
+        # Check whether the account has the campaign access token and if it's able to receive V-Bucks.
         reqQueryProfiles = [json.dumps(requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(session.post(links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False))]
         campaignProfile = json.loads(reqQueryProfiles[1])['profileChanges'][0]['profile']
         bReceiveMtx = False
@@ -237,24 +250,24 @@ def getDailyQuests(auth):
             templateId = itemData['templateId']
             questName = stringList['Items'][templateId]['name'][itemsLang]
             objectives = stringList['Items'][templateId]['objectives']
-            progressMess = ""
+            progressMsg = ""
             for objective in objectives:
                 objData = objectives[objective]
                 objName, objCount = objData['name'][itemsLang], objData['count']
                 completionCount = itemData['attributes'].get(f'completion_{objective}', 0)
-                progressMess += f" {completionCount}/{objCount} {objName},"
-            progressMess = progressMess[:-1]
+                progressMsg += f" {completionCount}/{objCount} {objName},"
+            progressMsg = progressMsg[:-1]
             rewards = stringList['Items'][templateId]['rewards']
-            rewardsMess = ""
+            rewardsMsg = ""
             for reward in rewards:
                 rewardQuantity, rewardName = [rewards[reward], stringList['Items'][reward]['name'][itemsLang]]
                 if reward.startswith("ConditionalResource:"):
-                    if auth.bReceiveMtx == True: rewardsMess += f" {rewardQuantity}x {rewardName['PassedConditionItem']},"
+                    if auth.bReceiveMtx == True: rewardsMsg += f" {rewardQuantity}x {rewardName['PassedConditionItem']},"
                     rewardName = rewardName['FailedConditionItem']
-                rewardsMess += f" {rewardQuantity}x {rewardName},"
-            rewardsMess = rewardsMess[:-1]
+                rewardsMsg += f" {rewardQuantity}x {rewardName},"
+            rewardsMsg = rewardsMsg[:-1]
             questNumber += 1
-            questData[item] = {"templateId": templateId, "questNumber": questNumber, "questName": questName, "progress": progressMess, "rewards": rewardsMess}
+            questData[item] = {"templateId": templateId, "questNumber": questNumber, "questName": questName, "progress": progressMsg, "rewards": rewardsMsg}
     return questData
 
 # Menu (Account & Daily Quest Manager)
@@ -318,7 +331,7 @@ def menu():
                     input(getString("startup.managedailyquests.pressenter"))
                     break
                 else:
-                    for quest in questData: print(getString("startup.managedailyquests.info").format(questData[quest]['questNumber'], questData[quest]['questName'], questData[quest]['progress'], questData[quest]['rewards']))
+                    for quest in questData: message(getString("startup.managedailyquests.info").format(questData[quest]['questNumber'], questData[quest]['questName'], questData[quest]['progress'], questData[quest]['rewards']))
                     dailyQuestRerolls = auth.campaignProfile["stats"]["attributes"].get("quest_manager", 0).get("dailyQuestRerolls", 0)
                     if dailyQuestRerolls <= 0:
                         print(getString("startup.managedailyquests.norerolls"))
@@ -341,7 +354,7 @@ def menu():
 
     while True:
         if not authJson: addAccount(False)
-        bStartClaimer = validInput(getString("mainmenu.message"), ["1", "2", "3", "4"])
+        bStartClaimer = validInput(getString("mainmenu.message"), ["1", "2", "3", ""])
         if bStartClaimer == "1": break
         elif bStartClaimer == "2": manageDailyQuests()
         elif bStartClaimer == "3":

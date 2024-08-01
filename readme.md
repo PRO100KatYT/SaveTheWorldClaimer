@@ -37,17 +37,12 @@ This program allows you to claim Research Points, open free Llamas, manage your 
 ---
 
 ### Changelog:
-What's new in the 1.13.0 update:
-- Highly requested feature: Discord Webhook!
-  - This feature allows the program’s messages to be sent to a text channel in your Discord server.
-  - You can set the Webhook URL in config.
-  - Suggested by Salty-Coder, Lucy-2077, probablypablito, darzex and Playeereq.
-- Update checker at the start of the program (toggleable via config).
-- When the Main Program execution ends and `Skip_Main_Menu` is set to `false` in config:
-  - You are now able to go back to the Main Menu by typing `0` in the input and pressing ENTER.
-  - If the input is left blank, the program will stop, just like before.
-- When the Main Program execution ends and `Skip_Main_Menu` is set to `true` in config, the program will no longer ask to press ENTER to exit. ([Issue #29](https://github.com/PRO100KatYT/SaveTheWorldClaimer/issues/29))
-- Fixed date and time being displayed at the wrong line of text when a message begins with newlines.
+What's new in the 1.13.1 update:
+- If enabled, the program will now send Discord Webhooks in a thread so that it won't slow down the whole program anymore.
+- When you want to stop the program in the Main Menu, you can now just leave the input blank and press ENTER instead of having to additionally type `4` in the input.
+- Added Birthday Llama name strings to stringlist.json
+- The program will now display data from responses such as catalog, in the item language specified in the configuration.
+- Added a .gitignore file.
 - Tweaked the program's code a little bit.
 
 ---
