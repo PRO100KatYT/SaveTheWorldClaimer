@@ -37,14 +37,19 @@ This program allows you to claim Research Points, open free Llamas, manage your 
 ---
 
 ### Changelog:
+What's new in the 1.13.2 update:
+- Fixed the device login method not working.
+  - Included backwards compatibility with accounts saved prior to this update.
+- Added a confirmation question after selecting an account to remove from the program.
+- Added the Eternal Wanderer, Madcap and Mayhem heroes strings to the stringlist.json
+- Tweaked the program's code a little bit.
+
 What's new in the 1.13.1 update:
 - If enabled, the program will now send Discord Webhooks in a thread so that it won't slow down the whole program anymore.
 - When you want to stop the program in the Main Menu, you can now just leave the input blank and press ENTER instead of having to additionally type `4` in the input.
 - Added Birthday Llama name strings to stringlist.json
 - The program will now display data from responses such as catalog, in the item language specified in the configuration.
 - Added a .gitignore file.
-- Tweaked the program's code a little bit.
-
 ---
 
 ### How to use it?

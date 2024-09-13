@@ -1,5 +1,5 @@
-versionNum = 32
-versionStr = "1.13.1"
+versionNum = 33
+versionStr = "1.13.2"
 configVersion = "1.13.0"
 
 import os
@@ -37,6 +37,12 @@ class autoRecycling:
     rarities = {"off": "", "common": "common", "uncommon": "common, uncommon", "rare": "common, uncommon, rare", "epic": "common, uncommon, rare, epic"}
     itemRarities = []
     recycleResources = ["AccountResource:heroxp", "AccountResource:personnelxp", "AccountResource:phoenixxp", "AccountResource:phoenixxp_reward", "AccountResource:reagent_alteration_ele_fire", "AccountResource:reagent_alteration_ele_nature", "AccountResource:reagent_alteration_ele_water", "AccountResource:reagent_alteration_gameplay_generic", "AccountResource:reagent_alteration_generic", "AccountResource:reagent_alteration_upgrade_r", "AccountResource:reagent_alteration_upgrade_sr", "AccountResource:reagent_alteration_upgrade_uc", "AccountResource:reagent_alteration_upgrade_vr", "AccountResource:reagent_c_t01", "AccountResource:reagent_c_t02", "AccountResource:reagent_c_t03", "AccountResource:reagent_c_t04", "AccountResource:reagent_evolverarity_r", "AccountResource:reagent_evolverarity_sr", "AccountResource:reagent_evolverarity_vr", "AccountResource:reagent_people", "AccountResource:reagent_promotion_heroes", "AccountResource:reagent_promotion_survivors", "AccountResource:reagent_promotion_traps", "AccountResource:reagent_promotion_weapons", "AccountResource:reagent_traps", "AccountResource:reagent_weapons", "AccountResource:schematicxp"]
+
+# Basic headers for logging in. (For backwards compatibility for accounts saved prior to the 1.13.2 Update)
+class basicHeaders:
+    inUse = ""
+    ios = "MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE"
+    android = "M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU"
 
 # Start a new requests session.
 session = Session()
@@ -218,14 +224,16 @@ class login:
 
         # Log in.
         message(getString("main.login.start").format(displayName))
+        if not "addedInVersionNum" in account: basicHeaders.inUse = basicHeaders.ios
+        else: basicHeaders.inUse = basicHeaders.android
         if authType == "token":
             reqRefreshToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "refresh_token", "refresh_token": refreshToken}), False)
             if "errorMessage" in reqRefreshToken: customError(getString("main.login.token.error").format(displayName))
             account['refreshToken'], account['refresh_expires_at'] = reqRefreshToken["refresh_token"], reqRefreshToken["refresh_expires_at"]
             with open(authPath, "w", encoding="utf-8") as saveAuthFile: json.dump(authJson, saveAuthFile, indent=2, ensure_ascii=False)
             reqExchange = requestText(session.get(links.getOAuth.format("exchange"), headers={"Authorization": f"bearer {reqRefreshToken['access_token']}"}, data={"grant_type": "authorization_code"}), True)
-            reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "exchange_code", "exchange_code": reqExchange["code"], "token_type": "eg1"}), True)
-        elif authType == "device": reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE="}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"}), True)
+            reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {basicHeaders.inUse}"}, data={"grant_type": "exchange_code", "exchange_code": reqExchange["code"], "token_type": "eg1"}), True)
+        elif authType == "device": reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {basicHeaders.inUse}"}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"}), True)
         accessToken, displayName = reqToken['access_token'], reqToken['displayName']
         message(getString("main.login.success"))
 
@@ -281,13 +289,13 @@ def menu():
         if authType == "token": # Shoutout to BayGamerYT for telling me about this login method.
             reqToken = reqTokenText(loginLink.format("34a02cf8f4414e29b15921876da36f9a"), links.loginLink1.format("34a02cf8f4414e29b15921876da36f9a"), "MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y=")
             refreshToken, accountId, displayName, expirationDate = [reqToken["refresh_token"], reqToken["account_id"], reqToken["displayName"], reqToken["refresh_expires_at"]]
-            jsonToAppend = {getString("authjson.warning.header"): getString("authjson.warning.text"), "authType": "token", "refreshToken": refreshToken, "accountId": accountId, "displayName": displayName, "refresh_expires_at": expirationDate}
+            jsonToAppend = {getString("authjson.warning.header"): getString("authjson.warning.text"), "authType": "token", "refreshToken": refreshToken, "accountId": accountId, "displayName": displayName, "refresh_expires_at": expirationDate, "addedInVersionNum": versionNum}
         else:
-            reqToken = reqTokenText(loginLink.format("3446cd72694c4a4485d81b77adbb2141"), links.loginLink1.format("3446cd72694c4a4485d81b77adbb2141"), "MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE=")
+            reqToken = reqTokenText(loginLink.format("3f69e56c7649492c8cc29f1af08a8a12"), links.loginLink1.format("3f69e56c7649492c8cc29f1af08a8a12"), "M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU=")
             accessToken, accountId, displayName = [reqToken["access_token"], reqToken["account_id"], reqToken["displayName"]]
             reqDeviceAuth = requestText(session.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={}), True)
             deviceId, secret = [reqDeviceAuth["deviceId"], reqDeviceAuth["secret"]]
-            jsonToAppend = {getString("authjson.warning.header"): getString("authjson.warning.text"), "authType": "device",  "deviceId": deviceId, "accountId": accountId, "displayName": displayName, "secret": secret}
+            jsonToAppend = {getString("authjson.warning.header"): getString("authjson.warning.text"), "authType": "device",  "deviceId": deviceId, "accountId": accountId, "displayName": displayName, "secret": secret, "addedInVersionNum": versionNum}
         bAlreadyLoggedIn = any(account['accountId'] == accountId for account in authJson)
         if bAlreadyLoggedIn: print(getString("startup.addaccount.alreadyadded").format(displayName))
         else:
@@ -310,9 +318,11 @@ def menu():
         accountCountList = [str(i) for i in range(len(authJson))]
         accountToRemove = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)]))
         if accountToRemove != 0:
-            print(getString("startup.removeaccount.success").format(authJson[accountToRemove - 1]['displayName']))
-            authJson.pop(accountToRemove - 1)
-            with open(authPath, "w", encoding="utf-8") as authFile: json.dump(authJson, authFile, indent=2, ensure_ascii=False)
+            areYouSure = int(validInput(getString("startup.removeaccount.areyousure").format(authJson[accountToRemove - 1]['displayName']), ["1", "2"]))
+            if areYouSure == 1:
+                print(getString("startup.removeaccount.success").format(authJson[accountToRemove - 1]['displayName']))
+                authJson.pop(accountToRemove - 1)
+                with open(authPath, "w", encoding="utf-8") as authFile: json.dump(authJson, authFile, indent=2, ensure_ascii=False)
 
     def manageDailyQuests():
         while authJson:
