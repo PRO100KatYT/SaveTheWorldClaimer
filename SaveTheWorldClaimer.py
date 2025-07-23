@@ -91,7 +91,7 @@ def configError(key, value, validValues): customError(getString("configerror.mes
 # Input loop until it's one of the correct values.
 def validInput(text, values):
     while True:
-        response = input(f"{text}\n").lower()
+        response = input(f"{text}\n")
         if values == "digit" and response.replace(",", ".").replace(".", "").isdigit(): break
         elif response in values: break
         text = getString("validinput.message")
