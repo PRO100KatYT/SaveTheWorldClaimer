@@ -1,13 +1,14 @@
-versionNum = 33
-versionStr = "1.13.2"
-configVersion = "1.13.0"
+versionNum = 34
+versionStr = "1.14.0"
+configVersion = "1.14.0"
+print(f"Fortnite Save the World Claimer v{versionStr} by PRO100KatYT\n")
 
 import os
 import sys
 import subprocess
 import json
 from configparser import ConfigParser
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import webbrowser
 import time
 from threading import Thread
@@ -19,6 +20,7 @@ except ImportError:
     if os.name == 'posix': os.system('clear')
     else: os.system('cls')
     subprocess.call([sys.executable, os.path.realpath(__file__)] + sys.argv[1:])
+    exit()
 
 # Default program language value.
 language = "en"
@@ -38,7 +40,7 @@ class autoRecycling:
     itemRarities = []
     recycleResources = ["AccountResource:heroxp", "AccountResource:personnelxp", "AccountResource:phoenixxp", "AccountResource:phoenixxp_reward", "AccountResource:reagent_alteration_ele_fire", "AccountResource:reagent_alteration_ele_nature", "AccountResource:reagent_alteration_ele_water", "AccountResource:reagent_alteration_gameplay_generic", "AccountResource:reagent_alteration_generic", "AccountResource:reagent_alteration_upgrade_r", "AccountResource:reagent_alteration_upgrade_sr", "AccountResource:reagent_alteration_upgrade_uc", "AccountResource:reagent_alteration_upgrade_vr", "AccountResource:reagent_c_t01", "AccountResource:reagent_c_t02", "AccountResource:reagent_c_t03", "AccountResource:reagent_c_t04", "AccountResource:reagent_evolverarity_r", "AccountResource:reagent_evolverarity_sr", "AccountResource:reagent_evolverarity_vr", "AccountResource:reagent_people", "AccountResource:reagent_promotion_heroes", "AccountResource:reagent_promotion_survivors", "AccountResource:reagent_promotion_traps", "AccountResource:reagent_promotion_weapons", "AccountResource:reagent_traps", "AccountResource:reagent_weapons", "AccountResource:schematicxp"]
 
-# Basic headers for logging in. (For backwards compatibility for accounts saved prior to the 1.13.2 Update)
+# Basic headers for logging in. (For backwards compatibility with accounts saved prior to the 1.13.2 Update)
 class basicHeaders:
     inUse = ""
     ios = "MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE"
@@ -47,37 +49,62 @@ class basicHeaders:
 # Start a new requests session.
 session = Session()
 
+# Send requests and retry if something goes wrong.
+sendRequestErrorMsg = "An error occured when trying to send a \"{0}\" request to {1}.{2} Make sure you have a stable internet connection.\nRetrying in {3}s...\n" # It will later be overriden by the one from stringlist.json
+def request(method, url, headers=None, data=None, json=None):
+    global sendRequestErrorMsg
+    retries, secondsToWait = [0, 5]
+    while True:
+        try:
+            if method == "get": req = session.get(url, headers=headers, data=data, json=json)
+            elif method == "post": req = session.post(url, headers=headers, data=data, json=json)
+        except Exception as e:
+            secondsToWait = 10 if (retries in [2, 3]) else (30 if (retries in [4, 5]) else (60 if retries >= 6 else 5))
+            print(sendRequestErrorMsg.format(method, url, (" ({0}).".format(e) if retries >= 6 else ""), secondsToWait))
+            time.sleep(secondsToWait)
+            retries += 1
+            continue
+        return req
+
 # Default bShowDateTime value.
-bShowDateTime = "false"
+bShowDateTime = False
 
 # Get the current date and time and neatly format it | by Salty-Coder :)
 def getDateTimeString(): return datetime.now().strftime("[%Y/%m/%d %H:%M:%S]")
 
 # Get the next time program is going to run by Salty-Coder
-def nextrun(loopMinutes):
-    nextrun = datetime.now() + timedelta(minutes=loopMinutes)
+def nextrun(loopSeconds):
+    nextrun = datetime.now() + timedelta(seconds=loopSeconds)
     return nextrun.strftime("%Y/%m/%d %H:%M:%S")
 
-# Load the stringlist.json file.
+# Load and/or download the stringlist.json file.
 stringListPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "stringlist.json")
-if not os.path.exists(stringListPath):
-    input("ERROR: The stringlist.json file doesn't exist. Get it from this program's repository on GitHub (https://github.com/PRO100KatYT/SaveTheWorldClaimer), add it back and run this program again.\n\nPress ENTER to close the program.\n")
-    exit()
+def downloadAndSaveStringlistFile():
+    global stringListPath
+    content = request("get", "https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/refs/heads/main/stringlist.json").content
+    with open(stringListPath, "wb") as file: file.write(content)
+if not os.path.exists(stringListPath): downloadAndSaveStringlistFile()
 try: stringList = json.loads(open(stringListPath, "r", encoding = "utf-8").read())
 except:
-    input("ERROR: The program is unable to read the stringlist.json file. Delete the stringlist.json file, download it from this program's repository on GitHub (https://github.com/PRO100KatYT/SaveTheWorldClaimer), add it back here and run this program again.\n\nPress ENTER to close the program.\n")
-    exit()
+    downloadAndSaveStringlistFile()
+    try: stringList = json.loads(open(stringListPath, "r", encoding = "utf-8").read())
+    except:
+        input("ERROR: The program still can't read the newly downloaded stringlist.json file. Weird...")
+        exit()
 
 # Get a string in currently selected language.
-def getString(string): return stringList['Strings'].get(language, stringList['Strings']['en']).get(string, '')
+def getString(string): return stringList["Strings"].get(language, stringList["Strings"]["en"]).get(string, string)
 
 # Get a correct plural word depending on the int.
 def getPluralWord(string, number):
-    if number == 1: plural = 'one'
-    elif 2 <= number < 5: plural = 'few'
-    elif number == 0 or number >= 5: plural = 'many'
-    else: plural = 'other'
-    return stringList['Strings'].get(language, 'en')['words'][string][plural]
+    global language
+    if language == "pl":
+        if number == 1: plural = "one"
+        elif number % 10 in [2, 3, 4] and not (12 <= (number % 100) <= 14): plural = "few"
+        else: plural = "many"
+    elif language == "en": plural = "one" if number == 1 else "other"
+    else: plural = "other"
+    return stringList["Strings"].get(language, stringList["Strings"]["en"])["words"][string].get(plural, stringList["Strings"]["en"]["words"][string]["other"])
 
 # Error with a custom message.
 def customError(text):
@@ -90,9 +117,10 @@ def configError(key, value, validValues): customError(getString("configerror.mes
 
 # Input loop until it's one of the correct values.
 def validInput(text, values):
+    values = [i.lower() if isinstance(i, str) else i for i in values] if isinstance(values, list) else values
     while True:
-        response = input(f"{text}\n")
-        if values == "digit" and response.replace(",", ".").replace(".", "").isdigit(): break
+        response = input(f"{text}\n").lower()
+        if values == "digit" and response.replace(",", ".").replace(".", "").replace("-", "").isdigit(): break
         elif response in values: break
         text = getString("validinput.message")
     return response
@@ -108,7 +136,7 @@ def reqTokenText(loginLink, altLoginLink, authHeader):
     while True:
         webbrowser.open_new_tab(loginLink)
         print(getString("reqtoken.message").format(loginLink))
-        reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {authHeader}"}, data={"grant_type": "authorization_code", "code": input(getString("reqtoken.insertcode"))}), False)
+        reqToken = requestText(request("post", links.getOAuth.format("token"), headers={"Authorization": f"basic {authHeader}"}, data={"grant_type": "authorization_code", "code": input(getString("reqtoken.insertcode"))}), False)
         if "errorMessage" not in reqToken: return reqToken
         else: input(getString("reqtoken.error").format(reqToken['errorMessage']))
         loginLink = altLoginLink
@@ -118,12 +146,8 @@ webhookUrl = "" # A value will be assigned in the config part of the program.
 webhookMessagesToSend = []
 def message(string):
     global webhookUrl
-    if bShowDateTime == "true":
-        lines = string.split("\n")
-        for i in range(len(lines)): # fix for when a message starts with newlines
-            if lines[i].strip() != "":
-                lines[i] = f"{getDateTimeString()} {lines[i]}"
-                break
+    if bShowDateTime:
+        lines = [f"{getDateTimeString()} {line}" if line.strip() else line for line in string.split("\n")]
         string = "\n".join(lines)
     print(string)
     if not webhookUrl: return
@@ -135,9 +159,9 @@ def webhookLoop():
     while True:
         try:
             if webhookUrl and webhookMessagesToSend:
-                webhookMessagesToSend2 = ''.join(mess if mess.endswith('\n') else mess+'\n' for mess in webhookMessagesToSend)
+                webhookMessagesToSend2 = "".join(mess if mess.endswith('\n') else mess+'\n' for mess in webhookMessagesToSend)
                 webhookMessagesToSend.clear()
-                session.post(webhookUrl, data=json.dumps({"content": webhookMessagesToSend2}), headers={"Content-Type": "application/json"})
+                request("post", webhookUrl, data=json.dumps({"content": webhookMessagesToSend2}), headers={"Content-Type": "application/json"})
             else: time.sleep(0.25)
         except Exception as e: webhookMessagesToSend.clear()
 t = Thread(target=webhookLoop)
@@ -146,60 +170,89 @@ t.start()
 
 # Check if there is a newer version of this program available.
 def checkUpdate():
-    if bCheckForUpdates == "false": return
     try:
-        getJson = (session.get("https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/main/SaveTheWorldClaimer.py").text).splitlines()[0:2]
+        getJson = (request("get", "https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/main/SaveTheWorldClaimer.py").text).splitlines()[0:2]
         latestVerNum = int(getJson[0].split("=")[1].strip())
         latestVerStr = getJson[1].split("=")[1].strip().strip('"')
         if latestVerNum > versionNum: message(getString("updatechecker.message").format(latestVerStr))
-    except: []
+    except: pass
+
+# Check whether the type matches the value and return it.
+def isCorrectValue(value, type, validValues = []):
+    if validValues and isinstance(validValues, list):
+        for option in validValues:
+            if str(value).lower() == str(option).lower(): return [True, option]
+        return [False, ""]
+    if type == "string": return [True, str(value)]
+    if type in ["int", "float"]:
+        try:
+            conv = int if type == "int" else float
+            return [True, conv(value)]
+        except: return [False, ""]
+    return [False, ""]
 
 # Create and/or read the config.ini file.
 config, configPath = [ConfigParser(), os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.ini")]
-itemLangValues, langValues, boolValues = [["ar", "de", "en", "es", "es-419", "fr", "it", "ja", "ko", "pl", "pt-BR", "ru", "tr", "zh-CN", "zh-Hant"], ["en", "pl"], ["true", "false"]]
 if not os.path.exists(configPath):
-    message(getString("config.startgenerating"))
+    configFileContent = "[Config]\n\n"
+    configJson = {}
     bStartSetup = validInput(getString("config.bstartsetup"), ["1", "2"])
-    if bStartSetup == "1":
-        iLanguage = language = validInput(getString("config.setup.language").format(', '.join(langValues)), langValues)
-        iItemsLanguage = validInput(getString("config.setup.itemslanguage").format(', '.join(itemLangValues)), itemLangValues)
-        iSpend_Research_Points = validInput(getString("config.setup.researchpoints"), ["off", "lowest", "everyten"])
-        iOpen_Free_Llamas = validInput(getString("config.setup.freellamas"), boolValues)
-        bAutomaticRecycle = validInput(getString("config.setup.brecycle"), boolValues)
-        if bAutomaticRecycle == "false": iRecycle_Weapons = iRecycle_Traps = iRetire_Survivors = iRetire_Defenders = iRetire_Heroes = "off"
-        else:
-            iList = []
-            itemTypeJson = {"Recycle_Weapons": {"name": getString("config.setup.recycle.weapon"), "recycleWord": getString("config.setup.recycle.recycleword")}, "Recycle_Traps": {"name": getString("config.setup.recycle.trap"), "recycleWord": getString("config.setup.recycle.recycleword")}, "Recycle_Survivors": {"name": getString("config.setup.recycle.survivor"), "recycleWord": getString("config.setup.recycle.retireword")}, "Recycle_Defenders": {"name": getString("config.setup.recycle.defender"), "recycleWord": getString("config.setup.recycle.retireword")}, "Recycle_Heroes": {"name": getString("config.setup.recycle.hero"), "recycleWord": getString("config.setup.recycle.retireword")}}
-            for itemType in itemTypeJson: iList.append(validInput(getString("config.setup.recycle.message").format(itemTypeJson[itemType]['name'], itemTypeJson[itemType]['recycleWord']), ["off", "common", "uncommon", "rare", "epic"]))
-            iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes = iList  
-        iSkip_Tutorial = validInput(getString("config.setup.bskiptutorial"), boolValues)
-        iLoop_Time = validInput(getString("config.setup.looptime"), "digit")
-        iShow_Date_Time = validInput(getString("config.setup.datetime"), boolValues)
-        iCheck_For_Updates = validInput(getString("config.setup.checkupdates"), boolValues)
-    else: iLanguage, iItemsLanguage, iSpend_Research_Points, iOpen_Free_Llamas, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iSkip_Tutorial, iLoop_Time, iShow_Date_Time, iCheck_For_Updates = ["en", "en", "lowest", "true", "uncommon", "uncommon", "rare", "rare", "uncommon", "false", 0, "false", "true"]           
-    with open(configPath, "w", encoding="utf-8") as configFile: configFile.write(getString("config.configfile").format(', '.join(langValues), iLanguage, ', '.join(itemLangValues), iItemsLanguage, iSpend_Research_Points, iOpen_Free_Llamas, iSkip_Tutorial, iRecycle_Weapons, iRecycle_Traps, iRetire_Survivors, iRetire_Defenders, iRetire_Heroes, iLoop_Time, iShow_Date_Time, iCheck_For_Updates, configVersion))
-    print(getString("config.setup.success"))
+    message(getString("config.startgenerating"))
+    for setting in stringList["Config"]["Settings"]:
+        value = isCorrectValue(setting["defaultValue"], setting["settingType"], setting["validValues"])[1]
+        bSkipSetup = setting["bSkipInSetup"] or (bStartSetup != "1")
+        if setting["skipInSetupIf"]:
+            for key in setting["skipInSetupIf"]:
+                if key in configJson:
+                    setting2 = next(setting2 for setting2 in stringList["Config"]["Settings"] if setting2["settingName"] == key) # Get the properties of the setting
+                    val1 = isCorrectValue(configJson[key], setting2["settingType"], setting2["validValues"])[1]
+                    val2 = isCorrectValue(setting["skipInSetupIf"][key], setting2["settingType"], setting2["validValues"])[1]
+                    if val1 == val2:
+                        bSkipSetup = True
+                        break
+        if not bSkipSetup:
+            for comment in setting["settingComments"]: print(getString(comment))
+            print(getString("config.availableoptions").format(', '.join(str(item) for item in setting['validValues']).lower() if isinstance(setting['validValues'], list) else getString(setting['validValues'])))
+            value = input()
+            isCorrect = isCorrectValue(value, setting["settingType"], setting["validValues"])
+            value = isCorrect[1]
+            while not isCorrect[0]:
+                print(getString("validinput.message"))
+                value = input()
+                isCorrect = isCorrectValue(value, setting["settingType"], setting["validValues"])
+            print()
+        configJson[setting["settingName"]] = value
+        if setting["settingName"] == "Language": language = value # Scuffed but yeah
+        for comment in setting["extraComments"] + setting["settingComments"]:
+            configFileContent += f"# {getString(comment)}\n" if comment else "\n" # if comment is empty then just do newline
+        configFileContent += f"# {getString('config.availableoptions').format(', '.join(str(item) for item in setting['validValues']).lower() if isinstance(setting['validValues'], list) else getString(setting['validValues']))}\n{setting['settingName']} = {str(value).lower() if setting['settingType'] in ["bool", "string"] else value}\n\n"
+    configFileContent += f"# {getString('config.setup.dontchange')}\n[Config_Version]\n\nVersion = STWC_{configVersion}\n"
+    with open(configPath, "w", encoding="utf-8") as file:
+        file.write(configFileContent)
+    message(getString("config.setup.success"))
 config.read(configPath)
 try: configVer = config['Config_Version']['Version']
 except: customError(getString("config.readerror"))
 if configVer != f"STWC_{configVersion}": customError(getString("config.versionerror"))
-try:
-    language, itemsLang, spendAutoResearch, bOpenFreeLlamas, bSkipTutorial, loopMinutes, bShowDateTime, bCheckForUpdates, webhookUrl, bSkipMainMenu = [config['StW_Claimer_Config']['Language'].lower(), config['StW_Claimer_Config']['ItemsLanguage'].lower(), config['StW_Claimer_Config']['Spend_Research_Points'].lower(), config['StW_Claimer_Config']['Open_Free_Llamas'].lower(), config['StW_Claimer_Config']['Skip_Tutorial'].lower(), config['Loop']['Loop_Minutes'], config['Misc']['Show_Date_Time'].lower(), config['Misc']['Check_For_Updates'].lower(), config['Misc']['Discord_Webhook_URL'], config['Misc']['Skip_Main_Menu'].lower()]
-    autoRecycling.itemRarities = {"weapon": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Weapons'].lower()].split(", "), "trap": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Recycle_Traps'].lower()].split(", "), "survivor": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Survivors'].lower()].split(", "), "defender": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Defenders'].lower()].split(", "), "hero": autoRecycling.rarities[config['Automatic_Recycle/Retire']['Retire_Heroes'].lower()].split(", ")}
+
+# Get a setting value from the config file.
+def getConfig(settingName):
+    try:
+        setting = next(i for i in stringList["Config"]["Settings"] if i["settingName"] == settingName)
+        rawValue = config.get("Config", settingName)
+        if setting["settingType"] == "bool": return config.getboolean("Config", settingName)
+        elif setting["settingType"] == "int": return config.getint("Config", settingName)
+        elif setting["settingType"] == "float": return config.getfloat("Config", settingName)
+        return rawValue
+    except Exception as e: customError(getString("config.getconfigerror").format(settingName, e))
+
+bShowDateTime, webhookUrl, language = [getConfig('Show_Date_Time'), getConfig('Discord_Webhook_URL'), getConfig('Language')]
+try: autoRecycling.itemRarities = {"weapon": autoRecycling.rarities[getConfig('Recycle_Weapons').lower()].split(", "), "trap": autoRecycling.rarities[getConfig('Recycle_Traps').lower()].split(", "), "survivor": autoRecycling.rarities[getConfig('Retire_Survivors').lower()].split(", "), "defender": autoRecycling.rarities[getConfig('Retire_Defenders').lower()].split(", "), "hero": autoRecycling.rarities[getConfig('Retire_Heroes').lower()].split(", ")}
 except: customError(getString("config.readerror"))
-checkValuesJson = {"Language": {"value": language, "validValues": langValues}, "ItemsLanguage": {"value": itemsLang, "validValues": itemLangValues}, "Spend_Research_Points": {"value": spendAutoResearch, "validValues": ["off", "lowest", "everyten"]}, "Open_Free_Llamas": {"value": bOpenFreeLlamas, "validValues": boolValues}, "Skip_Tutorial": {"value": bSkipTutorial, "validValues": boolValues}, "Show_Date_Time": {"value": bShowDateTime, "validValues": boolValues}, "Skip_Main_Menu": {"value": bSkipMainMenu, "validValues": boolValues}}
-for option in checkValuesJson:
-    if not (checkValuesJson[option]['value'] in checkValuesJson[option]['validValues']): configError(option, checkValuesJson[option]['value'], ", ".join(checkValuesJson[option]['validValues']))
-recycleOptions = ["Recycle_Weapons", "Recycle_Traps", "Retire_Survivors", "Retire_Defenders", "Retire_Heroes"]
-recycleOn = False
-for key in recycleOptions:
-    keyValue = config['Automatic_Recycle/Retire'][f'{key}'].lower()
-    if not (keyValue == "off"): recycleOn = True
-    if not (keyValue in ("off", "common", "uncommon", "rare", "epic")): configError(key, keyValue, "off, common, uncommon, rare, epic")
-try:
-    if not (("," in loopMinutes) or ("." in loopMinutes)): loopMinutes = float(f"{loopMinutes}.0")
-    else: loopMinutes = float(loopMinutes.replace(",", "."))
-except: configError("Loop_Minutes", loopMinutes, getString("config.error.number"))
+bRecycle = False
+for key in ["Recycle_Weapons", "Recycle_Traps", "Retire_Survivors", "Retire_Defenders", "Retire_Heroes"]:
+    if getConfig(key).lower() != "off": bRecycle = True
+sendRequestErrorMsg = getString('request.error')
 
 # Create and load the auth.json file.
 authPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "auth.json")
@@ -227,26 +280,40 @@ class login:
         if not "addedInVersionNum" in account: basicHeaders.inUse = basicHeaders.ios
         else: basicHeaders.inUse = basicHeaders.android
         if authType == "token":
-            reqRefreshToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "refresh_token", "refresh_token": refreshToken}), False)
+            reqRefreshToken = requestText(request("post", links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "refresh_token", "refresh_token": refreshToken}), False)
             if "errorMessage" in reqRefreshToken: customError(getString("main.login.token.error").format(displayName))
             account['refreshToken'], account['refresh_expires_at'] = reqRefreshToken["refresh_token"], reqRefreshToken["refresh_expires_at"]
             with open(authPath, "w", encoding="utf-8") as saveAuthFile: json.dump(authJson, saveAuthFile, indent=2, ensure_ascii=False)
-            reqExchange = requestText(session.get(links.getOAuth.format("exchange"), headers={"Authorization": f"bearer {reqRefreshToken['access_token']}"}, data={"grant_type": "authorization_code"}), True)
-            reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {basicHeaders.inUse}"}, data={"grant_type": "exchange_code", "exchange_code": reqExchange["code"], "token_type": "eg1"}), True)
-        elif authType == "device": reqToken = requestText(session.post(links.getOAuth.format("token"), headers={"Authorization": f"basic {basicHeaders.inUse}"}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"}), True)
+            reqExchange = requestText(request("get", links.getOAuth.format("exchange"), headers={"Authorization": f"bearer {reqRefreshToken['access_token']}"}, data={"grant_type": "authorization_code"}), True)
+            reqToken = requestText(request("post", links.getOAuth.format("token"), headers={"Authorization": f"basic {basicHeaders.inUse}"}, data={"grant_type": "exchange_code", "exchange_code": reqExchange["code"], "token_type": "eg1"}), True)
+        elif authType == "device": reqToken = requestText(request("post", links.getOAuth.format("token"), headers={"Authorization": f"basic {basicHeaders.inUse}"}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"}), True)
         accessToken, displayName = reqToken['access_token'], reqToken['displayName']
         message(getString("main.login.success"))
 
         # Headers for MCP requests.
-        headers = {"User-Agent": "Fortnite/++Fortnite+Release-19.40-CL-19215531 Windows/10.0.19043.1.768.64bit", "Authorization": f"bearer {accessToken}", "Content-Type": "application/json", "X-EpicGames-Language": itemsLang, "Accept-Language": itemsLang}
+        headers = {"User-Agent": "Fortnite/++Fortnite+Release-19.40-CL-19215531 Windows/10.0.19043.1.768.64bit", "Authorization": f"bearer {accessToken}", "Content-Type": "application/json", "X-EpicGames-Language": getConfig('Items_Language'), "Accept-Language": getConfig('Items_Language')}
 
         # Check whether the account has the campaign access token and if it's able to receive V-Bucks.
-        reqQueryProfiles = [json.dumps(requestText(session.post(links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(session.post(links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False))]
+        reqQueryProfiles = [json.dumps(requestText(request("post", links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(request("post", links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False))]
         campaignProfile = json.loads(reqQueryProfiles[1])['profileChanges'][0]['profile']
         bReceiveMtx = False
+        bHasCampaignAccess = False
         if "Token:receivemtxcurrency" in reqQueryProfiles[1]: bReceiveMtx = True
+        if "Token:campaignaccess" in reqQueryProfiles[0]: bHasCampaignAccess = True
 
-        self.headers, self.accountId, self.displayName, self.campaignProfile, self.bReceiveMtx = headers, accountId, displayName, campaignProfile, bReceiveMtx
+        # Check whether the account is able to get Daily Quests
+        bDailyQuestsUnlocked = False
+        ssd3QuestGUID = next((id for id in campaignProfile["items"] if campaignProfile["items"][id]["templateId"].lower() == "quest:outpostquest_t1_l3"), "")
+        if ssd3QuestGUID:
+            if "completion_complete_outpost_1_3" in campaignProfile["items"][ssd3QuestGUID]["attributes"]:
+                if (campaignProfile["items"][ssd3QuestGUID]["attributes"]["completion_complete_outpost_1_3"] == 1
+                    and campaignProfile["items"][ssd3QuestGUID]["attributes"]["quest_state"].lower() == "claimed"):
+                    bDailyQuestsUnlocked = True
+
+        # Check whether the account is able to get Research Points
+        bRecyclingUnlocked = any(campaignProfile["items"][id]["templateId"].lower() == "homebasenode:questreward_recyclecollection" for id in campaignProfile["items"])
+
+        self.headers, self.accountId, self.displayName, self.campaignProfile, self.bHasCampaignAccess, self.bReceiveMtx, self.bDailyQuestsUnlocked, self.bRecyclingUnlocked = headers, accountId, displayName, campaignProfile, bHasCampaignAccess, bReceiveMtx, bDailyQuestsUnlocked, bRecyclingUnlocked
 
 # Get an account's Daily Quests
 def getDailyQuests(auth):
@@ -256,19 +323,19 @@ def getDailyQuests(auth):
         itemData = auth.campaignProfile['items'][item]
         if itemData['templateId'].lower().startswith("quest:daily_") and itemData['attributes']['quest_state'].lower() == "active":
             templateId = itemData['templateId']
-            questName = stringList['Items'][templateId]['name'][itemsLang]
+            questName = stringList['Items'][templateId]['name'][getConfig('Items_Language')]
             objectives = stringList['Items'][templateId]['objectives']
             progressMsg = ""
             for objective in objectives:
                 objData = objectives[objective]
-                objName, objCount = objData['name'][itemsLang], objData['count']
+                objName, objCount = objData['name'][getConfig('Items_Language')], objData['count']
                 completionCount = itemData['attributes'].get(f'completion_{objective}', 0)
                 progressMsg += f" {completionCount}/{objCount} {objName},"
             progressMsg = progressMsg[:-1]
             rewards = stringList['Items'][templateId]['rewards']
             rewardsMsg = ""
             for reward in rewards:
-                rewardQuantity, rewardName = [rewards[reward], stringList['Items'][reward]['name'][itemsLang]]
+                rewardQuantity, rewardName = [rewards[reward], stringList['Items'][reward]['name'][getConfig('Items_Language')]]
                 if reward.startswith("ConditionalResource:"):
                     if auth.bReceiveMtx == True: rewardsMsg += f" {rewardQuantity}x {rewardName['PassedConditionItem']},"
                     rewardName = rewardName['FailedConditionItem']
@@ -277,6 +344,50 @@ def getDailyQuests(auth):
             questNumber += 1
             questData[item] = {"templateId": templateId, "questNumber": questNumber, "questName": questName, "progress": progressMsg, "rewards": rewardsMsg}
     return questData
+
+class invJunkCleaner:
+    tiers = {1: ["t01"], 2: ["t01", "t02"], 3: ["t01", "t02", "t03"], 4: ["t01", "t02", "t03", "t04"], 5: ["t01", "t02", "t03", "t04", "t05"], "t06": ["t01", "t02", "t03", "t04", "t05", "t06"]};
+    TIDsToExclude = ["Trap:tid_floor_defender", "Trap:tid_floor_player_jump_pad", "Trap:tid_floor_player_jump_pad_free_direction", "Trap:tid_floor_launchpad_r_t01", "Trap:tid_floor_hoverboard_speed_curve_r_t01", "Trap:tid_floor_hoverboard_speed_r_t01", "Trap:tid_wall_spikes_r_t01", "Trap:ob_trap_floor_spikes"]
+
+    def isProfileLocked(theater0):
+        if not "profileLockExpiration" in theater0: return False
+        lockExpirationDate = lockExpirationDate = datetime.fromisoformat(theater0["profileLockExpiration"].replace("Z", "+00:00")).replace(tzinfo=timezone.utc)
+        nowDate = datetime.now(timezone.utc)
+        secondsDiff = (lockExpirationDate - nowDate).total_seconds()
+        return [lockExpirationDate.date() >= nowDate.date(), secondsDiff]
+    
+    def findItems(theater0):
+        itemGUIDsToRecycle, itemGUIDsToDestroy = [[], []]
+        for key in theater0["items"]:
+            templateId, attributes, quantity = [theater0["items"][key]["templateId"], theater0["items"][key]["attributes"], theater0["items"][key]["quantity"]]
+            if templateId.lower().startswith("ingredient:"):
+                if templateId in stringList["Items"] and "tier" in stringList["Items"][templateId]:
+                    if stringList["Items"][templateId]["tier"].lower() in invJunkCleaner.tiers[getConfig('Inventory_Junk_Cleaner')]:
+                        itemGUIDsToDestroy.append(key)
+            elif templateId.lower().startswith("trap:"):
+                if (("alterationDefinitions" not in attributes or not attributes["alterationDefinitions"]
+                or "itemSource" in attributes
+                and attributes["itemSource"] in ["EFortPickupSourceTypeFlag::Container", "EFortPickupSourceTypeFlag::AI"])
+                and templateId not in invJunkCleaner.TIDsToExclude):
+                    trapTier = templateId.split("_")[-1].lower()
+                    if trapTier in invJunkCleaner.tiers[getConfig('Inventory_Junk_Cleaner')]: itemGUIDsToDestroy.append(key)
+                    else: itemGUIDsToRecycle.append({"itemId": key, "quantity": quantity})
+            elif templateId.lower().startswith("weapon:"):
+                if "itemSource" in attributes and attributes["itemSource"] in ["EFortPickupSourceTypeFlag::Container", "EFortPickupSourceTypeFlag::AI"]:
+                    weaponTier = templateId.split("_")[-1].lower()
+                    if weaponTier in invJunkCleaner.tiers[getConfig('Inventory_Junk_Cleaner')]: itemGUIDsToDestroy.append(key)
+                    else: itemGUIDsToRecycle.append({"itemId": key, "quantity": quantity})
+        return [itemGUIDsToRecycle, itemGUIDsToDestroy]
+
+    def recycleAndDestroy(auth, itemGUIDsToRecycle, itemGUIDsToDestroy):
+        if (not itemGUIDsToRecycle) and (not itemGUIDsToDestroy):
+            message(getString("junkcleaner.nothingfound"))
+        if itemGUIDsToRecycle:
+            message(getString("junkcleaner.recycling").format(len(itemGUIDsToRecycle), getPluralWord('items', len(itemGUIDsToRecycle))))
+            requestText(request("post", links.profileRequest.format(auth.accountId, "DisassembleWorldItems", "theater0"), headers=auth.headers, json={"targetItemIdAndQuantityPairs": itemGUIDsToRecycle}), True)
+        if itemGUIDsToDestroy:
+            message(getString("junkcleaner.destroying").format(len(itemGUIDsToDestroy), getPluralWord('items', len(itemGUIDsToRecycle))))
+            requestText(request("post", links.profileRequest.format(auth.accountId, "DestroyWorldItems", "theater0"), headers=auth.headers, json={"itemIds": itemGUIDsToDestroy}), True)
 
 # Menu (Account & Daily Quest Manager)
 def menu():
@@ -293,7 +404,7 @@ def menu():
         else:
             reqToken = reqTokenText(loginLink.format("3f69e56c7649492c8cc29f1af08a8a12"), links.loginLink1.format("3f69e56c7649492c8cc29f1af08a8a12"), "M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU=")
             accessToken, accountId, displayName = [reqToken["access_token"], reqToken["account_id"], reqToken["displayName"]]
-            reqDeviceAuth = requestText(session.post(links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={}), True)
+            reqDeviceAuth = requestText(request("post", links.getDeviceAuth.format(accountId), headers={"Authorization": f"bearer {accessToken}"}, data={}), True)
             deviceId, secret = [reqDeviceAuth["deviceId"], reqDeviceAuth["secret"]]
             jsonToAppend = {getString("authjson.warning.header"): getString("authjson.warning.text"), "authType": "device",  "deviceId": deviceId, "accountId": accountId, "displayName": displayName, "secret": secret, "addedInVersionNum": versionNum}
         bAlreadyLoggedIn = any(account['accountId'] == accountId for account in authJson)
@@ -355,24 +466,68 @@ def menu():
                         questToReplace = list(questData.keys())[questIndex - 1]
                         confirmReroll = validInput(getString("startup.managedailyquests.confirm").format(questData[questToReplace]['questName']), ["1", "2"])
                         if confirmReroll == "1":
-                            reqRerollQuest = requestText(session.post(links.profileRequest.format(auth.accountId, "FortRerollDailyQuest", "campaign"), headers=auth.headers, json={"questId": questToReplace}), True)
+                            reqRerollQuest = requestText(request("post", links.profileRequest.format(auth.accountId, "FortRerollDailyQuest", "campaign"), headers=auth.headers, json={"questId": questToReplace}), True)
                             newQuestTemplateId = reqRerollQuest.get("notifications", [{}])[0].get("newQuestId")
                             if newQuestTemplateId:
-                                newQuestName = stringList['Items'].get(newQuestTemplateId, {}).get('name', {}).get(itemsLang, newQuestTemplateId)
+                                newQuestName = stringList['Items'].get(newQuestTemplateId, {}).get('name', {}).get(getConfig('Items_Language'), newQuestTemplateId)
                                 print(getString("startup.managedailyquests.success").format(questData[questToReplace]['questName'], newQuestName))
-                                input(getString("startup.managedailyquests.pressenter"))
-
+                                input(getString("startup.managedailyquests.pressenter"))            
+    
+    def junkCleaner():
+        while authJson:
+            print(getString("junkcleaner.message").format(getConfig('Inventory_Junk_Cleaner')))
+            selectedAccounts = []
+            whatToDo2 = validInput(getString("junkcleaner.whattodo"), ["1", "2", "3"])
+            if whatToDo2 == "1":
+                listAccounts()
+                print(getString("junkcleaner.selectaccount"))
+                accountCountList = list(map(str, range(len(authJson))))
+                accountIndex = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)]))
+                if accountIndex == 0: return
+                selectedAccounts = [authJson[accountIndex - 1]]
+            elif whatToDo2 == "2": selectedAccounts = authJson.copy()
+            else: break
+            loopMinutes = float(validInput(getString("junkcleaner.loopinput"), "digit"))
+            loopMinutes = int(loopMinutes) if str(loopMinutes).endswith(".0") else float(loopMinutes)
+            if len(selectedAccounts) > 1:
+                selectedNicknames = [i["displayName"] for i in selectedAccounts]
+                confirmation = validInput(getString("junkcleaner.confirmation").format(', '.join(selectedNicknames), getConfig('Inventory_Junk_Cleaner')), ["1", "2"])
+                if confirmation == "2": break
+            while True:
+                t1 = datetime.now()
+                for account in selectedAccounts:
+                    print()
+                    auth = login(account)
+                    message(getString("junkcleaner.gettinginfo"))
+                    reqGetTheater0 = requestText(request("post", links.profileRequest.format(auth.accountId, "QueryProfile", "theater0"), headers=auth.headers, data="{}"), True)['profileChanges'][0]['profile']
+                    isLocked = invJunkCleaner.isProfileLocked(reqGetTheater0)
+                    if isLocked[0]: message(getString("junkcleaner.profilelocked").format(auth.displayName))
+                    else:
+                        itemGUIDsToRecycle, itemGUIDsToDestroy = invJunkCleaner.findItems(reqGetTheater0)
+                        invJunkCleaner.recycleAndDestroy(auth, itemGUIDsToRecycle, itemGUIDsToDestroy)
+                t2 = datetime.now()
+                message(getString("junkcleaner.done"))
+                if loopMinutes <= 0: break
+                else:
+                    minutesWord = getPluralWord("minutes", loopMinutes)
+                    totalSecondsToSleep = max(1, loopMinutes * 60 - (t2 - t1).total_seconds())
+                    message(getString("junkcleaner.loopmessage").format(loopMinutes, minutesWord, nextrun(totalSecondsToSleep)))
+                    time.sleep(totalSecondsToSleep)
+            input(getString("junkcleaner.pressenter"))
+            break
+    
     while True:
         if not authJson: addAccount(False)
-        bStartClaimer = validInput(getString("mainmenu.message"), ["1", "2", "3", ""])
-        if bStartClaimer == "1": break
-        elif bStartClaimer == "2": manageDailyQuests()
-        elif bStartClaimer == "3":
+        whatToDo1 = validInput(getString("mainmenu.message"), ["1", "2", "3", "4", ""])
+        if whatToDo1 == "1": break
+        elif whatToDo1 == "2": manageDailyQuests()
+        elif whatToDo1 == "3": junkCleaner()
+        elif whatToDo1 == "4":
             while True:
-                whatToDo = validInput(getString("accountmanager.message"), ["1", "2", "3", "4"])
-                if whatToDo == "1": addAccount()
-                elif whatToDo == "2": removeAccount()
-                elif whatToDo == "3":
+                whatToDo3 = validInput(getString("accountmanager.message"), ["1", "2", "3", "4"])
+                if whatToDo3 == "1": addAccount()
+                elif whatToDo3 == "2": removeAccount()
+                elif whatToDo3 == "3":
                     listAccounts()
                     input(getString("accountmanager.pressenter"))
                 else: break
@@ -384,25 +539,27 @@ def main():
         auth = login(account)
         
         # Skip the StW tutorial if it hasn't been completed yet. Works for accounts that don't own StW too. It will get the account the StW music pack.
-        if bSkipTutorial == "true":
+        if getConfig('Skip_Tutorial'):
             for item in auth.campaignProfile['items']:
                 if auth.campaignProfile['items'][item]['templateId'].lower() != "quest:homebaseonboarding": continue
                 if auth.campaignProfile['items'][item]['attributes']['quest_state'].lower() == "claimed": break
                 message(getString("main.skiptutorial.start").format(auth.displayName))
-                session.post(links.profileRequest.format(auth.accountId, "SkipTutorial", "campaign"), headers=auth.headers, data="{}")
-                reqUpdateObjectives = requestText(session.post(links.profileRequest.format(auth.accountId, "UpdateQuestClientObjectives", "campaign"), headers=auth.headers, json={"advance": [{"statName": "hbonboarding_watchsatellitecine", "count": 1, "timestampOffset": 0}, {"statName": "hbonboarding_namehomebase", "count": 1, "timestampOffset": 0}]}), True)
+                request("post", links.profileRequest.format(auth.accountId, "SkipTutorial", "campaign"), headers=auth.headers, data="{}")
+                reqUpdateObjectives = requestText(request("post", links.profileRequest.format(auth.accountId, "UpdateQuestClientObjectives", "campaign"), headers=auth.headers, json={"advance": [{"statName": "hbonboarding_watchsatellitecine", "count": 1, "timestampOffset": 0}, {"statName": "hbonboarding_namehomebase", "count": 1, "timestampOffset": 0}]}), True)
                 if reqUpdateObjectives['profileChanges'][0]['profile']['items'][item]['attributes']['quest_state'].lower() == "claimed": message(getString("main.skiptutorial.success").format(auth.displayName))
                 else: message(getString("main.skiptutorial.error").format(auth.displayName))
                 break
 
         # Display current daily challenges, their rewards and progress if there is any.
-        message(getString("main.dailies.searching"))
-        questData = getDailyQuests(auth)
-        if not questData: message(getString("main.dailies.notfound"))
-        for quest in questData: message(getString("main.dailies.info").format(questData[quest]['questNumber'], questData[quest]['questName'], questData[quest]['progress'], questData[quest]['rewards']))
+        if auth.bDailyQuestsUnlocked:
+            message(getString("main.dailies.searching"))
+            questData = getDailyQuests(auth)
+            if not questData: message(getString("main.dailies.notfound"))
+            for quest in questData: message(getString("main.dailies.info").format(questData[quest]['questNumber'], questData[quest]['questName'], questData[quest]['progress'], questData[quest]['rewards']))
+        else: message(getString("main.dailies.unavailable"))
 
         # Claim and automatically spend the Research Points.
-        reqCampaignProfileCheck = requestText(session.post(links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)
+        reqCampaignProfileCheck = requestText(request("post", links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)
         try:
             reqCampaignProfileCheckResearchLevels = reqCampaignProfileCheck['profileChanges'][0]['profile']['stats']['attributes']['research_levels']
             bTryToClaimRP = True
@@ -418,15 +575,14 @@ def main():
                     tokenToClaim = key
                     break
             if tokenToClaim:
-                reqClaimCollectedResources = requestText(session.post(links.profileRequest.format(auth.accountId, "ClaimCollectedResources", "campaign"), headers=auth.headers, json={"collectorsToClaim": [tokenToClaim]}), False)
+                reqClaimCollectedResources = requestText(request("post", links.profileRequest.format(auth.accountId, "ClaimCollectedResources", "campaign"), headers=auth.headers, json={"collectorsToClaim": [tokenToClaim]}), False)
                 if "errorMessage" in reqClaimCollectedResources: message(getString("main.research.error").format(reqClaimCollectedResources['errorMessage'])) # Error without exit()
                 else:
                     storedMaxPoints = False
                     try:
                         totalItemGuid, rpToClaim = [reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['itemGuid'], reqClaimCollectedResources['profileChanges'][0]['profile']['items'][tokenToClaim]['attributes']['stored_value']]
                         rpStored, rpClaimedQuantity = [reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity'], int(reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity'])]
-                        if float(rpToClaim) >= 1:
-                            storedMaxPoints = True
+                        if float(rpToClaim) >= 1: storedMaxPoints = True
                         researchPointsWord = getPluralWord("researchPoints", rpClaimedQuantity)
                         message(getString("main.research.success").format(rpClaimedQuantity, researchPointsWord, reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']))
                     except:
@@ -439,28 +595,28 @@ def main():
                             storedMaxPoints = False
                             message(getString("main.research.notenough").format(round(rpToClaim, 2)))
 
-                    if storedMaxPoints == True:
-                        if spendAutoResearch == "off": message(getString("main.research.max.off").format(round(rpToClaim, 2), rpStored))
+                    if storedMaxPoints:
+                        if getConfig('Spend_Research_Points') == "off": message(getString("main.research.max.off").format(round(rpToClaim, 2), rpStored))
                         else:
                             message(getString("main.research.max.on").format(rpStored))
                             while True:
-                                reqFORTLevelsCheck = {**{"fortitude": 0, "offense": 0, "resistance": 0, "technology": 0}, **requestText(session.post(links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)['profileChanges'][0]['profile']['stats']['attributes']['research_levels']}
-                                if spendAutoResearch == "lowest":
+                                reqFORTLevelsCheck = {**{"fortitude": 0, "offense": 0, "resistance": 0, "technology": 0}, **requestText(request("post", links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)['profileChanges'][0]['profile']['stats']['attributes']['research_levels']}
+                                if getConfig('Spend_Research_Points') == "lowest":
                                     levelsList = [int(reqFORTLevelsCheck['fortitude']), int(reqFORTLevelsCheck['offense']), int(reqFORTLevelsCheck['resistance']), int(reqFORTLevelsCheck['technology'])]
                                     level = min(levelsList)
-                                elif spendAutoResearch == "everyten":
+                                elif getConfig('Spend_Research_Points') == "everyten":
                                     levelsList, levelsJson = [[int(reqFORTLevelsCheck['fortitude']) % 10, int(reqFORTLevelsCheck['offense']) % 10, int(reqFORTLevelsCheck['resistance']) % 10, int(reqFORTLevelsCheck['technology']) % 10], {int(reqFORTLevelsCheck['fortitude']) % 10: int(reqFORTLevelsCheck['fortitude']), int(reqFORTLevelsCheck['offense']) % 10: int(reqFORTLevelsCheck['offense']), int(reqFORTLevelsCheck['resistance']) % 10: int(reqFORTLevelsCheck['resistance']), int(reqFORTLevelsCheck['technology']) % 10: int(reqFORTLevelsCheck['technology'])}]
                                     level = levelsJson[max(levelsList)]
                                 for key in reqFORTLevelsCheck:
                                     if reqFORTLevelsCheck[key] == int(level):
                                         statToClaim = key
                                         break
-                                reqPurchaseResearchStatUpgrade = requestText(session.post(links.profileRequest.format(auth.accountId, "PurchaseResearchStatUpgrade", "campaign"), headers=auth.headers, json={"statId": f'{statToClaim}'}), False)
-                                statName = stringList['Strings'][language]['researchStats'][f'{statToClaim}']
+                                reqPurchaseResearchStatUpgrade = requestText(request("post", links.profileRequest.format(auth.accountId, "PurchaseResearchStatUpgrade", "campaign"), headers=auth.headers, json={"statId": f'{statToClaim}'}), False)
+                                statName = stringList['Strings'][getConfig('Language')]['researchStats'][f'{statToClaim}']
                                 if "errorMessage" in reqPurchaseResearchStatUpgrade: break # Error without exit()
                                 else: message(getString("main.research.spend.success").format(statName, reqPurchaseResearchStatUpgrade['profileChanges'][0]['profile']['stats']['attributes']['research_levels'][statToClaim]))
                             message(getString("main.research.spend.end"))
-                            reqClaimCollectedResources = requestText(session.post(links.profileRequest.format(auth.accountId, "ClaimCollectedResources", "campaign"), headers=auth.headers, json={"collectorsToClaim": [tokenToClaim]}), True)
+                            reqClaimCollectedResources = requestText(request("post", links.profileRequest.format(auth.accountId, "ClaimCollectedResources", "campaign"), headers=auth.headers, json={"collectorsToClaim": [tokenToClaim]}), True)
                             try:
                                 totalItemGuid = reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['itemGuid']
                                 message(getString("main.research.success").format(reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity'], reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity']))
@@ -468,8 +624,8 @@ def main():
 
         # Search for free Llamas and open them if they're available.
         alreadyOpenedFreeLlamas, freeLlamasCount, cpspStorefront = [0, 0, []]
-        if bOpenFreeLlamas == "true":
-            reqGetStorefront = requestText(session.get(links.getStorefront, headers=auth.headers, data={}), True)['storefronts']
+        if getConfig('Open_Free_Llamas'):
+            reqGetStorefront = requestText(request("get", links.getStorefront, headers=auth.headers, data={}), True)['storefronts']
             for key in reqGetStorefront:
                 if key['name'] == "CardPackStorePreroll":
                     cpspStorefront = key['catalogEntries']
@@ -487,18 +643,18 @@ def main():
                         try: llamaToClaimTitle = llama['title']
                         except: llamaToClaimTitle = []
                         llamaToClaimCPId = llama['itemGrants'][0]['templateId']
-                        try: llamaToClaimName = stringList['Items'][llamaToClaimCPId]['name'][itemsLang]
+                        try: llamaToClaimName = stringList['Items'][llamaToClaimCPId]['name'][getConfig('Items_Language')]
                         except:
                             if llamaToClaimTitle: llamaToClaimName = llamaToClaimTitle
                         if not llamaToClaimName: llamaToClaimName = llamaToClaimCPId
                         while True:
-                            reqPopulateLlamas = requestText(session.post(links.profileRequest.format(auth.accountId, "PopulatePrerolledOffers", "campaign"), headers=auth.headers, data="{}"), True)
+                            reqPopulateLlamas = requestText(request("post", links.profileRequest.format(auth.accountId, "PopulatePrerolledOffers", "campaign"), headers=auth.headers, data="{}"), True)
                             for key in reqPopulateLlamas['profileChanges'][0]['profile']['items']:
                                 if (reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['templateId'].lower().startswith("prerolldata") and reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['offerId'] == llamaToClaimOfferId):
                                     try: llamaTier = reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['highest_rarity']
                                     except: llamaTier = 0
-                                    llamaTier = stringList['Llama tiers'][f'{llamaTier}'][language]
-                            reqBuyFreeLlama = requestText(session.post(links.profileRequest.format(auth.accountId, "PurchaseCatalogEntry", "common_core"), headers=auth.headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "GameItem", "currencySubType": "AccountResource:currency_xrayllama", "expectedTotalPrice": 0, "gameContext": "Frontend.None"}), False)
+                                    llamaTier = stringList['Llama tiers'][f'{llamaTier}'][getConfig('Language')]
+                            reqBuyFreeLlama = requestText(request("post", links.profileRequest.format(auth.accountId, "PurchaseCatalogEntry", "common_core"), headers=auth.headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "GameItem", "currencySubType": "AccountResource:currency_xrayllama", "expectedTotalPrice": 0, "gameContext": "Frontend.None"}), False)
                             if "errorMessage" in reqBuyFreeLlama:
                                 if "limit of" in reqBuyFreeLlama['errorMessage']:
                                     if openedLlamas == 0: alreadyOpenedFreeLlamas += 1
@@ -510,13 +666,13 @@ def main():
                                 openedLlamas += 1
                                 for key in llamaLoot:
                                     templateId, itemGuid, itemQuantity = [key['itemType'], key['itemGuid'], key['quantity']]
-                                    try: itemName = stringList['Items'][templateId]['name'][itemsLang]
+                                    try: itemName = stringList['Items'][templateId]['name'][getConfig('Items_Language')]
                                     except: itemName = templateId
                                     try: itemRarity, itemType = [stringList['Items'][templateId]['rarity'], stringList['Items'][templateId]['type']]
                                     except: itemRarity, itemType = ["Unknown rarity", "Unknown type"]
                                     llamaLootCount += 1
                                     if itemRarity in ("common", "uncommon", "rare", "epic"): itemsfromLlamas.append({"itemName": itemName, "itemType": itemType, "templateId": templateId, "itemGuid": itemGuid, "itemRarity": itemRarity, "itemQuantity": itemQuantity})
-                                    try: message(f"{llamaLootCount}: {stringList['Item Rarities'][stringList['Items'][templateId]['rarity']][itemsLang]} | {stringList['Item Types'][stringList['Items'][templateId]['type']][itemsLang]}: {itemQuantity}x {itemName}")
+                                    try: message(f"{llamaLootCount}: {stringList['Item Rarities'][stringList['Items'][templateId]['rarity']][getConfig('Items_Language')]} | {stringList['Item Types'][stringList['Items'][templateId]['type']][getConfig('Items_Language')]}: {itemQuantity}x {itemName}")
                                     except: message(f"{llamaLootCount}: {itemRarity} | {itemType}: {itemQuantity}x {itemName}")
                     if int(alreadyOpenedFreeLlamas) == freeLlamasCount: message(getString("main.freellamas.alreadyclaimed"))
                     else:
@@ -524,24 +680,25 @@ def main():
                         if openedLlamas > 0: message(getString("main.freellamas.success").format(openedLlamas, freeLlamasWord))
 
         # Automatically recycle selected llama loot.
-        if (recycleOn) and (int(alreadyOpenedFreeLlamas) != freeLlamasCount):
+        if bRecycle and int(alreadyOpenedFreeLlamas) != freeLlamasCount:
             itemsToRecycle = [item for item in itemsfromLlamas if item['itemRarity'] in autoRecycling.itemRarities.get(item['itemType'], [])]
             itemGuidsToRecycle = [item['itemGuid'] for item in itemsToRecycle]
             recycleResources, recycledItemsCount, recycleResourcesCount = [[], 0, 0]
-            if len(itemGuidsToRecycle) != 0:
+            if not auth.bRecyclingUnlocked: message(getString("main.recycle.unavailable"))
+            elif len(itemGuidsToRecycle) != 0:
                 freeLlamasWord = getPluralWord("freeLlamasRecycle", openedLlamas)
                 message(getString("main.recycle.start").format(openedLlamas, freeLlamasWord))
-                reqGetResources = requestText(session.post(links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)
+                reqGetResources = requestText(request("post", links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)
                 for resource in autoRecycling.recycleResources:
                     for item in reqGetResources['profileChanges'][0]['profile']['items']:
-                        if reqGetResources['profileChanges'][0]['profile']['items'][item]['templateId'] == resource: recycleResources.append({"itemGuid": item, "templateId": resource, "itemName": stringList['Items'][resource]['name'][itemsLang], "quantity": reqGetResources['profileChanges'][0]['profile']['items'][item]['quantity']})
-                requestText(session.post(links.profileRequest.format(auth.accountId, "RecycleItemBatch", "campaign"), headers=auth.headers, json={"targetItemIds": itemGuidsToRecycle}), True)
+                        if reqGetResources['profileChanges'][0]['profile']['items'][item]['templateId'] == resource: recycleResources.append({"itemGuid": item, "templateId": resource, "itemName": stringList['Items'][resource]['name'][getConfig('Items_Language')], "quantity": reqGetResources['profileChanges'][0]['profile']['items'][item]['quantity']})
+                requestText(request("post", links.profileRequest.format(auth.accountId, "RecycleItemBatch", "campaign"), headers=auth.headers, json={"targetItemIds": itemGuidsToRecycle}), True)
                 recycleMessage = getString("main.recycle.message")
                 for item in itemsToRecycle:
                     recycledItemsCount += 1
-                    recycleMessage += f"{recycledItemsCount}: {stringList['Item Rarities'][item['itemRarity']][itemsLang]} | {stringList['Item Types'][item['itemType']][itemsLang]}: {item['itemQuantity']}x {item['itemName']}\n"
+                    recycleMessage += f"{recycledItemsCount}: {stringList['Item Rarities'][item['itemRarity']][getConfig('Items_Language')]} | {stringList['Item Types'][item['itemType']][getConfig('Items_Language')]}: {item['itemQuantity']}x {item['itemName']}\n"
                 message(f"{recycleMessage}")
-                reqGetResources2 = requestText(session.post(links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)
+                reqGetResources2 = requestText(request("post", links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)
                 resourcesMessage = getString("main.recycle.resources")
                 for resource in recycleResources:
                     resourceQuantity = int(reqGetResources2['profileChanges'][0]['profile']['items'][resource['itemGuid']]['quantity']) - int(resource['quantity'])
@@ -551,18 +708,20 @@ def main():
                 message(f"{resourcesMessage}")
 
 # Start the program.
-message(f"Fortnite Save the World Claimer v{versionStr} by PRO100KatYT\n")
-checkUpdate()
-if bSkipMainMenu == "false": menu()
+if getConfig('Check_For_Updates'): checkUpdate()
+if not getConfig('Skip_Main_Menu'): menu()
 while True:
+    t1 = datetime.now()
     main()
-    if loopMinutes > 0:
-        loopMinutes = int(loopMinutes) if str(loopMinutes).endswith(".0") else loopMinutes
+    t2 = datetime.now()
+    if getConfig('Loop_Minutes') > 0:
+        loopMinutes = int(getConfig('Loop_Minutes')) if str(getConfig('Loop_Minutes')).endswith(".0") else getConfig('Loop_Minutes')
         minutesWord = getPluralWord("minutes", loopMinutes)
-        print(getString("loop.message").format(loopMinutes, minutesWord, nextrun(loopMinutes)))
-        time.sleep(loopMinutes * 60)
+        totalSecondsToSleep = max(1, loopMinutes * 60 - (t2 - t1).total_seconds())
+        print(getString("loop.message").format(loopMinutes, minutesWord, nextrun(totalSecondsToSleep)))
+        time.sleep(totalSecondsToSleep)
     else:
-        if bSkipMainMenu == "true": break
+        if getConfig('Skip_Main_Menu'): break
         whatToDo = validInput(getString("noloop.input"), ["0", ""])
         if not whatToDo: break
         menu()
