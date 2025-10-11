@@ -37,6 +37,19 @@ This program allows you to claim Research Points, open free Llamas, manage your 
 ---
 
 ### 🔄 Changelog:
+**What's new in the `1.14.1` update:**
+- 📝 **Adjusted the displayed rewards info for Daily Quests:**
+  - All Daily Quests that awarded:
+    - 80 or 90 V-Bucks and/or X-Ray Tickets now award 100.
+    - 130 V-Bucks and/or X-Ray Tickets now award 150.
+- ⚙️ **Changed the way the `Skip_Main_Menu` config setting works:**
+  - When set to 1, the program will start the main claimer part.
+  - When set to 2, the program will start the Inventory Junk Cleaner loop on all accounts.
+  - Default value: 0 (disabled).
+- 🔧 Fixed the Inventory Junk Cleaner error when the program couldn't recycle items due to the inventory being full.
+- 🎽 Added the Areobic Assassin hero strings to the stringlist.json file.
+- 🎨 Tweaked the program's code a little bit.
+
 **What's new in the `1.14.0` update:**
 - ✨ **New Feature: Inventory Junk Cleaner!**
   - You can now easily destroy/recycle unwanted resources, weapons, etc. in your main backpack.

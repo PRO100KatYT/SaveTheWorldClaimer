@@ -16519,6 +16519,30 @@
       "rarity": "legendary",
       "type": "hero"
     },
+    "Hero:hid_ninja_exercise_sr_t01": {
+      "name": {
+        "ar": "الفتّاكة الرياضية",
+        "de": "Aerobic-Assassinin",
+        "en": "Aerobic Assassin",
+        "es": "Asesina aeróbica",
+        "es-419": "Asesina aeróbica",
+        "fr": "Accro à l'aérobic",
+        "id": "Assassin Aerobik",
+        "it": "Assassina aerobica",
+        "ja": "エアロビックアサシン",
+        "ko": "에어로빅 암살자",
+        "pl": "Treningowa Terrorystka",
+        "pt-BR": "Assassina Aeróbica",
+        "ru": "Звезда аэробики",
+        "th": "มือสังหารแอโรบิก",
+        "tr": "Aerobik Hocası",
+        "vi": "Sát Thủ Aerobic",
+        "zh-Hans": "有氧刺客",
+        "zh-Hant": "空氣刺客"
+      },
+      "rarity": "legendary",
+      "type": "hero"
+    },
     "Hero:hid_outlander_042_madcap_sr_t01": {
       "name": {
         "ar": "كاب المجنون",
@@ -49482,7 +49506,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -49535,7 +49559,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -49588,7 +49612,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -49641,7 +49665,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -49694,7 +49718,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -49747,7 +49771,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -49800,7 +49824,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -49853,7 +49877,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -49906,7 +49930,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -49959,7 +49983,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50012,7 +50036,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50065,7 +50089,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50118,7 +50142,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50171,7 +50195,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50224,7 +50248,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50277,7 +50301,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 130,
+        "ConditionalResource:currency_mtxswap": 150,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50330,7 +50354,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50383,7 +50407,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50436,7 +50460,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50489,7 +50513,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50542,7 +50566,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50595,7 +50619,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50648,7 +50672,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50701,7 +50725,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50754,7 +50778,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50807,7 +50831,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50860,7 +50884,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50913,7 +50937,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -50966,7 +50990,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -51019,7 +51043,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -51072,7 +51096,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 130,
+        "ConditionalResource:currency_mtxswap": 150,
         "AccountResource:eventcurrency_scaling": 410
       },
       "rarity": "uncommon",
@@ -51125,7 +51149,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 90,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -51178,7 +51202,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 90,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -51231,7 +51255,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 90,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -51284,7 +51308,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 90,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -51337,7 +51361,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -51390,7 +51414,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -51443,7 +51467,7 @@
         }
       },
       "rewards": {
-        "ConditionalResource:currency_mtxswap": 80,
+        "ConditionalResource:currency_mtxswap": 100,
         "AccountResource:eventcurrency_scaling": 250
       },
       "rarity": "uncommon",
@@ -51725,15 +51749,17 @@
         "extraComments": [],
         "settingComments": [
           "config.setup.skipmenu",
-          "config.setup.skipmenu2"
+          "config.setup.skipmenu2",
+          "config.setup.skipmenu3"
         ],
         "settingName": "Skip_Main_Menu",
-        "settingType": "bool",
+        "settingType": "int",
         "validValues": [
-          true,
-          false
+          0,
+          1,
+          2
         ],
-        "defaultValue": false,
+        "defaultValue": 0,
         "bSkipInSetup": true,
         "skipInSetupIf": {}
       }
@@ -51821,12 +51847,13 @@
       "config.setup.checkupdates": "Do you want the program to check for updates on startup?",
       "config.setup.dcwebhook": "Do you want the program to send its messages to a text channel in your Discord server?",
       "config.setup.dcwebhook.values": "a webhook url or leave empty to disable.",
-      "config.setup.skipmenu": "Do you want the program to skip the Main Menu to claim rewards immediately?",
-      "config.setup.skipmenu2": "If you'll have an issue with an account or want to use other program's features, you can switch it back to false in the config file.",
+      "config.setup.skipmenu": "Do you want the program to skip the Main Menu?",
+      "config.setup.skipmenu2": "To skip to the main program, set this to 1. To skip to Inventory Junk Cleaner (it will run on all added accounts straight away), set this to 2.",
+      "config.setup.skipmenu3": "If you'll have an issue with an account or want to use other program's features, you can switch it back to 0 in the config file.",
       "config.setup.dontchange": "Do not change anything below.",
       "config.setup.success": "The config.ini file was generated successfully.\n",
       "config.readerror": "The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.",
-      "config.versionerror": "The config.ini file is outdated. Delete the config.ini file and run this program again to generate a new one.",
+      "config.versionerror": "Thanks for downloading the update! The changes made in this version caused your config.ini file to be outdated. Delete the config.ini file and run this program again to generate a new one.",
       "authjson.readerror": "The program is unable to read the auth.json file. Delete the auth.json file and run this program again.",
       "authjson.oldformat": "Your auth.json file is in the pre-1.9.0 format, so the program cannot properly read it. To fix this issue, delete it and generate it by running this program again.",
       "startup.addaccount.isloggedin1": "Are you logged into your Epic account that you would like the program to use in your browser?\nType 1 if yes and press ENTER.\nType 2 if no and press ENTER.\nType 3 to go back and press ENTER.\n",
@@ -51886,6 +51913,7 @@
       "main.recycle.message": "The following items have been successfully recycled/retired:\n",
       "main.recycle.resources": "Resources received:\n",
       "main.recycle.totalamount": "Total amount: {0}",
+      "junkcleaner.title": "Starting the Inventory Junk Cleaner...",
       "junkcleaner.message": "Inventory Junk Cleaner:\n\nThis feature helps keep your inventory clean by destroying and recycling unwanted items. It works by:\n- Destroying specific backpack items at the selected star rating and below (perkless traps, weapons/traps from containers/animals, and tiered resources).\n- Recycling specific backpack items above the selected star rating (perkless traps and weapons/traps from containers/animals).\n\nThe program will NOT affect:\n- Items crafted by you or other players\n- Weapons and Traps with perks picked up from floor pickups\n- Weapons from in-game GiftBoxes\n- Ammo/Resources without a tier (Planks, Quartz, Coal, etc.)\n- Items in storage or in other backpacks (e.g. Ventures backpack)\n\nCurrently selected star rating: {0}. You can change it via the config.ini file.\n",
       "junkcleaner.whattodo": "Type 1 to run it on one account and press ENTER.\nType 2 to run it on all accounts and press ENTER.\nType 3 to go back and press ENTER.\n",
       "junkcleaner.selectaccount": "To select an account, type the number next to its display name and press ENTER.\nTo go back, type 0 and press ENTER.",
@@ -51896,6 +51924,7 @@
       "junkcleaner.destroying": "Destroying {0} backpack {1}...",
       "junkcleaner.gettinginfo": "Getting backpack information...\n",
       "junkcleaner.profilelocked": "Inventory operations are unavailable while {0} is playing a mission.",
+      "junkcleaner.recycleerror": "\nCannot recycle the items. Reason: {0}.\nThe program will attempt to destroy them.\n",
       "junkcleaner.loopmessage": "The Inventory Junk Cleaner will run again in {0} {1}. ({2})\n",
       "junkcleaner.done": "\nDone!",
       "junkcleaner.pressenter": "Press ENTER to continue.\n",
@@ -51985,12 +52014,13 @@
       "config.setup.checkupdates": "Czy chcesz, aby program sprawdzał dostępność aktualizacji po uruchomieniu?",
       "config.setup.dcwebhook": "Czy chcesz, aby program wysyłał wiadomości na kanał na Twoim serwerze Discord?",
       "config.setup.dcwebhook.values": "url webhooka lub zostaw puste, aby wyłączyć.",
-      "config.setup.skipmenu": "Czy chcesz, aby program pomijał Menu Główne, aby natychimastowo odbierać nagrody?",
-      "config.setup.skipmenu2": "Jeśli będzieta chcieli skorzystać z innych funkcji programu, można będzie zmienić to z powrotem na false w pliku config.",
+      "config.setup.skipmenu": "Czy chcesz, aby program pomijał Menu Główne?",
+      "config.setup.skipmenu2": "Aby pominąć do głównego programu, ustaw to na 1. Aby pominąć do Inventory Junk Cleaner'a (uruchomi się na wszystkich dodanych kontach), ustaw to na 2.",
+      "config.setup.skipmenu3": "Jeśli będzieta mieć jakiś problem lub chcieli skorzystać z innych funkcji programu, można będzie zmienić to z powrotem na 0 w pliku config.",
       "config.setup.dontchange": "Niczego poniżej nie zmieniaj.",
       "config.setup.success": "Plik conifg.ini został wygenerowany pomyślnie.\n",
       "config.readerror": "Program nie może odczytać pliku config.ini. Usuń plik config.ini i uruchom program ponownie, aby wygenerować nowy.",
-      "config.versionerror": "Plik config.ini jest nieaktualny. Usuń plik config.ini i uruchom program ponownie, aby wygenerować nowy.",
+      "config.versionerror": "Dzięki za pobranie aktualizacji! Zmiany w tej wersji spowodowały, że Twój plik config.ini stał się nieaktualny. Usuń plik config.ini i uruchom program ponownie, aby wygenerować nowy.",
       "authjson.readerror": "Program nie może odczytać pliku auth.json. Usuń plik auth.json i uruchom program ponownie.",
       "authjson.oldformat": "Twój plik auth.json jest sprzed wersji 1.9.0, przez co program nie może go poprawnie odczytać. Aby to naprawić, usuń go i wygeneruj, uruchamiając ten program ponownie.",
       "startup.addaccount.isloggedin1": "Czy jesteś zalogowany/a na konto Epic, które chcesz użyć w programie, w Twojej przeglądarce?\nWpisz 1, jeśli tak i wciśnij ENTER.\nWpisz 2, jeśli nie i wciśnij ENTER.\nWciśnij 3, aby pójść wstecz i wciśnij ENTER.\n",
@@ -52050,6 +52080,7 @@
       "main.recycle.message": "Następujące przedmioty zostały pomyślnie zrecyklingowane/odprawione:\n",
       "main.recycle.resources": "Otrzymane zasoby:\n",
       "main.recycle.totalamount": "Łącznie: {0}",
+      "junkcleaner.title": "Startowanie Inventory Junk Cleaner'a...",
       "junkcleaner.message": "Inventory Junk Cleaner:\n\nTa funkcja pomaga zachować porządek w ekwipunku, niszcząc i recyklingując niechciane przedmioty. Działa to poprzez:\n- Niszczenie konkretnych przedmiotów z plecaka o wybranej liczbie gwiazdek lub poniżej niej (pułapki bez profitów, bronie/pułapki z pudełek/zwierząt i surowce danego poziomu).\n- Recyklingowanie konkretnych przedmiotów z plecaka powyżej wybranej liczby gwiazdek (pułapki bez profitów oraz bronie/pułapki z pudełek/zwierząt).\n\nProgram nic NIE robi z:\n- Przedmiotami wytworzonymi przez Ciebie lub innych graczy\n- Brońmi i Pułapkami z profitami, podniesionymi z ziemi\n- Brońmi z prezentów zdobytych podczas misji\n- Amunicją/Zasobami bez poziomu (Deski, Kwarc, Węgiel, itp.)\n- Przedmiotami w magazynie lub innych plecakach (np. w plecaku Wypraw)\n\nAktualnie wybrany poziom gwiazdek: {0}. Możesz go zmienić w pliku config.ini.\n",
       "junkcleaner.whattodo": "Wpisz 1, aby uruchomić go na jednym koncie i wciśnij ENTER.\nWpisz 2, aby uruchomić go na wszystkich kontach i wciśnij ENTER.\nWpisz 3, aby wrócić i wciśnij ENTER.\n",
       "junkcleaner.selectaccount": "Aby wybrać konto, wpisz numer znajdujący się przy nicku i wciśnij ENTER.\nAby wrócić, wpisz 0 i wciśnij ENTER.",
@@ -52060,6 +52091,7 @@
       "junkcleaner.destroying": "Niszczenie {0} {1} z plecaka...",
       "junkcleaner.gettinginfo": "Zdobywanie informacji o plecaku...\n",
       "junkcleaner.profilelocked": "Działania na ekwipunku są niedostępne, ponieważ {0} jest w trakcie misji.",
+      "junkcleaner.recycleerror": "\nNie można zrecyklingować przedmiotów. Powód: {0}.\nProgram spróbuje je zniszczyć.\n",
       "junkcleaner.loopmessage": "Inventory Junk Cleaner wystartuje ponownie za {0} {1}. ({2})\n",
       "junkcleaner.done": "\nGotowe!",
       "junkcleaner.pressenter": "Wciśnij ENTER, aby kontynuować.\n",

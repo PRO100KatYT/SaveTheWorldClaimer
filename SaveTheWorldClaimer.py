@@ -1,6 +1,6 @@
-versionNum = 34
-versionStr = "1.14.0"
-configVersion = "1.14.0"
+versionNum = 35
+versionStr = "1.14.1"
+configVersion = "1.14.1"
 print(f"Fortnite Save the World Claimer v{versionStr} by PRO100KatYT\n")
 
 import os
@@ -384,10 +384,35 @@ class invJunkCleaner:
             message(getString("junkcleaner.nothingfound"))
         if itemGUIDsToRecycle:
             message(getString("junkcleaner.recycling").format(len(itemGUIDsToRecycle), getPluralWord('items', len(itemGUIDsToRecycle))))
-            requestText(request("post", links.profileRequest.format(auth.accountId, "DisassembleWorldItems", "theater0"), headers=auth.headers, json={"targetItemIdAndQuantityPairs": itemGUIDsToRecycle}), True)
+            reqRecycle = requestText(request("post", links.profileRequest.format(auth.accountId, "DisassembleWorldItems", "theater0"), headers=auth.headers, json={"targetItemIdAndQuantityPairs": itemGUIDsToRecycle}), False)
+            if "errorCode" in reqRecycle:
+                message(getString("junkcleaner.recycleerror").format(reqRecycle['errorMessage']))
+                for item in itemGUIDsToRecycle: itemGUIDsToDestroy.append(item['itemId'])
         if itemGUIDsToDestroy:
             message(getString("junkcleaner.destroying").format(len(itemGUIDsToDestroy), getPluralWord('items', len(itemGUIDsToRecycle))))
             requestText(request("post", links.profileRequest.format(auth.accountId, "DestroyWorldItems", "theater0"), headers=auth.headers, json={"itemIds": itemGUIDsToDestroy}), True)
+    
+    def main(selectedAccounts, loopMinutes):
+        while True:
+            t1 = datetime.now()
+            for account in selectedAccounts:
+                print()
+                auth = login(account)
+                message(getString("junkcleaner.gettinginfo"))
+                reqGetTheater0 = requestText(request("post", links.profileRequest.format(auth.accountId, "QueryProfile", "theater0"), headers=auth.headers, data="{}"), True)['profileChanges'][0]['profile']
+                isLocked = invJunkCleaner.isProfileLocked(reqGetTheater0)
+                if isLocked[0]: message(getString("junkcleaner.profilelocked").format(auth.displayName))
+                else:
+                    itemGUIDsToRecycle, itemGUIDsToDestroy = invJunkCleaner.findItems(reqGetTheater0)
+                    invJunkCleaner.recycleAndDestroy(auth, itemGUIDsToRecycle, itemGUIDsToDestroy)
+            t2 = datetime.now()
+            message(getString("junkcleaner.done"))
+            if loopMinutes <= 0: break
+            else:
+                minutesWord = getPluralWord("minutes", loopMinutes)
+                totalSecondsToSleep = max(1, loopMinutes * 60 - (t2 - t1).total_seconds())
+                message(getString("junkcleaner.loopmessage").format(loopMinutes, minutesWord, nextrun(totalSecondsToSleep)))
+                time.sleep(totalSecondsToSleep)
 
 # Menu (Account & Daily Quest Manager)
 def menu():
@@ -493,26 +518,7 @@ def menu():
                 selectedNicknames = [i["displayName"] for i in selectedAccounts]
                 confirmation = validInput(getString("junkcleaner.confirmation").format(', '.join(selectedNicknames), getConfig('Inventory_Junk_Cleaner')), ["1", "2"])
                 if confirmation == "2": break
-            while True:
-                t1 = datetime.now()
-                for account in selectedAccounts:
-                    print()
-                    auth = login(account)
-                    message(getString("junkcleaner.gettinginfo"))
-                    reqGetTheater0 = requestText(request("post", links.profileRequest.format(auth.accountId, "QueryProfile", "theater0"), headers=auth.headers, data="{}"), True)['profileChanges'][0]['profile']
-                    isLocked = invJunkCleaner.isProfileLocked(reqGetTheater0)
-                    if isLocked[0]: message(getString("junkcleaner.profilelocked").format(auth.displayName))
-                    else:
-                        itemGUIDsToRecycle, itemGUIDsToDestroy = invJunkCleaner.findItems(reqGetTheater0)
-                        invJunkCleaner.recycleAndDestroy(auth, itemGUIDsToRecycle, itemGUIDsToDestroy)
-                t2 = datetime.now()
-                message(getString("junkcleaner.done"))
-                if loopMinutes <= 0: break
-                else:
-                    minutesWord = getPluralWord("minutes", loopMinutes)
-                    totalSecondsToSleep = max(1, loopMinutes * 60 - (t2 - t1).total_seconds())
-                    message(getString("junkcleaner.loopmessage").format(loopMinutes, minutesWord, nextrun(totalSecondsToSleep)))
-                    time.sleep(totalSecondsToSleep)
+            invJunkCleaner.main(selectedAccounts, loopMinutes)
             input(getString("junkcleaner.pressenter"))
             break
     
@@ -710,20 +716,24 @@ def main():
 # Start the program.
 if getConfig('Check_For_Updates'): checkUpdate()
 if not getConfig('Skip_Main_Menu'): menu()
-while True:
-    t1 = datetime.now()
-    main()
-    t2 = datetime.now()
-    if getConfig('Loop_Minutes') > 0:
-        loopMinutes = int(getConfig('Loop_Minutes')) if str(getConfig('Loop_Minutes')).endswith(".0") else getConfig('Loop_Minutes')
-        minutesWord = getPluralWord("minutes", loopMinutes)
-        totalSecondsToSleep = max(1, loopMinutes * 60 - (t2 - t1).total_seconds())
-        print(getString("loop.message").format(loopMinutes, minutesWord, nextrun(totalSecondsToSleep)))
-        time.sleep(totalSecondsToSleep)
-    else:
-        if getConfig('Skip_Main_Menu'): break
-        whatToDo = validInput(getString("noloop.input"), ["0", ""])
-        if not whatToDo: break
-        menu()
+if getConfig('Skip_Main_Menu') != 2:
+    while True:
+        t1 = datetime.now()
+        main()
+        t2 = datetime.now()
+        if getConfig('Loop_Minutes') > 0:
+            loopMinutes = int(getConfig('Loop_Minutes')) if str(getConfig('Loop_Minutes')).endswith(".0") else getConfig('Loop_Minutes')
+            minutesWord = getPluralWord("minutes", loopMinutes)
+            totalSecondsToSleep = max(1, loopMinutes * 60 - (t2 - t1).total_seconds())
+            print(getString("loop.message").format(loopMinutes, minutesWord, nextrun(totalSecondsToSleep)))
+            time.sleep(totalSecondsToSleep)
+        else:
+            if getConfig('Skip_Main_Menu'): break
+            whatToDo = validInput(getString("noloop.input"), ["0", ""])
+            if not whatToDo: break
+            menu()
+else:
+    message(getString("junkcleaner.title"))
+    invJunkCleaner.main(authJson.copy(), getConfig("Loop_Minutes"))
 
 exit()
