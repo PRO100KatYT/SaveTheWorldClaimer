@@ -2,7 +2,7 @@
 
 <h1>Fortnite Save the World Claimer</h1>
 
-This program allows you to claim Research Points, open free Llamas, manage your Daily Quests, and much more — all without opening the game.
+This program allows you to open free Llamas, claim and replace your Daily Quests, and much more — all without opening the game.
 
 [![](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
 
@@ -21,8 +21,6 @@ This program allows you to claim Research Points, open free Llamas, manage your 
 - ♻️ **Daily Quest replacing** via the Daily Quest manager in the Main Menu.
 - 🦙 **Claiming free Llamas** and automatic Llama loot recycling.
   - You can toggle and adjust these features via the config file.
-- 🔬 **Claiming and auto-spending Research Points**.
-  - You can choose the spending method or toggle auto-spending via the config file.
 - 🎓 **Tutorial mission skipping**: unlock the Save the World music pack even if you don't own StW.
 - 🧹 **Inventory Junk Cleaner**: destroy/recycle unwanted backpack resources, weapons, etc.
   - You can find out more about this configurable feature in the Menu.
@@ -37,39 +35,8 @@ This program allows you to claim Research Points, open free Llamas, manage your 
 ---
 
 ### 🔄 Changelog:
-**What's new in the `1.14.1` update:**
-- 📝 **Adjusted the displayed rewards info for Daily Quests:**
-  - All Daily Quests that awarded:
-    - 80 or 90 V-Bucks and/or X-Ray Tickets now award 100.
-    - 130 V-Bucks and/or X-Ray Tickets now award 150.
-- ⚙️ **Changed the way the `Skip_Main_Menu` config setting works:**
-  - When set to 1, the program will start the main claimer part.
-  - When set to 2, the program will start the Inventory Junk Cleaner loop on all accounts.
-  - Default value: 0 (disabled).
-- 🔧 Fixed the Inventory Junk Cleaner error when the program couldn't recycle items due to the inventory being full.
-- 🎽 Added the Areobic Assassin hero strings to the stringlist.json file.
-- 🎨 Tweaked the program's code a little bit.
-
-**What's new in the `1.14.0` update:**
-- ✨ **New Feature: Inventory Junk Cleaner!**
-  - You can now easily destroy/recycle unwanted resources, weapons, etc. in your main backpack.
-  - Find out more about this feature in the program's Menu.
-- 📝 **Changes to `stringlist.json`:**
-  - Added 3 new languages: Indonesian, Thai, and Vietnamese for item names and quest strings.
-  - Added more detailed info on Defenders, e.g., "Defender (Shotgun)" instead of just "Defender".
-  - Added some missing item info.
-- ☁️ The program now downloads `stringlist.json` from GitHub if it's not present on launch.
-- ⚙️ Rewritten the config setup related code, making it easier to add new config options during development.
-- 🐛 Fixed a crash that occurred when the program was closed after installing the `requests` module.
-- 🇵🇱 Improved the `getPluralWord` function for the Polish language.
-- 🔁 The program now retries sending requests when connection issues occur.
-- ✅ The program now checks whether the account has completed Homebase SSD 3, which grants access to Daily Quests.
-- ✅ The program now checks for the completion of the "Mandatory Minimalism" Stonewood Quest, which grants access to recycling.
-  - This fixes an error during llama loot recycling for accounts that haven't unlocked this feature yet or just don't have Save the World access.
-- ⏱️ More accurate next-run timing: the program subtracts how long the last run took, so the next run starts on time.
-- 🔧 Fixed the program not letting to select some languages during the config setup.
-- 🔧 Fixed message formatting issues in certain scenarios (like opening llamas) with Show_Date_Time config option set to true.
-- 🌸 Made the README prettier.
+**What's new in the `1.14.2` update:**
+- ⛔ Removed the Research Points related program functionality due to Epic Games removing the Research system from the game.
 - 🎨 Tweaked the program's code a little bit.
 
 ---
@@ -98,7 +65,7 @@ This program allows you to claim Research Points, open free Llamas, manage your 
 
 8.  ✅ If everything went well, the program will confirm that the `auth.json` file was generated successfully. The program will then proceed to the Main Menu.
 
-9.  🎉 Congratulations! You can now get your daily quest, claim and spend research points, open free llamas (if available), and much more!
+9.  🎉 Congratulations! You can now get your daily quest, open free llamas (if available), and much more!
 
 10. The next time you launch the program, you won't need a new authorization code, as your login credentials are saved in `auth.json`.
 
@@ -111,6 +78,8 @@ Feel free to [open an issue](https://github.com/PRO100KatYT/SaveTheWorldClaimer/
 
 ### 🎁 Looking for Daily Login Rewards?
 Daily Login Rewards were removed from the game in June 2023. Read more [here](https://www.fortnite.com/news/changes-coming-to-fortnite-save-the-worlds-daily-reward-system-in-v25-10 "Daily Login Rewards removal info").
+### 🧪 Looking for Research Points?
+Research system was removed from the game in November 2025. Read more [here](https://www.reddit.com/r/FORTnITE/comments/1pa4vz8/save_the_world_v3900_update_notes "Research system removal info").
 
 ---
 

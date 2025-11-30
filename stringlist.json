@@ -51525,24 +51525,6 @@
       {
         "extraComments": [],
         "settingComments": [
-          "config.setup.researchpoints",
-          "config.setup.researchpoints2",
-          "config.setup.researchpoints3"
-        ],
-        "settingName": "Spend_Research_Points",
-        "settingType": "string",
-        "validValues": [
-          "off",
-          "lowest",
-          "everyten"
-        ],
-        "defaultValue": "lowest",
-        "bSkipInSetup": false,
-        "skipInSetupIf": {}
-      },
-      {
-        "extraComments": [],
-        "settingComments": [
           "config.setup.freellamas"
         ],
         "settingName": "Open_Free_Llamas",
@@ -51774,12 +51756,6 @@
           "many": "Rewards",
           "other": "Rewards"
         },
-        "researchPoints": {
-          "one": "Research Point",
-          "few": "Research Points",
-          "many": "Research Points",
-          "other": "Research Points"
-        },
         "freeLlamas": {
           "one": "Free Llama",
           "few": "Free Llamas",
@@ -51805,12 +51781,6 @@
           "other": "items"
         }
       },
-      "researchStats": {
-        "fortitude": "Fortitude",
-        "offense": "Offense",
-        "resistance": "Resistance",
-        "technology": "Technology"
-      },
       "request.error": "An error occured when trying to send a \"{0}\" request to {1}.{2} Make sure you have a stable internet connection.\nRetrying in {3}s...\n",
       "customerror.message": "ERROR: {0}\n\nPress ENTER to close the program.\n",
       "configerror.message": "You set the wrong {0} value in config.ini ({1}). Available options: {2}. Please change it and run this program again.",
@@ -51826,9 +51796,6 @@
       "config.availableoptions": "Available options: {0}",
       "config.setup.language": "What language should the program be displayed in?",
       "config.setup.itemslanguage": "What language do you want the Fortnite item names to be in?",
-      "config.setup.researchpoints": "Do you want to automatically spend your Research Points whenever the program is unable to collect them because Research Points storage is full?",
-      "config.setup.researchpoints2": "The \"lowest\" method makes the program search for a Research stat with the lowest level.",
-      "config.setup.researchpoints3": "The \"everyten\" method makes the program search for the closest Research stat to a full decimal level, e.g. level 10, 20, 40, etc.",
       "config.setup.freellamas": "Do you want the program to search for free Llamas and open them when they are available?",
       "config.setup.recycle.weapons": "Automatically recycle Weapon schematics from opened llamas at this rarity or below.",
       "config.setup.recycle.traps": "Automatically recycle Trap schematics from opened llamas at this rarity or below.",
@@ -51894,13 +51861,6 @@
       "main.dailies.searching": "Searching for active daily challenges...\n",
       "main.dailies.info": "{0}. {1} | Current progress:{2} | Earnable rewards:{3}\n",
       "main.dailies.notfound": "No active daily challenges found. Come back tommorow!\n",
-      "main.research.error": "ERROR: {0}\n",
-      "main.research.success": "Claimed {0} {1}. Total Research Points: {2}\n",
-      "main.research.notenough": "The program is unable to claim {0} Research Point because in order to collect it, at least 1 point must be available for claiming. In other words, the program will be able to claim Research Points again in a few minutes.\n",
-      "main.research.max.off": "The program is unable to claim {0} Research Points because Research Points storage is full ({1}pts).\nIn this situation if you want to automatically spend them, change the Spend_Research_Points value in config.ini to lowest or everyten and run this program again.\n",
-      "main.research.max.on": "The Research Points storage is full ({0}pts).\nStarting to automatically spend Research Points...\n",
-      "main.research.spend.success": "Bought 1 {0} level. New level: {1}.",
-      "main.research.spend.end": "Cannot buy more F.O.R.T. levels.\n",
       "main.freellamas.noshop": "Failed to find the Llama shop. Is it even possible? Maybe a new Fortnite update could break it, but it's very unlikely...",
       "main.freellamas.nollamas": "There are no free Llamas available at the moment.\n",
       "main.freellamas.yesllamas": "There are free llamas available! Yay!",
@@ -51941,12 +51901,6 @@
           "many": "Nagród",
           "other": "Nagród"
         },
-        "researchPoints": {
-          "one": "Punkt Badawczy",
-          "few": "Punkty Badawcze",
-          "many": "Punktów Badawczych",
-          "other": "Punktów Badawczych"
-        },
         "freeLlamas": {
           "one": "darmową Lamę",
           "few": "darmowe Lamy",
@@ -51972,12 +51926,6 @@
           "other": "przedmiotów"
         }
       },
-      "researchStats": {
-        "fortitude": "Formy",
-        "offense": "Ofensywy",
-        "resistance": "Rezystancji",
-        "technology": "Technologii"
-      },
       "request.error": "Wystąpił błąd przy próbie wysłania zapytania \"{0}\" do {1}.{2} Upewnij się, że masz stabilne połączenie z internetem.\nPonowna próba za {3}s...\n",
       "customerror.message": "BŁĄD: {0}\n\nWciśnij ENTER, aby zamknąć program.\n",
       "configerror.message": "Ustawiono nieprawidłową wartość dla {0} w config.ini ({1}). Dostępne opcje: {2}. Zmień to i uruchom ten program ponownie.",
@@ -51993,9 +51941,6 @@
       "config.availableoptions": "Dostępne opcje: {0}",
       "config.setup.language": "W jakim języku program ma być wyświetlany?",
       "config.setup.itemslanguage": "W jakim języku chcesz, aby były nazwy przedmiotów z Fortnite?",
-      "config.setup.researchpoints": "Czy chcesz automatycznie wydawać Punkty Badawcze, gdy program nie jest w stanie ich zebrać, bo magazyn Punktów Badawczych jest pełny?",
-      "config.setup.researchpoints2": "Metoda \"lowest\" sprawia, że program szuka statystyki Badania, która ma najniższy poziom.",
-      "config.setup.researchpoints3": "Metoda \"everyten\" sprawia, że program szuka statystyki Badania, która jest najbliższa do pełnej dziesiątki, np. poziomu 10, 20, 40, itd.",
       "config.setup.freellamas": "Czy chcesz, aby program szukał darmowych Lam i otwierał je, gdy są dostępne?",
       "config.setup.recycle.weapons": "Automatycznie przeznaczaj do recyklingu schematy broni o takiej lub niższej klasie rzadkości.",
       "config.setup.recycle.traps": "Automatycznie przeznaczaj do recyklingu schematy pułapek o takiej lub niższej klasie rzadkości.",
@@ -52061,13 +52006,6 @@
       "main.dailies.searching": "Poszukiwanie aktywnych zadań dnia...\n",
       "main.dailies.info": "{0}. {1} | Aktualny postęp:{2} | Nagrody do zdobycia:{3}\n",
       "main.dailies.notfound": "Nie znaleziono aktywnych zadań dnia. Zajrzyj tu jutro!\n",
-      "main.research.error": "BŁĄD: {0}\n",
-      "main.research.success": "Zebrano {0} {1}. Łączna liczba Punktów Badawczych: {2}\n",
-      "main.research.notenough": "Program nie może zebrać {0} Punkta Badawczego, ponieważ aby to zrobić, dostępny musi być co najmniej 1 punkt. Innymi słowy, program będzie mógł ponownie zebrać Punkty Badawcze za kilka minut.\n",
-      "main.research.max.off": "Program nie może zebrać {0} Punktów Badawczych, ponieważ magazyn Punktów Badawczych jest pełny ({1}pkt).\nW tej sytuacji, jeśli chcesz je automatycznie wydać, zmień wartość Spend_Research_Points w pliku config.ini na lowest lub everyten i uruchom program ponownie.\n",
-      "main.research.max.on": "Magazyn Punktów Badawczych jest pełny ({0}pkt).\nZaczynam automatyczne wydawanie Punktów Badawczych...\n",
-      "main.research.spend.success": "Kupiono 1 poziom {0}. Nowy poziom: {1}.",
-      "main.research.spend.end": "Nie można kupić więcej poziomów F.O.R.T.\n",
       "main.freellamas.noshop": "Nie znaleziono sklepu z Lamami. Czy to w ogóle możliwe? Może jakaś nowa aktualizacja Fortnite mogła to zepsuć, ale to mało prawdopodobne...",
       "main.freellamas.nollamas": "Obecnie nie ma żadnych darmowych Lam.\n",
       "main.freellamas.yesllamas": "Są dostępne darmowe Lamy! Juhu!",

@@ -1,6 +1,6 @@
-versionNum = 35
-versionStr = "1.14.1"
-configVersion = "1.14.1"
+versionNum = 36
+versionStr = "1.14.2"
+configVersion = "1.14.2"
 print(f"Fortnite Save the World Claimer v{versionStr} by PRO100KatYT\n")
 
 import os
@@ -310,7 +310,7 @@ class login:
                     and campaignProfile["items"][ssd3QuestGUID]["attributes"]["quest_state"].lower() == "claimed"):
                     bDailyQuestsUnlocked = True
 
-        # Check whether the account is able to get Research Points
+        # Check whether the account is able to get recycle items
         bRecyclingUnlocked = any(campaignProfile["items"][id]["templateId"].lower() == "homebasenode:questreward_recyclecollection" for id in campaignProfile["items"])
 
         self.headers, self.accountId, self.displayName, self.campaignProfile, self.bHasCampaignAccess, self.bReceiveMtx, self.bDailyQuestsUnlocked, self.bRecyclingUnlocked = headers, accountId, displayName, campaignProfile, bHasCampaignAccess, bReceiveMtx, bDailyQuestsUnlocked, bRecyclingUnlocked
@@ -563,70 +563,6 @@ def main():
             if not questData: message(getString("main.dailies.notfound"))
             for quest in questData: message(getString("main.dailies.info").format(questData[quest]['questNumber'], questData[quest]['questName'], questData[quest]['progress'], questData[quest]['rewards']))
         else: message(getString("main.dailies.unavailable"))
-
-        # Claim and automatically spend the Research Points.
-        reqCampaignProfileCheck = requestText(request("post", links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)
-        try:
-            reqCampaignProfileCheckResearchLevels = reqCampaignProfileCheck['profileChanges'][0]['profile']['stats']['attributes']['research_levels']
-            bTryToClaimRP = True
-            tokenToClaim = []
-        except: bTryToClaimRP = False
-        try:
-            if (reqCampaignProfileCheckResearchLevels['fortitude'] == reqCampaignProfileCheckResearchLevels['offense'] == reqCampaignProfileCheckResearchLevels['resistance'] == reqCampaignProfileCheckResearchLevels['technology'] == 120): bTryToClaimRP = False
-        except: pass
-        if bTryToClaimRP:
-            reqCampaignProfileCheckItems = reqCampaignProfileCheck['profileChanges'][0]['profile']['items']
-            for key in reqCampaignProfileCheckItems: # Shoutout to Lawin for helping me figuring out how to write this and the next line of code.
-                if reqCampaignProfileCheckItems[key]['templateId'] == "CollectedResource:Token_collectionresource_nodegatetoken01":
-                    tokenToClaim = key
-                    break
-            if tokenToClaim:
-                reqClaimCollectedResources = requestText(request("post", links.profileRequest.format(auth.accountId, "ClaimCollectedResources", "campaign"), headers=auth.headers, json={"collectorsToClaim": [tokenToClaim]}), False)
-                if "errorMessage" in reqClaimCollectedResources: message(getString("main.research.error").format(reqClaimCollectedResources['errorMessage'])) # Error without exit()
-                else:
-                    storedMaxPoints = False
-                    try:
-                        totalItemGuid, rpToClaim = [reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['itemGuid'], reqClaimCollectedResources['profileChanges'][0]['profile']['items'][tokenToClaim]['attributes']['stored_value']]
-                        rpStored, rpClaimedQuantity = [reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity'], int(reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity'])]
-                        if float(rpToClaim) >= 1: storedMaxPoints = True
-                        researchPointsWord = getPluralWord("researchPoints", rpClaimedQuantity)
-                        message(getString("main.research.success").format(rpClaimedQuantity, researchPointsWord, reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity']))
-                    except:
-                        for key in reqCampaignProfileCheckItems:
-                            if reqCampaignProfileCheckItems[key]['templateId'] == "Token:collectionresource_nodegatetoken01":
-                                totalItemGuid = key
-                                break
-                        rpToClaim, rpStored, storedMaxPoints = [reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{tokenToClaim}']['attributes']['stored_value'], reqClaimCollectedResources['profileChanges'][0]['profile']['items'][f'{totalItemGuid}']['quantity'], True]
-                        if int(rpToClaim) < 1:
-                            storedMaxPoints = False
-                            message(getString("main.research.notenough").format(round(rpToClaim, 2)))
-
-                    if storedMaxPoints:
-                        if getConfig('Spend_Research_Points') == "off": message(getString("main.research.max.off").format(round(rpToClaim, 2), rpStored))
-                        else:
-                            message(getString("main.research.max.on").format(rpStored))
-                            while True:
-                                reqFORTLevelsCheck = {**{"fortitude": 0, "offense": 0, "resistance": 0, "technology": 0}, **requestText(request("post", links.profileRequest.format(auth.accountId, "QueryProfile", "campaign"), headers=auth.headers, data="{}"), True)['profileChanges'][0]['profile']['stats']['attributes']['research_levels']}
-                                if getConfig('Spend_Research_Points') == "lowest":
-                                    levelsList = [int(reqFORTLevelsCheck['fortitude']), int(reqFORTLevelsCheck['offense']), int(reqFORTLevelsCheck['resistance']), int(reqFORTLevelsCheck['technology'])]
-                                    level = min(levelsList)
-                                elif getConfig('Spend_Research_Points') == "everyten":
-                                    levelsList, levelsJson = [[int(reqFORTLevelsCheck['fortitude']) % 10, int(reqFORTLevelsCheck['offense']) % 10, int(reqFORTLevelsCheck['resistance']) % 10, int(reqFORTLevelsCheck['technology']) % 10], {int(reqFORTLevelsCheck['fortitude']) % 10: int(reqFORTLevelsCheck['fortitude']), int(reqFORTLevelsCheck['offense']) % 10: int(reqFORTLevelsCheck['offense']), int(reqFORTLevelsCheck['resistance']) % 10: int(reqFORTLevelsCheck['resistance']), int(reqFORTLevelsCheck['technology']) % 10: int(reqFORTLevelsCheck['technology'])}]
-                                    level = levelsJson[max(levelsList)]
-                                for key in reqFORTLevelsCheck:
-                                    if reqFORTLevelsCheck[key] == int(level):
-                                        statToClaim = key
-                                        break
-                                reqPurchaseResearchStatUpgrade = requestText(request("post", links.profileRequest.format(auth.accountId, "PurchaseResearchStatUpgrade", "campaign"), headers=auth.headers, json={"statId": f'{statToClaim}'}), False)
-                                statName = stringList['Strings'][getConfig('Language')]['researchStats'][f'{statToClaim}']
-                                if "errorMessage" in reqPurchaseResearchStatUpgrade: break # Error without exit()
-                                else: message(getString("main.research.spend.success").format(statName, reqPurchaseResearchStatUpgrade['profileChanges'][0]['profile']['stats']['attributes']['research_levels'][statToClaim]))
-                            message(getString("main.research.spend.end"))
-                            reqClaimCollectedResources = requestText(request("post", links.profileRequest.format(auth.accountId, "ClaimCollectedResources", "campaign"), headers=auth.headers, json={"collectorsToClaim": [tokenToClaim]}), True)
-                            try:
-                                totalItemGuid = reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['itemGuid']
-                                message(getString("main.research.success").format(reqClaimCollectedResources['notifications'][0]['loot']['items'][0]['quantity'], reqClaimCollectedResources['profileChanges'][0]['profile']['items'][totalItemGuid]['quantity']))
-                            except: pass
 
         # Search for free Llamas and open them if they're available.
         alreadyOpenedFreeLlamas, freeLlamasCount, cpspStorefront = [0, 0, []]
