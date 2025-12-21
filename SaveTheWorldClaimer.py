@@ -1,6 +1,6 @@
-versionNum = 36
-versionStr = "1.14.2"
-configVersion = "1.14.2"
+versionNum = 37
+versionStr = "1.14.3"
+configVersion = "1.14.3"
 print(f"Fortnite Save the World Claimer v{versionStr} by PRO100KatYT\n")
 
 import os
@@ -31,14 +31,18 @@ class links:
     loginLink2 = "https://www.epicgames.com/id/logout?redirectUrl=https%3A%2F%2Fwww.epicgames.com%2Fid%2Flogin%3FredirectUrl%3Dhttps%253A%252F%252Fwww.epicgames.com%252Fid%252Fapi%252Fredirect%253FclientId%253D{0}%2526responseType%253Dcode"
     getOAuth = "https://account-public-service-prod.ol.epicgames.com/account/api/oauth/{0}"
     getDeviceAuth = "https://account-public-service-prod.ol.epicgames.com/account/api/public/account/{0}/deviceAuth"
-    getStorefront = "https://fortnite-public-service-prod11.ol.epicgames.com/fortnite/api/storefront/v2/catalog"
-    profileRequest = "https://fortnite-public-service-prod11.ol.epicgames.com/fortnite/api/game/v2/profile/{0}/client/{1}?profileId={2}"
+    getStorefront = "https://fngw-mcp-gc-livefn.ol.epicgames.com/fortnite/api/storefront/v2/catalog"
+    profileRequest = "https://mcp-gc.live.fngw.ol.epicgames.com/fortnite/api/game/v2/profile/{0}/client/{1}?profileId={2}"
 
 # Automatic llama loot recycling variables.
 class autoRecycling:
     rarities = {"off": "", "common": "common", "uncommon": "common, uncommon", "rare": "common, uncommon, rare", "epic": "common, uncommon, rare, epic"}
     itemRarities = []
     recycleResources = ["AccountResource:heroxp", "AccountResource:personnelxp", "AccountResource:phoenixxp", "AccountResource:phoenixxp_reward", "AccountResource:reagent_alteration_ele_fire", "AccountResource:reagent_alteration_ele_nature", "AccountResource:reagent_alteration_ele_water", "AccountResource:reagent_alteration_gameplay_generic", "AccountResource:reagent_alteration_generic", "AccountResource:reagent_alteration_upgrade_r", "AccountResource:reagent_alteration_upgrade_sr", "AccountResource:reagent_alteration_upgrade_uc", "AccountResource:reagent_alteration_upgrade_vr", "AccountResource:reagent_c_t01", "AccountResource:reagent_c_t02", "AccountResource:reagent_c_t03", "AccountResource:reagent_c_t04", "AccountResource:reagent_evolverarity_r", "AccountResource:reagent_evolverarity_sr", "AccountResource:reagent_evolverarity_vr", "AccountResource:reagent_people", "AccountResource:reagent_promotion_heroes", "AccountResource:reagent_promotion_survivors", "AccountResource:reagent_promotion_traps", "AccountResource:reagent_promotion_weapons", "AccountResource:reagent_traps", "AccountResource:reagent_weapons", "AccountResource:schematicxp"]
+
+# BR Winterfest event presents related variables.
+class winterfest:
+    rewardGraphId, nodesClaimingOrder = "AthenaRewardGraph:s39_winterfest", ["ERG.Node.A.3", "ERG.Node.A.4", "ERG.Node.A.5", "ERG.Node.A.6", "ERG.Node.A.7", "ERG.Node.A.8", "ERG.Node.A.9", "ERG.Node.A.2", "ERG.Node.A.10", "ERG.Node.A.11", "ERG.Node.A.12", "ERG.Node.B.1", "ERG.Node.A.13", "ERG.Node.A.1"]
 
 # Basic headers for logging in. (For backwards compatibility with accounts saved prior to the 1.13.2 Update)
 class basicHeaders:
@@ -294,26 +298,31 @@ class login:
         headers = {"User-Agent": "Fortnite/++Fortnite+Release-19.40-CL-19215531 Windows/10.0.19043.1.768.64bit", "Authorization": f"bearer {accessToken}", "Content-Type": "application/json", "X-EpicGames-Language": getConfig('Items_Language'), "Accept-Language": getConfig('Items_Language')}
 
         # Check whether the account has the campaign access token and if it's able to receive V-Bucks.
-        reqQueryProfiles = [json.dumps(requestText(request("post", links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(request("post", links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False))]
-        campaignProfile = json.loads(reqQueryProfiles[1])['profileChanges'][0]['profile']
+        reqQueryProfiles = [json.dumps(requestText(request("post", links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(request("post", links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False)), json.dumps(requestText(request("post", links.profileRequest.format(accountId, "ClientQuestLogin", "athena"), headers=headers, data="{}"), False))]
+        campaignProfile, athenaProfile = json.loads(reqQueryProfiles[1])["profileChanges"][0]["profile"], json.loads(reqQueryProfiles[2])["profileChanges"][0]["profile"]
         bReceiveMtx = False
         bHasCampaignAccess = False
         if "Token:receivemtxcurrency" in reqQueryProfiles[1]: bReceiveMtx = True
         if "Token:campaignaccess" in reqQueryProfiles[0]: bHasCampaignAccess = True
 
+        ssd3QuestGUID, bRecyclingUnlocked = "", False
+        for id in campaignProfile["items"]:
+            templateId = campaignProfile["items"][id]["templateId"].lower()
+            if templateId == "quest:outpostquest_t1_l3": ssd3QuestGUID = id
+            elif templateId == "homebasenode:questreward_recyclecollection": bRecyclingUnlocked = True
+
         # Check whether the account is able to get Daily Quests
         bDailyQuestsUnlocked = False
-        ssd3QuestGUID = next((id for id in campaignProfile["items"] if campaignProfile["items"][id]["templateId"].lower() == "quest:outpostquest_t1_l3"), "")
         if ssd3QuestGUID:
             if "completion_complete_outpost_1_3" in campaignProfile["items"][ssd3QuestGUID]["attributes"]:
                 if (campaignProfile["items"][ssd3QuestGUID]["attributes"]["completion_complete_outpost_1_3"] == 1
                     and campaignProfile["items"][ssd3QuestGUID]["attributes"]["quest_state"].lower() == "claimed"):
                     bDailyQuestsUnlocked = True
 
-        # Check whether the account is able to get recycle items
-        bRecyclingUnlocked = any(campaignProfile["items"][id]["templateId"].lower() == "homebasenode:questreward_recyclecollection" for id in campaignProfile["items"])
+        # Check whether the account has the BR Winterfest Reward Graph item.
+        winterfestRewardGraphID = next((id for id in athenaProfile["items"] if athenaProfile["items"][id]["templateId"].lower() == winterfest.rewardGraphId.lower()), "")
 
-        self.headers, self.accountId, self.displayName, self.campaignProfile, self.bHasCampaignAccess, self.bReceiveMtx, self.bDailyQuestsUnlocked, self.bRecyclingUnlocked = headers, accountId, displayName, campaignProfile, bHasCampaignAccess, bReceiveMtx, bDailyQuestsUnlocked, bRecyclingUnlocked
+        self.headers, self.accountId, self.displayName, self.campaignProfile, self.athenaProfile, self.bHasCampaignAccess, self.bReceiveMtx, self.bDailyQuestsUnlocked, self.bRecyclingUnlocked, self.winterfestRewardGraphID = headers, accountId, displayName, campaignProfile, athenaProfile, bHasCampaignAccess, bReceiveMtx, bDailyQuestsUnlocked, bRecyclingUnlocked, winterfestRewardGraphID
 
 # Get an account's Daily Quests
 def getDailyQuests(auth):
@@ -522,8 +531,17 @@ def menu():
             input(getString("junkcleaner.pressenter"))
             break
     
+    def getSeasonalGreeting():
+        now = datetime.now()
+        month, day = now.month, now.day
+        if month == 12 and 24 <= day and day <= 26: return getString('mainmenu.merrychristmas')
+        elif (month == 12 and day == 31) or (month == 1 and day == 1): return getString('mainmenu.happynewyear')
+        return ""
+    
     while True:
         if not authJson: addAccount(False)
+        seasonalGreeting = getSeasonalGreeting()
+        if seasonalGreeting: message(seasonalGreeting)
         whatToDo1 = validInput(getString("mainmenu.message"), ["1", "2", "3", "4", ""])
         if whatToDo1 == "1": break
         elif whatToDo1 == "2": manageDailyQuests()
@@ -555,6 +573,21 @@ def main():
                 if reqUpdateObjectives['profileChanges'][0]['profile']['items'][item]['attributes']['quest_state'].lower() == "claimed": message(getString("main.skiptutorial.success").format(auth.displayName))
                 else: message(getString("main.skiptutorial.error").format(auth.displayName))
                 break
+        
+        # Claim a BR Winterfest event present if available.
+        if getConfig('Claim_Winterfest_Presents') and auth.winterfestRewardGraphID:
+            rewardGraphItem = auth.athenaProfile["items"][auth.winterfestRewardGraphID]["attributes"]
+            nodeToUnlock = next((node for node in winterfest.nodesClaimingOrder if node not in rewardGraphItem["reward_nodes_claimed"]), "")
+            unlockKeysLeft = 0
+            for id in auth.athenaProfile["items"]:
+                if auth.athenaProfile["items"][id]["templateId"].lower() == rewardGraphItem["reward_keys"][0]["static_key_template_id"].lower(): unlockKeysLeft += auth.athenaProfile["items"][id]["quantity"]
+            if nodeToUnlock and unlockKeysLeft > 0:
+                auth.athenaProfile = requestText(request("post", links.profileRequest.format(auth.accountId, "UnlockRewardNode", "athena"), headers=auth.headers, json={"nodeId":nodeToUnlock,"rewardGraphId":auth.winterfestRewardGraphID,"rewardCfg":""}), True)["profileChanges"][0]["profile"]
+                rewardGraphItem = auth.athenaProfile["items"][auth.winterfestRewardGraphID]["attributes"]
+                message(getString("main.winterfest.claimed").format(rewardGraphItem["reward_keys"][0]["unlock_keys_used"], len(stringList["winterfestRewards"].keys())))
+                for templateId in stringList["winterfestRewards"][nodeToUnlock]:
+                    message(f"{stringList['Item Types'][stringList['Items'][templateId]['type']][getConfig('Items_Language')]} | {stringList['Items'][templateId]['name'][getConfig('Items_Language')]}")
+                print()
 
         # Display current daily challenges, their rewards and progress if there is any.
         if auth.bDailyQuestsUnlocked:

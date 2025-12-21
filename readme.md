@@ -24,6 +24,7 @@ This program allows you to open free Llamas, claim and replace your Daily Quests
 - 🎓 **Tutorial mission skipping**: unlock the Save the World music pack even if you don't own StW.
 - 🧹 **Inventory Junk Cleaner**: destroy/recycle unwanted backpack resources, weapons, etc.
   - You can find out more about this configurable feature in the Menu.
+- 🎁 **Winterfest presents claiming** which you can turn on via the config file.
 - 💬 **Discord Webhook integration**.
   - You can set the Webhook URL in the config file.
 - 🌐 **Multi-language support** for the program interface (English & Polish).
@@ -35,8 +36,12 @@ This program allows you to open free Llamas, claim and replace your Daily Quests
 ---
 
 ### 🔄 Changelog:
-**What's new in the `1.14.2` update:**
-- ⛔ Removed the Research Points related program functionality due to Epic Games removing the Research system from the game.
+**What's new in the `1.14.3` update:**
+- 🎁 New feature: Winterfest event presents claiming!
+  - Because Epic Games decided to make Winterfest presents not stack this year, I decided to rewrite my WinterfestPresentsOpener program functionality and include it in SaveTheWorldClaimer.
+  - This feature is turned off by default. You can enable it by setting the `Claim_Winterfest_Presents` option to true in config.ini.
+- 👋 Added some seasonal greetings when entering the Main Menu.
+- ⚙️ Updated the Epic Games domains in certain URLs.
 - 🎨 Tweaked the program's code a little bit.
 
 ---
@@ -84,4 +89,4 @@ Research system was removed from the game in November 2025. Read more [here](htt
 ---
 
 ### 🔔 Want notifications for free llamas?
-I recommend joining [the r/FORTnITE discord server](https://discord.gg/PjqZaDmV8D "Here is the link :D") and assigning yourself the `freellamas` role on the `#role-assignment` channel.
+I recommend joining [the r/FORTnITE discord server](https://discord.gg/PjqZaDmV8D "Here is the link :D") and assigning yourself the `freellamas` role. Alternatively, you can set the program to loop every 60 minutes to ensure you won't miss them when they appear in the llama shop.
