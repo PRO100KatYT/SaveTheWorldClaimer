@@ -229,7 +229,7 @@ if not os.path.exists(configPath):
         if setting["settingName"] == "Language": language = value # Scuffed but yeah
         for comment in setting["extraComments"] + setting["settingComments"]:
             configFileContent += f"# {getString(comment)}\n" if comment else "\n" # if comment is empty then just do newline
-        configFileContent += f"# {getString('config.availableoptions').format(', '.join(str(item) for item in setting['validValues']).lower() if isinstance(setting['validValues'], list) else getString(setting['validValues']))}\n{setting['settingName']} = {str(value).lower() if setting['settingType'] in ["bool", "string"] else value}\n\n"
+        configFileContent += f"# {getString('config.availableoptions').format(', '.join(str(item) for item in setting['validValues']).lower() if isinstance(setting['validValues'], list) else getString(setting['validValues']))}\n{setting['settingName']} = {str(value).lower() if setting['settingType'] in ['bool', 'string'] else value}\n\n"
     configFileContent += f"# {getString('config.setup.dontchange')}\n[Config_Version]\n\nVersion = STWC_{configVersion}\n"
     with open(configPath, "w", encoding="utf-8") as file:
         file.write(configFileContent)
