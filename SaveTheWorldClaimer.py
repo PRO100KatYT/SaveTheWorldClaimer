@@ -1,5 +1,5 @@
-versionNum = 37
-versionStr = "1.14.3"
+versionNum = 38
+versionStr = "1.14.4"
 configVersion = "1.14.3"
 print(f"Fortnite Save the World Claimer v{versionStr} by PRO100KatYT\n")
 
@@ -295,11 +295,11 @@ class login:
         message(getString("main.login.success"))
 
         # Headers for MCP requests.
-        headers = {"User-Agent": "Fortnite/++Fortnite+Release-19.40-CL-19215531 Windows/10.0.19043.1.768.64bit", "Authorization": f"bearer {accessToken}", "Content-Type": "application/json", "X-EpicGames-Language": getConfig('Items_Language'), "Accept-Language": getConfig('Items_Language')}
+        headers = {"User-Agent": "Fortnite/++Fortnite+Release-39.40-CL-50341043 Windows/10.0.26100.1.256.64bit", "Authorization": f"bearer {accessToken}", "Content-Type": "application/json", "X-EpicGames-Language": getConfig('Items_Language'), "Accept-Language": getConfig('Items_Language')}
 
         # Check whether the account has the campaign access token and if it's able to receive V-Bucks.
         reqQueryProfiles = [json.dumps(requestText(request("post", links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(request("post", links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False)), json.dumps(requestText(request("post", links.profileRequest.format(accountId, "ClientQuestLogin", "athena"), headers=headers, data="{}"), False))]
-        campaignProfile, athenaProfile = json.loads(reqQueryProfiles[1])["profileChanges"][0]["profile"], json.loads(reqQueryProfiles[2])["profileChanges"][0]["profile"]
+        commonCoreProfile, campaignProfile, athenaProfile = json.loads(reqQueryProfiles[0])["profileChanges"][0]["profile"], json.loads(reqQueryProfiles[1])["profileChanges"][0]["profile"], json.loads(reqQueryProfiles[2])["profileChanges"][0]["profile"]
         bReceiveMtx = False
         bHasCampaignAccess = False
         if "Token:receivemtxcurrency" in reqQueryProfiles[1]: bReceiveMtx = True
@@ -322,7 +322,7 @@ class login:
         # Check whether the account has the BR Winterfest Reward Graph item.
         winterfestRewardGraphID = next((id for id in athenaProfile["items"] if athenaProfile["items"][id]["templateId"].lower() == winterfest.rewardGraphId.lower()), "")
 
-        self.headers, self.accountId, self.displayName, self.campaignProfile, self.athenaProfile, self.bHasCampaignAccess, self.bReceiveMtx, self.bDailyQuestsUnlocked, self.bRecyclingUnlocked, self.winterfestRewardGraphID = headers, accountId, displayName, campaignProfile, athenaProfile, bHasCampaignAccess, bReceiveMtx, bDailyQuestsUnlocked, bRecyclingUnlocked, winterfestRewardGraphID
+        self.headers, self.accountId, self.displayName, self.commonCoreProfile, self.campaignProfile, self.athenaProfile, self.bHasCampaignAccess, self.bReceiveMtx, self.bDailyQuestsUnlocked, self.bRecyclingUnlocked, self.winterfestRewardGraphID = headers, accountId, displayName, commonCoreProfile, campaignProfile, athenaProfile, bHasCampaignAccess, bReceiveMtx, bDailyQuestsUnlocked, bRecyclingUnlocked, winterfestRewardGraphID
 
 # Get an account's Daily Quests
 def getDailyQuests(auth):
@@ -422,6 +422,80 @@ class invJunkCleaner:
                 totalSecondsToSleep = max(1, loopMinutes * 60 - (t2 - t1).total_seconds())
                 message(getString("junkcleaner.loopmessage").format(loopMinutes, minutesWord, nextrun(totalSecondsToSleep)))
                 time.sleep(totalSecondsToSleep)
+
+class itemShop:
+    def getEventPurchasesQuantities(auth, offerIds):
+        countJson = {}
+        for offerId in offerIds: countJson[offerId] = 0
+        for key in auth.commonCoreProfile["items"]:
+            if not auth.commonCoreProfile["items"][key]["templateId"].lower() == "eventpurchasetracker:generic_instance": continue
+            attributes = auth.commonCoreProfile["items"][key]["attributes"]
+            if not "event_purchases" in attributes: continue
+            for offerId2 in attributes["event_purchases"]:
+                if offerId2 in offerIds: countJson[offerId2] += attributes["event_purchases"][offerId2]
+        return countJson
+    
+    def getAvailableCurrencyQuantity(auth, currency, currencySubType):
+        count = 0
+        if currency.lower() == "mtxcurrency":
+            for key in auth.commonCoreProfile["items"]:
+                if not auth.commonCoreProfile["items"][key]["templateId"].lower().startswith("currency:mtx"): continue
+                count += auth.commonCoreProfile["items"][key]["quantity"]
+        elif currencySubType:
+            for key in auth.campaignProfile["items"]:
+                if auth.campaignProfile["items"][key]["templateId"].lower() == currencySubType.lower():
+                    count += auth.campaignProfile["items"][key]["quantity"]
+        return count
+    
+    def bCanAffordThisPurchase(auth, purchaseReqBody):
+        return itemShop.getAvailableCurrencyQuantity(auth, purchaseReqBody["currency"], purchaseReqBody["currencySubType"]) >= purchaseReqBody["expectedTotalPrice"]
+
+    def getCatalogEntriesFromTemplateId(auth, templateId):
+        catalogEntries = []
+        reqGetStorefront = requestText(request("get", links.getStorefront, headers=auth.headers, data={}), True)['storefronts']
+        for key in reqGetStorefront:
+            for entry in key["catalogEntries"]:
+                for key2 in entry["itemGrants"]:
+                    if key2["templateId"].lower() == templateId.lower():
+                        catalogEntries.append(entry)
+        return catalogEntries
+    
+    def denyOnOwnershipNumLeft(auth, catalogEntry):
+        templateIdsToCheck = {}
+        for requirement in catalogEntry["requirements"]:
+            if requirement["requirementType"].lower() == "denyonitemownership":
+                templateIdsToCheck[requirement["requiredId"].lower()] = requirement["minQuantity"]
+        profileItemsCombined = {k: v for p in [auth.campaignProfile, auth.commonCoreProfile, auth.athenaProfile] for k, v in p["items"].items()}
+        for key in profileItemsCombined:
+            if profileItemsCombined[key]["templateId"].lower() in templateIdsToCheck.keys():
+                templateIdsToCheck[profileItemsCombined[key]["templateId"].lower()] -= profileItemsCombined[key]["quantity"]
+        return templateIdsToCheck
+
+    def purchaseArmorySlots(auth): # This is a temp function, will get replaced with a new one in the future
+        catalogEntry = itemShop.getCatalogEntriesFromTemplateId(auth, "Token:accountinventorybonus")[0]
+        purchaseReqBody = {"offerId": catalogEntry["offerId"], "currency": catalogEntry["prices"][0]["currencyType"], "currencySubType": catalogEntry["prices"][0]["currencySubType"], "gameContext": "fn"}
+        purchaseReqBody["purchaseQuantity"] = int(catalogEntry["meta"]["EventLimit"]) - itemShop.getEventPurchasesQuantities(auth, [catalogEntry["offerId"]])[catalogEntry["offerId"]]
+        if itemShop.denyOnOwnershipNumLeft(auth, catalogEntry)["token:accountinventorybonus"] < purchaseReqBody["purchaseQuantity"]:
+            purchaseReqBody["purchaseQuantity"] = itemShop.denyOnOwnershipNumLeft(auth, catalogEntry)["token:accountinventorybonus"]
+        purchaseReqBody["expectedTotalPrice"] = catalogEntry["prices"][0]["finalPrice"] * purchaseReqBody["purchaseQuantity"]
+        if not itemShop.bCanAffordThisPurchase(auth, purchaseReqBody):
+            print(getString('itemshop.armoryslots.cannotafford').format(purchaseReqBody["expectedTotalPrice"], itemShop.getAvailableCurrencyQuantity(auth, catalogEntry["prices"][0]["currencyType"], catalogEntry["prices"][0]["currencySubType"])))
+            input(getString('itemshop.pressenter'))
+            return
+        if purchaseReqBody["purchaseQuantity"] <= 0:
+            print(getString('itemshop.armoryslots.alreadypurchased'))
+            input(getString('itemshop.pressenter'))
+            return
+        print(getString('itemshop.armoryslots.areyousure').format(purchaseReqBody["purchaseQuantity"], purchaseReqBody["expectedTotalPrice"], auth.displayName))
+        input(getString('itemshop.pressenter'))
+        oldPurchaseQuantity = purchaseReqBody["purchaseQuantity"]
+        purchaseReqBody["purchaseQuantity"], purchaseReqBody["expectedTotalPrice"] = [1, catalogEntry["prices"][0]["finalPrice"]]
+        for i in range(1, oldPurchaseQuantity + 1):
+            reqPurchase = requestText(request("post", links.profileRequest.format(auth.accountId, "PurchaseCatalogEntry", "common_core"), headers=auth.headers, json=purchaseReqBody), False)
+            print(getString('itemshop.armoryslots.purchased').format(i, oldPurchaseQuantity))
+        print(getString('itemshop.armoryslots.success'))
+        input(getString('itemshop.pressenter'))
+        return
 
 # Menu (Account & Daily Quest Manager)
 def menu():
@@ -530,6 +604,16 @@ def menu():
             invJunkCleaner.main(selectedAccounts, loopMinutes)
             input(getString("junkcleaner.pressenter"))
             break
+
+    def armorySlotPurchaser():
+        listAccounts()
+        print(getString('itemshop.armoryslots.selection'))
+        accountCountList = list(map(str, range(len(authJson))))
+        accountIndex = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)]))
+        if accountIndex == 0: return
+        selectedAccount = authJson[accountIndex - 1]
+        auth = login(selectedAccount)
+        itemShop.purchaseArmorySlots(auth)
     
     def getSeasonalGreeting():
         now = datetime.now()
@@ -542,7 +626,7 @@ def menu():
         if not authJson: addAccount(False)
         seasonalGreeting = getSeasonalGreeting()
         if seasonalGreeting: message(seasonalGreeting)
-        whatToDo1 = validInput(getString("mainmenu.message"), ["1", "2", "3", "4", ""])
+        whatToDo1 = validInput(getString("mainmenu.message"), ["1", "2", "3", "4", "5", ""])
         if whatToDo1 == "1": break
         elif whatToDo1 == "2": manageDailyQuests()
         elif whatToDo1 == "3": junkCleaner()
@@ -555,6 +639,7 @@ def menu():
                     listAccounts()
                     input(getString("accountmanager.pressenter"))
                 else: break
+        elif whatToDo1 == "5": armorySlotPurchaser()
         else: exit()
 
 # The main part of the program that can be looped.
@@ -629,7 +714,7 @@ def main():
                                     try: llamaTier = reqPopulateLlamas['profileChanges'][0]['profile']['items'][key]['attributes']['highest_rarity']
                                     except: llamaTier = 0
                                     llamaTier = stringList['Llama tiers'][f'{llamaTier}'][getConfig('Language')]
-                            reqBuyFreeLlama = requestText(request("post", links.profileRequest.format(auth.accountId, "PurchaseCatalogEntry", "common_core"), headers=auth.headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "GameItem", "currencySubType": "AccountResource:currency_xrayllama", "expectedTotalPrice": 0, "gameContext": "Frontend.None"}), False)
+                            reqBuyFreeLlama = requestText(request("post", links.profileRequest.format(auth.accountId, "PurchaseCatalogEntry", "common_core"), headers=auth.headers, json={"offerId": llamaToClaimOfferId, "purchaseQuantity": 1, "currency": "GameItem", "currencySubType": "AccountResource:currency_xrayllama", "expectedTotalPrice": 0, "gameContext": "fn"}), False)
                             if "errorMessage" in reqBuyFreeLlama:
                                 if "limit of" in reqBuyFreeLlama['errorMessage']:
                                     if openedLlamas == 0: alreadyOpenedFreeLlamas += 1
