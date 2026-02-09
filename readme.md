@@ -24,7 +24,8 @@ This program allows you to open free Llamas, claim and replace your Daily Quests
 - 🎓 **Tutorial mission skipping**: unlock the Save the World music pack even if you don't own StW.
 - 🧹 **Inventory Junk Cleaner**: destroy/recycle unwanted backpack resources, weapons, etc.
   - You can find out more about this configurable feature in the Menu.
-- 🎁 **Winterfest presents claiming** which you can turn on via the config file.
+- 🎁 **Winterfest presents claiming** during Winterfest which you can turn on via the config file.
+- 🗄️ **Armory Slots bulk purchasing**: No more clicking to buy them one by one in game!
 - 💬 **Discord Webhook integration**.
   - You can set the Webhook URL in the config file.
 - 🌐 **Multi-language support** for the program interface (English & Polish).
@@ -36,18 +37,16 @@ This program allows you to open free Llamas, claim and replace your Daily Quests
 ---
 
 ### 🔄 Changelog:
-**What's new in the `1.14.3` update:**
-- 🎁 New feature: Winterfest event presents claiming!
-  - Because Epic Games decided to make Winterfest presents not stack this year, I decided to rewrite my WinterfestPresentsOpener program functionality and include it in SaveTheWorldClaimer.
-  - This feature is turned off by default. You can enable it by setting the `Claim_Winterfest_Presents` option to true in config.ini.
-- 👋 Added some seasonal greetings when entering the Main Menu.
-- ⚙️ Updated the Epic Games domains in certain URLs.
+**What's new in the `1.14.4` update:**
+- 🗄️ New temporary Main Menu feature: Purchasing Armory Slots from the Event Store!
+  - You can now bulk purchase all available Armory Slots from the Event Store. No more clicking through them one by one!
+- ⚙️ Updated the user-agent header from version 19.40 to 39.40 (purely cosmetic)
 - 🎨 Tweaked the program's code a little bit.
 
 ---
 
 ### 🚀 How to use it?
-1.  Install **Python 3.9.5** or a newer version.
+1.  Install **Python 3.9.5** or newer.
 
 2.  The program will try to automatically install the `requests` module. If it fails, open your console/terminal and install it manually using the command: `pip install requests`.
 
@@ -78,6 +77,12 @@ This program allows you to open free Llamas, claim and replace your Daily Quests
 
 ### 🐛 Found a bug?
 Feel free to [open an issue](https://github.com/PRO100KatYT/SaveTheWorldClaimer/issues/new "Click here to open an issue.") if you encounter any bugs or just have a question.
+
+---
+
+### ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=PRO100KatYT/SaveTheWorldClaimer&type=date&legend=top-left)](https://www.star-history.com/#PRO100KatYT/SaveTheWorldClaimer&type=date&legend=top-left)
 
 ---
 
