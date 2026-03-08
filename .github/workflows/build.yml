@@ -1,0 +1,87 @@
+name: Build and Release
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  build-windows-x64:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install nuitka requests
+      - run: |
+          python -m nuitka --standalone --include-data-files=stringlist.json=stringlist.json --windows-icon-from-ico=icons/penny.ico --output-dir=build_nuitka SaveTheWorldClaimer.py
+      - uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        with:
+          path: installer/setup.iss
+          options: /O"installer_output" /F"SaveTheWorldClaimer_Setup_x64"
+      - name: Upload Windows Installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: installer_output/SaveTheWorldClaimer_Setup_x64.exe
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install nuitka requests
+      - run: |
+          python -m nuitka --onefile --include-data-files=stringlist.json=stringlist.json --linux-icon=icons/penny.png SaveTheWorldClaimer.py
+          mv SaveTheWorldClaimer.bin SaveTheWorldClaimer-Linux
+      - name: Upload Linux Binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-binary
+          path: SaveTheWorldClaimer-Linux
+
+  build-macos:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install nuitka requests
+      - run: |
+          python -m nuitka --standalone --macos-create-app-bundle --include-data-files=stringlist.json=stringlist.json --macos-app-icon=icons/penny.icns SaveTheWorldClaimer.py
+          ditto -c -k --sequesterRsrc --keepParent SaveTheWorldClaimer.app SaveTheWorldClaimer-macOS.zip
+      - name: Upload macOS App
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-app
+          path: SaveTheWorldClaimer-macOS.zip
+
+  create-release:
+    needs: [build-windows-x64, build-linux, build-macos]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-artifacts
+          merge-multiple: true
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: release-artifacts/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: release-artifacts/*
