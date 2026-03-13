@@ -746,7 +746,7 @@ def menu():
             print(getString('itemshop.config.accountlist'))
             if not authJson: print(getString("itemshop.config.noaccounts"))
             else:
-                for account in authJson: print(f"{authJson.index(account) + 1}: {account.get('displayName', getString('startup.listaccounts.noname'))} | {getString('itemshop.config.set') if (account["accountId"] in userConfigJson and perAccountConfig.bHasAllConfigOptionsSet(account["accountId"], stringList["Config"]["perUserSettings"]["itemShop"])) else (getString('itemshop.config.missing') if (account["accountId"] in userConfigJson and "itemShop" in userConfigJson[account["accountId"]]) else getString('itemshop.config.notset'))}")
+                for account in authJson: print(f"{authJson.index(account) + 1}: {account.get('displayName', getString('startup.listaccounts.noname'))} | {getString('itemshop.config.set') if (account['accountId'] in userConfigJson and perAccountConfig.bHasAllConfigOptionsSet(account['accountId'], stringList['Config']['perUserSettings']['itemShop'])) else (getString('itemshop.config.missing') if (account['accountId'] in userConfigJson and 'itemShop' in userConfigJson[account['accountId']]) else getString('itemshop.config.notset'))}")
             print(getString('itemshop.config.select'))
             accountCountList = [str(i) for i in range(len(authJson))]
             selectedAccountIndex = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)])) - 1
