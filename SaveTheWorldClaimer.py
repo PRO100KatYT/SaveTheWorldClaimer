@@ -1,7 +1,23 @@
-versionNum = 38
-versionStr = "1.14.4"
-configVersion = "1.14.3"
-print(f"Fortnite Save the World Claimer v{versionStr} by PRO100KatYT\n")
+versionNum = 39
+versionStr = "1.15.0"
+configVersion = "1.15.0"
+print(f"Save the World Claimer v{versionStr} by PRO100KatYT\n")
+
+# Save the World Claimer
+# Copyright (C) 2026 PRO100KatYT
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 import sys
@@ -12,15 +28,16 @@ from datetime import datetime, timedelta, timezone
 import webbrowser
 import time
 from threading import Thread
-if os.name == "nt": os.system(f"title Fortnite Save the World Claimer")
-try: from requests import Session
+if os.name == "nt": os.system("title Save the World Claimer")
+else: print("\033]0;Save the World Claimer\007", end='', flush=True) # This is for window title for Linux and macOS.
+try: import requests
 except ImportError:
-    print(f"The program will now try to install the requests module.\n")
+    print("The program will now try to install the requests module.\n")
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'requests'])
     if os.name == 'posix': os.system('clear')
     else: os.system('cls')
     subprocess.call([sys.executable, os.path.realpath(__file__)] + sys.argv[1:])
-    exit()
+    sys.exit(1)
 
 # Default program language value.
 language = "en"
@@ -42,26 +59,27 @@ class autoRecycling:
 
 # BR Winterfest event presents related variables.
 class winterfest:
-    rewardGraphId, nodesClaimingOrder = "AthenaRewardGraph:s39_winterfest", ["ERG.Node.A.3", "ERG.Node.A.4", "ERG.Node.A.5", "ERG.Node.A.6", "ERG.Node.A.7", "ERG.Node.A.8", "ERG.Node.A.9", "ERG.Node.A.2", "ERG.Node.A.10", "ERG.Node.A.11", "ERG.Node.A.12", "ERG.Node.B.1", "ERG.Node.A.13", "ERG.Node.A.1"]
-
-# Basic headers for logging in. (For backwards compatibility with accounts saved prior to the 1.13.2 Update)
-class basicHeaders:
-    inUse = ""
-    ios = "MzQ0NmNkNzI2OTRjNGE0NDg1ZDgxYjc3YWRiYjIxNDE6OTIwOWQ0YTVlMjVhNDU3ZmI5YjA3NDg5ZDMxM2I0MWE"
-    android = "M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU"
+    rewardGraphId, nodesClaimingOrder = "", ["ERG.Node.A.3", "ERG.Node.A.4", "ERG.Node.A.5", "ERG.Node.A.6", "ERG.Node.A.7", "ERG.Node.A.8", "ERG.Node.A.9", "ERG.Node.A.2", "ERG.Node.A.10", "ERG.Node.A.11", "ERG.Node.A.12", "ERG.Node.B.1", "ERG.Node.A.13", "ERG.Node.A.1"]
 
 # Start a new requests session.
-session = Session()
+session = requests.Session()
 
 # Send requests and retry if something goes wrong.
 sendRequestErrorMsg = "An error occured when trying to send a \"{0}\" request to {1}.{2} Make sure you have a stable internet connection.\nRetrying in {3}s...\n" # It will later be overriden by the one from stringlist.json
+bDisableSSLAfterError = False
 def request(method, url, headers=None, data=None, json=None):
-    global sendRequestErrorMsg
+    global sendRequestErrorMsg, bDisableSSLAfterError
     retries, secondsToWait = [0, 5]
     while True:
         try:
             if method == "get": req = session.get(url, headers=headers, data=data, json=json)
             elif method == "post": req = session.post(url, headers=headers, data=data, json=json)
+        except requests.exceptions.SSLError:
+            if bDisableSSLAfterError: # This option is skipped in the config setup and is not advised to be turned on for a longer period of time. This was made primarly for users who are running a packet sniffer in the background.
+                import urllib3
+                urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+                session.verify = False
+                print("Turning off SSL certificate verification for this session due to an SSL error. The program should function normally.\n")
         except Exception as e:
             secondsToWait = 10 if (retries in [2, 3]) else (30 if (retries in [4, 5]) else (60 if retries >= 6 else 5))
             print(sendRequestErrorMsg.format(method, url, (" ({0}).".format(e) if retries >= 6 else ""), secondsToWait))
@@ -172,14 +190,14 @@ t = Thread(target=webhookLoop)
 t.daemon = True # End the thread when program stops.
 t.start()
 
-# Check if there is a newer version of this program available.
+# Check if a newer version of this program is available.
 def checkUpdate():
     try:
         getJson = (request("get", "https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/main/SaveTheWorldClaimer.py").text).splitlines()[0:2]
         latestVerNum = int(getJson[0].split("=")[1].strip())
         latestVerStr = getJson[1].split("=")[1].strip().strip('"')
         if latestVerNum > versionNum: message(getString("updatechecker.message").format(latestVerStr))
-    except: pass
+    except: pass # If for some reason the program cannot check it then do nothing else
 
 # Check whether the type matches the value and return it.
 def isCorrectValue(value, type, validValues = []):
@@ -250,7 +268,7 @@ def getConfig(settingName):
         return rawValue
     except Exception as e: customError(getString("config.getconfigerror").format(settingName, e))
 
-bShowDateTime, webhookUrl, language = [getConfig('Show_Date_Time'), getConfig('Discord_Webhook_URL'), getConfig('Language')]
+bShowDateTime, webhookUrl, language, bDisableSSLAfterError = [getConfig('Show_Date_Time'), getConfig('Discord_Webhook_URL'), getConfig('Language'), getConfig('Disable_SSL')]
 try: autoRecycling.itemRarities = {"weapon": autoRecycling.rarities[getConfig('Recycle_Weapons').lower()].split(", "), "trap": autoRecycling.rarities[getConfig('Recycle_Traps').lower()].split(", "), "survivor": autoRecycling.rarities[getConfig('Retire_Survivors').lower()].split(", "), "defender": autoRecycling.rarities[getConfig('Retire_Defenders').lower()].split(", "), "hero": autoRecycling.rarities[getConfig('Retire_Heroes').lower()].split(", ")}
 except: customError(getString("config.readerror"))
 bRecycle = False
@@ -258,11 +276,82 @@ for key in ["Recycle_Weapons", "Recycle_Traps", "Retire_Survivors", "Retire_Defe
     if getConfig(key).lower() != "off": bRecycle = True
 sendRequestErrorMsg = getString('request.error')
 
+# Check if the user config file exists. If not, then create it. And read the file.
+userConfigPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "userConfig.json")
+if not os.path.exists(userConfigPath):
+    with open(userConfigPath, "w") as userConfigJson: userConfigJson.write("{}")
+try: 
+    with open(userConfigPath, "r", encoding="utf-8") as f: userConfigJson = json.loads(f.read())
+except: customError(getString("userconfig.readerror"))
+
+class perAccountConfig:
+    def readOption(accountId, path):
+        global userConfigJson
+        obj = userConfigJson[accountId] if accountId in userConfigJson else None
+        for key in path:
+            try: obj = obj[key]
+            except: return None
+        return obj
+
+    def setOption(accountId, path, value):
+        global userConfigJson
+        if not accountId in userConfigJson: userConfigJson[accountId] = {}
+        obj = userConfigJson[accountId]
+        for key in path[:-1]:
+            try: obj = obj.setdefault(key, {})
+            except: return False
+        try:
+            obj[path[-1]] = value
+            return True
+        except: return False
+
+    def saveFile():
+        global userConfigJson
+        try:
+            with open(userConfigPath, "w", encoding="utf-8") as saveConfigFile: json.dump(userConfigJson, saveConfigFile, indent=2, ensure_ascii=False)
+            return True
+        except: return False
+
+    def readInput(typeToCheckFor):
+        userInput = input().lower()
+        if typeToCheckFor == "bool":
+            if userInput == "y": return True
+            if userInput == "n": return False
+            return None
+        elif typeToCheckFor == "int":
+            try: return int(userInput)
+            except ValueError: return None
+        elif typeToCheckFor == "float":
+            try: return float(userInput)
+            except ValueError: return None
+        return None
+    
+    def bHasAllConfigOptionsSet(accountId, configOptionsList):
+        for option in configOptionsList:
+            if perAccountConfig.readOption(accountId, option["optionPath"]) == None:
+                return False
+        return True
+
+    def askSetupQuestionsAndSaveFile(accountId, configOptionsList):
+        for option in configOptionsList:
+            print(getString(option["question"]))
+            userInput = perAccountConfig.readInput(option["settingType"])
+            if userInput == None:
+                userInput = option["defaultValue"]
+                print(getString('userconifg.usingdefault'))
+            while userInput not in option["validValues"]:
+                if not option["validValues"]: break
+                print(getString('userconfig.invalidinput'))
+                userInput = perAccountConfig.readInput(option["settingType"])
+            perAccountConfig.setOption(accountId, option["optionPath"], userInput)
+        perAccountConfig.saveFile()
+
 # Create and load the auth.json file.
 authPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "auth.json")
 if not os.path.exists(authPath):
     with open(authPath, "w") as authJson: authJson.write("[]")
-try: authJson = json.loads(open(authPath, "r", encoding = "utf-8").read())
+try: 
+    with open(authPath, "r", encoding="utf-8") as f: authJson = json.loads(f.read())
 except: customError(getString("authjson.readerror"))
 if not isinstance(authJson, list): customError(getString("authjson.oldformat"))
 
@@ -281,16 +370,14 @@ class login:
 
         # Log in.
         message(getString("main.login.start").format(displayName))
-        if not "addedInVersionNum" in account: basicHeaders.inUse = basicHeaders.ios
-        else: basicHeaders.inUse = basicHeaders.android
         if authType == "token":
             reqRefreshToken = requestText(request("post", links.getOAuth.format("token"), headers={"Authorization": "basic MzRhMDJjZjhmNDQxNGUyOWIxNTkyMTg3NmRhMzZmOWE6ZGFhZmJjY2M3Mzc3NDUwMzlkZmZlNTNkOTRmYzc2Y2Y="}, data={"grant_type": "refresh_token", "refresh_token": refreshToken}), False)
             if "errorMessage" in reqRefreshToken: customError(getString("main.login.token.error").format(displayName))
             account['refreshToken'], account['refresh_expires_at'] = reqRefreshToken["refresh_token"], reqRefreshToken["refresh_expires_at"]
             with open(authPath, "w", encoding="utf-8") as saveAuthFile: json.dump(authJson, saveAuthFile, indent=2, ensure_ascii=False)
             reqExchange = requestText(request("get", links.getOAuth.format("exchange"), headers={"Authorization": f"bearer {reqRefreshToken['access_token']}"}, data={"grant_type": "authorization_code"}), True)
-            reqToken = requestText(request("post", links.getOAuth.format("token"), headers={"Authorization": f"basic {basicHeaders.inUse}"}, data={"grant_type": "exchange_code", "exchange_code": reqExchange["code"], "token_type": "eg1"}), True)
-        elif authType == "device": reqToken = requestText(request("post", links.getOAuth.format("token"), headers={"Authorization": f"basic {basicHeaders.inUse}"}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"}), True)
+            reqToken = requestText(request("post", links.getOAuth.format("token"), headers={"Authorization": "basic M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU"}, data={"grant_type": "exchange_code", "exchange_code": reqExchange["code"], "token_type": "eg1"}), True)
+        elif authType == "device": reqToken = requestText(request("post", links.getOAuth.format("token"), headers={"Authorization": "basic M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU"}, data={"grant_type": "device_auth", "device_id": deviceId, "account_id": accountId, "secret": secret, "token_type": "eg1"}), True)
         accessToken, displayName = reqToken['access_token'], reqToken['displayName']
         message(getString("main.login.success"))
 
@@ -300,9 +387,9 @@ class login:
         # Check whether the account has the campaign access token and if it's able to receive V-Bucks.
         reqQueryProfiles = [json.dumps(requestText(request("post", links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(request("post", links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False)), json.dumps(requestText(request("post", links.profileRequest.format(accountId, "ClientQuestLogin", "athena"), headers=headers, data="{}"), False))]
         commonCoreProfile, campaignProfile, athenaProfile = json.loads(reqQueryProfiles[0])["profileChanges"][0]["profile"], json.loads(reqQueryProfiles[1])["profileChanges"][0]["profile"], json.loads(reqQueryProfiles[2])["profileChanges"][0]["profile"]
-        bReceiveMtx = False
+        bReceiveMTX = False
         bHasCampaignAccess = False
-        if "Token:receivemtxcurrency" in reqQueryProfiles[1]: bReceiveMtx = True
+        if "Token:receivemtxcurrency" in reqQueryProfiles[1]: bReceiveMTX = True
         if "Token:campaignaccess" in reqQueryProfiles[0]: bHasCampaignAccess = True
 
         ssd3QuestGUID, bRecyclingUnlocked = "", False
@@ -322,7 +409,7 @@ class login:
         # Check whether the account has the BR Winterfest Reward Graph item.
         winterfestRewardGraphID = next((id for id in athenaProfile["items"] if athenaProfile["items"][id]["templateId"].lower() == winterfest.rewardGraphId.lower()), "")
 
-        self.headers, self.accountId, self.displayName, self.commonCoreProfile, self.campaignProfile, self.athenaProfile, self.bHasCampaignAccess, self.bReceiveMtx, self.bDailyQuestsUnlocked, self.bRecyclingUnlocked, self.winterfestRewardGraphID = headers, accountId, displayName, commonCoreProfile, campaignProfile, athenaProfile, bHasCampaignAccess, bReceiveMtx, bDailyQuestsUnlocked, bRecyclingUnlocked, winterfestRewardGraphID
+        self.headers, self.accountId, self.displayName, self.commonCoreProfile, self.campaignProfile, self.athenaProfile, self.bHasCampaignAccess, self.bReceiveMTX, self.bDailyQuestsUnlocked, self.bRecyclingUnlocked, self.winterfestRewardGraphID = headers, accountId, displayName, commonCoreProfile, campaignProfile, athenaProfile, bHasCampaignAccess, bReceiveMTX, bDailyQuestsUnlocked, bRecyclingUnlocked, winterfestRewardGraphID
 
 # Get an account's Daily Quests
 def getDailyQuests(auth):
@@ -346,7 +433,7 @@ def getDailyQuests(auth):
             for reward in rewards:
                 rewardQuantity, rewardName = [rewards[reward], stringList['Items'][reward]['name'][getConfig('Items_Language')]]
                 if reward.startswith("ConditionalResource:"):
-                    if auth.bReceiveMtx == True: rewardsMsg += f" {rewardQuantity}x {rewardName['PassedConditionItem']},"
+                    if auth.bReceiveMTX == True: rewardsMsg += f" {rewardQuantity}x {rewardName['PassedConditionItem']},"
                     rewardName = rewardName['FailedConditionItem']
                 rewardsMsg += f" {rewardQuantity}x {rewardName},"
             rewardsMsg = rewardsMsg[:-1]
@@ -424,15 +511,34 @@ class invJunkCleaner:
                 time.sleep(totalSecondsToSleep)
 
 class itemShop:
-    def getEventPurchasesQuantities(auth, offerIds):
+    def getOffersPurchasesQuantities(auth, catalogEntries):
         countJson = {}
-        for offerId in offerIds: countJson[offerId] = 0
+        for catalogEntry in catalogEntries: countJson[catalogEntry["offerId"]] = 0
         for key in auth.commonCoreProfile["items"]:
             if not auth.commonCoreProfile["items"][key]["templateId"].lower() == "eventpurchasetracker:generic_instance": continue
             attributes = auth.commonCoreProfile["items"][key]["attributes"]
             if not "event_purchases" in attributes: continue
             for offerId2 in attributes["event_purchases"]:
-                if offerId2 in offerIds: countJson[offerId2] += attributes["event_purchases"][offerId2]
+                if offerId2 in countJson: countJson[offerId2] += attributes["event_purchases"][offerId2]
+        profileAttributes = auth.commonCoreProfile["stats"]["attributes"]
+        for limitType in ["daily", "weekly", "monthly"]:
+            if not f"{limitType}_purchases" in profileAttributes: continue
+            if not "purchaseList" in profileAttributes[f"{limitType}_purchases"]: continue
+            for offerId2 in profileAttributes[f"{limitType}_purchases"]["purchaseList"]:
+                if offerId2 in countJson: countJson[offerId2] += profileAttributes[f"{limitType}_purchases"]["purchaseList"][offerId2]
+        return countJson
+    
+    def getOffersPurchasesLimit(auth, catalogEntries):
+        countJson = {}
+        for catalogEntry in catalogEntries:
+            offerId = catalogEntry["offerId"]
+            countJson[offerId] = 0
+            if "EventLimit" in catalogEntry["meta"]:
+                countJson[offerId] += int(catalogEntry["meta"]["EventLimit"])
+            for limitType in ["dailyLimit", "weeklyLimit", "monthlyLimit"]:
+                if not limitType in catalogEntry: continue
+                if catalogEntry[limitType] <= 0: continue
+                countJson[offerId] += catalogEntry[limitType]
         return countJson
     
     def getAvailableCurrencyQuantity(auth, currency, currencySubType):
@@ -450,16 +556,6 @@ class itemShop:
     def bCanAffordThisPurchase(auth, purchaseReqBody):
         return itemShop.getAvailableCurrencyQuantity(auth, purchaseReqBody["currency"], purchaseReqBody["currencySubType"]) >= purchaseReqBody["expectedTotalPrice"]
 
-    def getCatalogEntriesFromTemplateId(auth, templateId):
-        catalogEntries = []
-        reqGetStorefront = requestText(request("get", links.getStorefront, headers=auth.headers, data={}), True)['storefronts']
-        for key in reqGetStorefront:
-            for entry in key["catalogEntries"]:
-                for key2 in entry["itemGrants"]:
-                    if key2["templateId"].lower() == templateId.lower():
-                        catalogEntries.append(entry)
-        return catalogEntries
-    
     def denyOnOwnershipNumLeft(auth, catalogEntry):
         templateIdsToCheck = {}
         for requirement in catalogEntry["requirements"]:
@@ -471,31 +567,73 @@ class itemShop:
                 templateIdsToCheck[profileItemsCombined[key]["templateId"].lower()] -= profileItemsCombined[key]["quantity"]
         return templateIdsToCheck
 
-    def purchaseArmorySlots(auth): # This is a temp function, will get replaced with a new one in the future
-        catalogEntry = itemShop.getCatalogEntriesFromTemplateId(auth, "Token:accountinventorybonus")[0]
-        purchaseReqBody = {"offerId": catalogEntry["offerId"], "currency": catalogEntry["prices"][0]["currencyType"], "currencySubType": catalogEntry["prices"][0]["currencySubType"], "gameContext": "fn"}
-        purchaseReqBody["purchaseQuantity"] = int(catalogEntry["meta"]["EventLimit"]) - itemShop.getEventPurchasesQuantities(auth, [catalogEntry["offerId"]])[catalogEntry["offerId"]]
-        if itemShop.denyOnOwnershipNumLeft(auth, catalogEntry)["token:accountinventorybonus"] < purchaseReqBody["purchaseQuantity"]:
-            purchaseReqBody["purchaseQuantity"] = itemShop.denyOnOwnershipNumLeft(auth, catalogEntry)["token:accountinventorybonus"]
-        purchaseReqBody["expectedTotalPrice"] = catalogEntry["prices"][0]["finalPrice"] * purchaseReqBody["purchaseQuantity"]
-        if not itemShop.bCanAffordThisPurchase(auth, purchaseReqBody):
-            print(getString('itemshop.armoryslots.cannotafford').format(purchaseReqBody["expectedTotalPrice"], itemShop.getAvailableCurrencyQuantity(auth, catalogEntry["prices"][0]["currencyType"], catalogEntry["prices"][0]["currencySubType"])))
-            input(getString('itemshop.pressenter'))
-            return
-        if purchaseReqBody["purchaseQuantity"] <= 0:
-            print(getString('itemshop.armoryslots.alreadypurchased'))
-            input(getString('itemshop.pressenter'))
-            return
-        print(getString('itemshop.armoryslots.areyousure').format(purchaseReqBody["purchaseQuantity"], purchaseReqBody["expectedTotalPrice"], auth.displayName))
-        input(getString('itemshop.pressenter'))
-        oldPurchaseQuantity = purchaseReqBody["purchaseQuantity"]
-        purchaseReqBody["purchaseQuantity"], purchaseReqBody["expectedTotalPrice"] = [1, catalogEntry["prices"][0]["finalPrice"]]
-        for i in range(1, oldPurchaseQuantity + 1):
-            reqPurchase = requestText(request("post", links.profileRequest.format(auth.accountId, "PurchaseCatalogEntry", "common_core"), headers=auth.headers, json=purchaseReqBody), False)
-            print(getString('itemshop.armoryslots.purchased').format(i, oldPurchaseQuantity))
-        print(getString('itemshop.armoryslots.success'))
-        input(getString('itemshop.pressenter'))
-        return
+    def getCatalogEntriesToPurchase(auth):
+        def bIsEligible(catalogEntry):
+            for option in stringList["Config"]["perUserSettings"]["itemShop"]:
+                if option["settingType"] != "bool": continue # Skip the gold config option
+                optionValue = perAccountConfig.readOption(auth.accountId, option["optionPath"])
+                if not optionValue: continue
+                eligibleShopItems = option["eligibleShopItems"]
+                for item in catalogEntry["itemGrants"]:
+                    numCriteriaMet, templateId = [0, item["templateId"].lower()]
+                    if "templateIds" in eligibleShopItems:
+                        if templateId in [i.lower() for i in eligibleShopItems["templateIds"]]:
+                            numCriteriaMet += 1
+                    if "startsWith" in eligibleShopItems:
+                        if any(templateId.startswith(criterion.lower()) for criterion in eligibleShopItems["startsWith"]):
+                            numCriteriaMet += 1
+                    if "endsWith" in eligibleShopItems:
+                        if any(templateId.endswith(criterion.lower()) for criterion in eligibleShopItems["endsWith"]):
+                            numCriteriaMet += 1
+                    if "contains" in eligibleShopItems:
+                        if any(criterion.lower() in templateId for criterion in eligibleShopItems["contains"]):
+                            numCriteriaMet += 1
+                    if numCriteriaMet == len(eligibleShopItems):
+                        return True
+            return False
+        catalogEntries = []
+        reqGetStorefront = requestText(request("get", links.getStorefront, headers=auth.headers, data={}), True)['storefronts']
+        for key in reqGetStorefront:
+            for catalogEntry in key["catalogEntries"]:
+                if bIsEligible(catalogEntry): catalogEntries.append(catalogEntry)
+        return catalogEntries
+    
+    def purchaseCatalogEntries(auth):
+        catalogEntries = itemShop.getCatalogEntriesToPurchase(auth)
+        purchasedQuantities = itemShop.getOffersPurchasesQuantities(auth, catalogEntries)
+        offerPurchaseLimits = itemShop.getOffersPurchasesLimit(auth, catalogEntries)
+        bPurchasedSomething = False
+        for catalogEntry in catalogEntries:
+            offerId = catalogEntry["offerId"]
+            purchaseReqBody = {"offerId": offerId, "currency": catalogEntry["prices"][0]["currencyType"], "currencySubType": catalogEntry["prices"][0]["currencySubType"], "gameContext": "fn"}
+            purchaseReqBody["purchaseQuantity"] = offerPurchaseLimits[offerId] - purchasedQuantities[offerId]
+            if purchaseReqBody["purchaseQuantity"] <= 0: continue
+            dontSpendBelowGoldAmount = perAccountConfig.readOption(auth.accountId, ["itemShop", "gold", "dontSpendBelow"])
+            if itemShop.getAvailableCurrencyQuantity(auth, purchaseReqBody["currency"], purchaseReqBody["currencySubType"]) < dontSpendBelowGoldAmount:
+                continue
+            denyOnOwnershipNumLeft = itemShop.denyOnOwnershipNumLeft(auth, catalogEntry)
+            for templateId in denyOnOwnershipNumLeft:
+                if denyOnOwnershipNumLeft[templateId] < purchaseReqBody["purchaseQuantity"]:
+                    purchaseReqBody["purchaseQuantity"] = denyOnOwnershipNumLeft[templateId]
+            if purchaseReqBody["purchaseQuantity"] <= 0: continue
+            purchaseReqBody["expectedTotalPrice"] = catalogEntry["prices"][0]["finalPrice"] * purchaseReqBody["purchaseQuantity"]
+            if not itemShop.bCanAffordThisPurchase(auth, purchaseReqBody): continue
+            if purchaseReqBody["purchaseQuantity"] <= 0: continue
+            reqPurchase = requestText(request("post", links.profileRequest.format(auth.accountId, "PurchaseCatalogEntry", "common_core"), headers=auth.headers, json=purchaseReqBody), True)
+            bPurchasedSomething = True
+            for item in catalogEntry["itemGrants"]:
+                templateId = item["templateId"]
+                itemQuantity = purchaseReqBody['purchaseQuantity'] * item['quantity']
+                itemData = stringList.get('Items', {}).get(templateId, {})
+                itemName = itemData.get('name', {}).get(getConfig('Items_Language'), templateId)
+                itemRarity = itemData.get('rarity', "Unknown rarity")
+                itemType = itemData.get('type', "Unknown type")
+                try:
+                    itemRarityStr = stringList['Item Rarities'][itemRarity][getConfig('Items_Language')]
+                    itemTypeStr = stringList['Item Types'][itemType][getConfig('Items_Language')]
+                except: itemRarityStr, itemTypeStr = [itemRarity, itemType]
+                message(getString('itemshop.purchased').format(itemRarityStr, itemTypeStr, itemQuantity, itemName))
+        if bPurchasedSomething: print()
 
 # Menu (Account & Daily Quest Manager)
 def menu():
@@ -526,9 +664,7 @@ def menu():
         print(getString("startup.listaccounts.header"))
         if not authJson: print(getString("startup.listaccounts.empty"))
         else:
-            for account in authJson:
-                try: print(f"{authJson.index(account) + 1}: {account['displayName']}")
-                except KeyError: print(f"{authJson.index(account) + 1}: {getString('startup.listaccounts.noname')}")
+            for account in authJson: print(f"{authJson.index(account) + 1}: {account.get('displayName', getString('startup.listaccounts.noname'))}")
 
     def removeAccount():
         listAccounts()
@@ -605,15 +741,18 @@ def menu():
             input(getString("junkcleaner.pressenter"))
             break
 
-    def armorySlotPurchaser():
-        listAccounts()
-        print(getString('itemshop.armoryslots.selection'))
-        accountCountList = list(map(str, range(len(authJson))))
-        accountIndex = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)]))
-        if accountIndex == 0: return
-        selectedAccount = authJson[accountIndex - 1]
-        auth = login(selectedAccount)
-        itemShop.purchaseArmorySlots(auth)
+    def itemShopConfigurator():
+        while authJson:
+            print(getString('itemshop.config.accountlist'))
+            if not authJson: print(getString("itemshop.config.noaccounts"))
+            else:
+                for account in authJson: print(f"{authJson.index(account) + 1}: {account.get('displayName', getString('startup.listaccounts.noname'))} | {getString('itemshop.config.set') if (account["accountId"] in userConfigJson and perAccountConfig.bHasAllConfigOptionsSet(account["accountId"], stringList["Config"]["perUserSettings"]["itemShop"])) else (getString('itemshop.config.missing') if (account["accountId"] in userConfigJson and "itemShop" in userConfigJson[account["accountId"]]) else getString('itemshop.config.notset'))}")
+            print(getString('itemshop.config.select'))
+            accountCountList = [str(i) for i in range(len(authJson))]
+            selectedAccountIndex = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)])) - 1
+            if selectedAccountIndex == -1: break
+            print(getString('itemshop.config.setup.info'))
+            perAccountConfig.askSetupQuestionsAndSaveFile(authJson[selectedAccountIndex]["accountId"], stringList["Config"]["perUserSettings"]["itemShop"])
     
     def getSeasonalGreeting():
         now = datetime.now()
@@ -639,7 +778,7 @@ def menu():
                     listAccounts()
                     input(getString("accountmanager.pressenter"))
                 else: break
-        elif whatToDo1 == "5": armorySlotPurchaser()
+        elif whatToDo1 == "5": itemShopConfigurator()
         else: exit()
 
 # The main part of the program that can be looped.
@@ -654,13 +793,13 @@ def main():
                 if auth.campaignProfile['items'][item]['attributes']['quest_state'].lower() == "claimed": break
                 message(getString("main.skiptutorial.start").format(auth.displayName))
                 request("post", links.profileRequest.format(auth.accountId, "SkipTutorial", "campaign"), headers=auth.headers, data="{}")
-                reqUpdateObjectives = requestText(request("post", links.profileRequest.format(auth.accountId, "UpdateQuestClientObjectives", "campaign"), headers=auth.headers, json={"advance": [{"statName": "hbonboarding_watchsatellitecine", "count": 1, "timestampOffset": 0}, {"statName": "hbonboarding_namehomebase", "count": 1, "timestampOffset": 0}]}), True)
+                reqUpdateObjectives = requestText(request("post", links.profileRequest.format(auth.accountId, "UpdateQuestClientObjectives", "campaign"), headers=auth.headers, json={"advance": [{"statName": "hbonboarding_watchsatellitecine", "count": 1, "timestampOffset": 0}]}), True)
                 if reqUpdateObjectives['profileChanges'][0]['profile']['items'][item]['attributes']['quest_state'].lower() == "claimed": message(getString("main.skiptutorial.success").format(auth.displayName))
                 else: message(getString("main.skiptutorial.error").format(auth.displayName))
                 break
         
         # Claim a BR Winterfest event present if available.
-        if getConfig('Claim_Winterfest_Presents') and auth.winterfestRewardGraphID:
+        if auth.winterfestRewardGraphID and getConfig('Claim_Winterfest_Presents'):
             rewardGraphItem = auth.athenaProfile["items"][auth.winterfestRewardGraphID]["attributes"]
             nodeToUnlock = next((node for node in winterfest.nodesClaimingOrder if node not in rewardGraphItem["reward_nodes_claimed"]), "")
             unlockKeysLeft = 0
@@ -674,13 +813,17 @@ def main():
                     message(f"{stringList['Item Types'][stringList['Items'][templateId]['type']][getConfig('Items_Language')]} | {stringList['Items'][templateId]['name'][getConfig('Items_Language')]}")
                 print()
 
-        # Display current daily challenges, their rewards and progress if there is any.
+        # Display current daily challenges, their rewards and progress.
         if auth.bDailyQuestsUnlocked:
             message(getString("main.dailies.searching"))
             questData = getDailyQuests(auth)
             if not questData: message(getString("main.dailies.notfound"))
             for quest in questData: message(getString("main.dailies.info").format(questData[quest]['questNumber'], questData[quest]['questName'], questData[quest]['progress'], questData[quest]['rewards']))
         else: message(getString("main.dailies.unavailable"))
+
+        # Search for eligible STW Item Shop offers and buy them for gold.
+        if auth.accountId in userConfigJson and "itemShop" in userConfigJson[auth.accountId] and perAccountConfig.bHasAllConfigOptionsSet(auth.accountId, stringList["Config"]["perUserSettings"]["itemShop"]):
+            itemShop.purchaseCatalogEntries(auth)
 
         # Search for free Llamas and open them if they're available.
         alreadyOpenedFreeLlamas, freeLlamasCount, cpspStorefront = [0, 0, []]
@@ -725,15 +868,21 @@ def main():
                                 llamaLoot, llamaLootCount = [reqBuyFreeLlama['notifications'][0]['lootResult']['items'], 0]
                                 openedLlamas += 1
                                 for key in llamaLoot:
-                                    templateId, itemGuid, itemQuantity = [key['itemType'], key['itemGuid'], key['quantity']]
-                                    try: itemName = stringList['Items'][templateId]['name'][getConfig('Items_Language')]
-                                    except: itemName = templateId
-                                    try: itemRarity, itemType = [stringList['Items'][templateId]['rarity'], stringList['Items'][templateId]['type']]
-                                    except: itemRarity, itemType = ["Unknown rarity", "Unknown type"]
+                                    templateId = key['itemType']
+                                    itemGuid = key['itemGuid']
+                                    itemQuantity = key['quantity']
+                                    itemData = stringList.get('Items', {}).get(templateId, {})
+                                    itemName = itemData.get('name', {}).get(getConfig('Items_Language'), templateId)
+                                    itemRarity = itemData.get('rarity', "Unknown rarity")
+                                    itemType = itemData.get('type', "Unknown type")
                                     llamaLootCount += 1
                                     if itemRarity in ("common", "uncommon", "rare", "epic"): itemsfromLlamas.append({"itemName": itemName, "itemType": itemType, "templateId": templateId, "itemGuid": itemGuid, "itemRarity": itemRarity, "itemQuantity": itemQuantity})
-                                    try: message(f"{llamaLootCount}: {stringList['Item Rarities'][stringList['Items'][templateId]['rarity']][getConfig('Items_Language')]} | {stringList['Item Types'][stringList['Items'][templateId]['type']][getConfig('Items_Language')]}: {itemQuantity}x {itemName}")
-                                    except: message(f"{llamaLootCount}: {itemRarity} | {itemType}: {itemQuantity}x {itemName}")
+                                    try:
+                                        itemRarityStr = stringList['Item Rarities'][itemRarity][getConfig('Items_Language')]
+                                        itemTypeStr = stringList['Item Types'][itemType][getConfig('Items_Language')]
+                                    except: itemRarityStr, itemTypeStr = [itemRarity, itemType]
+                                    message(f"{llamaLootCount}: {itemRarityStr} | {itemTypeStr}: {itemQuantity}x {itemName}")
+
                     if int(alreadyOpenedFreeLlamas) == freeLlamasCount: message(getString("main.freellamas.alreadyclaimed"))
                     else:
                         freeLlamasWord = getPluralWord("freeLlamas", int(openedLlamas))

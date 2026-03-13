@@ -48742,6 +48742,54 @@
       "rarity": "epic",
       "type": "cardpack"
     },
+    "CampaignHeroLoadout:purchaseabledefaultloadout": {
+      "name": {
+        "ar": "حمولة البطل",
+        "de": "Heldenauswahl",
+        "en": "Hero Loadout",
+        "es": "Equipo del héroe",
+        "es-419": "Equipamiento del héroe",
+        "fr": "Choix de héros",
+        "id": "Set Tempur Hero",
+        "it": "Equipaggiamento eroe",
+        "ja": "ヒーローロードアウト",
+        "ko": "영웅 편성",
+        "pl": "Zespół bohaterów",
+        "pt-BR": "Perfil Heroico",
+        "ru": "Раскладка героев",
+        "th": "โหลดเอาต์ฮีโร่",
+        "tr": "Kahraman Dizilimi",
+        "vi": "Bộ Trang Bị Anh Hùng",
+        "zh-Hans": "英雄编队",
+        "zh-Hant": "英雄配置"
+      },
+      "rarity": "legendary",
+      "type": "campaignheroloadout"
+    },
+    "Token:accountinventorybonus": {
+      "name": {
+        "ar": "موضع مستودع الأسلحة",
+        "de": "Waffenlager-Slot",
+        "en": "Armory Slot",
+        "es": "Espacio de arsenal",
+        "es-419": "Espacio del arsenal",
+        "fr": "Emplacement d'arsenal",
+        "id": "Slot Gudang Senjata",
+        "it": "Slot armeria",
+        "ja": "武器庫スロット",
+        "ko": "무기고 슬롯",
+        "pl": "Pole w zbrojowni",
+        "pt-BR": "Espaço de Arsenal",
+        "ru": "Ячейка арсенала",
+        "th": "ช่องคลังอาวุธ",
+        "tr": "Cephanelik Yuvası",
+        "vi": "Ô Kho Vũ Khí",
+        "zh-Hans": "武器库槽",
+        "zh-Hant": "軍械庫欄位"
+      },
+      "rarity": "legendary",
+      "type": "token"
+    },
     "Ingredient:ingredient_bacon": {
       "name": {
         "ar": "لحم مقدّد",
@@ -52583,8 +52631,461 @@
         "defaultValue": 0,
         "bSkipInSetup": true,
         "skipInSetupIf": {}
+      },
+      {
+        "extraComments": [],
+        "settingComments": [
+          "config.setup.disablessl",
+          "config.setup.disablessl2",
+          "config.setup.disablessl3"
+        ],
+        "settingName": "Disable_SSL",
+        "settingType": "bool",
+        "validValues": [
+          true,
+          false
+        ],
+        "defaultValue": "false",
+        "bSkipInSetup": true,
+        "skipInSetupIf": {}
       }
-    ]
+    ],
+    "perUserSettings": {
+      "itemShop": [
+        {
+          "question": "itemshop.config.setup.puredropsofrain",
+          "optionPath": [
+            "itemShop",
+            "evolutionMaterials",
+            "pureDropsOfRain"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_c_t01"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.lightningbottles",
+          "optionPath": [
+            "itemShop",
+            "evolutionMaterials",
+            "lightningBottles"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_c_t02"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.eyesofthestorm",
+          "optionPath": [
+            "itemShop",
+            "evolutionMaterials",
+            "eyesOfTheStorm"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_c_t03"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.stormshards",
+          "optionPath": [
+            "itemShop",
+            "evolutionMaterials",
+            "stormShards"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_c_t04"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.legendaryflux",
+          "optionPath": [
+            "itemShop",
+            "flux",
+            "legendary"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_evolverarity_sr"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.epicflux",
+          "optionPath": [
+            "itemShop",
+            "flux",
+            "epic"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_evolverarity_vr"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.rareflux",
+          "optionPath": [
+            "itemShop",
+            "flux",
+            "rare"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": false,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_evolverarity_r"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.legendaryperkup",
+          "optionPath": [
+            "itemShop",
+            "perkMaterials",
+            "legendary"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_alteration_upgrade_sr"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.epicperkup",
+          "optionPath": [
+            "itemShop",
+            "perkMaterials",
+            "epic"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_alteration_upgrade_vr"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.rareperkup",
+          "optionPath": [
+            "itemShop",
+            "perkMaterials",
+            "rare"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": false,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_alteration_upgrade_r"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.uncommonperkup",
+          "optionPath": [
+            "itemShop",
+            "perkMaterials",
+            "uncommon"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": false,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_alteration_upgrade_uc"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.reperk",
+          "optionPath": [
+            "itemShop",
+            "perkMaterials",
+            "rePerk"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": false,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_alteration_generic"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.legendarysurvivors",
+          "optionPath": [
+            "itemShop",
+            "survivors",
+            "legendary"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "startsWith": [
+              "Worker:"
+            ],
+            "contains": [
+              "_sr_"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.epicsurvivors",
+          "optionPath": [
+            "itemShop",
+            "survivors",
+            "epic"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": false,
+          "eligibleShopItems": {
+            "startsWith": [
+              "Worker:"
+            ],
+            "contains": [
+              "_vr_"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.mythiclegendaryheroes",
+          "optionPath": [
+            "itemShop",
+            "heroes",
+            "mythicAndLegendary"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": false,
+          "eligibleShopItems": {
+            "startsWith": [
+              "Hero:"
+            ],
+            "contains": [
+              "_sr_"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.epicheroes",
+          "optionPath": [
+            "itemShop",
+            "heroes",
+            "epic"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": false,
+          "eligibleShopItems": {
+            "startsWith": [
+              "Hero:"
+            ],
+            "contains": [
+              "_vr_"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.legendaryschematics",
+          "optionPath": [
+            "itemShop",
+            "schematics",
+            "legendary"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": false,
+          "eligibleShopItems": {
+            "startsWith": [
+              "Schematic:"
+            ],
+            "contains": [
+              "_sr_"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.epicschematics",
+          "optionPath": [
+            "itemShop",
+            "schematics",
+            "epic"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": false,
+          "eligibleShopItems": {
+            "startsWith": [
+              "Schematic:"
+            ],
+            "contains": [
+              "_vr_"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.legendarydefenders",
+          "optionPath": [
+            "itemShop",
+            "defenders",
+            "legendary"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "startsWith": [
+              "Defender:"
+            ],
+            "contains": [
+              "_sr_"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.armoryslots",
+          "optionPath": [
+            "itemShop",
+            "slots",
+            "armory"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "templateIds": [
+              "Token:accountinventorybonus"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.heroloadouts",
+          "optionPath": [
+            "itemShop",
+            "slots",
+            "heroLoadout"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": true,
+          "eligibleShopItems": {
+            "templateIds": [
+              "CampaignHeroLoadout:purchaseabledefaultloadout"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.dontspendbelowgold",
+          "optionPath": [
+            "itemShop",
+            "gold",
+            "dontSpendBelow"
+          ],
+          "settingType": "int",
+          "validValues": [],
+          "defaultValue": 5000,
+          "eligibleShopItems": {}
+        }
+      ]
+    }
   },
   "Strings": {
     "en": {
@@ -52630,7 +53131,7 @@
       "webhook.error": "Error while sending Discord Webhook message: {0}.\nDisabling the Discord Webhook feature for this session...\n",
       "updatechecker.message": "There is a newer version v{0} available on GitHub!\n(https://github.com/PRO100KatYT/SaveTheWorldClaimer)\n",
       "config.startgenerating": "Starting to generate the config.ini file.\n",
-      "config.bstartsetup": "Type 1 to start the config setup (recommended) and press ENTER.\nType 2 to use the default config values and press ENTER.\n",
+      "config.bstartsetup": "Welcome! Thank you for downloading this program. Let's get things set up.\n\nType 1 to start the config setup (recommended) and press ENTER.\nType 2 to use the default config values and press ENTER.\n",
       "config.getconfigerror": "Error in config file for the following setting: {0}. Please ensure the setting exists and its value is valid.\nAlternatively, delete the config.ini file and run the program again in order to make a new one.\nDetails: {1}",
       "config.availableoptions": "Available options: {0}",
       "config.setup.language": "What language should the program be displayed in?",
@@ -52657,10 +53158,16 @@
       "config.setup.skipmenu": "Do you want the program to skip the Main Menu?",
       "config.setup.skipmenu2": "To skip to the main program, set this to 1. To skip to Inventory Junk Cleaner (it will run on all added accounts straight away), set this to 2.",
       "config.setup.skipmenu3": "If you'll have an issue with an account or want to use other program's features, you can switch it back to 0 in the config file.",
+      "config.setup.disablessl": "Do you want the program to turn off SSL certificate verification",
+      "config.setup.disablessl2": "after an SSL error occurs (for example, while using packet sniffers)?",
+      "config.setup.disablessl3": "NOTE: Use this option at your own risk and only when really needed!",
       "config.setup.dontchange": "Do not change anything below.",
       "config.setup.success": "The config.ini file was generated successfully. For more options, take a look inside this file.\n",
       "config.readerror": "The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.",
       "config.versionerror": "Thanks for downloading the update! The changes made in this version caused your config.ini file to be outdated. Delete the config.ini file and run this program again to generate a new one.",
+      "userconfig.readerror": "The program is unable to read the userConfig.josn file. Delete the userConfig.json file and run this program again.",
+      "userconifg.usingdefault": "Set the default value\n",
+      "userconfig.invalidinput": "You provided a wrong value. Please input it again.\n",
       "authjson.readerror": "The program is unable to read the auth.json file. Delete the auth.json file and run this program again.",
       "authjson.oldformat": "Your auth.json file is in the pre-1.9.0 format, so the program cannot properly read it. To fix this issue, delete it and generate it by running this program again.",
       "startup.addaccount.isloggedin1": "Are you logged into your Epic account that you would like the program to use in your browser?\nType 1 if yes and press ENTER.\nType 2 if no and press ENTER.\nType 3 to go back and press ENTER.\n",
@@ -52688,7 +53195,7 @@
       "startup.managedailyquests.pressenter": "Press ENTER to continue.\n",
       "mainmenu.merrychristmas": "Merry Christmas from PRO100KatYT!\n",
       "mainmenu.happynewyear": "Happy new year from PRO100KatYT!\n",
-      "mainmenu.message": "Main menu:\nType 1 to start this program and press ENTER.\nType 2 to go to the Daily Quest Manager and press ENTER.\nType 3 to go to the Inventory Junk Cleaner and press ENTER.\nType 4 to go the Account Manager and press ENTER.\nType 5 to go the Armory Slots Purchaser and press ENTER.\nTo stop the program leave the input blank and press ENTER.\n",
+      "mainmenu.message": "Main menu:\nType 1 to start this program and press ENTER.\nType 2 to go to the Daily Quest Manager and press ENTER.\nType 3 to go to the Inventory Junk Cleaner and press ENTER.\nType 4 to go the Account Manager and press ENTER.\nType 5 to manage the Item Shop Purchaser config and press ENTER.\nTo stop the program leave the input blank and press ENTER.\n",
       "accountmanager.message": "Account Manager:\nType 1 to add an account to this program and press ENTER.\nType 2 to remove an account from this program and press ENTER.\nType 3 to see the list of accounts added to this program and press ENTER.\nType 4 to go back and press ENTER.\n",
       "accountmanager.pressenter": "Press ENTER to continue.\n",
       "main.auth.tokenexpired": "The refresh token has expired. To fix this issue, remove {0} from this program and add this account back. If this problem persists try to log in using the device auth type.",
@@ -52716,13 +53223,37 @@
       "main.recycle.message": "The following items have been successfully recycled/retired:\n",
       "main.recycle.resources": "Resources received:\n",
       "main.recycle.totalamount": "Total amount: {0}",
-      "itemshop.armoryslots.selection": "To select an account, type the number next to its display name and press ENTER.\nTo go back, type 0 and press ENTER.",
-      "itemshop.armoryslots.cannotafford": "You don't have enough currency. Required amount: {0}. You own: {1}",
-      "itemshop.armoryslots.alreadypurchased": "All currently available Armory Slots are already purchased on this account.\n",
-      "itemshop.armoryslots.areyousure": "The program will purchase {0} Armory Slots for {1} Gold as {2}",
-      "itemshop.armoryslots.purchased": "Purchased {0} of {1}",
-      "itemshop.armoryslots.success": "Successfully finished purchasing Armory Slots.",
       "itemshop.pressenter": "Press ENTER to continue.\n",
+      "itemshop.config.accountlist": "Account list and Item Shop config status:",
+      "itemshop.config.noaccounts": "There are no accounts added to this program.\n",
+      "itemshop.config.set": "✓ Config Set",
+      "itemshop.config.notset": "✗ Config NOT Set",
+      "itemshop.config.missing": "✗ Config Incomplete",
+      "itemshop.config.select": "The program will run the Item Shop part only for accounts next to which is \"✓ Config Set\".\nSelect an account of which you want to set/modify the Item Shop config values. Or type 0 to go back:",
+      "itemshop.config.setup.info": "A capital letter indicates the default value. For example, (Y/n) means that the default option is Y (true).\n",
+      "itemshop.config.setup.puredropsofrain": "Purchase Pure Drops of Rain? (Y/n)",
+      "itemshop.config.setup.lightningbottles": "Purchase Lightning in a Bottle? (Y/n)",
+      "itemshop.config.setup.eyesofthestorm": "Purchase Eyes of the Storm? (Y/n)",
+      "itemshop.config.setup.stormshards": "Purchase Storm Shards? (Y/n)",
+      "itemshop.config.setup.legendaryflux": "Purchase Legendary Flux? (Y/n)",
+      "itemshop.config.setup.epicflux": "Purchase Epic Flux? (Y/n)",
+      "itemshop.config.setup.rareflux": "Purchase Rare Flux? (y/N)",
+      "itemshop.config.setup.legendaryperkup": "Purchase Legendary PERK-UP? (Y/n)",
+      "itemshop.config.setup.epicperkup": "Purchase Epic PERK-UP? (Y/n)",
+      "itemshop.config.setup.rareperkup": "Purchase Rare PERK-UP? (y/N)",
+      "itemshop.config.setup.uncommonperkup": "Purchase Uncommon PERK-UP? (y/N)",
+      "itemshop.config.setup.reperk": "Purchase RE-PERK? (y/N)",
+      "itemshop.config.setup.legendarysurvivors": "Purchase Legendary Survivors? (Y/n)",
+      "itemshop.config.setup.epicsurvivors": "Purchase Epic Survivors? (y/N)",
+      "itemshop.config.setup.mythiclegendaryheroes": "Purchase Mythic and Legendary Heroes? (y/N)",
+      "itemshop.config.setup.epicheroes": "Purchase Epic Heroes? (y/N)",
+      "itemshop.config.setup.legendaryschematics": "Purchase Legendary Schematics? (y/N)",
+      "itemshop.config.setup.epicschematics": "Purchase Epic Schematics? (y/N)",
+      "itemshop.config.setup.legendarydefenders": "Purchase Legendary Defenders? (Y/n)",
+      "itemshop.config.setup.armoryslots": "Purchase Armory Slots? (Y/n)",
+      "itemshop.config.setup.heroloadouts": "Purchase Hero Loadout Slots? (Y/n)",
+      "itemshop.config.setup.dontspendbelowgold": "And last question:\nAt what gold amount should the program stop buying items? Input an integer (Default: 5000)",
+      "itemshop.purchased": "Purchased: {0} | {1}: {2}x {3}",
       "junkcleaner.title": "Starting the Inventory Junk Cleaner...",
       "junkcleaner.message": "Inventory Junk Cleaner:\n\nThis feature helps keep your inventory clean by destroying and recycling unwanted items. It works by:\n- Destroying specific backpack items at the selected star rating and below (perkless traps, weapons/traps from containers/animals, and tiered resources).\n- Recycling specific backpack items above the selected star rating (perkless traps and weapons/traps from containers/animals).\n\nThe program will NOT affect:\n- Items crafted by you or other players\n- Weapons and Traps with perks picked up from floor pickups\n- Weapons from in-game GiftBoxes\n- Ammo/Resources without a tier (Planks, Quartz, Coal, etc.)\n- Items in storage or in other backpacks (e.g. Ventures backpack)\n\nCurrently selected star rating: {0}. You can change it via the config.ini file.\n",
       "junkcleaner.whattodo": "Type 1 to run it on one account and press ENTER.\nType 2 to run it on all accounts and press ENTER.\nType 3 to go back and press ENTER.\n",
@@ -52786,7 +53317,7 @@
       "webhook.error": "Wystąpił błąd przy wysyłaniu wiadomości Webhooka na Discorda: {0}.\nWyłączanie funkcji Discord Webhook na tę sesję...\n",
       "updatechecker.message": "Jest dostępna na GitHubie nowsza wersja v{0}!\n(https://github.com/PRO100KatYT/SaveTheWorldClaimer)\n",
       "config.startgenerating": "Rozpoczynanie generowania pliku config.ini.\n",
-      "config.bstartsetup": "Wpisz 1, aby rozpocząć konfigurację (zalecane) i wciśnij ENTER.\nWpisz 2, aby zastosować domyślną konfigurację i wciśnij ENTER.\n",
+      "config.bstartsetup": "Witaj! Dzięki za pobranie tego programu. Lecimy z tematem.\n\nWpisz 1, aby rozpocząć konfigurację (zalecane) i wciśnij ENTER.\nWpisz 2, aby zastosować domyślną konfigurację i wciśnij ENTER.\n",
       "config.getconfigerror": "Błąd w pliku config dla następującego ustawienia: {0}. Upewnijta się, czy ustawienie istnije, a jego wartość jest odpowiednia.\nEwentualnie usuń plik config.ini i uruchom program ponownie, aby wygenerować nowy.\nSzczegóły: {1}",
       "config.availableoptions": "Dostępne opcje: {0}",
       "config.setup.language": "W jakim języku program ma być wyświetlany?",
@@ -52813,10 +53344,16 @@
       "config.setup.skipmenu": "Czy chcesz, aby program pomijał Menu Główne?",
       "config.setup.skipmenu2": "Aby pominąć do głównego programu, ustaw to na 1. Aby pominąć do Inventory Junk Cleaner'a (uruchomi się na wszystkich dodanych kontach), ustaw to na 2.",
       "config.setup.skipmenu3": "Jeśli będzieta mieć jakiś problem lub chcieli skorzystać z innych funkcji programu, można będzie zmienić to z powrotem na 0 w pliku config.",
+      "config.setup.disablessl": "Czy program ma wyłączyć weryfikację certyfikatu SSL",
+      "config.setup.disablessl2": "po wystąpieniu błędu (np. podczas korzystania ze snifferów pakietów)?",
+      "config.setup.disablessl3": "UWAGA: Używaj tej opcji na własne ryzyko i tylko gdy to konieczne!",
       "config.setup.dontchange": "Niczego poniżej nie zmieniaj.",
       "config.setup.success": "Plik conifg.ini został wygenerowany pomyślnie. Po więcej opcji, zajrzyj do niego.\n",
       "config.readerror": "Program nie może odczytać pliku config.ini. Usuń plik config.ini i uruchom program ponownie, aby wygenerować nowy.",
       "config.versionerror": "Dzięki za pobranie aktualizacji! Zmiany w tej wersji spowodowały, że Twój plik config.ini stał się nieaktualny. Usuń plik config.ini i uruchom program ponownie, aby wygenerować nowy.",
+      "userconfig.readerror": "Program nie może odczytać pliku userConfig.json. Usuń plik userConfig.json i uruchom program ponownie, aby wygenerować nowy.",
+      "userconifg.usingdefault": "Ustawiono domyślną wartość\n",
+      "userconfig.invalidinput": "Wprowadzono nieprawidłową wartość. Wprowadź ją raz jeszcze.\n",
       "authjson.readerror": "Program nie może odczytać pliku auth.json. Usuń plik auth.json i uruchom program ponownie.",
       "authjson.oldformat": "Twój plik auth.json jest sprzed wersji 1.9.0, przez co program nie może go poprawnie odczytać. Aby to naprawić, usuń go i wygeneruj, uruchamiając ten program ponownie.",
       "startup.addaccount.isloggedin1": "Czy jesteś zalogowany/a na konto Epic, które chcesz użyć w programie, w Twojej przeglądarce?\nWpisz 1, jeśli tak i wciśnij ENTER.\nWpisz 2, jeśli nie i wciśnij ENTER.\nWciśnij 3, aby pójść wstecz i wciśnij ENTER.\n",
@@ -52844,7 +53381,7 @@
       "startup.managedailyquests.pressenter": "Wciśnij ENTER, aby kontynuować.\n",
       "mainmenu.merrychristmas": "Wesołych Świąt od PRO100Kąta!\n",
       "mainmenu.happynewyear": "Szczęśliwego nowego roku od PRO100Kąta!\n",
-      "mainmenu.message": "Menu główne:\nWpisz 1, aby uruchomić ten program i wciśnij ENTER.\nWpisz 2, aby przejść do Menadżera Zadań Dnia i wciśnij ENTER.\nWpisz 3, aby przejść do Inventory Junk Cleaner'a i wciśnij ENTER.\nWpisz 4, aby przejść do Menadżera Kont i wciśnij ENTER.\nWpisz 5, aby przejsć do funkcji kupowania Pól w zbrojowni i wciśnij ENTER.\nAby zatrzymać program, nic nie wpisuj i wciśnij ENTER.\n",
+      "mainmenu.message": "Menu główne:\nWpisz 1, aby uruchomić ten program i wciśnij ENTER.\nWpisz 2, aby przejść do Menadżera Zadań Dnia i wciśnij ENTER.\nWpisz 3, aby przejść do Inventory Junk Cleanera i wciśnij ENTER.\nWpisz 4, aby przejść do Menadżera Kont i wciśnij ENTER.\nWpisz 5, aby zarządzać konfiguracją Item Shop Purchasera i wciśnij ENTER.\nAby zatrzymać program, nic nie wpisuj i wciśnij ENTER.\n",
       "accountmanager.message": "Menadżer Kont:\nWpisz 1, aby dodać konto do programu i wciśnij ENTER.\nWpisz 2, aby usunąć konto z programu i wciśnij ENTER.\nWpisz 3, aby zobaczyć listę kont dodanych do programu i wciśnij ENTER.\nWpisz 4, aby pójść wstecz i wciśnij ENTER.\n",
       "accountmanager.pressenter": "Wciśnij ENTER, aby kontynuować.\n",
       "main.auth.tokenexpired": "Refresh token wygasł. Aby to naprawić, usuń {0} z listy kont i dodaj ponownie. Jeśli ten problem będzie się powtarzał, spróbuj zalogować się używając metody uwierzytelnienia \"device\".",
@@ -52872,13 +53409,37 @@
       "main.recycle.message": "Następujące przedmioty zostały pomyślnie zrecyklingowane/odprawione:\n",
       "main.recycle.resources": "Otrzymane zasoby:\n",
       "main.recycle.totalamount": "Łącznie: {0}",
-      "itemshop.armoryslots.selection": "Aby wybrać konto, wpisz numer znajdujący się przy nicku i wciśnij ENTER.\nAby wrócić, wpisz 0 i wciśnij ENTER.",
-      "itemshop.armoryslots.cannotafford": "Nie masz wystarczająco dużo waluty. Wymagana liczba: {0}. Posiadasz: {1}",
-      "itemshop.armoryslots.alreadypurchased": "Wszystkie obecnie dostępne Pola w zbrojowni zostały już zakupione na tym koncie.\n",
-      "itemshop.armoryslots.areyousure": "Program kupi {0} Pól w zbrojowni za {1} Złota jako {2}",
-      "itemshop.armoryslots.purchased": "Kupiono {0} of {1}",
-      "itemshop.armoryslots.success": "Pomyślnie ukończono kupowanie Pól w zbrojowni.",
       "itemshop.pressenter": "Wciśnij ENTER, aby kontynuować.\n",
+      "itemshop.config.accountlist": "Lista kont i status konfiguracji Item Shopu:",
+      "itemshop.config.noaccounts": "Nie ma żadnych kont dodanych do programu.\n",
+      "itemshop.config.set": "✓ Konfiguracja ustawiona",
+      "itemshop.config.notset": "✗ Konfiguracja NIE jest ustawiona",
+      "itemshop.config.missing": "✗ Konfiguracja niekompletna",
+      "itemshop.config.select": "Program będzie uruchamiał część Item Shopu tylko dla kont, obok których widnieje \"✓ Konfiguracja ustawiona\".\nWybierz konto, dla którego chcesz ustawić/zmodyfikować wartości konfiguracji Item Shopu. Albo wpisz 0, aby się cofnąć:",
+      "itemshop.config.setup.info": "Wielka litera wskazuje domyślny wybór. Przykład: (Y/n) oznacza domyślne Y (tak, czyli true).\n",
+      "itemshop.config.setup.puredropsofrain": "Kupować Czyste krople deszczu? (Y/n)",
+      "itemshop.config.setup.lightningbottles": "Kupować Błyskawice w butelce? (Y/n)",
+      "itemshop.config.setup.eyesofthestorm": "Kupować Oka burzy? (Y/n)",
+      "itemshop.config.setup.stormshards": "Kupować Odłamki burzy? (Y/n)",
+      "itemshop.config.setup.legendaryflux": "Kupować Legendarny Fluks? (Y/n)",
+      "itemshop.config.setup.epicflux": "Kupować Epicki Fluks? (Y/n)",
+      "itemshop.config.setup.rareflux": "Kupować Rzadki Fluks? (y/N)",
+      "itemshop.config.setup.legendaryperkup": "Kupować Legendarny profit+? (Y/n)",
+      "itemshop.config.setup.epicperkup": "Kupować Epicki profit+? (Y/n)",
+      "itemshop.config.setup.rareperkup": "Kupować Rzadki profit+? (y/N)",
+      "itemshop.config.setup.uncommonperkup": "Kupować Niepospolity profit+? (y/N)",
+      "itemshop.config.setup.reperk": "Kupować Re-profit? (y/N)",
+      "itemshop.config.setup.legendarysurvivors": "Kupować Legendarnych Ocaleńców? (Y/n)",
+      "itemshop.config.setup.epicsurvivors": "Kupować Epickich Ocaleńców? (y/N)",
+      "itemshop.config.setup.mythiclegendaryheroes": "Kupować Mitycznych i Legendarnych Bohaterów? (y/N)",
+      "itemshop.config.setup.epicheroes": "Kupować Epickich Bohaterów? (y/N)",
+      "itemshop.config.setup.legendaryschematics": "Kupować Legendarne Schematy? (y/N)",
+      "itemshop.config.setup.epicschematics": "Kupować Epickie Schematy? (y/N)",
+      "itemshop.config.setup.legendarydefenders": "Kupować Legendarnych Obrońców? (Y/n)",
+      "itemshop.config.setup.armoryslots": "Kupować Pola w zbrojowni? (Y/n)",
+      "itemshop.config.setup.heroloadouts": "Kupować sloty na Zespoły Bohaterów? (Y/n)",
+      "itemshop.config.setup.dontspendbelowgold": "I ostatnie pytanie:\nPrzy jakiej ilości złota program ma przestać kupować przedmioty? Wprowadź liczbę. (Domyślnie: 5000)",
+      "itemshop.purchased": "Kupiono: {0} | {1}: {2}x {3}",
       "junkcleaner.title": "Startowanie Inventory Junk Cleaner'a...",
       "junkcleaner.message": "Inventory Junk Cleaner:\n\nTa funkcja pomaga zachować porządek w ekwipunku, niszcząc i recyklingując niechciane przedmioty. Działa to poprzez:\n- Niszczenie konkretnych przedmiotów z plecaka o wybranej liczbie gwiazdek lub poniżej niej (pułapki bez profitów, bronie/pułapki z pudełek/zwierząt i surowce danego poziomu).\n- Recyklingowanie konkretnych przedmiotów z plecaka powyżej wybranej liczby gwiazdek (pułapki bez profitów oraz bronie/pułapki z pudełek/zwierząt).\n\nProgram nic NIE robi z:\n- Przedmiotami wytworzonymi przez Ciebie lub innych graczy\n- Brońmi i Pułapkami z profitami, podniesionymi z ziemi\n- Brońmi z prezentów zdobytych podczas misji\n- Amunicją/Zasobami bez poziomu (Deski, Kwarc, Węgiel, itp.)\n- Przedmiotami w magazynie lub innych plecakach (np. w plecaku Wypraw)\n\nAktualnie wybrany poziom gwiazdek: {0}. Możesz go zmienić w pliku config.ini.\n",
       "junkcleaner.whattodo": "Wpisz 1, aby uruchomić go na jednym koncie i wciśnij ENTER.\nWpisz 2, aby uruchomić go na wszystkich kontach i wciśnij ENTER.\nWpisz 3, aby wrócić i wciśnij ENTER.\n",
