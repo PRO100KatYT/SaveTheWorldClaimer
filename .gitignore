@@ -1,2 +1,9 @@
 auth.json
+userConfig.json
 config.ini
+build_nuitka/
+SaveTheWorldClaimer.build/
+SaveTheWorldClaimer.dist/
+SaveTheWorldClaimer.onefile-build/
+installer_output/
+*.exe
