@@ -19,7 +19,7 @@ jobs:
           python-version: '3.11'
       - run: pip install nuitka requests
       - run: |
-          python -m nuitka --standalone --include-data-files=stringlist.json=stringlist.json --windows-icon-from-ico=icons/penny.ico --output-dir=build_nuitka SaveTheWorldClaimer.py
+          python -m nuitka --assume-yes-for-downloads --standalone --include-data-files=stringlist.json=stringlist.json --windows-icon-from-ico=icons/penny.ico --output-dir=build_nuitka SaveTheWorldClaimer.py
       - uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
         with:
           path: installer/setup.iss
@@ -39,7 +39,7 @@ jobs:
           python-version: '3.11'
       - run: pip install nuitka requests
       - run: |
-          python -m nuitka --onefile --include-data-files=stringlist.json=stringlist.json --linux-icon=icons/penny.png SaveTheWorldClaimer.py
+          python -m nuitka --assume-yes-for-downloads --onefile --include-data-files=stringlist.json=stringlist.json --linux-icon=icons/penny.png SaveTheWorldClaimer.py
           mv SaveTheWorldClaimer.bin SaveTheWorldClaimer-Linux
       - name: Upload Linux Binary
         uses: actions/upload-artifact@v4
@@ -56,7 +56,7 @@ jobs:
           python-version: '3.11'
       - run: pip install nuitka requests
       - run: |
-          python -m nuitka --standalone --macos-create-app-bundle --include-data-files=stringlist.json=stringlist.json --macos-app-icon=icons/penny.icns SaveTheWorldClaimer.py
+          python -m nuitka --assume-yes-for-downloads --standalone --macos-create-app-bundle --include-data-files=stringlist.json=stringlist.json --macos-app-icon=icons/penny.icns SaveTheWorldClaimer.py
           ditto -c -k --sequesterRsrc --keepParent SaveTheWorldClaimer.app SaveTheWorldClaimer-macOS.zip
       - name: Upload macOS App
         uses: actions/upload-artifact@v4
