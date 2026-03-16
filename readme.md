@@ -1,7 +1,7 @@
 <div align="center">
 
-<img src="https://github.com/user-attachments/assets/c7cf1450-6e2f-4828-a327-d4563365c0c8" alt="Penny Logo" width="150"/><br>
-<img width="500" alt="Save the World Claimer banner" src="https://github.com/user-attachments/assets/f46859d0-5f32-4b29-80e4-526cb06c838f" />
+<img src="https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/main/icons/penny.png" alt="Penny Logo" width="150"/><br>
+<img width="500" alt="Save the World Claimer banner" src="https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/main/icons/banner.png" />
 <br>
 This Fortnite: Save the World tool allows you to open free Llamas, claim and replace your Daily Quests, manage your Backpack items, auto-buy items from the Weekly & Event Store, and much more - all without launching the game.
 
@@ -44,6 +44,11 @@ This Fortnite: Save the World tool allows you to open free Llamas, claim and rep
 - 📝 Added strings for Purchasable Hero Loadouts and Armory Slots to `stringlist.json`.
 - 🗂️ Reorganized the README.
 - 🎨 Minor internal code refactoring and optimizations.
+
+**What's new in the `1.15.1` update:**
+- 🐛 Fixed an issue where the pre-compiled Linux version would fail to permanently files between sessions.
+- 💥 Fixed an error that occurred when closing the compiled application or encountering an error.
+- 🖼️ Fixed an issue where the logo and banner images in the README were sometimes not displaying correctly.
 
 ---
 
