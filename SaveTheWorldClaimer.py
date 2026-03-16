@@ -61,6 +61,12 @@ class autoRecycling:
 class winterfest:
     rewardGraphId, nodesClaimingOrder = "", ["ERG.Node.A.3", "ERG.Node.A.4", "ERG.Node.A.5", "ERG.Node.A.6", "ERG.Node.A.7", "ERG.Node.A.8", "ERG.Node.A.9", "ERG.Node.A.2", "ERG.Node.A.10", "ERG.Node.A.11", "ERG.Node.A.12", "ERG.Node.B.1", "ERG.Node.A.13", "ERG.Node.A.1"]
 
+# Get the base path depending on whether the program is compiled or not.
+def getBasePath():
+    if hasattr(sys, 'frozen'):
+        return os.path.dirname(sys.executable)
+    return os.path.split(os.path.abspath(__file__))[0]
+
 # Start a new requests session.
 session = requests.Session()
 
@@ -100,7 +106,7 @@ def nextrun(loopSeconds):
     return nextrun.strftime("%Y/%m/%d %H:%M:%S")
 
 # Load and/or download the stringlist.json file.
-stringListPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "stringlist.json")
+stringListPath = os.path.join(getBasePath(), "stringlist.json")
 def downloadAndSaveStringlistFile():
     global stringListPath
     content = request("get", "https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/refs/heads/main/stringlist.json").content
@@ -112,7 +118,7 @@ except:
     try: stringList = json.loads(open(stringListPath, "r", encoding = "utf-8").read())
     except:
         input("ERROR: The program still can't read the newly downloaded stringlist.json file. Weird...")
-        exit()
+        sys.exit(1)
 
 # Get a string in currently selected language.
 def getString(string): return stringList["Strings"].get(language, stringList["Strings"]["en"]).get(string, string)
@@ -132,7 +138,7 @@ def getPluralWord(string, number):
 def customError(text):
     if bShowDateTime == "true": input(f"{getDateTimeString()} {getString('customerror.message').format(text)}")
     else: input(getString('customerror.message').format(text))
-    exit()
+    sys.exit(1)
 
 # Error for invalid config values.
 def configError(key, value, validValues): customError(getString("configerror.message").format(key, value, validValues))
@@ -214,7 +220,7 @@ def isCorrectValue(value, type, validValues = []):
     return [False, ""]
 
 # Create and/or read the config.ini file.
-config, configPath = [ConfigParser(), os.path.join(os.path.split(os.path.abspath(__file__))[0], "config.ini")]
+config, configPath = [ConfigParser(), os.path.join(getBasePath(), "config.ini")]
 if not os.path.exists(configPath):
     configFileContent = "[Config]\n\n"
     configJson = {}
@@ -277,7 +283,7 @@ for key in ["Recycle_Weapons", "Recycle_Traps", "Retire_Survivors", "Retire_Defe
 sendRequestErrorMsg = getString('request.error')
 
 # Check if the user config file exists. If not, then create it. And read the file.
-userConfigPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "userConfig.json")
+userConfigPath = os.path.join(getBasePath(), "userConfig.json")
 if not os.path.exists(userConfigPath):
     with open(userConfigPath, "w") as userConfigJson: userConfigJson.write("{}")
 try: 
@@ -347,7 +353,7 @@ class perAccountConfig:
         perAccountConfig.saveFile()
 
 # Create and load the auth.json file.
-authPath = os.path.join(os.path.split(os.path.abspath(__file__))[0], "auth.json")
+authPath = os.path.join(getBasePath(), "auth.json")
 if not os.path.exists(authPath):
     with open(authPath, "w") as authJson: authJson.write("[]")
 try: 
@@ -779,7 +785,7 @@ def menu():
                     input(getString("accountmanager.pressenter"))
                 else: break
         elif whatToDo1 == "5": itemShopConfigurator()
-        else: exit()
+        else: sys.exit()
 
 # The main part of the program that can be looped.
 def main():
@@ -939,4 +945,4 @@ else:
     message(getString("junkcleaner.title"))
     invJunkCleaner.main(authJson.copy(), getConfig("Loop_Minutes"))
 
-exit()
+sys.exit()
