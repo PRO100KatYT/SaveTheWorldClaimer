@@ -30663,6 +30663,30 @@
       "rarity": "common",
       "type": "accountresource"
     },
+    "AccountResource:peoplexp": {
+      "name": {
+        "ar": "نقاط خبرة الأشخاص",
+        "de": "Anhänger-EP",
+        "en": "People XP",
+        "es": "PE de personas",
+        "es-419": "PE de personas",
+        "fr": "EXP d'individus",
+        "id": "XP Pengguna",
+        "it": "PE persone",
+        "ja": "キャラクターXP",
+        "ko": "사람 XP",
+        "pl": "PD ludzi",
+        "pt-BR": "EXP de Pessoas",
+        "ru": "Опыт персонала",
+        "th": "XP บุคลากร",
+        "tr": "İnsan TP'si",
+        "vi": "XP Con Người",
+        "zh-Hans": "成员经验值",
+        "zh-Hant": "人員經驗值"
+      },
+      "rarity": "common",
+      "type": "accountresource"
+    },
     "AccountResource:voucher_generic_weapon_r": {
       "name": {
         "ar": "رمز السلاح النادر",
