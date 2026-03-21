@@ -452,7 +452,7 @@ class invJunkCleaner:
     TIDsToExclude = ["Trap:tid_floor_defender", "Trap:tid_floor_player_jump_pad", "Trap:tid_floor_player_jump_pad_free_direction", "Trap:tid_floor_launchpad_r_t01", "Trap:tid_floor_hoverboard_speed_curve_r_t01", "Trap:tid_floor_hoverboard_speed_r_t01", "Trap:tid_wall_spikes_r_t01", "Trap:ob_trap_floor_spikes"]
 
     def isProfileLocked(theater0):
-        if not "profileLockExpiration" in theater0: return False
+        if not "profileLockExpiration" in theater0: return [False, 0]
         lockExpirationDate = lockExpirationDate = datetime.fromisoformat(theater0["profileLockExpiration"].replace("Z", "+00:00")).replace(tzinfo=timezone.utc)
         nowDate = datetime.now(timezone.utc)
         secondsDiff = (lockExpirationDate - nowDate).total_seconds()
