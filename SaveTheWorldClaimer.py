@@ -27,6 +27,7 @@ from configparser import ConfigParser
 from datetime import datetime, timedelta, timezone
 import webbrowser
 import time
+import shutil
 from threading import Thread
 if os.name == "nt": os.system("title Save the World Claimer")
 else: print("\033]0;Save the World Claimer\007", end='', flush=True) # This is for window title for Linux and macOS.
@@ -63,9 +64,15 @@ class winterfest:
 
 # Get the base path depending on whether the program is compiled or not.
 def getBasePath():
-    if hasattr(sys, 'frozen'):
-        return os.path.dirname(sys.executable)
-    return os.path.split(os.path.abspath(__file__))[0]
+    bIsCompiled = hasattr(sys, "frozen") or "__compiled__" in globals()
+    if not bIsCompiled:  return os.path.dirname(os.path.abspath(__file__))
+    if "APPIMAGE" in os.environ: return os.path.dirname(os.environ["APPIMAGE"])
+    exePath = sys.executable if hasattr(sys, "frozen") else sys.argv[0]
+    if not os.path.isabs(exePath): exePath = shutil.which(exePath) or os.path.abspath(exePath)
+    baseDir = os.path.dirname(exePath)
+    if sys.platform == "darwin" and "Contents/MacOS" in baseDir:
+        baseDir = os.path.abspath(os.path.join(baseDir, "../../.."))
+    return baseDir
 
 # Start a new requests session.
 session = requests.Session()
