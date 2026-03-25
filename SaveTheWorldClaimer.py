@@ -651,8 +651,8 @@ class itemShop:
 # Menu (Account & Daily Quest Manager)
 def menu():
     def addAccount(bGoBack=True):
-        isLoggedIn = validInput(getString("startup.addaccount.isloggedin1" if bGoBack else "startup.addaccount.isloggedin2"), ["1", "2", "3"])
-        if isLoggedIn == "3": return
+        isLoggedIn = validInput(getString("startup.addaccount.isloggedin1" if bGoBack else "startup.addaccount.isloggedin2"), ["", "1", "2"])
+        if not isLoggedIn: return
         authType = validInput(getString("startup.addaccount.authtype"), ["token", "device"])
         input(getString("startup.addaccount.openwebsiteinfo"))
         loginLink = links.loginLink1 if isLoggedIn == "1" else links.loginLink2
@@ -683,9 +683,10 @@ def menu():
         listAccounts()
         if not authJson: return
         print(getString("startup.removeaccount.message"))
-        accountCountList = [str(i) for i in range(len(authJson))]
-        accountToRemove = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)]))
-        if accountToRemove != 0:
+        accountCountList = [str(i) for i in range(1, len(authJson) + 1)]
+        accountToRemove = validInput("", accountCountList + [""])
+        if accountToRemove:
+            accountToRemove = int(accountToRemove)
             areYouSure = int(validInput(getString("startup.removeaccount.areyousure").format(authJson[accountToRemove - 1]['displayName']), ["1", "2"]))
             if areYouSure == 1:
                 print(getString("startup.removeaccount.success").format(authJson[accountToRemove - 1]['displayName']))
@@ -694,12 +695,15 @@ def menu():
 
     def manageDailyQuests():
         while authJson:
-            listAccounts()
-            print(getString("startup.managedailyquests.message"))
-            accountCountList = list(map(str, range(len(authJson))))
-            accountIndex = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)]))
-            if accountIndex == 0: break
-            accountToManage = authJson[accountIndex - 1]
+            accountToManage = []
+            if len(authJson) == 1: accountToManage = authJson[0]
+            else:
+                listAccounts()
+                print(getString("startup.managedailyquests.message"))
+                accountCountList = list(map(str, range(1, len(authJson) + 1)))
+                accountIndex = validInput("", accountCountList + [""])
+                if not accountIndex: break
+                accountToManage = authJson[int(accountIndex) - 1]
             while True:
                 auth = login(accountToManage)
                 print(getString("startup.managedailyquests.searching"))
@@ -717,10 +721,10 @@ def menu():
                         break
                     else:
                         print(getString("startup.managedailyquests.choosequest").format(auth.displayName))
-                        questCountList = list(map(str, range(len(questData))))
-                        questIndex = int(validInput("", questCountList + [str(int(questCountList[-1]) + 1)]))
-                        if questIndex == 0: break
-                        questToReplace = list(questData.keys())[questIndex - 1]
+                        questCountList = list(map(str, range(1, len(questData) + 1)))
+                        questIndex = validInput("", questCountList + [""])
+                        if not questIndex: break
+                        questToReplace = list(questData.keys())[int(questIndex) - 1]
                         confirmReroll = validInput(getString("startup.managedailyquests.confirm").format(questData[questToReplace]['questName']), ["1", "2"])
                         if confirmReroll == "1":
                             reqRerollQuest = requestText(request("post", links.profileRequest.format(auth.accountId, "FortRerollDailyQuest", "campaign"), headers=auth.headers, json={"questId": questToReplace}), True)
@@ -734,14 +738,14 @@ def menu():
         while authJson:
             print(getString("junkcleaner.message").format(getConfig('Inventory_Junk_Cleaner')))
             selectedAccounts = []
-            whatToDo2 = validInput(getString("junkcleaner.whattodo"), ["1", "2", "3"])
+            whatToDo2 = validInput(getString("junkcleaner.whattodo"), ["", "1", "2"])
             if whatToDo2 == "1":
                 listAccounts()
                 print(getString("junkcleaner.selectaccount"))
-                accountCountList = list(map(str, range(len(authJson))))
-                accountIndex = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)]))
-                if accountIndex == 0: return
-                selectedAccounts = [authJson[accountIndex - 1]]
+                accountCountList = list(map(str, range(1, len(authJson) + 1)))
+                accountIndex = validInput("", accountCountList + [""])
+                if not accountIndex: return
+                selectedAccounts = [authJson[int(accountIndex) - 1]]
             elif whatToDo2 == "2": selectedAccounts = authJson.copy()
             else: break
             loopMinutes = float(validInput(getString("junkcleaner.loopinput"), "digit"))
@@ -761,11 +765,11 @@ def menu():
             else:
                 for account in authJson: print(f"{authJson.index(account) + 1}: {account.get('displayName', getString('startup.listaccounts.noname'))} | {getString('itemshop.config.set') if (account['accountId'] in userConfigJson and perAccountConfig.bHasAllConfigOptionsSet(account['accountId'], stringList['Config']['perUserSettings']['itemShop'])) else (getString('itemshop.config.missing') if (account['accountId'] in userConfigJson and 'itemShop' in userConfigJson[account['accountId']]) else getString('itemshop.config.notset'))}")
             print(getString('itemshop.config.select'))
-            accountCountList = [str(i) for i in range(len(authJson))]
-            selectedAccountIndex = int(validInput("", accountCountList + [str(int(accountCountList[-1]) + 1)])) - 1
-            if selectedAccountIndex == -1: break
+            accountCountList = [str(i) for i in range(1, len(authJson) + 1)]
+            selectedAccountIndex = validInput("", accountCountList + [""])
+            if not selectedAccountIndex: break
             print(getString('itemshop.config.setup.info'))
-            perAccountConfig.askSetupQuestionsAndSaveFile(authJson[selectedAccountIndex]["accountId"], stringList["Config"]["perUserSettings"]["itemShop"])
+            perAccountConfig.askSetupQuestionsAndSaveFile(authJson[int(selectedAccountIndex) - 1]["accountId"], stringList["Config"]["perUserSettings"]["itemShop"])
     
     def getSeasonalGreeting():
         now = datetime.now()
@@ -784,7 +788,7 @@ def menu():
         elif whatToDo1 == "3": junkCleaner()
         elif whatToDo1 == "4":
             while True:
-                whatToDo3 = validInput(getString("accountmanager.message"), ["1", "2", "3", "4"])
+                whatToDo3 = validInput(getString("accountmanager.message"), ["1", "2", "3", ""])
                 if whatToDo3 == "1": addAccount()
                 elif whatToDo3 == "2": removeAccount()
                 elif whatToDo3 == "3":
@@ -945,7 +949,7 @@ if getConfig('Skip_Main_Menu') != 2:
             time.sleep(totalSecondsToSleep)
         else:
             if getConfig('Skip_Main_Menu'): break
-            whatToDo = validInput(getString("noloop.input"), ["0", ""])
+            whatToDo = input(getString("noloop.input"))
             if not whatToDo: break
             menu()
 else:
