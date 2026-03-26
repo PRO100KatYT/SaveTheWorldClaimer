@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/main/icons/penny.png" alt="Penny Logo" width="150"/><br>
+<img src="https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/main/icons/penny.png" alt="Penny Logo" width="130"/><br>
 <img width="500" alt="Save the World Claimer banner" src="https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/main/icons/banner.png" />
 <br>
 This Fortnite: Save the World tool allows you to open free Llamas, claim and replace your Daily Quests, manage your Backpack items, auto-buy items from the Weekly & Event Store, and much more - all without launching the game.
@@ -31,24 +31,7 @@ This Fortnite: Save the World tool allows you to open free Llamas, claim and rep
 ---
 
 ### 🔄 Changelog:
-**What's new in the `1.15.0` update:**
-- ✨ **New Feature: STW Item Shop Purchaser!**
-  - Are you tired of having to manually buy necessary items from the Event and Weekly store on all of your accounts every week? You no longer have to!
-  - This feature is highly configurable, separately for each account added to the program.
-  - You can choose whether or not to buy specific types and rarities of items, including: Evolution Materials, Flux, Perk resources, Heroes, Survivors, Defenders, Schematics, as well as Armory and Hero Loadout Slots.
-- ⚙️ Added the functionality of per account configs stored in `userConfig.json`. I plan to move some of the already existing config options there in future updates for more customizability.
-- 🧹 Removed unnecessary backwards compatibility with accounts saved prior to v1.13.2, as those tokens have already expired.
-- 🖥️ Added terminal window title for macOS and Linux.
-- 🗑️ Removed the unnecessary `hbonboarding_namehomebase` stat from the Skip Tutorial request body.
-- 🖼️ Added a logo to the program.
-- 📝 Added strings for Purchasable Hero Loadouts and Armory Slots to `stringlist.json`.
-- 🗂️ Reorganized the README.
-- 🎨 Minor internal code refactoring and optimizations.
-
-**What's new in the `1.15.1` update:**
-- 🐛 Fixed an issue where the pre-compiled Linux version would fail to permanently files between sessions.
-- 💥 Fixed an error that occurred when closing the compiled application or encountering an error.
-- 🖼️ Fixed an issue where the logo and banner images in the README were sometimes not displaying correctly.
+You can view the latest release changelog [here](https://github.com/PRO100KatYT/SaveTheWorldClaimer/releases/latest).
 
 ---
 
@@ -130,7 +113,13 @@ Feel free to [open an issue](https://github.com/PRO100KatYT/SaveTheWorldClaimer/
 <summary><b>Thanks to all stargazers! Click to expand the Star History Chart.</b></summary>
 <br>
 
-[![Star History Chart](https://api.star-history.com/svg?repos=PRO100KatYT/SaveTheWorldClaimer&type=date&legend=top-left)](https://www.star-history.com/#PRO100KatYT/SaveTheWorldClaimer&type=date&legend=top-left)
+<a href="https://www.star-history.com/?repos=PRO100KatYT%2FSaveTheWorldClaimer&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=PRO100KatYT/SaveTheWorldClaimer&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=PRO100KatYT/SaveTheWorldClaimer&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/image?repos=PRO100KatYT/SaveTheWorldClaimer&type=date&legend=top-left" />
+ </picture>
+</a>
 
 </details>
 
