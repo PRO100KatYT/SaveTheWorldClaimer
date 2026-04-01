@@ -93,6 +93,7 @@ def request(method, url, headers=None, data=None, json=None):
                 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
                 session.verify = False
                 print("Turning off SSL certificate verification for this session due to an SSL error. The program should function normally.\n")
+            continue
         except Exception as e:
             secondsToWait = 10 if (retries in [2, 3]) else (30 if (retries in [4, 5]) else (60 if retries >= 6 else 5))
             print(sendRequestErrorMsg.format(method, url, (" ({0}).".format(e) if retries >= 6 else ""), secondsToWait))
@@ -732,7 +733,8 @@ def menu():
                             if newQuestTemplateId:
                                 newQuestName = stringList['Items'].get(newQuestTemplateId, {}).get('name', {}).get(getConfig('Items_Language'), newQuestTemplateId)
                                 print(getString("startup.managedailyquests.success").format(questData[questToReplace]['questName'], newQuestName))
-                                input(getString("startup.managedailyquests.pressenter"))            
+                                input(getString("startup.managedailyquests.pressenter"))
+            if len(authJson) == 1: break
     
     def junkCleaner():
         while authJson:
