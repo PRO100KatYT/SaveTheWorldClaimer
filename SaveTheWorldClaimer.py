@@ -63,9 +63,9 @@ class winterfest:
     rewardGraphId, nodesClaimingOrder = "", ["ERG.Node.A.3", "ERG.Node.A.4", "ERG.Node.A.5", "ERG.Node.A.6", "ERG.Node.A.7", "ERG.Node.A.8", "ERG.Node.A.9", "ERG.Node.A.2", "ERG.Node.A.10", "ERG.Node.A.11", "ERG.Node.A.12", "ERG.Node.B.1", "ERG.Node.A.13", "ERG.Node.A.1"]
 
 # Get the base path depending on whether the program is compiled or not.
-def getBasePath():
+def getBasePath(bGetExePath = True):
     bIsCompiled = hasattr(sys, "frozen") or "__compiled__" in globals()
-    if not bIsCompiled:  return os.path.dirname(os.path.abspath(__file__))
+    if not bIsCompiled or not bGetExePath:  return os.path.dirname(os.path.abspath(__file__))
     if "APPIMAGE" in os.environ: return os.path.dirname(os.environ["APPIMAGE"])
     exePath = sys.executable if hasattr(sys, "frozen") else sys.argv[0]
     if not os.path.isabs(exePath): exePath = shutil.which(exePath) or os.path.abspath(exePath)
@@ -114,7 +114,7 @@ def nextrun(loopSeconds):
     return nextrun.strftime("%Y/%m/%d %H:%M:%S")
 
 # Load and/or download the stringlist.json file.
-stringListPath = os.path.join(getBasePath(), "stringlist.json")
+stringListPath = os.path.join(getBasePath(False), "stringlist.json")
 def downloadAndSaveStringlistFile():
     global stringListPath
     content = request("get", "https://raw.githubusercontent.com/PRO100KatYT/SaveTheWorldClaimer/refs/heads/main/stringlist.json").content
