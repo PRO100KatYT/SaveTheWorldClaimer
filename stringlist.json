@@ -30819,6 +30819,30 @@
       "rarity": "common",
       "type": "accountresource"
     },
+    "AccountResource:reagent_schematic": {
+      "name": {
+        "ar": "أدلة المخططات",
+        "de": "Skizzenhandbücher",
+        "en": "Schematic Manuals",
+        "es": "Manuales de esquemas",
+        "es-419": "Manuales de esquema",
+        "fr": "Manuels de schémas",
+        "id": "Manual Skema",
+        "it": "Manuali dei progetti",
+        "ja": "設計図マニュアル",
+        "ko": "제작법 매뉴얼",
+        "pl": "Podręczniki schematów",
+        "pt-BR": "Manuais de Plano",
+        "ru": "Руководства по чертежам",
+        "th": "คู่มือแผนผัง",
+        "tr": "Şema Kılavuzları",
+        "vi": "Sổ Tay Bản Thiết Kế",
+        "zh-Hans": "构造图手册",
+        "zh-Hant": "圖紙手冊"
+      },
+      "rarity": "common",
+      "type": "accountresource"
+    },
     "AccountResource:eventcurrency_lunar": {
       "name": {
         "ar": "تذاكر قمرية",
