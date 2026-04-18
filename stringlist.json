@@ -54869,26 +54869,6 @@
       {
         "extraComments": [],
         "settingComments": [
-          "config.setup.junkcleaner",
-          "config.setup.junkcleaner2",
-          "config.setup.junkcleaner3",
-          "config.setup.junkcleaner4"
-        ],
-        "settingName": "Inventory_Junk_Cleaner",
-        "settingType": "int",
-        "validValues": [
-          1,
-          2,
-          3,
-          4
-        ],
-        "defaultValue": 1,
-        "bSkipInSetup": true,
-        "skipInSetupIf": {}
-      },
-      {
-        "extraComments": [],
-        "settingComments": [
           "config.setup.winterfestgifts"
         ],
         "settingName": "Claim_Winterfest_Presents",
@@ -55426,6 +55406,28 @@
           "defaultValue": 5000,
           "eligibleShopItems": {}
         }
+      ],
+      "invJunkCleaner": [
+        {
+          "question": "junkcleaner.config.setup.tier",
+          "optionPath": [
+            "invJunkCleaner",
+            "tier"
+          ],
+          "settingType": "int",
+          "validValues": [2, 3, 4, 5],
+          "defaultValue": 5
+        },
+        {
+          "question": "junkcleaner.config.setup.powerlevel",
+          "optionPath": [
+            "invJunkCleaner",
+            "powerLevel"
+          ],
+          "settingType": "int",
+          "validValues": [],
+          "defaultValue": 130
+        }
       ]
     }
   },
@@ -55485,10 +55487,6 @@
       "config.setup.recycle.defenders": "Automatically retire Defenders from opened llamas at this rarity or below.",
       "config.setup.recycle.heroes": "Automatically retire Heroes from opened llamas at this rarity or below.",
       "config.setup.bskiptutorial": "Do you want the program to skip the Save the World tutorial mission if it hasn't been completed on an account yet? You'll receive the StW music pack.",
-      "config.setup.junkcleaner": "Keep your backpack clean by destroying and recycling unwanted items. (More detailed info is available in the Inventory Junk Cleaner menu.)",
-      "config.setup.junkcleaner2": "If you select 1, the program will destroy 1-star items and recycle some of the 2-, 3-, 4- and 5-star stuff.",
-      "config.setup.junkcleaner3": "If you select 2, the program will destroy 1- and 2-star items, and recycle some of the 3-, 4- and 5-star stuff.",
-      "config.setup.junkcleaner4": "And so on. If your accounts are in the Twine Peaks endgame stage and you're using only 5-star items, It's recommended to set this option to 4.",
       "config.setup.winterfestgifts": "Do you want the program to claim cosmetic rewards from presents during the Winterfest event?",
       "config.setup.looptime": "Do you want the program to loop itself every X minutes?",
       "config.setup.looptime2": "Set this to 0 to not loop the program.",
@@ -55537,7 +55535,7 @@
       "startup.managedailyquests.pressenter": "Press ENTER to continue.\n",
       "mainmenu.merrychristmas": "Merry Christmas from PRO100KatYT!\n",
       "mainmenu.happynewyear": "Happy new year from PRO100KatYT!\n",
-      "mainmenu.message": "Main menu:\nType 1 to start this program and press ENTER.\nType 2 to go to the Daily Quest Manager and press ENTER.\nType 3 to go to the Inventory Junk Cleaner and press ENTER.\nType 4 to go the Account Manager and press ENTER.\nType 5 to manage the Item Shop Purchaser config and press ENTER.\nTo stop the program leave the input blank and press ENTER.\n",
+      "mainmenu.message": "Main menu:\nType 1 to start this program and press ENTER.\nType 2 to go to the Daily Quest Manager and press ENTER.\nType 3 to go to the Inventory Junk Cleaner and press ENTER.\nType 4 to go the Account Manager and press ENTER.\nType 5 to manage the Item Shop Purchaser and press ENTER.\nTo stop the program leave the input blank and press ENTER.\n",
       "accountmanager.message": "Account Manager:\nType 1 to add an account to this program and press ENTER.\nType 2 to remove an account from this program and press ENTER.\nType 3 to see the list of accounts added to this program and press ENTER.\nTo go back, leave the input blank and press ENTER.\n",
       "accountmanager.pressenter": "Press ENTER to continue.\n",
       "main.auth.tokenexpired": "The refresh token has expired. To fix this issue, remove {0} from this program and add this account back. If this problem persists try to log in using the device auth type.",
@@ -55596,9 +55594,19 @@
       "itemshop.config.setup.heroloadouts": "Purchase Hero Loadout Slots? (Y/n)",
       "itemshop.config.setup.dontspendbelowgold": "And last question:\nAt what gold amount should the program stop buying items? Input an integer (Default: 5000)",
       "itemshop.purchased": "Purchased: {0} | {1}: {2}x {3}",
+      "junkcleaner.config.accountlist": "Account list and Inventory Junk Cleaner config status:",
+      "junkcleaner.config.noaccounts": "There are no accounts added to this program.\n",
+      "junkcleaner.config.set": "✓ Config Set",
+      "junkcleaner.config.notset": "✗ Config NOT Set",
+      "junkcleaner.config.missing": "✗ Config Incomplete",
+      "junkcleaner.config.select": "The program will run the Inventory Junk Cleaner only for accounts next to which is \"✓ Config Set\".\nSelect an account of which you want to set/modify the Inventory Junk Cleaner config values. Or leave the input blank to go back:",
+      "junkcleaner.config.setup.info": "",
+      "junkcleaner.config.setup.tier": "Below which tier destroy backpack resources? Input an integer (2-5). Default: 5.",
+      "junkcleaner.config.setup.powerlevel": "Below which power level recycle and/or destroy weapons and traps? Input an integer. Default: 130.",
+      "junkcleaner.snapshot.success": "Backpack snapshot successfully created.\n",
       "junkcleaner.title": "Starting the Inventory Junk Cleaner...",
-      "junkcleaner.message": "Inventory Junk Cleaner:\n\nThis feature helps keep your inventory clean by destroying and recycling unwanted items. It works by:\n- Destroying specific backpack items at the selected star rating and below (perkless traps, weapons/traps from containers/animals, and tiered resources).\n- Recycling specific backpack items above the selected star rating (perkless traps and weapons/traps from containers/animals).\n\nThe program will NOT affect:\n- Items crafted by you or other players\n- Weapons and Traps with perks picked up from floor pickups\n- Weapons from in-game GiftBoxes\n- Ammo/Resources without a tier (Planks, Quartz, Coal, etc.)\n- Items in storage or in other backpacks (e.g. Ventures backpack)\n\nCurrently selected star rating: {0}. You can change it via the config.ini file.\n",
-      "junkcleaner.whattodo": "Type 1 to run it on one account and press ENTER.\nType 2 to run it on all accounts and press ENTER.\nTo go back, leave the input blank and press ENTER.\n",
+      "junkcleaner.message": "Inventory Junk Cleaner:\n\nThis feature helps keep your inventory clean by getting rid of unwanted items. It works by:\n- Recycling and/or destroying weapons and traps in your backpack below the selected Power Level.\n- Destroying ingredients in your backpack below the selected Star Rating (tier).\n\nIt will NOT affect:\n- Ammo/Resources without a tier (Planks, Quartz, Coal, etc.)\n- Items in storage or in other backpacks (e.g. Ventures backpack)\n\nTo protect your existing weapons and traps, the program will take a backpack snapshot on its first run on an account. It will only process new items that match your criteria.\n",
+      "junkcleaner.whattodo": "Type 1 to run it on configured accounts and press ENTER.\nType 2 to manage the configuration and press ENTER.\nTo go back, leave the input blank and press ENTER.\n",
       "junkcleaner.selectaccount": "To select an account, type the number next to its display name and press ENTER.\nTo go back, leave the input blank and press ENTER.",
       "junkcleaner.loopinput": "Do you want this Inventory Junk Cleaner session to loop every X minutes?\nType any number greater than 0 if yes to set the interval in minutes.\nType 0 or a negative number if you want to run it once.\n",
       "junkcleaner.confirmation": "Confirmation: The Inventory Junk Cleaner is about to run on following accounts: {0}.\nSelected items star rating: {1}. Make sure it's correct! It will be irreversible.\nType 1 to start and press ENTER.\nType 2 to cancel and press ENTER.\n",
@@ -55671,10 +55679,6 @@
       "config.setup.recycle.defenders": "Automatycznie odprawiaj obrońców o takiej lub niższej klasie rzadkości.",
       "config.setup.recycle.heroes": "Automatycznie odprawiaj bohaterów o takiej lub niższej klasie rzadkości.",
       "config.setup.bskiptutorial": "Czy chcesz, aby program pomijał misję samouczka w Ratowaniu Świata, jeśli nie została ona jeszcze ukończona na danym koncie? Otrzymasz pakiet muzyczny RŚ.",
-      "config.setup.junkcleaner": "Utrzymuj porządek w swym plecaku poprzez niszczenie i recyklingowanie niechcianych przedmiotów. (Więcej szczegółowych informacji jest dostępnych w menu Inventory Junk Cleaner'a.)",
-      "config.setup.junkcleaner2": "Jeśli wybierzesz 1, program zniszczy 1-gwiazdkowe przedmioty i zrecyklinguje niektóre z niechcianych przemiotów 2-, 3-, 4- i 5-gwiazdkowych.",
-      "config.setup.junkcleaner3": "Jeśli wybierzesz 2, program zniszczy 1- i 2-gwiazdkowe przedmioty, i zrecyklinguje niektóre z przedmiotów 3-, 4- i 5-gwiazdkowych.",
-      "config.setup.junkcleaner4": "I tak dalej. Jeśli Twoje konta są na etapie endgame'u w Twine Peaks'ie i używasz tylko przedmiotów 5-gwiazdkowych, zaleca się ustawić tę opcję na 4.",
       "config.setup.winterfestgifts": "Czy chcesz, aby program odbierał nagrody kosmetyczne z prezentów podczas wydarzenia Festiwalu Zimy?",
       "config.setup.looptime": "Czy chcesz, aby program zapętlał się co każde X minut?",
       "config.setup.looptime2": "Ustaw na 0, aby nie zapętlać programu.",
@@ -55723,7 +55727,7 @@
       "startup.managedailyquests.pressenter": "Wciśnij ENTER, aby kontynuować.\n",
       "mainmenu.merrychristmas": "Wesołych Świąt od PRO100Kąta!\n",
       "mainmenu.happynewyear": "Szczęśliwego nowego roku od PRO100Kąta!\n",
-      "mainmenu.message": "Menu główne:\nWpisz 1, aby uruchomić ten program i wciśnij ENTER.\nWpisz 2, aby przejść do Menadżera Zadań Dnia i wciśnij ENTER.\nWpisz 3, aby przejść do Inventory Junk Cleanera i wciśnij ENTER.\nWpisz 4, aby przejść do Menadżera Kont i wciśnij ENTER.\nWpisz 5, aby zarządzać konfiguracją Item Shop Purchasera i wciśnij ENTER.\nAby zatrzymać program, nic nie wpisuj i wciśnij ENTER.\n",
+      "mainmenu.message": "Menu główne:\nWpisz 1, aby uruchomić ten program i wciśnij ENTER.\nWpisz 2, aby przejść do Menadżera Zadań Dnia i wciśnij ENTER.\nWpisz 3, aby przejść do Inventory Junk Cleanera i wciśnij ENTER.\nWpisz 4, aby przejść do Menadżera Kont i wciśnij ENTER.\nWpisz 5, aby zarządzać Item Shop Purchaserem i wciśnij ENTER.\nAby zatrzymać program, nic nie wpisuj i wciśnij ENTER.\n",
       "accountmanager.message": "Menadżer Kont:\nWpisz 1, aby dodać konto do programu i wciśnij ENTER.\nWpisz 2, aby usunąć konto z programu i wciśnij ENTER.\nWpisz 3, aby zobaczyć listę kont dodanych do programu i wciśnij ENTER.\nAby pójść wstecz, nic nie wpisuj i wciśnij ENTER.\n",
       "accountmanager.pressenter": "Wciśnij ENTER, aby kontynuować.\n",
       "main.auth.tokenexpired": "Refresh token wygasł. Aby to naprawić, usuń {0} z listy kont i dodaj ponownie. Jeśli ten problem będzie się powtarzał, spróbuj zalogować się używając metody uwierzytelnienia \"device\".",
@@ -55747,7 +55751,7 @@
       "main.freellamas.alreadyclaimed": "\nDarmowe Lamy dostępne w sklepie zostały już odebrane na tym koncie. Dodatkowo, jeśli chodzi o darmowe Ulepszlamy z godzinnej rotacji, możesz odebrać maksymalnie 2 na rotację sklepu.\n",
       "main.freellamas.success": "\nPomyślnie otwarto {0} {1}.\n",
       "main.recycle.unavailable": "Recykling przedmiotów jest niedostępny na tym koncie. Ukończ Zadanie \"Obowiązkowy minimalizm\", aby go odblokować.\n",
-      "main.recycle.start": "Recyklingowanie i odprawianie wybranych przedmiotów z {0} {1}...\n",
+      "main.recycle.start": "Recykling i odprawianie wybranych przedmiotów z {0} {1}...\n",
       "main.recycle.message": "Następujące przedmioty zostały pomyślnie zrecyklingowane/odprawione:\n",
       "main.recycle.resources": "Otrzymane zasoby:\n",
       "main.recycle.totalamount": "Łącznie: {0}",
@@ -55782,14 +55786,25 @@
       "itemshop.config.setup.heroloadouts": "Kupować sloty na Zespoły Bohaterów? (Y/n)",
       "itemshop.config.setup.dontspendbelowgold": "I ostatnie pytanie:\nPrzy jakiej ilości złota program ma przestać kupować przedmioty? Wprowadź liczbę. (Domyślnie: 5000)",
       "itemshop.purchased": "Kupiono: {0} | {1}: {2}x {3}",
+      "junkcleaner.config.accountlist": "Lista kont i status konfiguracji Inventory Junk Cleanera:",
+      "junkcleaner.config.noaccounts": "Nie ma żadnych kont dodanych do programu.\n",
+      "junkcleaner.config.set": "✓ Konfiguracja ustawiona",
+      "junkcleaner.config.notset": "✗ Konfiguracja NIE jest ustawiona",
+      "junkcleaner.config.missing": "✗ Konfiguracja niekompletna",
+      "junkcleaner.config.select": "Program będzie uruchamiał część Inventory Junk Cleanera tylko dla kont, obok których widnieje \"✓ Konfiguracja ustawiona\".\nWybierz konto, dla którego chcesz ustawić/zmodyfikować wartości konfiguracji Inventory Junk Cleanera. Albo nic nie wpisuj, aby pójść wstecz:",
+      "junkcleaner.config.setup.info": "",
+      "junkcleaner.config.setup.tier": "Poniżej ilu gwiazdek mają być niszczone surowce? Wprowadź liczbę (2-5). Domyślnie: 5.",
+      "junkcleaner.config.setup.powerlevel": "Poniżej którego poziomu mocy mają być recyklingowane/niszczone bronie i pułapki? Wprowadź liczbę. Domyślnie: 130.",
+      "junkcleaner.snapshot.success": "Zapis stanu plecaka pomyślnie ukończony.\n",
       "junkcleaner.title": "Startowanie Inventory Junk Cleaner'a...",
-      "junkcleaner.message": "Inventory Junk Cleaner:\n\nTa funkcja pomaga zachować porządek w ekwipunku, niszcząc i recyklingując niechciane przedmioty. Działa to poprzez:\n- Niszczenie konkretnych przedmiotów z plecaka o wybranej liczbie gwiazdek lub poniżej niej (pułapki bez profitów, bronie/pułapki z pudełek/zwierząt i surowce danego poziomu).\n- Recyklingowanie konkretnych przedmiotów z plecaka powyżej wybranej liczby gwiazdek (pułapki bez profitów oraz bronie/pułapki z pudełek/zwierząt).\n\nProgram nic NIE robi z:\n- Przedmiotami wytworzonymi przez Ciebie lub innych graczy\n- Brońmi i Pułapkami z profitami, podniesionymi z ziemi\n- Brońmi z prezentów zdobytych podczas misji\n- Amunicją/Zasobami bez poziomu (Deski, Kwarc, Węgiel, itp.)\n- Przedmiotami w magazynie lub innych plecakach (np. w plecaku Wypraw)\n\nAktualnie wybrany poziom gwiazdek: {0}. Możesz go zmienić w pliku config.ini.\n",
-      "junkcleaner.whattodo": "Wpisz 1, aby uruchomić go na jednym koncie i wciśnij ENTER.\nWpisz 2, aby uruchomić go na wszystkich kontach i wciśnij ENTER.\nAby pójść wstecz, nic nie wpisuj i wciśnij ENTER.\n",
+      "junkcleaner.message": "Inventory Junk Cleaner:\n\nTa funkcja pomaga zachować porządek w ekwipunku, pozbywając się niechcianych przedmiotów. Działa to poprzez:\n- Recykling i/lub niszczenie broni i pułapek z plecaka poniżej wybranego poziomu mocy.\n- Niszczenie składników z plecaka poniżej wybranej liczby gwiazdek.\n\nProgram nic NIE robi z:\n- Amunicją/Zasobami bez gwiazdek (Deski, Kwarc, Węgiel, itp.)\n- Przedmiotami w magazynie lub innych plecakach (np. w plecaku Wypraw)\n\nAby chronić twoje dotychczasowe bronie i pułapki, program dokona zapisu stanu plecaka przy pierwszym uruchomieniu na danym koncie. Będzie on przetwarzać tylko nowe przedmioty spełniające twoje kryteria.\n",
+      "junkcleaner.whattodo": "Wpisz 1, aby uruchomić go na skonfigurowanych kontach i wciśnij ENTER.\nWpisz 2, aby zarządzać konfiguracją i wciśnij ENTER.\nAby pójść wstecz, nic nie wpisuj i wciśnij ENTER.\n",
       "junkcleaner.selectaccount": "Aby wybrać konto, wpisz numer znajdujący się przy nicku i wciśnij ENTER.\nAby wrócić, nic nie wpisuj i wciśnij ENTER.",
       "junkcleaner.loopinput": "Czy chcesz, aby ta sesja Inventory Junk Cleaner'a zapętlała się co każde X minut?\nWpisz dowolną liczbę wiekszą od 0, jeśli tak, aby ustawić czas pauzy w minutach.\nWpisz 0 lub liczbę ujemną, jeśli chcesz go uruchomić jeden raz.\n",
       "junkcleaner.confirmation": "Potwierdzenie: Inventory Junk Cleaner uruchomi się na następujących kontach: {0}.\nWybrany poziom gwiazdek: {1}. Upewnij się, że jest on poprawny! Te działanie będzie nieodwracalne.\nWpisz 1, aby rozpocząć i wciśnij ENTER.\nWpisz 2, aby anulować i wciśnij ENTER.\n",
+      "junkcleaner.confirmation": "Potwierdzenie: Inventory Junk Cleaner uruchomi się na następujących kontach: {0}.\nWybrany poziom gwiazdek: {1}. Upewnij się, że jest on poprawny! To działanie będzie nieodwracalne.\nWpisz 1, aby rozpocząć i wciśnij ENTER.\nWpisz 2, aby anulować i wciśnij ENTER.\n",
       "junkcleaner.nothingfound": "Nie znaleziono żadnych przedmiotów do recyklingu lub zniszczenia.",
-      "junkcleaner.recycling": "Recyklingowanie {0} {1} z plecaka...",
+      "junkcleaner.recycling": "Recykling {0} {1} z plecaka...",
       "junkcleaner.destroying": "Niszczenie {0} {1} z plecaka...",
       "junkcleaner.gettinginfo": "Zdobywanie informacji o plecaku...\n",
       "junkcleaner.profilelocked": "Działania na ekwipunku są niedostępne, ponieważ {0} jest w trakcie misji.",
