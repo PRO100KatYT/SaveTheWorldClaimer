@@ -55801,7 +55801,6 @@
       "junkcleaner.whattodo": "Wpisz 1, aby uruchomić go na skonfigurowanych kontach i wciśnij ENTER.\nWpisz 2, aby zarządzać konfiguracją i wciśnij ENTER.\nAby pójść wstecz, nic nie wpisuj i wciśnij ENTER.\n",
       "junkcleaner.selectaccount": "Aby wybrać konto, wpisz numer znajdujący się przy nicku i wciśnij ENTER.\nAby wrócić, nic nie wpisuj i wciśnij ENTER.",
       "junkcleaner.loopinput": "Czy chcesz, aby ta sesja Inventory Junk Cleaner'a zapętlała się co każde X minut?\nWpisz dowolną liczbę wiekszą od 0, jeśli tak, aby ustawić czas pauzy w minutach.\nWpisz 0 lub liczbę ujemną, jeśli chcesz go uruchomić jeden raz.\n",
-      "junkcleaner.confirmation": "Potwierdzenie: Inventory Junk Cleaner uruchomi się na następujących kontach: {0}.\nWybrany poziom gwiazdek: {1}. Upewnij się, że jest on poprawny! Te działanie będzie nieodwracalne.\nWpisz 1, aby rozpocząć i wciśnij ENTER.\nWpisz 2, aby anulować i wciśnij ENTER.\n",
       "junkcleaner.confirmation": "Potwierdzenie: Inventory Junk Cleaner uruchomi się na następujących kontach: {0}.\nWybrany poziom gwiazdek: {1}. Upewnij się, że jest on poprawny! To działanie będzie nieodwracalne.\nWpisz 1, aby rozpocząć i wciśnij ENTER.\nWpisz 2, aby anulować i wciśnij ENTER.\n",
       "junkcleaner.nothingfound": "Nie znaleziono żadnych przedmiotów do recyklingu lub zniszczenia.",
       "junkcleaner.recycling": "Recykling {0} {1} z plecaka...",

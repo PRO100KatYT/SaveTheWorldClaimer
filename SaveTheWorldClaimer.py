@@ -142,6 +142,12 @@ def getPluralWord(string, number):
     else: plural = "other"
     return stringList["Strings"].get(language, stringList["Strings"]["en"])["words"][string].get(plural, stringList["Strings"]["en"]["words"][string]["other"])
 
+# Return the power level of a weapon/trap.
+def getItemPowerLevel(templateId, level):
+    strToCheck = "_" + "_".join(templateId.lower().split("_")[-2:])
+    if not strToCheck in stringList["Item Power Levels"]: return -1
+    return stringList["Item Power Levels"][strToCheck][f"{level}"]
+
 # Error with a custom message.
 def customError(text):
     if bShowDateTime == "true": input(f"{getDateTimeString()} {getString('customerror.message').format(text)}")
@@ -455,8 +461,15 @@ def getDailyQuests(auth):
             questData[item] = {"templateId": templateId, "questNumber": questNumber, "questName": questName, "progress": progressMsg, "rewards": rewardsMsg}
     return questData
 
+def loopSleep(t1, t2):
+    loopMinutes = int(getConfig('Loop_Minutes')) if str(getConfig('Loop_Minutes')).endswith(".0") else getConfig('Loop_Minutes')
+    minutesWord = getPluralWord("minutes", loopMinutes)
+    totalSecondsToSleep = max(1, loopMinutes * 60 - (t2 - t1).total_seconds())
+    print(getString("loop.message").format(loopMinutes, minutesWord, nextrun(totalSecondsToSleep)))
+    time.sleep(totalSecondsToSleep)
+
 class invJunkCleaner:
-    tiers = {1: ["t01"], 2: ["t01", "t02"], 3: ["t01", "t02", "t03"], 4: ["t01", "t02", "t03", "t04"], 5: ["t01", "t02", "t03", "t04", "t05"], "t06": ["t01", "t02", "t03", "t04", "t05", "t06"]};
+    tiers = {1: [], 2: ["t01"], 3: ["t01", "t02"], 4: ["t01", "t02", "t03"], 5: ["t01", "t02", "t03", "t04"], 6: ["t01", "t02", "t03", "t04", "t05"]};
     TIDsToExclude = ["Trap:tid_floor_defender", "Trap:tid_floor_player_jump_pad", "Trap:tid_floor_player_jump_pad_free_direction", "Trap:tid_floor_launchpad_r_t01", "Trap:tid_floor_hoverboard_speed_curve_r_t01", "Trap:tid_floor_hoverboard_speed_r_t01", "Trap:tid_wall_spikes_r_t01", "Trap:ob_trap_floor_spikes"]
 
     def isProfileLocked(theater0):
@@ -466,27 +479,28 @@ class invJunkCleaner:
         secondsDiff = (lockExpirationDate - nowDate).total_seconds()
         return [lockExpirationDate.date() >= nowDate.date(), secondsDiff]
     
+    def makeBackpackSnapshot(theater0):
+        existingItemGUIDS = ",".join([key for key in theater0["items"] if theater0["items"][key]["templateId"].lower().split(":")[0] in ["weapon", "trap"]])
+        perAccountConfig.setOption(theater0["accountId"], ["invJunkCleaner", "backpackSnapshot"], existingItemGUIDS)
+        perAccountConfig.saveFile()
+        print(getString('junkcleaner.snapshot.success'))
+    
     def findItems(theater0):
         itemGUIDsToRecycle, itemGUIDsToDestroy = [[], []]
+        tierConfig = perAccountConfig.readOption(theater0["accountId"], ["invJunkCleaner", "tier"])
+        powerLevelConfig = perAccountConfig.readOption(theater0["accountId"], ["invJunkCleaner", "powerLevel"])
+        backpackSnapshot = perAccountConfig.readOption(theater0["accountId"], ["invJunkCleaner", "backpackSnapshot"]).split(",")
         for key in theater0["items"]:
             templateId, attributes, quantity = [theater0["items"][key]["templateId"], theater0["items"][key]["attributes"], theater0["items"][key]["quantity"]]
-            if templateId.lower().startswith("ingredient:"):
+            itemType = templateId.lower().split(":")[0]
+            if itemType == "ingredient":
                 if templateId in stringList["Items"] and "tier" in stringList["Items"][templateId]:
-                    if stringList["Items"][templateId]["tier"].lower() in invJunkCleaner.tiers[getConfig('Inventory_Junk_Cleaner')]:
+                    if stringList["Items"][templateId]["tier"].lower() in invJunkCleaner.tiers[tierConfig]:
                         itemGUIDsToDestroy.append(key)
-            elif templateId.lower().startswith("trap:"):
-                if (("alterationDefinitions" not in attributes or not attributes["alterationDefinitions"]
-                or "itemSource" in attributes
-                and attributes["itemSource"] in ["EFortPickupSourceTypeFlag::Container", "EFortPickupSourceTypeFlag::AI"])
-                and templateId not in invJunkCleaner.TIDsToExclude):
-                    trapTier = templateId.split("_")[-1].lower()
-                    if trapTier in invJunkCleaner.tiers[getConfig('Inventory_Junk_Cleaner')]: itemGUIDsToDestroy.append(key)
-                    else: itemGUIDsToRecycle.append({"itemId": key, "quantity": quantity})
-            elif templateId.lower().startswith("weapon:"):
-                if "itemSource" in attributes and attributes["itemSource"] in ["EFortPickupSourceTypeFlag::Container", "EFortPickupSourceTypeFlag::AI"]:
-                    weaponTier = templateId.split("_")[-1].lower()
-                    if weaponTier in invJunkCleaner.tiers[getConfig('Inventory_Junk_Cleaner')]: itemGUIDsToDestroy.append(key)
-                    else: itemGUIDsToRecycle.append({"itemId": key, "quantity": quantity})
+            elif (itemType in ["weapon", "trap"] and templateId not in invJunkCleaner.TIDsToExclude
+                  and key not in backpackSnapshot and "level" in attributes):
+                powerLevel = getItemPowerLevel(templateId, attributes["level"])
+                if powerLevel < powerLevelConfig: itemGUIDsToRecycle.append({"itemId": key, "quantity": quantity})
         return [itemGUIDsToRecycle, itemGUIDsToDestroy]
 
     def recycleAndDestroy(auth, itemGUIDsToRecycle, itemGUIDsToDestroy):
@@ -502,14 +516,17 @@ class invJunkCleaner:
             message(getString("junkcleaner.destroying").format(len(itemGUIDsToDestroy), getPluralWord('items', len(itemGUIDsToRecycle))))
             requestText(request("post", links.profileRequest.format(auth.accountId, "DestroyWorldItems", "theater0"), headers=auth.headers, json={"itemIds": itemGUIDsToDestroy}), True)
     
-    def main(selectedAccounts, loopMinutes):
+    def main(selectedAccounts):
         while True:
             t1 = datetime.now()
             for account in selectedAccounts:
+                if not perAccountConfig.bHasAllConfigOptionsSet(account["accountId"], stringList["Config"]["perUserSettings"]["invJunkCleaner"]): continue
                 print()
                 auth = login(account)
                 message(getString("junkcleaner.gettinginfo"))
                 reqGetTheater0 = requestText(request("post", links.profileRequest.format(auth.accountId, "QueryProfile", "theater0"), headers=auth.headers, data="{}"), True)['profileChanges'][0]['profile']
+                if not perAccountConfig.readOption(auth.accountId, ["invJunkCleaner", "backpackSnapshot"]):
+                    invJunkCleaner.makeBackpackSnapshot(reqGetTheater0)
                 isLocked = invJunkCleaner.isProfileLocked(reqGetTheater0)
                 if isLocked[0]: message(getString("junkcleaner.profilelocked").format(auth.displayName))
                 else:
@@ -517,12 +534,8 @@ class invJunkCleaner:
                     invJunkCleaner.recycleAndDestroy(auth, itemGUIDsToRecycle, itemGUIDsToDestroy)
             t2 = datetime.now()
             message(getString("junkcleaner.done"))
-            if loopMinutes <= 0: break
-            else:
-                minutesWord = getPluralWord("minutes", loopMinutes)
-                totalSecondsToSleep = max(1, loopMinutes * 60 - (t2 - t1).total_seconds())
-                message(getString("junkcleaner.loopmessage").format(loopMinutes, minutesWord, nextrun(totalSecondsToSleep)))
-                time.sleep(totalSecondsToSleep)
+            if getConfig('Loop_Minutes') > 0: loopSleep(t1, t2)
+            else: break
 
 class itemShop:
     def getOffersPurchasesQuantities(auth, catalogEntries):
@@ -735,44 +748,34 @@ def menu():
                                 print(getString("startup.managedailyquests.success").format(questData[questToReplace]['questName'], newQuestName))
                                 input(getString("startup.managedailyquests.pressenter"))
             if len(authJson) == 1: break
-    
-    def junkCleaner():
-        while authJson:
-            print(getString("junkcleaner.message").format(getConfig('Inventory_Junk_Cleaner')))
-            selectedAccounts = []
-            whatToDo2 = validInput(getString("junkcleaner.whattodo"), ["", "1", "2"])
-            if whatToDo2 == "1":
-                listAccounts()
-                print(getString("junkcleaner.selectaccount"))
-                accountCountList = list(map(str, range(1, len(authJson) + 1)))
-                accountIndex = validInput("", accountCountList + [""])
-                if not accountIndex: return
-                selectedAccounts = [authJson[int(accountIndex) - 1]]
-            elif whatToDo2 == "2": selectedAccounts = authJson.copy()
-            else: break
-            loopMinutes = float(validInput(getString("junkcleaner.loopinput"), "digit"))
-            loopMinutes = int(loopMinutes) if str(loopMinutes).endswith(".0") else float(loopMinutes)
-            if len(selectedAccounts) > 1:
-                selectedNicknames = [i["displayName"] for i in selectedAccounts]
-                confirmation = validInput(getString("junkcleaner.confirmation").format(', '.join(selectedNicknames), getConfig('Inventory_Junk_Cleaner')), ["1", "2"])
-                if confirmation == "2": break
-            invJunkCleaner.main(selectedAccounts, loopMinutes)
-            input(getString("junkcleaner.pressenter"))
-            break
 
-    def itemShopConfigurator():
+    def perUserConfigurator(strPrefix, configName):
         while authJson:
-            print(getString('itemshop.config.accountlist'))
-            if not authJson: print(getString("itemshop.config.noaccounts"))
+            print(getString(f'{strPrefix}.config.accountlist'))
+            if not authJson: print(getString(f"{configName}.config.noaccounts"))
             else:
-                for account in authJson: print(f"{authJson.index(account) + 1}: {account.get('displayName', getString('startup.listaccounts.noname'))} | {getString('itemshop.config.set') if (account['accountId'] in userConfigJson and perAccountConfig.bHasAllConfigOptionsSet(account['accountId'], stringList['Config']['perUserSettings']['itemShop'])) else (getString('itemshop.config.missing') if (account['accountId'] in userConfigJson and 'itemShop' in userConfigJson[account['accountId']]) else getString('itemshop.config.notset'))}")
-            print(getString('itemshop.config.select'))
+                for account in authJson: print(f"{authJson.index(account) + 1}: {account.get('displayName', getString('startup.listaccounts.noname'))} | {getString(f'{strPrefix}.config.set') if (account['accountId'] in userConfigJson and perAccountConfig.bHasAllConfigOptionsSet(account['accountId'], stringList['Config']['perUserSettings'][configName])) else (getString(f'{strPrefix}.config.missing') if (account['accountId'] in userConfigJson and configName in userConfigJson[account['accountId']]) else getString(f'{strPrefix}.config.notset'))}")
+            print(getString(f'{strPrefix}.config.select'))
             accountCountList = [str(i) for i in range(1, len(authJson) + 1)]
             selectedAccountIndex = validInput("", accountCountList + [""])
             if not selectedAccountIndex: break
-            print(getString('itemshop.config.setup.info'))
-            perAccountConfig.askSetupQuestionsAndSaveFile(authJson[int(selectedAccountIndex) - 1]["accountId"], stringList["Config"]["perUserSettings"]["itemShop"])
+            setupInfoStr = getString(f'{strPrefix}.config.setup.info')
+            if setupInfoStr: print(setupInfoStr)
+            perAccountConfig.askSetupQuestionsAndSaveFile(authJson[int(selectedAccountIndex) - 1]["accountId"], stringList["Config"]["perUserSettings"][configName])
     
+    def junkCleaner():
+        while authJson:
+            print(getString("junkcleaner.message"))
+            selectedAccounts = []
+            whatToDo2 = validInput(getString("junkcleaner.whattodo"), ["", "1", "2"])
+            if whatToDo2 == "1":
+                selectedAccounts = authJson.copy()
+                invJunkCleaner.main(selectedAccounts)
+                input(getString("junkcleaner.pressenter"))
+                break
+            elif whatToDo2 == "2": perUserConfigurator("junkcleaner", "invJunkCleaner")
+            else: break
+
     def getSeasonalGreeting():
         now = datetime.now()
         month, day = now.month, now.day
@@ -797,7 +800,7 @@ def menu():
                     listAccounts()
                     input(getString("accountmanager.pressenter"))
                 else: break
-        elif whatToDo1 == "5": itemShopConfigurator()
+        elif whatToDo1 == "5": perUserConfigurator("itemshop", "itemShop")
         else: sys.exit()
 
 # The main part of the program that can be looped.
@@ -943,12 +946,7 @@ if getConfig('Skip_Main_Menu') != 2:
         t1 = datetime.now()
         main()
         t2 = datetime.now()
-        if getConfig('Loop_Minutes') > 0:
-            loopMinutes = int(getConfig('Loop_Minutes')) if str(getConfig('Loop_Minutes')).endswith(".0") else getConfig('Loop_Minutes')
-            minutesWord = getPluralWord("minutes", loopMinutes)
-            totalSecondsToSleep = max(1, loopMinutes * 60 - (t2 - t1).total_seconds())
-            print(getString("loop.message").format(loopMinutes, minutesWord, nextrun(totalSecondsToSleep)))
-            time.sleep(totalSecondsToSleep)
+        if getConfig('Loop_Minutes') > 0: loopSleep(t1, t2)
         else:
             if getConfig('Skip_Main_Menu'): break
             whatToDo = input(getString("noloop.input"))
@@ -956,6 +954,6 @@ if getConfig('Skip_Main_Menu') != 2:
             menu()
 else:
     message(getString("junkcleaner.title"))
-    invJunkCleaner.main(authJson.copy(), getConfig("Loop_Minutes"))
+    invJunkCleaner.main(authJson.copy())
 
 sys.exit()
