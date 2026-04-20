@@ -144,7 +144,8 @@ def getPluralWord(string, number):
 
 # Return the power level of a weapon/trap.
 def getItemPowerLevel(templateId, level):
-    strToCheck = "_" + "_".join(templateId.lower().split("_")[-2:])
+    templateId = templateId.lower().replace("_crystal", "").replace("_ore", "")
+    strToCheck = "_" + "_".join(templateId.lower().split("_")[-2:]).upper()
     if not strToCheck in stringList["Item Power Levels"]: return -1
     return stringList["Item Power Levels"][strToCheck][f"{level}"]
 
