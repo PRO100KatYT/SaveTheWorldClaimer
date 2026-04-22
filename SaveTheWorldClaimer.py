@@ -471,7 +471,6 @@ def loopSleep(t1, t2):
 
 class invJunkCleaner:
     tiers = {1: [], 2: ["t01"], 3: ["t01", "t02"], 4: ["t01", "t02", "t03"], 5: ["t01", "t02", "t03", "t04"], 6: ["t01", "t02", "t03", "t04", "t05"]};
-    TIDsToExclude = ["Trap:tid_floor_defender", "Trap:tid_floor_player_jump_pad", "Trap:tid_floor_player_jump_pad_free_direction", "Trap:tid_floor_launchpad_r_t01", "Trap:tid_floor_hoverboard_speed_curve_r_t01", "Trap:tid_floor_hoverboard_speed_r_t01", "Trap:tid_wall_spikes_r_t01", "Trap:ob_trap_floor_spikes"]
 
     def isProfileLocked(theater0):
         if not "profileLockExpiration" in theater0: return [False, 0]
@@ -498,8 +497,7 @@ class invJunkCleaner:
                 if templateId in stringList["Items"] and "tier" in stringList["Items"][templateId]:
                     if stringList["Items"][templateId]["tier"].lower() in invJunkCleaner.tiers[tierConfig]:
                         itemGUIDsToDestroy.append(key)
-            elif (itemType in ["weapon", "trap"] and templateId not in invJunkCleaner.TIDsToExclude
-                  and key not in backpackSnapshot and "level" in attributes):
+            elif (itemType in ["weapon", "trap"] and key not in backpackSnapshot and "level" in attributes):
                 powerLevel = getItemPowerLevel(templateId, attributes["level"])
                 if powerLevel < powerLevelConfig: itemGUIDsToRecycle.append({"itemId": key, "quantity": quantity})
         return [itemGUIDsToRecycle, itemGUIDsToDestroy]
