@@ -21,7 +21,6 @@ This Fortnite: Save the World tool allows you to open free Llamas, claim and rep
 - 🦙 **Free Llamas Claiming** - open free llamas and automatically recycle their loot (configurable).
 - 🛒 **STW Item Shop Purchaser** - auto-buy chosen items from the Event and Weekly store for Gold.
 - 🧹 **Inventory Junk Cleaner** - automatically destroy or recycle unwanted backpack items after missions.
-- 🎓 **Tutorial Mission Skipping** - unlock the Save the World music pack even if you don't own STW.
 - 🎁 **Winterfest Presents** - claim available presents during the BR Winterfest event.
 - 👥 **Multiple account support** - log in with refresh token or device auth.
 - 💬 **Discord Webhook Integration** - receive program's messages directly on your Discord server channel.

@@ -54854,21 +54854,6 @@
       {
         "extraComments": [],
         "settingComments": [
-          "config.setup.bskiptutorial"
-        ],
-        "settingName": "Skip_Tutorial",
-        "settingType": "bool",
-        "validValues": [
-          true,
-          false
-        ],
-        "defaultValue": "false",
-        "bSkipInSetup": false,
-        "skipInSetupIf": {}
-      },
-      {
-        "extraComments": [],
-        "settingComments": [
           "config.setup.winterfestgifts"
         ],
         "settingName": "Claim_Winterfest_Presents",
@@ -55486,7 +55471,6 @@
       "config.setup.recycle.survivors": "Automatically retire Survivors from opened llamas at this rarity or below.",
       "config.setup.recycle.defenders": "Automatically retire Defenders from opened llamas at this rarity or below.",
       "config.setup.recycle.heroes": "Automatically retire Heroes from opened llamas at this rarity or below.",
-      "config.setup.bskiptutorial": "Do you want the program to skip the Save the World tutorial mission if it hasn't been completed on an account yet? You'll receive the StW music pack.",
       "config.setup.winterfestgifts": "Do you want the program to claim cosmetic rewards from presents during the Winterfest event?",
       "config.setup.looptime": "Do you want the program to loop itself every X minutes?",
       "config.setup.looptime2": "Set this to 0 to not loop the program.",
@@ -55543,9 +55527,6 @@
       "main.login.start": "Logging in as {0}...",
       "main.login.token.error": "The refresh token is invalid. To fix this issue, remove {0} from this program and add this account back. If this problem persists try to log in using the device auth type.",
       "main.login.success": "Successfully logged in.\n",
-      "main.skiptutorial.start": "{0} didn't complete the StW tutorial mission yet. Skipping the tutorial...\n",
-      "main.skiptutorial.success": "Successfully skipped {0}'s Save the World tutorial mission.\n",
-      "main.skiptutorial.error": "Something went wrong and the program wasn't able to skip {0}'s Save the World tutorial mission.\n",
       "main.winterfest.claimed": "Claimed the Winterfest event present {0} of {1}.\nLoot:",
       "main.dailies.unavailable": "Daily Quests are unavailable on this account. Complete the \"Homebase Storm Shield Defense 3\" Quest in order to unlock them.\n",
       "main.dailies.searching": "Searching for active daily challenges...\n",
@@ -55678,7 +55659,6 @@
       "config.setup.recycle.survivors": "Automatycznie odprawiaj ocaleńców o takiej lub niższej klasie rzadkości.",
       "config.setup.recycle.defenders": "Automatycznie odprawiaj obrońców o takiej lub niższej klasie rzadkości.",
       "config.setup.recycle.heroes": "Automatycznie odprawiaj bohaterów o takiej lub niższej klasie rzadkości.",
-      "config.setup.bskiptutorial": "Czy chcesz, aby program pomijał misję samouczka w Ratowaniu Świata, jeśli nie została ona jeszcze ukończona na danym koncie? Otrzymasz pakiet muzyczny RŚ.",
       "config.setup.winterfestgifts": "Czy chcesz, aby program odbierał nagrody kosmetyczne z prezentów podczas wydarzenia Festiwalu Zimy?",
       "config.setup.looptime": "Czy chcesz, aby program zapętlał się co każde X minut?",
       "config.setup.looptime2": "Ustaw na 0, aby nie zapętlać programu.",
@@ -55735,9 +55715,6 @@
       "main.login.start": "Logowanie jako {0}...",
       "main.login.token.error": "Refresh token jest nieprawidłowy. Aby to naprawić, usuń {0} z listy kont i dodaj ponownie. Jeśli ten problem będzie się powtarzał, spróbuj zalogować się używając metody uwierzytelnienia \"device\".",
       "main.login.success": "Zalogowano pomyślnie.\n",
-      "main.skiptutorial.start": "{0} nie ma jeszcze ukończonego samouczka RŚ. Pomijanie samouczka...\n",
-      "main.skiptutorial.success": "Pomyślnie pominięto misję samouczka RŚ na koncie dla {0}.\n",
-      "main.skiptutorial.error": "Coś poszło nie tak i program nie mógł pominąć misji samouczka RŚ na koncie {0}.\n",
       "main.winterfest.claimed": "Odebrano prezent nr {0} z {1} z wydarzenia Festiwalu Zimy.\nŁup:",
       "main.dailies.unavailable": "Zadania dnia są niedostępne na tym koncie. Ukończ Zadanie \"Baza główna – obrona burzowej tarczy 3\", aby je odblokować.\n",
       "main.dailies.searching": "Poszukiwanie aktywnych zadań dnia...\n",

@@ -807,18 +807,6 @@ def main():
     for account in authJson:
         auth = login(account)
         
-        # Skip the StW tutorial if it hasn't been completed yet. Works for accounts that don't own StW too. It will get the account the StW music pack.
-        if getConfig('Skip_Tutorial'):
-            for item in auth.campaignProfile['items']:
-                if auth.campaignProfile['items'][item]['templateId'].lower() != "quest:homebaseonboarding": continue
-                if auth.campaignProfile['items'][item]['attributes']['quest_state'].lower() == "claimed": break
-                message(getString("main.skiptutorial.start").format(auth.displayName))
-                request("post", links.profileRequest.format(auth.accountId, "SkipTutorial", "campaign"), headers=auth.headers, data="{}")
-                reqUpdateObjectives = requestText(request("post", links.profileRequest.format(auth.accountId, "UpdateQuestClientObjectives", "campaign"), headers=auth.headers, json={"advance": [{"statName": "hbonboarding_watchsatellitecine", "count": 1, "timestampOffset": 0}]}), True)
-                if reqUpdateObjectives['profileChanges'][0]['profile']['items'][item]['attributes']['quest_state'].lower() == "claimed": message(getString("main.skiptutorial.success").format(auth.displayName))
-                else: message(getString("main.skiptutorial.error").format(auth.displayName))
-                break
-        
         # Claim a BR Winterfest event present if available.
         if auth.winterfestRewardGraphID and getConfig('Claim_Winterfest_Presents'):
             rewardGraphItem = auth.athenaProfile["items"][auth.winterfestRewardGraphID]["attributes"]
