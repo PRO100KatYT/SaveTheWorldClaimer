@@ -408,10 +408,7 @@ class login:
         # Check whether the account has the campaign access token and if it's able to receive V-Bucks.
         reqQueryProfiles = [json.dumps(requestText(request("post", links.profileRequest.format(accountId, "QueryProfile", "common_core"), headers=headers, data="{}"), False)), json.dumps(requestText(request("post", links.profileRequest.format(accountId, "ClientQuestLogin", "campaign"), headers=headers, data="{}"), False)), json.dumps(requestText(request("post", links.profileRequest.format(accountId, "ClientQuestLogin", "athena"), headers=headers, data="{}"), False))]
         commonCoreProfile, campaignProfile, athenaProfile = json.loads(reqQueryProfiles[0])["profileChanges"][0]["profile"], json.loads(reqQueryProfiles[1])["profileChanges"][0]["profile"], json.loads(reqQueryProfiles[2])["profileChanges"][0]["profile"]
-        bReceiveMTX = False
-        bHasCampaignAccess = False
-        if "Token:receivemtxcurrency" in reqQueryProfiles[1]: bReceiveMTX = True
-        if "Token:campaignaccess" in reqQueryProfiles[0]: bHasCampaignAccess = True
+        bReceiveMTX = "Token:receivemtxcurrency" in reqQueryProfiles[1]
 
         ssd3QuestGUID, bRecyclingUnlocked = "", False
         for id in campaignProfile["items"]:
@@ -430,7 +427,7 @@ class login:
         # Check whether the account has the BR Winterfest Reward Graph item.
         winterfestRewardGraphID = next((id for id in athenaProfile["items"] if athenaProfile["items"][id]["templateId"].lower() == winterfest.rewardGraphId.lower()), "")
 
-        self.headers, self.accountId, self.displayName, self.commonCoreProfile, self.campaignProfile, self.athenaProfile, self.bHasCampaignAccess, self.bReceiveMTX, self.bDailyQuestsUnlocked, self.bRecyclingUnlocked, self.winterfestRewardGraphID = headers, accountId, displayName, commonCoreProfile, campaignProfile, athenaProfile, bHasCampaignAccess, bReceiveMTX, bDailyQuestsUnlocked, bRecyclingUnlocked, winterfestRewardGraphID
+        self.headers, self.accountId, self.displayName, self.commonCoreProfile, self.campaignProfile, self.athenaProfile, self.bReceiveMTX, self.bDailyQuestsUnlocked, self.bRecyclingUnlocked, self.winterfestRewardGraphID = headers, accountId, displayName, commonCoreProfile, campaignProfile, athenaProfile, bReceiveMTX, bDailyQuestsUnlocked, bRecyclingUnlocked, winterfestRewardGraphID
 
 # Get an account's Daily Quests
 def getDailyQuests(auth):
