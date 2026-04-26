@@ -20,15 +20,21 @@ jobs:
       - run: pip install nuitka requests
       - run: |
           python -m nuitka --assume-yes-for-downloads --standalone --include-data-files=stringlist.json=stringlist.json --windows-icon-from-ico=icons/penny.ico --output-dir=build_nuitka SaveTheWorldClaimer.py
+      - run: Compress-Archive -Path "build_nuitka\SaveTheWorldClaimer.dist\*" -DestinationPath SaveTheWorldClaimer-Windows-Portable.zip
+      - name: Upload Windows Portable
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-portable
+          path: SaveTheWorldClaimer-Windows-Portable.zip
       - uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
         with:
           path: installer/setup.iss
-          options: /O"installer_output" /F"SaveTheWorldClaimer_Setup_x64"
+          options: /O"installer_output" /F"SaveTheWorldClaimer-Windows-Installer"
       - name: Upload Windows Installer
         uses: actions/upload-artifact@v4
         with:
           name: windows-installer
-          path: installer_output/SaveTheWorldClaimer_Setup_x64.exe
+          path: installer_output/SaveTheWorldClaimer-Windows-Installer.exe
 
   build-linux:
     runs-on: ubuntu-latest
