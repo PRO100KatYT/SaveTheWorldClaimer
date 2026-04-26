@@ -1,6 +1,6 @@
-versionNum = 42
-versionStr = "1.15.3"
-configVersion = "1.15.0"
+versionNum = 43
+versionStr = "1.16.0"
+configVersion = "1.16.0"
 print(f"Save the World Claimer v{versionStr} by PRO100KatYT\n")
 
 # Save the World Claimer
