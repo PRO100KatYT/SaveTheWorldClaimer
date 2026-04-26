@@ -28,6 +28,7 @@ from datetime import datetime, timedelta, timezone
 import webbrowser
 import time
 import shutil
+import argparse
 from threading import Thread
 if os.name == "nt": os.system("title Save the World Claimer")
 else: print("\033]0;Save the World Claimer\007", end='', flush=True) # This is for window title for Linux and macOS.
@@ -74,12 +75,21 @@ def getBasePath(bGetExePath = True):
         baseDir = os.path.abspath(os.path.join(baseDir, "../../.."))
     return baseDir
 
+# Set and get launch arguments.
+parser = argparse.ArgumentParser(description="Fortnite STW Claimer for free Llamas, manager for your Daily Quests, Backpack items, and more.", add_help=False)
+parser.add_argument("-h", "--help", action="help", default=argparse.SUPPRESS, help="Shows this help message and exits the program.")
+parser.add_argument("-l", "--loop", type=float, default=0.0, metavar="<minutes>", help="Makes the program loop every X minutes.")
+parser.add_argument("-sc", "--skip-to-claimer", action="store_true", help="Makes the program skip the Main Menu and go straight to the main program execution.")
+parser.add_argument("-si", "--skip-to-invcleaner", action="store_true", help="Makes the program skip the Main Menu and go straight to the Inventory Junk Cleaner execution.")
+parser.add_argument("-dssl", "--disable-ssl", action="store_true", help="Turns off SSL certificate verification after an error. Use this option at your own risk and only when really needed!")
+args = parser.parse_args()
+
 # Start a new requests session.
 session = requests.Session()
 
 # Send requests and retry if something goes wrong.
 sendRequestErrorMsg = "An error occured when trying to send a \"{0}\" request to {1}.{2} Make sure you have a stable internet connection.\nRetrying in {3}s...\n" # It will later be overriden by the one from stringlist.json
-bDisableSSLAfterError = False
+bDisableSSLAfterError = args.disable_ssl
 def request(method, url, headers=None, data=None, json=None):
     global sendRequestErrorMsg, bDisableSSLAfterError
     retries, secondsToWait = [0, 5]
@@ -289,7 +299,7 @@ def getConfig(settingName):
         return rawValue
     except Exception as e: customError(getString("config.getconfigerror").format(settingName, e))
 
-bShowDateTime, webhookUrl, language, bDisableSSLAfterError = [getConfig('Show_Date_Time'), getConfig('Discord_Webhook_URL'), getConfig('Language'), getConfig('Disable_SSL')]
+bShowDateTime, webhookUrl, language = [getConfig('Show_Date_Time'), getConfig('Discord_Webhook_URL'), getConfig('Language')]
 try: autoRecycling.itemRarities = {"weapon": autoRecycling.rarities[getConfig('Recycle_Weapons').lower()].split(", "), "trap": autoRecycling.rarities[getConfig('Recycle_Traps').lower()].split(", "), "survivor": autoRecycling.rarities[getConfig('Retire_Survivors').lower()].split(", "), "defender": autoRecycling.rarities[getConfig('Retire_Defenders').lower()].split(", "), "hero": autoRecycling.rarities[getConfig('Retire_Heroes').lower()].split(", ")}
 except: customError(getString("config.readerror"))
 bRecycle = False
@@ -460,7 +470,7 @@ def getDailyQuests(auth):
     return questData
 
 def loopSleep(t1, t2):
-    loopMinutes = int(getConfig('Loop_Minutes')) if str(getConfig('Loop_Minutes')).endswith(".0") else getConfig('Loop_Minutes')
+    loopMinutes = int(args.loop) if str(args.loop).endswith(".0") else args.loop
     minutesWord = getPluralWord("minutes", loopMinutes)
     totalSecondsToSleep = max(1, loopMinutes * 60 - (t2 - t1).total_seconds())
     print(getString("loop.message").format(loopMinutes, minutesWord, nextrun(totalSecondsToSleep)))
@@ -530,7 +540,7 @@ class invJunkCleaner:
                     invJunkCleaner.recycleAndDestroy(auth, itemGUIDsToRecycle, itemGUIDsToDestroy)
             t2 = datetime.now()
             message(getString("junkcleaner.done"))
-            if getConfig('Loop_Minutes') > 0: loopSleep(t1, t2)
+            if args.loop > 0: loopSleep(t1, t2)
             else: break
 
 class itemShop:
@@ -924,15 +934,15 @@ def main():
 
 # Start the program.
 if getConfig('Check_For_Updates'): checkUpdate()
-if not getConfig('Skip_Main_Menu'): menu()
-if getConfig('Skip_Main_Menu') != 2:
+if not args.skip_to_claimer and not args.skip_to_invcleaner: menu()
+if not args.skip_to_invcleaner:
     while True:
         t1 = datetime.now()
         main()
         t2 = datetime.now()
-        if getConfig('Loop_Minutes') > 0: loopSleep(t1, t2)
+        if args.loop > 0: loopSleep(t1, t2)
         else:
-            if getConfig('Skip_Main_Menu'): break
+            if args.skip_to_claimer: break
             whatToDo = input(getString("noloop.input"))
             if not whatToDo: break
             menu()

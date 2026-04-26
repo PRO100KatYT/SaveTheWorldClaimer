@@ -54869,19 +54869,6 @@
       {
         "extraComments": [],
         "settingComments": [
-          "config.setup.looptime",
-          "config.setup.looptime2"
-        ],
-        "settingName": "Loop_Minutes",
-        "settingType": "float",
-        "validValues": "config.setup.looptime.values",
-        "defaultValue": 0,
-        "bSkipInSetup": false,
-        "skipInSetupIf": {}
-      },
-      {
-        "extraComments": [],
-        "settingComments": [
           "config.setup.datetime"
         ],
         "settingName": "Show_Date_Time",
@@ -54918,41 +54905,6 @@
         "settingType": "string",
         "validValues": "config.setup.dcwebhook.values",
         "defaultValue": "",
-        "bSkipInSetup": true,
-        "skipInSetupIf": {}
-      },
-      {
-        "extraComments": [],
-        "settingComments": [
-          "config.setup.skipmenu",
-          "config.setup.skipmenu2",
-          "config.setup.skipmenu3"
-        ],
-        "settingName": "Skip_Main_Menu",
-        "settingType": "int",
-        "validValues": [
-          0,
-          1,
-          2
-        ],
-        "defaultValue": 0,
-        "bSkipInSetup": true,
-        "skipInSetupIf": {}
-      },
-      {
-        "extraComments": [],
-        "settingComments": [
-          "config.setup.disablessl",
-          "config.setup.disablessl2",
-          "config.setup.disablessl3"
-        ],
-        "settingName": "Disable_SSL",
-        "settingType": "bool",
-        "validValues": [
-          true,
-          false
-        ],
-        "defaultValue": "false",
         "bSkipInSetup": true,
         "skipInSetupIf": {}
       }
@@ -55472,19 +55424,10 @@
       "config.setup.recycle.defenders": "Automatically retire Defenders from opened llamas at this rarity or below.",
       "config.setup.recycle.heroes": "Automatically retire Heroes from opened llamas at this rarity or below.",
       "config.setup.winterfestgifts": "Do you want the program to claim cosmetic rewards from presents during the Winterfest event?",
-      "config.setup.looptime": "Do you want the program to loop itself every X minutes?",
-      "config.setup.looptime2": "Set this to 0 to not loop the program.",
-      "config.setup.looptime.values": "any number (1, 5.5, 15, 60, etc.).",
       "config.setup.datetime": "Do you want the program to show the date and time when sending messages?",
       "config.setup.checkupdates": "Do you want the program to check for updates on startup?",
       "config.setup.dcwebhook": "Do you want the program to send its messages to a text channel in your Discord server?",
       "config.setup.dcwebhook.values": "a webhook url or leave empty to disable.",
-      "config.setup.skipmenu": "Do you want the program to skip the Main Menu?",
-      "config.setup.skipmenu2": "To skip to the main program, set this to 1. To skip to Inventory Junk Cleaner (it will run on all added accounts straight away), set this to 2.",
-      "config.setup.skipmenu3": "If you'll have an issue with an account or want to use other program's features, you can switch it back to 0 in the config file.",
-      "config.setup.disablessl": "Do you want the program to turn off SSL certificate verification",
-      "config.setup.disablessl2": "after an SSL error occurs (for example, while using packet sniffers)?",
-      "config.setup.disablessl3": "NOTE: Use this option at your own risk and only when really needed!",
       "config.setup.dontchange": "Do not change anything below.",
       "config.setup.success": "The config.ini file was generated successfully. For more options, take a look inside this file.\n",
       "config.readerror": "The program is unable to read the config.ini file. Delete the config.ini file and run this program again to generate a new one.",
@@ -55660,19 +55603,10 @@
       "config.setup.recycle.defenders": "Automatycznie odprawiaj obrońców o takiej lub niższej klasie rzadkości.",
       "config.setup.recycle.heroes": "Automatycznie odprawiaj bohaterów o takiej lub niższej klasie rzadkości.",
       "config.setup.winterfestgifts": "Czy chcesz, aby program odbierał nagrody kosmetyczne z prezentów podczas wydarzenia Festiwalu Zimy?",
-      "config.setup.looptime": "Czy chcesz, aby program zapętlał się co każde X minut?",
-      "config.setup.looptime2": "Ustaw na 0, aby nie zapętlać programu.",
-      "config.setup.looptime.values": "dowolna liczba (1, 5.5, 15, 60, itd.).",
       "config.setup.datetime": "Czy chcesz, aby program wyświetlał datę i godzinę przy wysyłaniu wiadomości?",
       "config.setup.checkupdates": "Czy chcesz, aby program sprawdzał dostępność aktualizacji po uruchomieniu?",
       "config.setup.dcwebhook": "Czy chcesz, aby program wysyłał wiadomości na kanał na Twoim serwerze Discord?",
       "config.setup.dcwebhook.values": "url webhooka lub zostaw puste, aby wyłączyć.",
-      "config.setup.skipmenu": "Czy chcesz, aby program pomijał Menu Główne?",
-      "config.setup.skipmenu2": "Aby pominąć do głównego programu, ustaw to na 1. Aby pominąć do Inventory Junk Cleaner'a (uruchomi się na wszystkich dodanych kontach), ustaw to na 2.",
-      "config.setup.skipmenu3": "Jeśli będzieta mieć jakiś problem lub chcieli skorzystać z innych funkcji programu, można będzie zmienić to z powrotem na 0 w pliku config.",
-      "config.setup.disablessl": "Czy program ma wyłączyć weryfikację certyfikatu SSL",
-      "config.setup.disablessl2": "po wystąpieniu błędu (np. podczas korzystania ze snifferów pakietów)?",
-      "config.setup.disablessl3": "UWAGA: Używaj tej opcji na własne ryzyko i tylko gdy to konieczne!",
       "config.setup.dontchange": "Niczego poniżej nie zmieniaj.",
       "config.setup.success": "Plik conifg.ini został wygenerowany pomyślnie. Po więcej opcji, zajrzyj do niego.\n",
       "config.readerror": "Program nie może odczytać pliku config.ini. Usuń plik config.ini i uruchom program ponownie, aby wygenerować nowy.",
