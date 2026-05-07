@@ -545,6 +545,11 @@ class invJunkCleaner:
 
 class itemShop:
     def getOffersPurchasesQuantities(auth, catalogEntries):
+        limitsJson = {
+            "daily": 1,
+            "weekly": 7,
+            "monthly": 30
+        }
         countJson = {}
         for catalogEntry in catalogEntries: countJson[catalogEntry["offerId"]] = 0
         for key in auth.commonCoreProfile["items"]:
@@ -554,8 +559,13 @@ class itemShop:
             for offerId2 in attributes["event_purchases"]:
                 if offerId2 in countJson: countJson[offerId2] += attributes["event_purchases"][offerId2]
         profileAttributes = auth.commonCoreProfile["stats"]["attributes"]
-        for limitType in ["daily", "weekly", "monthly"]:
+        for limitType in limitsJson:
             if not f"{limitType}_purchases" in profileAttributes: continue
+            if not "lastInterval" in profileAttributes[f"{limitType}_purchases"]: continue
+            lastInterval = profileAttributes[f"{limitType}_purchases"]["lastInterval"]
+            lastIntervalDate = datetime.fromisoformat(lastInterval.replace("Z", "+00:00"))
+            currentTime = datetime.now(timezone.utc)
+            if currentTime >= lastIntervalDate + timedelta(days=limitsJson[limitType]): continue 
             if not "purchaseList" in profileAttributes[f"{limitType}_purchases"]: continue
             for offerId2 in profileAttributes[f"{limitType}_purchases"]["purchaseList"]:
                 if offerId2 in countJson: countJson[offerId2] += profileAttributes[f"{limitType}_purchases"]["purchaseList"][offerId2]
