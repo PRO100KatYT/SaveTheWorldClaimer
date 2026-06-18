@@ -55324,10 +55324,32 @@
             true,
             false
           ],
-          "defaultValue": true,
+          "defaultValue": false,
           "eligibleShopItems": {
             "templateIds": [
               "CampaignHeroLoadout:purchaseabledefaultloadout"
+            ]
+          }
+        },
+        {
+          "question": "itemshop.config.setup.superchargers",
+          "optionPath": [
+            "itemShop",
+            "evolutionMaterials",
+            "superchargers"
+          ],
+          "settingType": "bool",
+          "validValues": [
+            true,
+            false
+          ],
+          "defaultValue": false,
+          "eligibleShopItems": {
+            "templateIds": [
+              "AccountResource:reagent_promotion_weapons",
+              "AccountResource:reagent_promotion_heroes",
+              "AccountResource:reagent_promotion_traps",
+              "AccountResource:reagent_promotion_survivors"
             ]
           }
         },
@@ -55516,6 +55538,7 @@
       "itemshop.config.setup.legendarydefenders": "Purchase Legendary Defenders? (Y/n)",
       "itemshop.config.setup.armoryslots": "Purchase Armory Slots? (Y/n)",
       "itemshop.config.setup.heroloadouts": "Purchase Hero Loadout Slots? (Y/n)",
+      "itemshop.config.setup.superchargers": "Purchase Superchargers? (Y/n)",
       "itemshop.config.setup.dontspendbelowgold": "And last question:\nAt what gold amount should the program stop buying items? Input an integer (Default: 5000)",
       "itemshop.purchased": "Purchased: {0} | {1}: {2}x {3}",
       "junkcleaner.config.accountlist": "Account list and Inventory Junk Cleaner config status:",
@@ -55695,6 +55718,7 @@
       "itemshop.config.setup.legendarydefenders": "Kupować Legendarnych Obrońców? (Y/n)",
       "itemshop.config.setup.armoryslots": "Kupować Pola w zbrojowni? (Y/n)",
       "itemshop.config.setup.heroloadouts": "Kupować sloty na Zespoły Bohaterów? (Y/n)",
+      "itemshop.config.setup.superchargers": "Kupować Superdoładowania? (Y/n)",
       "itemshop.config.setup.dontspendbelowgold": "I ostatnie pytanie:\nPrzy jakiej ilości złota program ma przestać kupować przedmioty? Wprowadź liczbę. (Domyślnie: 5000)",
       "itemshop.purchased": "Kupiono: {0} | {1}: {2}x {3}",
       "junkcleaner.config.accountlist": "Lista kont i status konfiguracji Inventory Junk Cleanera:",
