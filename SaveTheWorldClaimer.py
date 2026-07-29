@@ -499,13 +499,13 @@ class invJunkCleaner:
         backpackSnapshot = perAccountConfig.readOption(theater0["accountId"], ["invJunkCleaner", "backpackSnapshot"]).split(",")
         for key in theater0["items"]:
             templateId, attributes, quantity = [theater0["items"][key]["templateId"], theater0["items"][key]["attributes"], theater0["items"][key]["quantity"]]
-            itemType = templateId.lower().split(":")[0]
+            itemType, itemId = templateId.lower().split(":")
             if itemType == "ingredient":
                 if templateId in stringList["Items"] and "tier" in stringList["Items"][templateId]:
                     if stringList["Items"][templateId]["tier"].lower() in invJunkCleaner.tiers[tierConfig]:
                         itemGUIDsToDestroy.append(key)
-            elif (itemType in ["weapon", "trap"] and key not in backpackSnapshot and "level" in attributes):
-                powerLevel = getItemPowerLevel(templateId, attributes["level"])
+            elif (itemType in ["weapon", "trap"] and key not in backpackSnapshot and (not itemId.startswith("buildingitemdata"))):
+                powerLevel = getItemPowerLevel(templateId, attributes.get("level", 1))
                 if powerLevel < powerLevelConfig: itemGUIDsToRecycle.append({"itemId": key, "quantity": quantity})
         return [itemGUIDsToRecycle, itemGUIDsToDestroy]
 
