@@ -114,9 +114,9 @@ Feel free to [open an issue](https://github.com/PRO100KatYT/SaveTheWorldClaimer/
 
 <a href="https://www.star-history.com/?repos=PRO100KatYT%2FSaveTheWorldClaimer&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=PRO100KatYT/SaveTheWorldClaimer&type=date&theme=dark&legend=top-left&sealed_token=6VaQaHDhSOMlwkIly_fbkRqAxUNFAbaEwcvac87_jWzaOv-t_xOUMbM9eVzEs5vn8UYzaACzNmzWgMnwtOBx7b6Qx01C02KC7hjTPwgk-ksxJFe8r3q74n8BGVg9ghB8IrIMpaikacNIMUDuPuFEbZNPeROqg4KtU9_qlSfDVpoj7uMFIaz_J5qlDa5J" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=PRO100KatYT/SaveTheWorldClaimer&type=date&legend=top-left&sealed_token=6VaQaHDhSOMlwkIly_fbkRqAxUNFAbaEwcvac87_jWzaOv-t_xOUMbM9eVzEs5vn8UYzaACzNmzWgMnwtOBx7b6Qx01C02KC7hjTPwgk-ksxJFe8r3q74n8BGVg9ghB8IrIMpaikacNIMUDuPuFEbZNPeROqg4KtU9_qlSfDVpoj7uMFIaz_J5qlDa5J" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=PRO100KatYT/SaveTheWorldClaimer&type=date&legend=top-left&sealed_token=6VaQaHDhSOMlwkIly_fbkRqAxUNFAbaEwcvac87_jWzaOv-t_xOUMbM9eVzEs5vn8UYzaACzNmzWgMnwtOBx7b6Qx01C02KC7hjTPwgk-ksxJFe8r3q74n8BGVg9ghB8IrIMpaikacNIMUDuPuFEbZNPeROqg4KtU9_qlSfDVpoj7uMFIaz_J5qlDa5J" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=PRO100KatYT/SaveTheWorldClaimer&type=date&theme=dark&legend=top-left&sealed_token=tyzic29ItXKDNnRlqrqPGbT_0DKUN5EYVwDWcIjulkcrEeJm_CclJzbrZo0TuVCyUXRNOo4RNhrVNl2D88oKrexlzCyVf49roQH9K-9oAFvlp2SqiLSSVA" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=PRO100KatYT/SaveTheWorldClaimer&type=date&legend=top-left&sealed_token=tyzic29ItXKDNnRlqrqPGbT_0DKUN5EYVwDWcIjulkcrEeJm_CclJzbrZo0TuVCyUXRNOo4RNhrVNl2D88oKrexlzCyVf49roQH9K-9oAFvlp2SqiLSSVA" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=PRO100KatYT/SaveTheWorldClaimer&type=date&legend=top-left&sealed_token=tyzic29ItXKDNnRlqrqPGbT_0DKUN5EYVwDWcIjulkcrEeJm_CclJzbrZo0TuVCyUXRNOo4RNhrVNl2D88oKrexlzCyVf49roQH9K-9oAFvlp2SqiLSSVA" />
  </picture>
 </a>
 
