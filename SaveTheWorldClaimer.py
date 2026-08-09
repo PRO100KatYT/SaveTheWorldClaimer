@@ -663,6 +663,10 @@ class itemShop:
             if not itemShop.bCanAffordThisPurchase(auth, purchaseReqBody): continue
             if purchaseReqBody["purchaseQuantity"] <= 0: continue
             reqPurchase = requestText(request("post", links.profileRequest.format(auth.accountId, "PurchaseCatalogEntry", "common_core"), headers=auth.headers, json=purchaseReqBody), True)
+            if purchaseReqBody["currencySubType"]:
+                for key in auth.campaignProfile["items"]:
+                    if auth.campaignProfile["items"][key]["templateId"].lower() == purchaseReqBody["currencySubType"].lower():
+                        auth.campaignProfile["items"][key]["quantity"] -= purchaseReqBody["expectedTotalPrice"]
             bPurchasedSomething = True
             for item in catalogEntry["itemGrants"]:
                 templateId = item["templateId"]
