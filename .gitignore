@@ -7,3 +7,4 @@ SaveTheWorldClaimer.dist/
 SaveTheWorldClaimer.onefile-build/
 installer_output/
 *.exe
+*.pyc
