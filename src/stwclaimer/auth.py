@@ -9,16 +9,16 @@ AUTH_CODE_LINK: str = (
 )
 
 
-def save_auth(auth_json: list) -> None:
+def save_auth(auth_json: list) -> bool:
     try:
         with open(AUTH_PATH, "w") as file:
             json.dump(auth_json, file, indent=2, ensure_ascii=False)
             return True
     except PermissionError:
-        return None
+        return False
 
 
-def read_auth() -> list | None:
+def read_auth() -> list:
     try:
         with open(AUTH_PATH, "r") as file:
             return json.load(file)
@@ -30,3 +30,27 @@ def read_auth() -> list | None:
         save_auth([])
         return []
 
+
+async def add_account(auth_code: str) -> bool:
+    req_token = await api.get_access_token(auth_code)
+    access_token, account_id, display_name = [
+        req_token["access_token"],
+        req_token["account_id"],
+        req_token["displayName"],
+    ]
+
+    req_device = await api.get_device_auth(access_token, account_id)
+    device_id, secret = [req_device["deviceId"], req_device["secret"]]
+
+    auth_json = read_auth()
+    auth_json.append(
+        {
+            "display_name": display_name,
+            "account_id": account_id,
+            "device_id": device_id,
+            "secret": secret,
+        }
+    )
+    save_auth(auth_json)
+
+    return True
