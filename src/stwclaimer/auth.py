@@ -31,15 +31,17 @@ def read_auth() -> list:
         return []
 
 
-async def add_account(auth_code: str) -> bool:
-    req_token = await api.get_access_token(auth_code)
+async def add_account(auth_api: api.AuthAPI, auth_code: str) -> bool:
+    req_token = await auth_api.get_access_token(auth_code)
     access_token, account_id, display_name = [
         req_token["access_token"],
         req_token["account_id"],
         req_token["displayName"],
     ]
 
-    req_device = await api.get_device_auth(access_token, account_id)
+    auth_api.epic.set_access_token(access_token)
+
+    req_device = await auth_api.get_device_auth(account_id)
     device_id, secret = [req_device["deviceId"], req_device["secret"]]
 
     auth_json = read_auth()
