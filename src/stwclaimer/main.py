@@ -1,8 +1,7 @@
 import sys
 import auth
 import asyncio
-from cli import auth_cli
-import menu
+from cli import auth_cli, menu
 import api
 
 
@@ -13,7 +12,9 @@ async def main():
     auth_api = api.AuthAPI(epic_api)
 
     if not auth.read_auth():
-        await auth_cli.ask_for_login(auth_api)
+        await auth_cli.add_account(auth_api)
+
+    await menu.main_menu(epic_api, auth_api)
 
     sys.exit()
 
