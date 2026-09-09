@@ -9,7 +9,7 @@ AUTH_CODE_LINK: str = (
 )
 
 
-def save_auth(auth_json: list) -> bool:
+def save_auth(auth_json: dict) -> bool:
     try:
         with open(AUTH_PATH, "w") as file:
             json.dump(auth_json, file, indent=2, ensure_ascii=False)
@@ -18,20 +18,20 @@ def save_auth(auth_json: list) -> bool:
         return False
 
 
-def read_auth() -> list:
+def read_auth() -> dict:
     try:
         with open(AUTH_PATH, "r") as file:
             return json.load(file)
     except FileNotFoundError:
-        save_auth([])
-        return []
+        save_auth({})
+        return {}
     except json.JSONDecodeError:
         AUTH_PATH.unlink()
-        save_auth([])
-        return []
+        save_auth({})
+        return {}
 
 
-async def add_account(auth_api: api.AuthAPI, auth_code: str) -> bool:
+async def add_account(auth_api: api.AuthAPI, auth_code: str) -> str:
     req_token = await auth_api.get_access_token(auth_code)
     access_token, account_id, display_name = [
         req_token["access_token"],
@@ -45,14 +45,14 @@ async def add_account(auth_api: api.AuthAPI, auth_code: str) -> bool:
     device_id, secret = [req_device["deviceId"], req_device["secret"]]
 
     auth_json = read_auth()
-    auth_json.append(
-        {
-            "display_name": display_name,
-            "account_id": account_id,
-            "device_id": device_id,
-            "secret": secret,
-        }
-    )
+
+    auth_json[account_id] = {
+        "display_name": display_name,
+        "account_id": account_id,
+        "device_id": device_id,
+        "secret": secret,
+    }
+
     save_auth(auth_json)
 
-    return True
+    return display_name
