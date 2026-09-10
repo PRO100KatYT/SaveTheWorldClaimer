@@ -2,6 +2,7 @@ import questionary
 import auth
 import webbrowser
 import api
+from cli import utils_cli
 
 
 async def add_account(auth_api: api.AuthAPI) -> None:
@@ -48,23 +49,14 @@ async def list_accounts(*args) -> None:
 async def remove_account(*args) -> None:
     auth_json = auth.read_auth()
 
-    options = []
-    for account_id, data in auth_json.items():
-        options.append(questionary.Choice(data["display_name"], account_id))
-
-    options.append(questionary.Choice("Back", False, shortcut_key="0"))
-
     while True:
-        choice = await questionary.select(
-            "Select an account to remove:",
-            options,
-            qmark="",
-            pointer=">",
-            use_shortcuts=True,
-            instruction=" ",
-        ).ask_async()
+        options = []
+        for account_id, data in auth_json.items():
+            options.append(questionary.Choice(data["display_name"], account_id))
 
-        if choice is False:
+        choice = await utils_cli.select("Select an account to remove:", options)
+
+        if choice is False or choice is None:
             break
 
         confirmation = await questionary.confirm(
@@ -86,20 +78,12 @@ async def menu(epic_api: api.EpicAPI, auth_api: api.AuthAPI) -> None:
         "Add an account": add_account,
         "List accounts": list_accounts,
         "Remove an account": remove_account,
-        "Back": None,
     }
 
     while True:
-        choice = await questionary.select(
-            "Account Management:",
-            options.keys(),
-            qmark="",
-            pointer=">",
-            use_shortcuts=True,
-            instruction=" ",
-        ).ask_async()
+        choice = await utils_cli.select("Account Management:", options)
 
-        if choice is None or options[choice] is None:
+        if choice is False or choice is None:
             break
         print()
 

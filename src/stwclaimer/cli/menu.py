@@ -1,7 +1,7 @@
 import os
 import sys
 import questionary
-from cli import auth_cli
+from cli import auth_cli, utils_cli
 import api
 
 
@@ -14,23 +14,12 @@ def set_and_display_title() -> None:
 
 
 async def main_menu(epic_api: api.EpicAPI, auth_api: api.AuthAPI) -> None:
-    options = {
-        "Start this program": None,
-        "Manage accounts": auth_cli.menu,
-        "Exit": None,
-    }
+    options = {"Start this program": False, "Manage accounts": auth_cli.menu}
 
     while True:
-        choice = await questionary.select(
-            "Main Menu:",
-            options.keys(),
-            qmark="",
-            pointer=">",
-            use_shortcuts=True,
-            instruction=" ",
-        ).ask_async()
+        choice = await utils_cli.select("Main Menu:", options.keys(), "Exit")
 
-        if choice is None or options[choice] is None:
+        if choice is False or options[choice] is False:
             break
 
         await options[choice](epic_api, auth_api)
