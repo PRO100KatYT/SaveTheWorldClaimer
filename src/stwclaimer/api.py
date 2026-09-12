@@ -32,7 +32,7 @@ class AuthAPI:
     def __init__(self, epic_api: EpicAPI):
         self.epic = epic_api
 
-    async def get_access_token(self, auth_code: str) -> dict:
+    async def get_token_by_code(self, auth_code: str) -> dict:
         req_headers = {
             "Authorization": "basic M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU="
         }
@@ -40,6 +40,28 @@ class AuthAPI:
         json_body = {
             "grant_type": "authorization_code",
             "code": auth_code,
+        }
+
+        response = await self.epic.post(
+            "https://account-public-service-prod.ol.epicgames.com/account/api/oauth/token",
+            headers=req_headers,
+            data=json_body,
+        )
+        return response
+
+    async def get_token_by_device(
+        self, account_id: str, device_id: str, secret: str
+    ) -> dict:
+        req_headers = {
+            "Authorization": "basic M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU="
+        }
+
+        json_body = {
+            "grant_type": "device_auth",
+            "device_id": device_id,
+            "account_id": account_id,
+            "secret": secret,
+            "token_type": "eg1",
         }
 
         response = await self.epic.post(
@@ -91,7 +113,9 @@ class McpAPI:
 
     async def public_request(self, account_id: str, profile_id: str) -> dict:
         if profile_id not in ("campaign", "common_public"):
-            raise ValueError(f"{profile_id} is not allowed for public requests.")
+            raise ValueError(
+                f"{profile_id} profile is not allowed for public requests."
+            )
 
         return await self.epic.post(
             f"https://mcp-gc.live.fngw.ol.epicgames.com/fortnite/api/game/v2/profile/{account_id}/public/QueryPublicProfile",

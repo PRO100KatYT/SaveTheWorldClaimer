@@ -2,6 +2,7 @@ import os
 import sys
 import questionary
 from cli import auth_cli, utils_cli
+from features import claimer
 import api
 
 
@@ -14,7 +15,7 @@ def set_and_display_title() -> None:
 
 
 async def main_menu(epic_api: api.EpicAPI, auth_api: api.AuthAPI) -> None:
-    options = {"Start this program": False, "Manage accounts": auth_cli.menu}
+    options = {"Start this program": claimer.loop, "Manage accounts": auth_cli.menu}
 
     while True:
         choice = await utils_cli.select("Main Menu:", options.keys(), "Exit")

@@ -32,7 +32,7 @@ def read_auth() -> dict:
 
 
 async def add_account(auth_api: api.AuthAPI, auth_code: str) -> str:
-    req_token = await auth_api.get_access_token(auth_code)
+    req_token = await auth_api.get_token_by_code(auth_code)
     access_token, account_id, display_name = [
         req_token["access_token"],
         req_token["account_id"],
@@ -56,3 +56,14 @@ async def add_account(auth_api: api.AuthAPI, auth_code: str) -> str:
     save_auth(auth_json)
 
     return display_name
+
+
+async def login(auth_api: api.AuthAPI, account_id: str, auth_json: dict) -> None:
+    device_id, secret = [
+        auth_json[account_id]["device_id"],
+        auth_json[account_id]["secret"],
+    ]
+
+    req_token = await auth_api.get_token_by_device(account_id, device_id, secret)
+
+    auth_api.epic.set_access_token(req_token["access_token"])
