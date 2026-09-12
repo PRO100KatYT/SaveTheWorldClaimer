@@ -1,5 +1,4 @@
 import httpx
-import asyncio
 from json import JSONDecodeError
 
 
@@ -30,8 +29,8 @@ class EpicAPI:
 
 
 class AuthAPI:
-    def __init__(self, epic: EpicAPI):
-        self.epic = epic
+    def __init__(self, epic_api: EpicAPI):
+        self.epic = epic_api
 
     async def get_access_token(self, auth_code: str) -> dict:
         req_headers = {
@@ -56,3 +55,46 @@ class AuthAPI:
             data={},
         )
         return response
+
+
+class McpAPI:
+    def __init__(self, account_id: str, epic_api: EpicAPI):
+        self.account_id = account_id
+        self.epic = epic_api
+
+    async def client_request(
+        self, operation: str, profile_id: str, json_body: dict = {}
+    ) -> dict:
+        if profile_id not in (
+            "athena",
+            "campaign",
+            "collection_book_people0",
+            "collection_book_schematics0",
+            "collections",
+            "common_core",
+            "common_public",
+            "creative",
+            "metadata",
+            "outpost0",
+            "recycle_bin",
+            "theater0",
+            "theater1",
+            "theater2",
+        ):
+            raise ValueError(f"{profile_id} is not a valid profile.")
+
+        return await self.epic.post(
+            f"https://mcp-gc.live.fngw.ol.epicgames.com/fortnite/api/game/v2/profile/{self.account_id}/client/{operation}",
+            json=json_body,
+            params={"profileId": profile_id},
+        )
+
+    async def public_request(self, account_id: str, profile_id: str) -> dict:
+        if profile_id not in ("campaign", "common_public"):
+            raise ValueError(f"{profile_id} is not allowed for public requests.")
+
+        return await self.epic.post(
+            f"https://mcp-gc.live.fngw.ol.epicgames.com/fortnite/api/game/v2/profile/{account_id}/public/QueryPublicProfile",
+            json={},
+            params={"profileId": profile_id},
+        )
