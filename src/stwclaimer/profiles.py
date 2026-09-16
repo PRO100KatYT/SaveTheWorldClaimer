@@ -10,19 +10,25 @@ class ProfileManager:
         for entry in profile_changes:
             match entry["changeType"]:
                 case "itemAdded":
-                    return
+                    self.cache[profile_id]["items"][entry["itemId"]] = entry["item"]
 
                 case "itemRemoved":
-                    return
+                    del self.cache[profile_id]["items"][entry["itemId"]]
 
                 case "itemAttrChanged":
-                    return
+                    self.cache[profile_id]["items"][entry["itemId"]]["attributes"][
+                        entry["attributeName"]
+                    ] = entry["attributeValue"]
 
                 case "itemQuantityChanged":
-                    return
+                    self.cache[profile_id]["items"][entry["itemId"]]["quantity"] = (
+                        entry["quantity"]
+                    )
 
                 case "statModified":
-                    return
+                    self.cache[profile_id]["stats"]["attributes"][entry["name"]] = (
+                        entry["value"]
+                    )
 
                 case "fullProfileUpdate":
                     self.cache[profile_id] = entry["profile"]
