@@ -114,7 +114,7 @@ class McpAPI:
     async def public_request(self, account_id: str, profile_id: str) -> dict:
         if profile_id not in ("campaign", "common_public"):
             raise ValueError(
-                f"{profile_id} profile is not allowed for public requests."
+                f"{profile_id} profile is not allowed for public profile requests."
             )
 
         return await self.epic.post(
