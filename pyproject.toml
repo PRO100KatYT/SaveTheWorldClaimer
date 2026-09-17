@@ -1,0 +1,8 @@
+[tool.pytest.ini_options]
+addopts = "-ra -q"
+pythonpath = [
+    "src/stwclaimer"
+]
+testpaths = [
+    "tests"
+]
