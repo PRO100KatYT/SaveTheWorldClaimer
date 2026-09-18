@@ -9,25 +9,25 @@ AUTH_CODE_LINK: str = (
 )
 
 
-def save_auth(auth_json: dict) -> bool:
+def save_auth(auth_json: dict, path: Path = AUTH_PATH) -> bool:
     try:
-        with open(AUTH_PATH, "w") as file:
+        with open(path, "w") as file:
             json.dump(auth_json, file, indent=2, ensure_ascii=False)
             return True
     except PermissionError:
         return False
 
 
-def read_auth() -> dict:
+def read_auth(path: Path = AUTH_PATH) -> dict:
     try:
-        with open(AUTH_PATH, "r") as file:
+        with open(path, "r") as file:
             return json.load(file)
     except FileNotFoundError:
-        save_auth({})
+        save_auth({}, path)
         return {}
     except json.JSONDecodeError:
-        AUTH_PATH.unlink()
-        save_auth({})
+        path.unlink()
+        save_auth({}, path)
         return {}
 
 
@@ -48,7 +48,6 @@ async def add_account(auth_api: api.AuthAPI, auth_code: str) -> str:
 
     auth_json[account_id] = {
         "display_name": display_name,
-        "account_id": account_id,
         "device_id": device_id,
         "secret": secret,
     }
