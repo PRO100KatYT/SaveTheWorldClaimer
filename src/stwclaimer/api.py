@@ -85,7 +85,7 @@ class McpAPI:
         self.epic = epic_api
 
     async def client_request(
-        self, operation: str, profile_id: str, json_body: dict = {}
+        self, operation: str, profile_id: str, rvn: int = -1, json_body: dict = {}
     ) -> dict:
         if profile_id not in (
             "athena",
@@ -108,7 +108,7 @@ class McpAPI:
         return await self.epic.post(
             f"https://mcp-gc.live.fngw.ol.epicgames.com/fortnite/api/game/v2/profile/{self.account_id}/client/{operation}",
             json=json_body,
-            params={"profileId": profile_id},
+            params={"profileId": profile_id, "rvn": rvn},
         )
 
     async def public_request(self, account_id: str, profile_id: str) -> dict:

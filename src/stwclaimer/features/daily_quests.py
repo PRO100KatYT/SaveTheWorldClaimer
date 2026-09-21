@@ -8,7 +8,7 @@ def is_active_daily_quest(item: dict) -> bool:
     )
 
 
-def get_daily_quests(manager: profiles.ProfileManager, profile_changes: dict) -> dict:
+def get_daily_quests(manager: profiles.ProfileManager, profile_changes: list) -> dict:
     output = {"new_quests": {}, "quests": {}}
 
     for change in profile_changes:

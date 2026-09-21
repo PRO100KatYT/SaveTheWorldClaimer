@@ -1,10 +1,33 @@
 import api
+import json
 
 
 class ProfileManager:
     def __init__(self, mcp_api: api.McpAPI):
         self.mcp = mcp_api
         self.cache = {}
+
+    def get_profile_rvn(self, profile_id: str) -> int:
+        if not profile_id in self.cache:
+            self.cache[profile_id] = {"commandRevision": -1}
+        return self.cache[profile_id]["commandRevision"]
+
+    def update_revisions_headers(self) -> None:
+        revisions = []
+
+        for profile_id in self.cache:
+            revisions.append(
+                {
+                    "profileId": profile_id,
+                    "clientCommandRevision": self.cache[profile_id]["commandRevision"],
+                }
+            )
+
+        headers = {
+            "X-EpicGames-ProfileRevisions": json.dumps(revisions, separators=(",", ":"))
+        }
+
+        self.mcp.epic.session.headers.update(headers)
 
     def process_profile_changes(self, profile_changes: list, profile_id: str) -> None:
         for entry in profile_changes:
@@ -36,13 +59,16 @@ class ProfileManager:
                 case _:
                     return
 
-    def get_profile_changes(self, profile_updates: dict, profile_id: str) -> dict:
-        return profile_updates.get(profile_id, None).get("profileChanges", {})
+    def get_profile_changes(self, profile_updates: dict, profile_id: str) -> list:
+        return profile_updates.get(profile_id, {}).get("profileChanges", [])
 
     async def base_request(
         self, operation: str, profile_id: str, json_body: dict = {}
     ) -> dict:
-        res = await self.mcp.client_request(operation, profile_id, json_body)
+        rvn = self.get_profile_rvn(profile_id)
+        self.update_revisions_headers()
+
+        res = await self.mcp.client_request(operation, profile_id, rvn, json_body)
 
         profile_updates = {}
 
