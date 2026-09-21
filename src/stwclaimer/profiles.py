@@ -36,6 +36,9 @@ class ProfileManager:
                 case _:
                     return
 
+    def get_profile_changes(self, profile_updates: dict, profile_id: str) -> dict:
+        return profile_updates.get(profile_id, None).get("profileChanges", {})
+
     async def base_request(
         self, operation: str, profile_id: str, json_body: dict = {}
     ) -> dict:
@@ -51,11 +54,14 @@ class ProfileManager:
         profile_updates[res["profileId"]] = res
 
         for res_profile_id in profile_updates:
-            self.process_profile_changes(
-                profile_updates[res_profile_id]["profileChanges"], res_profile_id
-            )
+            profile_changes = self.get_profile_changes(profile_updates, res_profile_id)
+
+            self.process_profile_changes(profile_changes, res_profile_id)
 
         return profile_updates
 
     async def query_profile(self, profile_id: str) -> dict:
         return await self.base_request("QueryProfile", profile_id)
+
+    async def client_quest_login(self, profile_id: str) -> dict:
+        return await self.base_request("ClientQuestLogin", profile_id)

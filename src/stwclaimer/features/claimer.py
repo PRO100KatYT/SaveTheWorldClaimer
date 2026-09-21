@@ -1,6 +1,7 @@
 import auth
 import api
 import profiles
+from features import daily_quests
 
 
 async def loop(epic_api: api.EpicAPI, auth_api: api.AuthAPI) -> None:
@@ -15,3 +16,5 @@ async def loop(epic_api: api.EpicAPI, auth_api: api.AuthAPI) -> None:
 
         mcp = api.McpAPI(account_id, epic_api)
         manager = profiles.ProfileManager(mcp)
+
+        await daily_quests.main(manager)
