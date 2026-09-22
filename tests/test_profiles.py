@@ -2,6 +2,7 @@ import profiles
 import pathlib
 import json
 import pytest
+import api
 
 
 @pytest.fixture
@@ -12,7 +13,9 @@ def get_test_manager():
     with open(profile_path, "r") as file:
         profile = json.load(file)
 
-    manager = profiles.ProfileManager(None)
+    epic_api = api.EpicAPI()
+    mcp_api = api.McpAPI("test_account_id", epic_api)
+    manager = profiles.ProfileManager(mcp_api)
     manager.cache = {"campaign": profile}
     return manager
 
@@ -222,3 +225,26 @@ def test_profile_changes_fullprofileupdate(get_test_manager):
 
     for entry in profile_changes:
         assert entry["profile"] == manager.cache["campaign"]
+
+
+def test_get_profile_rvn(get_test_manager):
+    manager = get_test_manager
+    manager.cache["athena"] = {"commandRevision": 2136}
+
+    assert manager.get_profile_rvn("athena") == 2136
+    assert manager.get_profile_rvn("theater0") == -1
+
+
+def test_update_revisions_headers(get_test_manager):
+    manager = get_test_manager
+    manager.cache["athena"] = {"commandRevision": 2136}
+
+    manager.update_revisions_headers()
+
+    for entry in json.loads(
+        manager.mcp.epic.session.headers["X-EpicGames-ProfileRevisions"]
+    ):
+        assert (
+            manager.cache[entry["profileId"]]["commandRevision"]
+            == entry["clientCommandRevision"]
+        )
