@@ -30,6 +30,7 @@ def get_daily_quests(manager: profiles.ProfileManager, profile_changes: list) ->
 
 
 async def main(manager: profiles.ProfileManager) -> None:
+    await manager.query_profile("campaign")
     profile_updates = await manager.client_quest_login("campaign")
     profile_changes = manager.get_profile_changes(profile_updates, "campaign")
 
