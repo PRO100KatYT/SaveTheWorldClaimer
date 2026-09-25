@@ -1,9 +1,7 @@
 import os
-import sys
-import questionary
 from cli import auth_cli, utils_cli
 from features import claimer
-import api
+import core
 
 
 def set_and_display_title() -> None:
@@ -14,7 +12,7 @@ def set_and_display_title() -> None:
     print("Save the World Claimer v2.0.0 by PRO100KatYT\n")
 
 
-async def main_menu(epic_api: api.EpicAPI, auth_api: api.AuthAPI) -> None:
+async def main_menu(context: core.Context) -> None:
     options = {"Start this program": claimer.loop, "Manage accounts": auth_cli.menu}
 
     while True:
@@ -23,4 +21,4 @@ async def main_menu(epic_api: api.EpicAPI, auth_api: api.AuthAPI) -> None:
         if choice is False or options[choice] is False:
             break
 
-        await options[choice](epic_api, auth_api)
+        await options[choice](context)

@@ -1,11 +1,11 @@
 import questionary
 import auth
 import webbrowser
-import api
+import core
 from cli import utils_cli
 
 
-async def add_account(auth_api: api.AuthAPI) -> None:
+async def add_account(context: core.Context) -> None:
     print(f"To add an account, log in using this link: {auth.AUTH_CODE_LINK}")
     open_in_browser = await questionary.confirm(
         "Would you like to open it in your browser?"
@@ -22,7 +22,7 @@ async def add_account(auth_api: api.AuthAPI) -> None:
             return
 
         try:
-            display_name = await auth.add_account(auth_api, auth_code)
+            display_name = await auth.add_account(context.auth, auth_code)
             print(f"\n{display_name} has been added to the program.\n")
             break
         except ValueError as e:
@@ -73,7 +73,7 @@ async def remove_account(*args) -> None:
         print(f"\nSuccessfully removed {display_name} from the program.\n")
 
 
-async def menu(epic_api: api.EpicAPI, auth_api: api.AuthAPI) -> None:
+async def menu(context: core.Context) -> None:
     options = {
         "Add an account": add_account,
         "List accounts": list_accounts,
@@ -87,4 +87,4 @@ async def menu(epic_api: api.EpicAPI, auth_api: api.AuthAPI) -> None:
             break
         print()
 
-        await options[choice](auth_api)
+        await options[choice](context)

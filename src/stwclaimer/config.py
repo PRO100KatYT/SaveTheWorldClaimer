@@ -18,6 +18,9 @@ class ConfigManager:
         }
         self.user_config = {}
 
+        self.load_global_config()
+        self.load_user_config()
+
     def save_global_config(self, path: Path = GLOBAL_CONFIG_PATH) -> bool:
         try:
             with open(path, "w") as file:
