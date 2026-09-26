@@ -1,9 +1,11 @@
-import api
-import config
+from api import EpicAPI, AuthAPI
+from config import ConfigManager
+from assets import Assets
 
 
 class Context:
     def __init__(self):
-        self.epic = api.EpicAPI()
-        self.auth = api.AuthAPI(self.epic)
-        self.cfg = config.ConfigManager()
+        self.epic = EpicAPI()
+        self.auth = AuthAPI(self.epic)
+        self.cfg = ConfigManager()
+        self.ast = Assets()

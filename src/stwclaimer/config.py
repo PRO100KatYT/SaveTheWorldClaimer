@@ -9,7 +9,7 @@ USER_CONFIG_PATH: Path = utils.base_path(False) / "user_config.json"
 class ConfigManager:
     def __init__(self):
         self.global_config = {
-            "language": "en",
+            "ui_language": "en",
             "items_language": "en",
             "open_free_llamas": True,
             "show_date_time": True,

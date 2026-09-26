@@ -1,5 +1,7 @@
 auth.json
+user_config.json
 userConfig.json
+config.json
 config.ini
 build_nuitka/
 SaveTheWorldClaimer.build/
