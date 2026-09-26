@@ -17,6 +17,7 @@ class ConfigManager:
             "check_for_updates": True,
         }
         self.user_config = {}
+        self.reload_strings = None
 
         self.load_global_config()
         self.load_user_config()

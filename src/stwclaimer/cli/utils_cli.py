@@ -1,11 +1,14 @@
 import questionary
+import core
 
 
-async def select(title: str, options: list, back_str: str = None) -> str:
+async def select(
+    ctx: core.Context, title: str, options: list, back_str: str = None
+) -> str:
     options = list(options)
     options.append(
         questionary.Choice(
-            "Back" if back_str is None else back_str, False, shortcut_key="0"
+            ctx.ast.get_ui_str("select.back") if back_str is None else back_str, False, shortcut_key="0"
         )
     )
 

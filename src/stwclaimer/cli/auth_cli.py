@@ -5,10 +5,10 @@ import core
 from cli import utils_cli
 
 
-async def add_account(context: core.Context) -> None:
-    print(f"To add an account, log in using this link: {auth.AUTH_CODE_LINK}")
+async def add_account(ctx: core.Context) -> None:
+    print(ctx.ast.get_ui_str("auth_cli.add_account.info").format(auth.AUTH_CODE_LINK))
     open_in_browser = await questionary.confirm(
-        "Would you like to open it in your browser?"
+        ctx.ast.get_ui_str("auth_cli.add_account.askbrowser")
     ).ask_async()
 
     if open_in_browser:
@@ -16,22 +16,24 @@ async def add_account(context: core.Context) -> None:
 
     while True:
         auth_code = await questionary.password(
-            "Paste the authorizationCode here:"
+            ctx.ast.get_ui_str("auth_cli.add_account.pastecode")
         ).ask_async()
         if auth_code is None:
             return
 
         try:
-            display_name = await auth.add_account(context.auth, auth_code)
-            print(f"\n{display_name} has been added to the program.\n")
+            display_name = await auth.add_account(ctx.auth, auth_code)
+            print(
+                ctx.ast.get_ui_str("auth_cli.add_account.success").format(display_name)
+            )
             break
         except ValueError as e:
             print(e)
 
 
-async def list_accounts(*args) -> None:
+async def list_accounts(ctx: core.Context) -> None:
     auth_json = auth.read_auth()
-    print("Added accounts:")
+    print(ctx.ast.get_ui_str("auth_cli.list_accounts.title"))
     counter = 1
     for account_id in auth_json:
         print(
@@ -43,10 +45,10 @@ async def list_accounts(*args) -> None:
             ),
         )
         counter += 1
-    input("\n\nPress ENTER to continue.\n")
+    input(ctx.ast.get_ui_str("auth_cli.list_accounts.pressenter"))
 
 
-async def remove_account(*args) -> None:
+async def remove_account(ctx: core.Context) -> None:
     auth_json = auth.read_auth()
 
     while True:
@@ -54,13 +56,17 @@ async def remove_account(*args) -> None:
         for account_id, data in auth_json.items():
             options.append(questionary.Choice(data["display_name"], account_id))
 
-        choice = await utils_cli.select("Select an account to remove:", options)
+        choice = await utils_cli.select(
+            ctx, ctx.ast.get_ui_str("auth_cli.remove_account.title"), options
+        )
 
         if choice is False or choice is None:
             break
 
         confirmation = await questionary.confirm(
-            f"Are you sure you want to remove {auth_json[choice]["display_name"]} from the program?"
+            ctx.ast.get_ui_str("auth_cli.remove_account.confirmation").format(
+                auth_json[choice]["display_name"]
+            )
         ).ask_async()
 
         if not confirmation:
@@ -70,21 +76,27 @@ async def remove_account(*args) -> None:
         del auth_json[choice]
         auth.save_auth(auth_json)
 
-        print(f"\nSuccessfully removed {display_name} from the program.\n")
+        print(
+            ctx.ast.get_ui_str("auth_cli.remove_account.success").format(display_name)
+        )
 
 
-async def menu(context: core.Context) -> None:
+async def menu(ctx: core.Context) -> None:
     options = {
-        "Add an account": add_account,
-        "List accounts": list_accounts,
-        "Remove an account": remove_account,
+        "auth_cli.menu.addaccount": add_account,
+        "auth_cli.menu.listaccounts": list_accounts,
+        "auth_cli.menu.removeaccount": remove_account,
     }
 
     while True:
-        choice = await utils_cli.select("Account Management:", options)
+        choice = await utils_cli.select(
+            ctx,
+            ctx.ast.get_ui_str("auth_cli.menu.title"),
+            [questionary.Choice(ctx.ast.get_ui_str(i), i) for i in options],
+        )
 
         if choice is False or choice is None:
             break
         print()
 
-        await options[choice](context)
+        await options[choice](ctx)

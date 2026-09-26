@@ -41,3 +41,9 @@ class Assets:
             self.interface = json.load(file)
         with open(items_path / f"{items_language}.json", "r", encoding="utf-8") as file:
             self.items = json.load(file)
+
+    def get_ui_str(self, key: str) -> str:
+        return self.interface.get(key, key)
+
+    def get_item_name(self, template_id_lower: str) -> str:
+        return self.items.get(template_id_lower, template_id_lower)
