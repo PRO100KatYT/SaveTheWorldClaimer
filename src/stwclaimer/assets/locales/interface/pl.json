@@ -51,5 +51,9 @@
   "auth_cli.remove_account.confirmation": "Jesteś pewny(a), że chcesz usunąć konto {0} z programu?",
   "auth_cli.remove_account.success": "\nPomyślnie usunięto konto {0} z programu.\n",
   "claimer.loop.loggingin": "\nLogowanie jako {0}...",
-  "claimer.loop.success": "Sukces!"
+  "claimer.loop.success": "Sukces!",
+  "daily_quests.fetching": "\nPozyskiwanie zadań dnia...\n",
+  "daily_quests.display": "{0}. {1} | Postęp: {2} | Nagrody: {3}",
+  "daily_quests.displaynew": "{0}. (Nowe!) {1} | Postęp: {2} | Nagrody: {3}",
+  "daily_quests.noquests": "Nie znaleziono aktywnych zadań dnia. Wróć jutro!"
 }

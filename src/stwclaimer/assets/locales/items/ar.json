@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "المصيدة",
     "weapon": "السلاح",
     "hero": "البطل",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "ميكروفون",
     "cosmeticjamtrack": "مقطوعة عزف"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "شائع",
     "uncommon": "غير شائع",
     "rare": "نادر",
@@ -43,7 +43,7 @@
     "legendary": "أسطوري",
     "mythic": "خرافي"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "قاذفة الأرضية",
     "schematic:sid_floor_tar_r_t01": "حفرة القطران",
     "schematic:sid_ceiling_electric_single_r_t01": "مصيدة السقف الكهربائية",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "بيلي الدافئ",
     "athenadance:spray_winterfest2": "لا للتعرق يا سمكة الثلج",
     "athenaglider:glider_rumplewisp": "رسالة مهرجان الشتاء"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "تم تدمير آلات آركيد",
+    "quest_reactive_destroybear_v3": "تم تدمير الدب تيدي",
+    "quest_reactive_destroyfiretruck_v2": "تم تدمير شاحنات النار",
+    "quest_reactive_destroygnome_v2": "تم تدمير أقزام الحديقة",
+    "quest_reactive_destroypropane_v2": "تم تدمير دبابات البروبان",
+    "quest_reactive_destroyseesaw_v3": "تم تدمير أرجوحات الحديقة",
+    "quest_reactive_destroyserverrack_v2": "تم تدمير حوامل الخادم",
+    "quest_reactive_destroytransform_v3": "تم تدمير محولات الطاقة الصناعية",
+    "quest_reactive_destroytv_v2": "تم تدمير أجهزة التليفزيون",
+    "quest_reactive_discoverconstruction_v2": "تم اكتشاف موقع البناء",
+    "quest_reactive_discoverruinedhouses_v2": "تم اكتشاف موقع ريفي",
+    "quest_reactive_discovershelter_v2": "تم اكتشاف موقع المأوى",
+    "quest_reactive_discoverfastfood_v2": "تم اكتشاف موقع ضاحية",
+    "quest_reactive_discoveremergencybuildings_v2": "تم اكتشاف موقع المدينة",
+    "complete_exploration_1": "المناطق المكتشفة",
+    "questcollect_survivoritemdata": "تم إنقاذ الناجين",
+    "kill_husk": "تم تصفية المومياوات",
+    "kill_husk_constructor_v2": "تم تصفية المومياوات كبنّاء",
+    "kill_husk_melee": "تم تصفية المومياوات بسلاح شجار",
+    "kill_husk_ninja_v2": "تم تصفية المومياء بصفتك نينجا",
+    "kill_husk_outlander_v2": "تم تصفية المومياوات بصفتك أجنبي",
+    "kill_husk_assault": "تم تصفية المومياوات ببندقية هجومية",
+    "kill_husk_pistol": "تم تصفية المومياوات بمسدس",
+    "kill_husk_shotgun": "تم تصفية المومياوات بشوزِن",
+    "kill_husk_smg": "تم تصفية المومياوات برشّاش خفيف",
+    "kill_husk_sniper": "تم تصفية المومياوات ببندقية قنص",
+    "kill_husk_commando_v2": "تم تصفية المومياوات كجندي",
+    "kill_husk_trap": "تم تصفية المومياوات بمصائد",
+    "complete_buildradar_1_diff2": "بناء أبراج الرادار",
+    "complete_primary": "اكتملت المهمات",
+    "complete_constructor": "تم إكمال المهمة as a Constructor",
+    "complete_ninja": "تم إكمال المهام كنينجا",
+    "complete_outlander": "تم إكمال المهام كأجنبي",
+    "complete_commando": "تم إكمال المهام كجندي",
+    "daily_partyof50": "تم إنقاذ الناجين",
+    "interact_safe": "الخزائن المنهوبة",
+    "interact_treasurechest": "صناديق الكنوز المنهوبة"
   }
 }

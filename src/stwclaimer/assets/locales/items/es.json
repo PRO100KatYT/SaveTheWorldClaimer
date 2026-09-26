@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "Trampa",
     "weapon": "Arma",
     "hero": "Héroe",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "Micrófono",
     "cosmeticjamtrack": "Pista de improvisación"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "Común",
     "uncommon": "Poco común",
     "rare": "Raro",
@@ -43,7 +43,7 @@
     "legendary": "Legendario",
     "mythic": "Mítico"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "Lanzador de suelo",
     "schematic:sid_floor_tar_r_t01": "Pozo de alquitrán",
     "schematic:sid_ceiling_electric_single_r_t01": "Calambres de techo",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "Banano acogedor",
     "athenadance:spray_winterfest2": "Tranqui, Pescanieve",
     "athenaglider:glider_rumplewisp": "Carta del Festival de invierno"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "Máquinas recreativas destruidas",
+    "quest_reactive_destroybear_v3": "Ositos de peluche destruidos",
+    "quest_reactive_destroyfiretruck_v2": "Camión de bomberos destruido",
+    "quest_reactive_destroygnome_v2": "Gnomos de jardín destruidos",
+    "quest_reactive_destroypropane_v2": "Tanques de propano destruidos",
+    "quest_reactive_destroyseesaw_v3": "Balancines destruidos",
+    "quest_reactive_destroyserverrack_v2": "Grupos de servidores destruidos",
+    "quest_reactive_destroytransform_v3": "Transformadores industriales destruidos",
+    "quest_reactive_destroytv_v2": "Televisores destruidos",
+    "quest_reactive_discoverconstruction_v2": "Ubicación de construcción descubierta",
+    "quest_reactive_discoverruinedhouses_v2": "Ubicación rural descubierta",
+    "quest_reactive_discovershelter_v2": "Ubicación de refugio descubierta",
+    "quest_reactive_discoverfastfood_v2": "Ubicación de suburbio descubierta",
+    "quest_reactive_discoveremergencybuildings_v2": "Ubicación de ciudad descubierta",
+    "complete_exploration_1": "Zonas exploradas",
+    "questcollect_survivoritemdata": "Supervivientes salvados",
+    "kill_husk": "Cáscaras eliminados",
+    "kill_husk_constructor_v2": "Cáscaras eliminados con un constructor",
+    "kill_husk_melee": "Cáscaras eliminados con un arma cuerpo a cuerpo",
+    "kill_husk_ninja_v2": "Cáscaras eliminados con un ninja",
+    "kill_husk_outlander_v2": "Cáscaras eliminados con un trotamundos",
+    "kill_husk_assault": "Cáscaras eliminados con un fusil de asalto",
+    "kill_husk_pistol": "Cáscaras eliminados con una pistola",
+    "kill_husk_shotgun": "Cáscaras eliminados con una escopeta",
+    "kill_husk_smg": "Cáscaras eliminados con un subfusil",
+    "kill_husk_sniper": "Cáscaras eliminados con un fusil de tirador",
+    "kill_husk_commando_v2": "Cáscaras eliminados con un soldado",
+    "kill_husk_trap": "Cáscaras eliminados con trampas",
+    "complete_buildradar_1_diff2": "Torres de radar construidas",
+    "complete_primary": "Misiones completadas",
+    "complete_constructor": "Misión completada con un constructor",
+    "complete_ninja": "Misiones completadas con un ninja",
+    "complete_outlander": "Misiones completadas con un trotamundos",
+    "complete_commando": "Misiones completadas con un soldado",
+    "daily_partyof50": "Supervivientes salvados",
+    "interact_safe": "Cajas fuertes saqueadas",
+    "interact_treasurechest": "Cofres del tesoro saqueados"
   }
 }

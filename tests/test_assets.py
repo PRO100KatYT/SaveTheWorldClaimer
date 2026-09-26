@@ -16,10 +16,10 @@ def test_init():
     assert "main.login.success" in ast.interface
     assert ast.interface["main.login.success"] == "Logged in successfully"
 
-    assert "Items" in ast.items
-    assert "quest:daily_huskextermination_anyhero" in ast.items["Items"]
+    assert "items" in ast.items
+    assert "quest:daily_huskextermination_anyhero" in ast.items["items"]
     assert (
-        ast.items["Items"]["quest:daily_huskextermination_anyhero"]
+        ast.items["items"]["quest:daily_huskextermination_anyhero"]
         == "Eksterminacja pustaków (dowolny bohater)"
     )
 
@@ -34,9 +34,9 @@ def test_reload():
     assert "main.login.success" in ast.interface
     assert ast.interface["main.login.success"] == "Zalogowano pomyślnie"
 
-    assert "Items" in ast.items
-    assert "quest:daily_huskextermination_anyhero" in ast.items["Items"]
+    assert "items" in ast.items
+    assert "quest:daily_huskextermination_anyhero" in ast.items["items"]
     assert (
-        ast.items["Items"]["quest:daily_huskextermination_anyhero"]
+        ast.items["items"]["quest:daily_huskextermination_anyhero"]
         == "Hüllenausrottung (Beliebiger Held)"
     )

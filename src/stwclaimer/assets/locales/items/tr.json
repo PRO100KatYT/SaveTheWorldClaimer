@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "Tuzak",
     "weapon": "Silah",
     "hero": "Kahraman",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "Mikrofon",
     "cosmeticjamtrack": "Müzik Parçası"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "Yaygın",
     "uncommon": "Sıradışı",
     "rare": "Nadir",
@@ -43,7 +43,7 @@
     "legendary": "Efsanevi",
     "mythic": "Eşsiz"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "Zemin İticisi",
     "schematic:sid_floor_tar_r_t01": "Zift Çukuru",
     "schematic:sid_ceiling_electric_single_r_t01": "Tavan Şok Tuzağı",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "Yanan Muzaffer",
     "athenadance:spray_winterfest2": "Kar Balığı Varsa Sıkıntı Yok",
     "athenaglider:glider_rumplewisp": "Kış Festivali Mektubu"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "Yok edilen Oyun Makineleri",
+    "quest_reactive_destroybear_v3": "Yok edilen Oyuncak Ayılar",
+    "quest_reactive_destroyfiretruck_v2": "İtfaiye Kamyonu yok edildi",
+    "quest_reactive_destroygnome_v2": "Yok Edilen Bahçe Cüceleri",
+    "quest_reactive_destroypropane_v2": "Yok Edilen Gaz Tankları",
+    "quest_reactive_destroyseesaw_v3": "Yok Edilen Tahterevalliler",
+    "quest_reactive_destroyserverrack_v2": "Yok edilen Sunucu Kabinleri",
+    "quest_reactive_destroytransform_v3": "Yok edilen Endüstriyel Güç Trafoları",
+    "quest_reactive_destroytv_v2": "Yok Edilen Televizyonlar",
+    "quest_reactive_discoverconstruction_v2": "İnşaat Konumu Keşfedildi",
+    "quest_reactive_discoverruinedhouses_v2": "Kırsal Konum Keşfedildi",
+    "quest_reactive_discovershelter_v2": "Sığınak Konumu Keşfedildi",
+    "quest_reactive_discoverfastfood_v2": "Banliyö Konumu Keşfedildi",
+    "quest_reactive_discoveremergencybuildings_v2": "Şehir Konumu Keşfedildi",
+    "complete_exploration_1": "Keşfedilen bölgeler",
+    "questcollect_survivoritemdata": "Kurtarılan felaketzedeler",
+    "kill_husk": "Avlanan suratsızlar",
+    "kill_husk_constructor_v2": "İnşaatçı olarak avlanan suratsızlar",
+    "kill_husk_melee": "Yakın dövüş silahıyla avlanan suratsızlar",
+    "kill_husk_ninja_v2": "Ninja olarak avlanan suratsızlar",
+    "kill_husk_outlander_v2": "İzci olarak avlanan suratsızlar",
+    "kill_husk_assault": "Taarruz Tüfeğiyle avlanan suratsızlar",
+    "kill_husk_pistol": "Tabancayla avlanan suratsızlar",
+    "kill_husk_shotgun": "Pompalı Tüfekle avlanan suratsızlar",
+    "kill_husk_smg": "Hafif Makineli Tüfek ile avlanan suratsızlar",
+    "kill_husk_sniper": "Keskin Nişancı Tüfeğiyle avlanan suratsızlar",
+    "kill_husk_commando_v2": "Asker olarak avlanan suratsızlar",
+    "kill_husk_trap": "Tuzaklarla avlanan suratsızlar",
+    "complete_buildradar_1_diff2": "İnşa edilen Radar Kuleleri",
+    "complete_primary": "Tamamlanan görevler",
+    "complete_constructor": "İnşaatçı olarak görev tamamlandı",
+    "complete_ninja": "Ninja olarak tamamlanan görevler",
+    "complete_outlander": "İzci olarak tamamlanan görevler",
+    "complete_commando": "Asker olarak tamamlanan görevler",
+    "daily_partyof50": "Kurtarılan felaketzedeler",
+    "interact_safe": "Açılan Çelik kasalar",
+    "interact_treasurechest": "Açılan hazine sandıkları"
   }
 }

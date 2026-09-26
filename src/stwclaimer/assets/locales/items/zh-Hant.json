@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "陷阱",
     "weapon": "武器",
     "hero": "英雄",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "麥克風",
     "cosmeticjamtrack": "即興曲目"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "普通",
     "uncommon": "罕見",
     "rare": "稀有",
@@ -43,7 +43,7 @@
     "legendary": "傳奇",
     "mythic": "神話"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "地面發射器",
     "schematic:sid_floor_tar_r_t01": "瀝青湖",
     "schematic:sid_ceiling_electric_single_r_t01": "天花板電擊陷阱",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "溫暖又蕉蕉",
     "athenadance:spray_winterfest2": "小事一樁，雪魚",
     "athenaglider:glider_rumplewisp": "冬日節慶信函"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "已摧毀遊樂場機器",
+    "quest_reactive_destroybear_v3": "已摧毀泰迪熊",
+    "quest_reactive_destroyfiretruck_v2": "已摧毀消防車",
+    "quest_reactive_destroygnome_v2": "已摧毀花園地精",
+    "quest_reactive_destroypropane_v2": "已摧毀丙烷桶",
+    "quest_reactive_destroyseesaw_v3": "已摧毀公園蹺蹺板",
+    "quest_reactive_destroyserverrack_v2": "已摧毀伺服器架",
+    "quest_reactive_destroytransform_v3": "已摧毀工業變壓器",
+    "quest_reactive_destroytv_v2": "已摧毀電視",
+    "quest_reactive_discoverconstruction_v2": "已發現建築位置",
+    "quest_reactive_discoverruinedhouses_v2": "已發現鄉村位置",
+    "quest_reactive_discovershelter_v2": "已發現庇護所位置",
+    "quest_reactive_discoverfastfood_v2": "已發現郊區位置",
+    "quest_reactive_discoveremergencybuildings_v2": "已發現城市位置",
+    "complete_exploration_1": "已探索區域",
+    "questcollect_survivoritemdata": "已保護生存者",
+    "kill_husk": "已殲滅骸屍",
+    "kill_husk_constructor_v2": "已經以建造者職業殲滅骸屍",
+    "kill_husk_melee": "已使用近戰武器殲滅骸屍",
+    "kill_husk_ninja_v2": "已經以忍者職業殲滅骸屍",
+    "kill_husk_outlander_v2": "已經以漂泊者職業殲滅骸屍",
+    "kill_husk_assault": "已使用突擊步槍殲滅骸屍",
+    "kill_husk_pistol": "已使用手槍殲滅骸屍",
+    "kill_husk_shotgun": "已使用霰彈槍殲滅骸屍",
+    "kill_husk_smg": "已使用衝鋒槍殲滅骸屍",
+    "kill_husk_sniper": "已使用狙擊步槍殲滅骸屍",
+    "kill_husk_commando_v2": "已經以士兵職業殲滅骸屍",
+    "kill_husk_trap": "已使用陷阱殲滅骸屍",
+    "complete_buildradar_1_diff2": "雷達塔已完工",
+    "complete_primary": "任務完成",
+    "complete_constructor": "以建造者職業完成任務",
+    "complete_ninja": "以忍者職業完成任務",
+    "complete_outlander": "以漂泊者職業完成任務",
+    "complete_commando": "以士兵職業完成任務",
+    "daily_partyof50": "已保護生存者",
+    "interact_safe": "已搜刮保險箱",
+    "interact_treasurechest": "已搜刮寶箱"
   }
 }

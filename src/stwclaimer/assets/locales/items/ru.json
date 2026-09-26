@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "Ловушка",
     "weapon": "Оружие",
     "hero": "Герой",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "Микрофон",
     "cosmeticjamtrack": "Джем-трек"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "Обычный",
     "uncommon": "Необычный",
     "rare": "Редкий",
@@ -43,7 +43,7 @@
     "legendary": "Легендарный",
     "mythic": "Мифический"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "Напольная катапульта",
     "schematic:sid_floor_tar_r_t01": "Смоляная ловушка",
     "schematic:sid_ceiling_electric_single_r_t01": "Потолочный шокер",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "Весёлый костерок",
     "athenadance:spray_winterfest2": "Беззаботный Снежок",
     "athenaglider:glider_rumplewisp": "Конверт-самолёт"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "Уничтожьте игровые автоматы",
+    "quest_reactive_destroybear_v3": "Уничтожьте плюшевых медведей",
+    "quest_reactive_destroyfiretruck_v2": "Уничтожьте пожарные машины",
+    "quest_reactive_destroygnome_v2": "Уничтожьте садовых гномов",
+    "quest_reactive_destroypropane_v2": "Уничтожьте баллоны с пропаном",
+    "quest_reactive_destroyseesaw_v3": "Уничтожьте парковые качели",
+    "quest_reactive_destroyserverrack_v2": "Уничтожьте серверные стойки",
+    "quest_reactive_destroytransform_v3": "Уничтожьте промышленные трансформаторы",
+    "quest_reactive_destroytv_v2": "Уничтожьте телевизоры",
+    "quest_reactive_discoverconstruction_v2": "Стройплощадка обнаружена",
+    "quest_reactive_discoverruinedhouses_v2": "Сельская постройка обнаружена",
+    "quest_reactive_discovershelter_v2": "Убежище обнаружено",
+    "quest_reactive_discoverfastfood_v2": "Пригородная постройка обнаружена",
+    "quest_reactive_discoveremergencybuildings_v2": "Городская постройка обнаружена",
+    "complete_exploration_1": "Исследуйте зоны",
+    "questcollect_survivoritemdata": "Спасите выживших",
+    "kill_husk": "Мозгляки уничтожены",
+    "kill_husk_constructor_v2": "Мозгляки уничтожены при игре за конструктора",
+    "kill_husk_melee": "Уничтожьте мозгляков холодным оружием",
+    "kill_husk_ninja_v2": "Мозгляки уничтожены при игре за ниндзя",
+    "kill_husk_outlander_v2": "Уничтожьте мозгляков, играя за путешественника",
+    "kill_husk_assault": "Уничтожьте мозгляков из автомата",
+    "kill_husk_pistol": "Мозгляки уничтожены из пистолета",
+    "kill_husk_shotgun": "Мозгляки уничтожены из дробовика",
+    "kill_husk_smg": "Уничтожьте мозгляков из пистолета-пулемёта",
+    "kill_husk_sniper": "Уничтожьте мозгляков из снайперской винтовки",
+    "kill_husk_commando_v2": "Уничтожьте мозгляков, играя за солдата",
+    "kill_husk_trap": "Уничтожьте мозгляков с помощью ловушек",
+    "complete_buildradar_1_diff2": "Построенные радарные вышки",
+    "complete_primary": "Выполните миссии",
+    "complete_constructor": "Выполните миссию за конструктора",
+    "complete_ninja": "Выполните миссию за ниндзя",
+    "complete_outlander": "Выполните миссию за путешественника",
+    "complete_commando": "Выполните миссию за солдата",
+    "daily_partyof50": "Спасите выживших",
+    "interact_safe": "Опустошите сейфы",
+    "interact_treasurechest": "Сокровища добыты"
   }
 }

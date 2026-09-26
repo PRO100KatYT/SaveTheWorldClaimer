@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "กับดัก",
     "weapon": "อาวุธ",
     "hero": "ฮีโร่",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "ไมโครโฟน",
     "cosmeticjamtrack": "แจมแทร็ก"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "ธรรมดา",
     "uncommon": "พิเศษ",
     "rare": "หายาก",
@@ -43,7 +43,7 @@
     "legendary": "ตำนาน",
     "mythic": "ยอดตำนาน"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "กับดักพื้นดีดตัว",
     "schematic:sid_floor_tar_r_t01": "กับดักน้ำมันดิบ",
     "schematic:sid_ceiling_electric_single_r_t01": "กับดักไฟฟ้าติดเพดาน",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "อบอุ่นกับพีลลี่",
     "athenadance:spray_winterfest2": "เจ้าปลาหิมะหายห่วง",
     "athenaglider:glider_rumplewisp": "จดหมายเทศกาลฤดูหนาว"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "ตู้เกมอาร์เคดถูกทำลาย",
+    "quest_reactive_destroybear_v3": "หมีเท็ดดี้ถูกทำลาย",
+    "quest_reactive_destroyfiretruck_v2": "รถดับเพลิงถูกทำลาย",
+    "quest_reactive_destroygnome_v2": "โนมสวนถูกทำลาย",
+    "quest_reactive_destroypropane_v2": "ถังโพรเพนถูกทำลาย",
+    "quest_reactive_destroyseesaw_v3": "ชิงช้าสวนสาธารณะถูกทำลาย",
+    "quest_reactive_destroyserverrack_v2": "ชั้นวางเซิร์ฟเวอร์ถูกทำลาย",
+    "quest_reactive_destroytransform_v3": "หม้อแปลงไฟฟ้าอุตสาหกรรม",
+    "quest_reactive_destroytv_v2": "ทีวีถูกทำลาย",
+    "quest_reactive_discoverconstruction_v2": "ค้นพบตำแหน่งสำหรับการก่อสร้างแล้ว",
+    "quest_reactive_discoverruinedhouses_v2": "ค้นพบตำแหน่งชนบทแล้ว",
+    "quest_reactive_discovershelter_v2": "ค้นพบตำแหน่งที่พักพิงแล้ว",
+    "quest_reactive_discoverfastfood_v2": "ค้นพบตำแหน่งชานเมืองแล้ว",
+    "quest_reactive_discoveremergencybuildings_v2": "ค้นพบตำแหน่งเมืองแล้ว",
+    "complete_exploration_1": "โซนต่างๆ ถูกสำรวจแล้ว",
+    "questcollect_survivoritemdata": "ช่วยผู้รอดชีวิตแล้ว",
+    "kill_husk": "ซอมบี้ฮัสก์ถูกกำจัด",
+    "kill_husk_constructor_v2": "ซอมบี้ฮัสก์ถูกกำจัดโดยนักก่อสร้าง",
+    "kill_husk_melee": "ซอมบี้ฮัสก์ถูกกำจัดด้วยอาวุธระยะประชิด",
+    "kill_husk_ninja_v2": "ซอมบี้ฮัสก์ถูกกำจัดโดยนินจา",
+    "kill_husk_outlander_v2": "ซอมบี้ฮัสก์ถูกกำจัดโดยคนนอก",
+    "kill_husk_assault": "ซอมบี้ฮัสก์ถูกกำจัดด้วยปืนไรเฟิลจู่โจม",
+    "kill_husk_pistol": "ซอมบี้ฮัสก์ถูกกำจัดด้วยปืนพก",
+    "kill_husk_shotgun": "ซอมบี้ฮัสก์ถูกกำจัดด้วยปืนลูกซอง",
+    "kill_husk_smg": "ซอมบี้ฮัสก์ถูกกำจัดด้วยปืนกลมือ",
+    "kill_husk_sniper": "ซอมบี้ฮัสก์ถูกกำจัดด้วยปืนไรเฟิลซุ่มยิง",
+    "kill_husk_commando_v2": "ซอมบี้ฮัสก์ถูกกำจัดโดยทหาร",
+    "kill_husk_trap": "ซอมบี้ฮัสก์ถูกกำจัดด้วยกับดัก",
+    "complete_buildradar_1_diff2": "สร้างหอคอยเรดาร์แล้ว",
+    "complete_primary": "ภารกิจสำเร็จ",
+    "complete_constructor": "สำเร็จภารกิจโดยใช้นักก่อสร้าง",
+    "complete_ninja": "สำเร็จภารกิจโดยใช้นินจา",
+    "complete_outlander": "สำเร็จภารกิจโดยใช้คนต่างถิ่น",
+    "complete_commando": "สำเร็จภารกิจโดยใช้ทหาร",
+    "daily_partyof50": "ช่วยผู้รอดชีวิตแล้ว",
+    "interact_safe": "ตู้นิรภัยถูกรื้อค้นไปแล้ว",
+    "interact_treasurechest": "หีบสมบัติถูกรื้อค้นไปแล้ว"
   }
 }

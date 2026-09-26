@@ -50,5 +50,9 @@
   "auth_cli.remove_account.confirmation": "Are you sure you want to remove {0} from the program?",
   "auth_cli.remove_account.success": "\nSuccessfully removed {0} from the program.\n",
   "claimer.loop.loggingin": "\nLogging in as {0}...",
-  "claimer.loop.success": "Success!"
+  "claimer.loop.success": "Success!",
+  "daily_quests.fetching": "\nFetching daily quests...\n",
+  "daily_quests.display": "{0}. {1} | Progress: {2} | Rewards: {3}",
+  "daily_quests.displaynew": "{0}. (New!) {1} | Progress: {2} | Rewards: {3}",
+  "daily_quests.noquests": "No active daily challenges found. Come back tommorow!"
 }

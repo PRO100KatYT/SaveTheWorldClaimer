@@ -1,10 +1,10 @@
 {
-  "Llama tiers": {
+  "llama_tiers": {
     "0": "Normal (1)",
     "1": "Silver (2)",
     "2": "Gold (3)"
   },
-  "Item Types": {
+  "types": {
     "trap": "Trap",
     "weapon": "Weapon",
     "hero": "Hero",
@@ -40,7 +40,7 @@
     "cosmeticmicrophone": "Microphone",
     "cosmeticjamtrack": "Jam Track"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "Common",
     "uncommon": "Uncommon",
     "rare": "Rare",
@@ -48,7 +48,7 @@
     "legendary": "Legendary",
     "mythic": "Mythic"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "Floor Launcher",
     "schematic:sid_floor_tar_r_t01": "Tar Pit",
     "schematic:sid_ceiling_electric_single_r_t01": "Ceiling Zapper",
@@ -2154,5 +2154,44 @@
     "athenadance:spray_winterfest": "Warm & Peely",
     "athenadance:spray_winterfest2": "No Sweat, Snowfish",
     "athenaglider:glider_rumplewisp": "Winterfest Letter"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "Arcade Machines destroyed",
+    "quest_reactive_destroybear_v3": "Teddy Bears destroyed",
+    "quest_reactive_destroyfiretruck_v2": "Fire Truck destroyed",
+    "quest_reactive_destroygnome_v2": "Garden Gnomes destroyed",
+    "quest_reactive_destroypropane_v2": "Propane Tanks destroyed",
+    "quest_reactive_destroyseesaw_v3": "Park Seesaws destroyed",
+    "quest_reactive_destroyserverrack_v2": "Server Racks destroyed",
+    "quest_reactive_destroytransform_v3": "Industrial Power Transformers destroyed",
+    "quest_reactive_destroytv_v2": "TVs destroyed",
+    "quest_reactive_discoverconstruction_v2": "Construction Location Discovered",
+    "quest_reactive_discoverruinedhouses_v2": "Rural Location Discovered",
+    "quest_reactive_discovershelter_v2": "Shelter Location Discovered",
+    "quest_reactive_discoverfastfood_v2": "Suburban Location Discovered",
+    "quest_reactive_discoveremergencybuildings_v2": "City Location Discovered",
+    "complete_exploration_1": "Zones explored",
+    "questcollect_survivoritemdata": "Survivors saved",
+    "kill_husk": "Husks eliminated",
+    "kill_husk_constructor_v2": "Husks eliminated as a Constructor",
+    "kill_husk_melee": "Husks eliminated with a melee weapon",
+    "kill_husk_ninja_v2": "Husk eliminated as a Ninja",
+    "kill_husk_outlander_v2": "Husks eliminated as an Outlander",
+    "kill_husk_assault": "Husks eliminated with an assault rifle",
+    "kill_husk_pistol": "Husks eliminated with a pistol",
+    "kill_husk_shotgun": "Husks eliminated with a shotgun",
+    "kill_husk_smg": "Husks eliminated with an SMG",
+    "kill_husk_sniper": "Husks eliminated with a sniper rifle",
+    "kill_husk_commando_v2": "Husks eliminated as a Soldier",
+    "kill_husk_trap": "Husks eliminated with traps",
+    "complete_buildradar_1_diff2": "Radar Towers built",
+    "complete_primary": "Missions completed",
+    "complete_constructor": "Mission completed as a Constructor",
+    "complete_ninja": "Missions completed as a Ninja",
+    "complete_outlander": "Missions completed as an Outlander",
+    "complete_commando": "Missions completed as a Soldier",
+    "daily_partyof50": "Survivors saved",
+    "interact_safe": "Safes looted",
+    "interact_treasurechest": "Treasure chests looted"
   }
 }

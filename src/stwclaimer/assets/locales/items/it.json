@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "Trappola",
     "weapon": "Arma",
     "hero": "Eroe",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "Microfono",
     "cosmeticjamtrack": "Traccia Jam"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "Comune",
     "uncommon": "Non comune",
     "rare": "Raro",
@@ -43,7 +43,7 @@
     "legendary": "Leggendario",
     "mythic": "Mitico"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "Sbalzatore",
     "schematic:sid_floor_tar_r_t01": "Pozza di bitume",
     "schematic:sid_ceiling_electric_single_r_t01": "Folgoratore da soffitto",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "Calor di Bananita",
     "athenadance:spray_winterfest2": "Vacci pianino, pesce nevino",
     "athenaglider:glider_rumplewisp": "Lettera di Mezz'inverno"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "Postazioni arcade distrutte",
+    "quest_reactive_destroybear_v3": "Orsacchiotti distrutti",
+    "quest_reactive_destroyfiretruck_v2": "Camion dei pompieri distrutto",
+    "quest_reactive_destroygnome_v2": "Gnomi da giardino distrutti",
+    "quest_reactive_destroypropane_v2": "Bombole di propano distrutte",
+    "quest_reactive_destroyseesaw_v3": "Altalene da parco distrutte",
+    "quest_reactive_destroyserverrack_v2": "Rack di server distrutti",
+    "quest_reactive_destroytransform_v3": "Trasformatori industriali distrutti",
+    "quest_reactive_destroytv_v2": "TV distrutte",
+    "quest_reactive_discoverconstruction_v2": "Luogo di costruzione scoperto",
+    "quest_reactive_discoverruinedhouses_v2": "Luogo rurale scoperto",
+    "quest_reactive_discovershelter_v2": "Posizioni rifugi scoperte",
+    "quest_reactive_discoverfastfood_v2": "Luogo periferia scoperto",
+    "quest_reactive_discoveremergencybuildings_v2": "Luogo città scoperto",
+    "complete_exploration_1": "Zone esplorate",
+    "questcollect_survivoritemdata": "Superstiti salvati",
+    "kill_husk": "Abietti eliminati",
+    "kill_husk_constructor_v2": "Abietti eliminati come Costruttore",
+    "kill_husk_melee": "Abietti eliminati con un'arma da mischia",
+    "kill_husk_ninja_v2": "Abietti eliminati come Ninja",
+    "kill_husk_outlander_v2": "Abietti eliminati come Straniero",
+    "kill_husk_assault": "Abietti eliminati con un fucile d'assalto",
+    "kill_husk_pistol": "Abietti eliminati con una pistola",
+    "kill_husk_shotgun": "Abietti eliminati con un fucile pesante",
+    "kill_husk_smg": "Abietti eliminati con una mitraglietta",
+    "kill_husk_sniper": "Abietti eliminati con un fucile di precisione",
+    "kill_husk_commando_v2": "Abietti eliminati come Soldato",
+    "kill_husk_trap": "Abietti eliminati con trappole",
+    "complete_buildradar_1_diff2": "Torri radar costruite",
+    "complete_primary": "Missioni completate",
+    "complete_constructor": "Missioni completate come Costruttore",
+    "complete_ninja": "Missioni completate come Ninja",
+    "complete_outlander": "Missioni completate come Straniero",
+    "complete_commando": "Missioni completate come Soldato",
+    "daily_partyof50": "Superstiti salvati",
+    "interact_safe": "Casseforti saccheggiate",
+    "interact_treasurechest": "Forzieri del tesoro saccheggiati"
   }
 }

@@ -20,4 +20,4 @@ async def loop(ctx: core.Context) -> None:
         mcp = api.McpAPI(account_id, ctx.epic)
         manager = profiles.ProfileManager(mcp)
 
-        await daily_quests.main(manager)
+        await daily_quests.main(ctx, manager)

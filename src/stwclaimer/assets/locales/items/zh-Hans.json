@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "陷阱",
     "weapon": "武器",
     "hero": "英雄",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "麦克风",
     "cosmeticjamtrack": "即兴曲目"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "普通",
     "uncommon": "罕见",
     "rare": "稀有",
@@ -43,7 +43,7 @@
     "legendary": "传奇",
     "mythic": "神话"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "地面发射器",
     "schematic:sid_floor_tar_r_t01": "焦油坑",
     "schematic:sid_ceiling_electric_single_r_t01": "吊顶诱捕器",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "火焰蕉宝",
     "athenadance:spray_winterfest2": "不用冒汗，雪鱼",
     "athenaglider:glider_rumplewisp": "冬季节日信"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "街机已摧毁",
+    "quest_reactive_destroybear_v3": "泰迪熊已摧毁",
+    "quest_reactive_destroyfiretruck_v2": "救火车已摧毁",
+    "quest_reactive_destroygnome_v2": "花园地精被摧毁",
+    "quest_reactive_destroypropane_v2": "丙烷罐已破坏",
+    "quest_reactive_destroyseesaw_v3": "已摧毁公园跷跷板",
+    "quest_reactive_destroyserverrack_v2": "服务器机架已破坏",
+    "quest_reactive_destroytransform_v3": "已摧毁工业电力变压器",
+    "quest_reactive_destroytv_v2": "TV已摧毁",
+    "quest_reactive_discoverconstruction_v2": "已发现建筑物位置",
+    "quest_reactive_discoverruinedhouses_v2": "农村位置发现",
+    "quest_reactive_discovershelter_v2": "已发现避难所位置",
+    "quest_reactive_discoverfastfood_v2": "郊区位置发现",
+    "quest_reactive_discoveremergencybuildings_v2": "已发现城市位置",
+    "complete_exploration_1": "已探索的区域",
+    "questcollect_survivoritemdata": "幸存者已营救",
+    "kill_husk": "已淘汰毒尸怪",
+    "kill_husk_constructor_v2": "使用建筑师消灭毒尸怪",
+    "kill_husk_melee": "用近战武器消灭毒尸怪",
+    "kill_husk_ninja_v2": "作为忍者已消灭毒尸怪",
+    "kill_husk_outlander_v2": "作为漂泊者消灭毒尸怪",
+    "kill_husk_assault": "用突击步枪消灭毒尸怪",
+    "kill_husk_pistol": "使用手枪消灭毒尸怪",
+    "kill_husk_shotgun": "使用霰弹枪消灭毒尸怪",
+    "kill_husk_smg": "用冲锋枪淘汰的毒尸怪",
+    "kill_husk_sniper": "使用狙击步枪消灭毒尸怪",
+    "kill_husk_commando_v2": "作为士兵消灭毒尸怪",
+    "kill_husk_trap": "使用陷阱击破毒尸怪",
+    "complete_buildradar_1_diff2": "雷达塔已建造",
+    "complete_primary": "任务完成",
+    "complete_constructor": "使用建筑师完成任务",
+    "complete_ninja": "使用忍者完成任务",
+    "complete_outlander": "使用漂泊者完成任务",
+    "complete_commando": "使用士兵完成任务",
+    "daily_partyof50": "幸存者已营救",
+    "interact_safe": "保险箱已拾取",
+    "interact_treasurechest": "财宝箱已搜刮"
   }
 }

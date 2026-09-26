@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "Bẫy",
     "weapon": "Vũ Khí",
     "hero": "Anh Hùng",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "Micro",
     "cosmeticjamtrack": "Bản Nhạc Biến Tấu"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "Thường",
     "uncommon": "Lạ",
     "rare": "Hiếm",
@@ -43,7 +43,7 @@
     "legendary": "Huyền Thoại",
     "mythic": "Thần Thoại"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "Sàn Hất Tung",
     "schematic:sid_floor_tar_r_t01": "Hố Hắc Ín",
     "schematic:sid_ceiling_electric_single_r_t01": "Bẫy Điện Trần",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "Ấm Áp & Peely",
     "athenadance:spray_winterfest2": "Nhàn Tênh, Cá Tuyết Ạ",
     "athenaglider:glider_rumplewisp": "Lá Thư Lễ Hội Mùa Đông"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "Máy Arcade đã phá hủy",
+    "quest_reactive_destroybear_v3": "Gấu Teddy đã phá hủy",
+    "quest_reactive_destroyfiretruck_v2": "Xe Cứu Hỏa đã phá hủy",
+    "quest_reactive_destroygnome_v2": "Thần Lùn Làm Vườn đã bị phá hủy",
+    "quest_reactive_destroypropane_v2": "Bình Khí Propan đã phá hủy",
+    "quest_reactive_destroyseesaw_v3": "Bập Bênh Công Viên đã phá hủy",
+    "quest_reactive_destroyserverrack_v2": "Giá Đỡ Máy Chủ đã phá hủy",
+    "quest_reactive_destroytransform_v3": "Máy Biến Áp Điện Công Nghiệp đã phá hủy",
+    "quest_reactive_destroytv_v2": "TV đã phá hủy",
+    "quest_reactive_discoverconstruction_v2": "Địa Điểm Xây Dựng Đã Khám Phá",
+    "quest_reactive_discoverruinedhouses_v2": "Địa Điểm Nông Thôn Đã Khám Phá",
+    "quest_reactive_discovershelter_v2": "Địa Điểm Nơi Trú Ẩn Đã Khám Phá",
+    "quest_reactive_discoverfastfood_v2": "Địa Điểm Ngoại Ô Đã Khám Phá",
+    "quest_reactive_discoveremergencybuildings_v2": "Địa Điểm Thành Phố Đã Khám Phá",
+    "complete_exploration_1": "Khu Vực đã thám hiểm",
+    "questcollect_survivoritemdata": "Người Sống Sót được giải cứu",
+    "kill_husk": "Xác khô bị hạ gục",
+    "kill_husk_constructor_v2": "Xác Khô bị hạ gục khi bạn trong vai Thợ Xây",
+    "kill_husk_melee": "Xác Khô bị hạ gục bằng vũ khí cận chiến",
+    "kill_husk_ninja_v2": "Xác Khô đã hạ gục với vai trò Ninja",
+    "kill_husk_outlander_v2": "Xác Khô bị hạ gục khi bạn trong vai Lãng Khách",
+    "kill_husk_assault": "Xác Khô bị hạ gục bằng súng trường xung kích",
+    "kill_husk_pistol": "Xác Khô bị hạ gục bằng súng lục",
+    "kill_husk_shotgun": "Xác Khô bị hạ gục bằng shotgun",
+    "kill_husk_smg": "Xác Khô bị hạ gục bằng SMG",
+    "kill_husk_sniper": "Xác Khô bị hạ gục bằng súng trường bắn tỉa",
+    "kill_husk_commando_v2": "Xác Khô bị hạ gục khi bạn trong vai Chiến Binh",
+    "kill_husk_trap": "Xác Khô bị hạ gục bằng bẫy",
+    "complete_buildradar_1_diff2": "Tháp Ra-đa đã xây",
+    "complete_primary": "Sứ mệnh đã hoàn thành",
+    "complete_constructor": "Sứ mệnh đã hoàn thành với vai trò Thợ Xây",
+    "complete_ninja": "Sứ mệnh đã hoàn thành với vai trò Ninja",
+    "complete_outlander": "Sứ mệnh đã hoàn thành với vai trò Lãng Khách",
+    "complete_commando": "Sứ mệnh đã hoàn thành với vai trò Chiến Binh",
+    "daily_partyof50": "Người Sống Sót được giải cứu",
+    "interact_safe": "Két đã nhặt",
+    "interact_treasurechest": "Rương kho báu đã nhặt"
   }
 }

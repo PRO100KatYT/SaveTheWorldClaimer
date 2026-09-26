@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "Perangkap",
     "weapon": "Senjata",
     "hero": "Hero",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "Mikrofon",
     "cosmeticjamtrack": "Lagu Jamming"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "Common",
     "uncommon": "Uncommon",
     "rare": "Rare",
@@ -43,7 +43,7 @@
     "legendary": "Legendary",
     "mythic": "Mythic"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "Peluncur Lantai",
     "schematic:sid_floor_tar_r_t01": "Lubang Ter",
     "schematic:sid_ceiling_electric_single_r_t01": "Penyetrum Langit-Langit",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "Warm & Peely",
     "athenadance:spray_winterfest2": "Santai, Ikan Salju",
     "athenaglider:glider_rumplewisp": "Surat Festival Musim Dingin"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "Mesin Arkade dihancurkan",
+    "quest_reactive_destroybear_v3": "Beruang Teddy dihancurkan",
+    "quest_reactive_destroyfiretruck_v2": "Mobil Pemadam dihancurkan",
+    "quest_reactive_destroygnome_v2": "Gnome Taman dihancurkan",
+    "quest_reactive_destroypropane_v2": "Tangki Propana dihancurkan",
+    "quest_reactive_destroyseesaw_v3": "Jungkat-jungkit Taman dihancurkan",
+    "quest_reactive_destroyserverrack_v2": "Rak Server dihancurkan",
+    "quest_reactive_destroytransform_v3": "Trafo Daya Industri dihancurkan",
+    "quest_reactive_destroytv_v2": "TV dihancurkan",
+    "quest_reactive_discoverconstruction_v2": "Lokasi Konstruksi Ditemukan",
+    "quest_reactive_discoverruinedhouses_v2": "Lokasi Pedesaan Ditemukan",
+    "quest_reactive_discovershelter_v2": "Lokasi Selter Ditemukan",
+    "quest_reactive_discoverfastfood_v2": "Lokasi Pinggiran Kota Ditemukan",
+    "quest_reactive_discoveremergencybuildings_v2": "Lokasi Kota Ditemukan",
+    "complete_exploration_1": "Zona yang sudah dijelajahi",
+    "questcollect_survivoritemdata": "Penyintas terselamatkan",
+    "kill_husk": "Husk tersingkir",
+    "kill_husk_constructor_v2": "Husk tersingkir sebagai Pembangun",
+    "kill_husk_melee": "Husk tersingkir dengan senjata jarak dekat",
+    "kill_husk_ninja_v2": "Husk tersingkir sebagai Ninja",
+    "kill_husk_outlander_v2": "Husk tersingkir sebagai Pengelana",
+    "kill_husk_assault": "Husk tersingkir dengan senapan serbu",
+    "kill_husk_pistol": "Husk tersingkir dengan pistol",
+    "kill_husk_shotgun": "Husk tersingkir dengan senapan gentel",
+    "kill_husk_smg": "Husk tersingkir dengan SMG",
+    "kill_husk_sniper": "Husk tersingkir dengan senapan penembak runduk",
+    "kill_husk_commando_v2": "Husk tersingkir sebagai Serdadu",
+    "kill_husk_trap": "Husk tersingkir dengan perangkap",
+    "complete_buildradar_1_diff2": "Menara Radar dibangun",
+    "complete_primary": "Misi selesai",
+    "complete_constructor": "Misi selesai sebagai Pembangun",
+    "complete_ninja": "Misi selesai sebagai Ninja",
+    "complete_outlander": "Misi selesai sebagai Pengelana",
+    "complete_commando": "Misi selesai sebagai Serdadu",
+    "daily_partyof50": "Penyintas terselamatkan",
+    "interact_safe": "Brankas dijarah",
+    "interact_treasurechest": "Peti harta karun dijarah"
   }
 }

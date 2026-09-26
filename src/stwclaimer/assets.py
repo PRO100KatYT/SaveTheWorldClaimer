@@ -45,5 +45,14 @@ class Assets:
     def get_ui_str(self, key: str) -> str:
         return self.interface.get(key, key)
 
-    def get_item_name(self, template_id_lower: str) -> str:
-        return self.items.get(template_id_lower, template_id_lower)
+    def get_type_str(self, item_type_lower: str) -> str:
+        return self.items["types"].get(item_type_lower, item_type_lower)
+
+    def get_rarity_str(self, rarity_lower: str) -> str:
+        return self.items["rarities"].get(rarity_lower, rarity_lower)
+
+    def get_item_str(self, template_id_lower: str) -> str:
+        return self.items["items"].get(template_id_lower, template_id_lower)
+
+    def get_objective_str(self, objective_lower: str) -> str:
+        return self.items["objectives"].get(objective_lower, objective_lower)

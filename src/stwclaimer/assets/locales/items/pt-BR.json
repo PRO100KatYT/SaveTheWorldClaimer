@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "Armadilha",
     "weapon": "Arma",
     "hero": "Herói",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "Microfone",
     "cosmeticjamtrack": "Música"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "Comum",
     "uncommon": "Incomum",
     "rare": "Raro",
@@ -43,7 +43,7 @@
     "legendary": "Lendário",
     "mythic": "Mítico"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "Lançador de Piso",
     "schematic:sid_floor_tar_r_t01": "Poço de Piche",
     "schematic:sid_ceiling_electric_single_r_t01": "Zapper de Teto",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "Quente e Embananado",
     "athenadance:spray_winterfest2": "Não Esquenta, Peixe das Neves",
     "athenaglider:glider_rumplewisp": "Carta do Festival Invernal"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "Máquinas de Fliperama destruídas",
+    "quest_reactive_destroybear_v3": "Ursos de Pelúcia destruídos",
+    "quest_reactive_destroyfiretruck_v2": "Caminhão de Bombeiro destruído",
+    "quest_reactive_destroygnome_v2": "Gnomos de Jardim destruídos",
+    "quest_reactive_destroypropane_v2": "Tanques de Propano destruídos",
+    "quest_reactive_destroyseesaw_v3": "Gangorras de Parque destruídas",
+    "quest_reactive_destroyserverrack_v2": "Armários de Servidor destruídos",
+    "quest_reactive_destroytransform_v3": "Transformadores de Força Industriais destruídos",
+    "quest_reactive_destroytv_v2": "TVs destruídas",
+    "quest_reactive_discoverconstruction_v2": "Local de Construção Descoberto",
+    "quest_reactive_discoverruinedhouses_v2": "Local Rural Descoberto",
+    "quest_reactive_discovershelter_v2": "Local de Abrigo Descoberto",
+    "quest_reactive_discoverfastfood_v2": "Local Suburbano Descoberto",
+    "quest_reactive_discoveremergencybuildings_v2": "Local na Cidade Descoberto",
+    "complete_exploration_1": "Áreas exploradas",
+    "questcollect_survivoritemdata": "Sobreviventes salvos",
+    "kill_husk": "Carcaças eliminadas",
+    "kill_husk_constructor_v2": "Carcaças eliminadas como Construtor",
+    "kill_husk_melee": "Carcaças eliminadas com uma arma branca",
+    "kill_husk_ninja_v2": "Carcaça eliminada como Ninja",
+    "kill_husk_outlander_v2": "Carcaças eliminadas como Forasteiro",
+    "kill_husk_assault": "Carcaças eliminadas com um rifle de assalto",
+    "kill_husk_pistol": "Carcaças eliminadas com uma pistola",
+    "kill_husk_shotgun": "Carcaças eliminadas com uma espingarda",
+    "kill_husk_smg": "Carcaças eliminadas com uma SMG",
+    "kill_husk_sniper": "Carcaças eliminadas com um rifle de precisão",
+    "kill_husk_commando_v2": "Carcaças eliminadas como Soldado",
+    "kill_husk_trap": "Carcaças eliminadas com armadilhas",
+    "complete_buildradar_1_diff2": "Torres de Radar construídas",
+    "complete_primary": "Missões concluídas",
+    "complete_constructor": "Missões concluídas como Construtor",
+    "complete_ninja": "Missões concluídas como Ninja",
+    "complete_outlander": "Missões concluídas como Forasteiro",
+    "complete_commando": "Missões concluídas como Soldado",
+    "daily_partyof50": "Sobreviventes salvos",
+    "interact_safe": "Cofres saqueados",
+    "interact_treasurechest": "Baús de tesouro saqueados"
   }
 }

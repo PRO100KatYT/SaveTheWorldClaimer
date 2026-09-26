@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "함정",
     "weapon": "무기",
     "hero": "영웅",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "마이크",
     "cosmeticjamtrack": "잼 트랙"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "일반",
     "uncommon": "고급",
     "rare": "희귀",
@@ -43,7 +43,7 @@
     "legendary": "전설",
     "mythic": "신화"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "바닥 발사 장치",
     "schematic:sid_floor_tar_r_t01": "타르 구덩이",
     "schematic:sid_ceiling_electric_single_r_t01": "천장 감전기",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "따뜻한 필리",
     "athenadance:spray_winterfest2": "노 스웨트, 눈꽃 물고기",
     "athenaglider:glider_rumplewisp": "겨울축제 편지"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "오락기 파괴",
+    "quest_reactive_destroybear_v3": "테디 베어 파괴",
+    "quest_reactive_destroyfiretruck_v2": "소방차 파괴",
+    "quest_reactive_destroygnome_v2": "정원 요정 상 파괴",
+    "quest_reactive_destroypropane_v2": "프로판 가스통 파괴",
+    "quest_reactive_destroyseesaw_v3": "공원 시소 파괴",
+    "quest_reactive_destroyserverrack_v2": "서버 랙 파괴",
+    "quest_reactive_destroytransform_v3": "산업용 변압기 파괴",
+    "quest_reactive_destroytv_v2": "TV 파괴",
+    "quest_reactive_discoverconstruction_v2": "건설 지역 발견",
+    "quest_reactive_discoverruinedhouses_v2": "교외 지역 발견",
+    "quest_reactive_discovershelter_v2": "대피소 지역 발견",
+    "quest_reactive_discoverfastfood_v2": "교외 지역 발견",
+    "quest_reactive_discoveremergencybuildings_v2": "도시 지역 발견",
+    "complete_exploration_1": "구역 탐험",
+    "questcollect_survivoritemdata": "생존자 구조",
+    "kill_husk": "허스크 처치",
+    "kill_husk_constructor_v2": "건축가로 허스크 처치",
+    "kill_husk_melee": "근접 무기로 허스크 처치",
+    "kill_husk_ninja_v2": "닌자로 허스크 처치",
+    "kill_husk_outlander_v2": "개척자로 허스크 처치",
+    "kill_husk_assault": "돌격소총으로 허스크 처치",
+    "kill_husk_pistol": "권총으로 허스크 처치",
+    "kill_husk_shotgun": "산탄총으로 허스크 처치",
+    "kill_husk_smg": "기관단총으로 허스크 처치",
+    "kill_husk_sniper": "저격소총으로 허스크 처치",
+    "kill_husk_commando_v2": "군인으로 허스크 처치",
+    "kill_husk_trap": "함정으로 허스크 처치",
+    "complete_buildradar_1_diff2": "레이더 탑 건설",
+    "complete_primary": "미션 완료",
+    "complete_constructor": "건축가로 미션 완료",
+    "complete_ninja": "닌자로 미션 완료",
+    "complete_outlander": "개척자로 미션 완료",
+    "complete_commando": "군인으로 미션 완료",
+    "daily_partyof50": "생존자 구출 완료",
+    "interact_safe": "금고 획득",
+    "interact_treasurechest": "보물상자 획득"
   }
 }

@@ -1,10 +1,10 @@
 {
-  "Llama tiers": {
+  "llama_tiers": {
     "0": "Zwykły (1)",
     "1": "Srebrny (2)",
     "2": "Złoty (3)"
   },
-  "Item Types": {
+  "types": {
     "trap": "Pułapka",
     "weapon": "Broń",
     "hero": "Bohater",
@@ -40,7 +40,7 @@
     "cosmeticmicrophone": "Mikrofon",
     "cosmeticjamtrack": "Ścieżka jamowa"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "Zwykłe",
     "uncommon": "Niepospolite",
     "rare": "Rzadkie",
@@ -48,7 +48,7 @@
     "legendary": "Legendarne",
     "mythic": "Mityczne"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "Wyrzutnia podłogowa",
     "schematic:sid_floor_tar_r_t01": "Smolna kałuża",
     "schematic:sid_ceiling_electric_single_r_t01": "Sufitowy porażacz",
@@ -2154,5 +2154,44 @@
     "athenadance:spray_winterfest": "Ciepło i skórkowo",
     "athenadance:spray_winterfest2": "Bez spiny, rybeńko",
     "athenaglider:glider_rumplewisp": "List Festiwalu Zimy"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "Automaty do gier zniszczone",
+    "quest_reactive_destroybear_v3": "Pluszowe misie zlikwidowane",
+    "quest_reactive_destroyfiretruck_v2": "Wóz strażacki zniszczony",
+    "quest_reactive_destroygnome_v2": "Zniszczone gnomy ogrodowe",
+    "quest_reactive_destroypropane_v2": "Zniszczone butle z gazem",
+    "quest_reactive_destroyseesaw_v3": "Huśtawki zniszczone",
+    "quest_reactive_destroyserverrack_v2": "Szafy serwerowe zniszczone",
+    "quest_reactive_destroytransform_v3": "Przemysłowe transformatory zniszczone",
+    "quest_reactive_destroytv_v2": "Telewizory zniszczone",
+    "quest_reactive_discoverconstruction_v2": "Odnaleziono plac budowy",
+    "quest_reactive_discoverruinedhouses_v2": "Odnaleziono miejsce na wsi",
+    "quest_reactive_discovershelter_v2": "Odkryto położenie schronu",
+    "quest_reactive_discoverfastfood_v2": "Odnaleziono miejsce na przedmieściu",
+    "quest_reactive_discoveremergencybuildings_v2": "Odnaleziono miejsce w mieście",
+    "complete_exploration_1": "Strefy odkryte",
+    "questcollect_survivoritemdata": "Ocaleńcy uratowani",
+    "kill_husk": "Pustaki zlikwidowane",
+    "kill_husk_constructor_v2": "Pustaki zlikwidowane jako Budowniczy",
+    "kill_husk_melee": "Pustaki zlikwidowane bronią białą",
+    "kill_husk_ninja_v2": "Pustaki zlikwidowane jako Ninja",
+    "kill_husk_outlander_v2": "Pustaki zlikwidowane jako Rubieżnik",
+    "kill_husk_assault": "Pustaki zlikwidowane z karabinu szturmowego",
+    "kill_husk_pistol": "Pustaki zlikwidowane z pistoletu",
+    "kill_husk_shotgun": "Pustaki zlikwidowane ze strzelby",
+    "kill_husk_smg": "Pustaki zlikwidowane z pistoletu maszynowego",
+    "kill_husk_sniper": "Pustaki zlikwidowane z karabinu snajperskiego",
+    "kill_husk_commando_v2": "Pustaki zlikwidowane jako Żołnierz",
+    "kill_husk_trap": "Pustaki zlikwidowane przy użyciu pułapek",
+    "complete_buildradar_1_diff2": "Wieże radarowe zbudowane",
+    "complete_primary": "Ukończone misje",
+    "complete_constructor": "Misje ukończone jako Budowniczy",
+    "complete_ninja": "Misje ukończone jako Ninja",
+    "complete_outlander": "Misje ukończone jako Rubieżnik",
+    "complete_commando": "Misje ukończone jako Żołnierz",
+    "daily_partyof50": "Ocaleńcy uratowani",
+    "interact_safe": "Sejfy złupione",
+    "interact_treasurechest": "Złupione skrzynie ze skarbami"
   }
 }

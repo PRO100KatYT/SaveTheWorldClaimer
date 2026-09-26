@@ -1,5 +1,5 @@
 {
-  "Item Types": {
+  "types": {
     "trap": "トラップ",
     "weapon": "武器",
     "hero": "ヒーロー",
@@ -35,7 +35,7 @@
     "cosmeticmicrophone": "マイク",
     "cosmeticjamtrack": "ジャムトラック"
   },
-  "Item Rarities": {
+  "rarities": {
     "common": "コモン",
     "uncommon": "アンコモン",
     "rare": "レア",
@@ -43,7 +43,7 @@
     "legendary": "レジェンド",
     "mythic": "ミシック"
   },
-  "Items": {
+  "items": {
     "schematic:sid_floor_launcher_sr_t01": "フロアランチャー",
     "schematic:sid_floor_tar_r_t01": "タールピット",
     "schematic:sid_ceiling_electric_single_r_t01": "シーリングザッパー",
@@ -2149,5 +2149,44 @@
     "athenadance:spray_winterfest": "暖かくピーリー",
     "athenadance:spray_winterfest2": "No Sweatスノーフィッシュ",
     "athenaglider:glider_rumplewisp": "ウィンターフェストの手紙"
+  },
+  "objectives": {
+    "quest_reactive_destroyarcade_v4": "アーケードマシンを破壊する",
+    "quest_reactive_destroybear_v3": "テディベアを破壊する",
+    "quest_reactive_destroyfiretruck_v2": "消防車を破壊する",
+    "quest_reactive_destroygnome_v2": "ガーデンノームを破壊する",
+    "quest_reactive_destroypropane_v2": "プロパンタンクを破壊する",
+    "quest_reactive_destroyseesaw_v3": "公園のシーソーを破壊する",
+    "quest_reactive_destroyserverrack_v2": "サーバーラックを破壊する",
+    "quest_reactive_destroytransform_v3": "工業用電力変圧器を破壊する",
+    "quest_reactive_destroytv_v2": "テレビを破壊する",
+    "quest_reactive_discoverconstruction_v2": "建設現場を発見する",
+    "quest_reactive_discoverruinedhouses_v2": "農村ロケーションを発見する",
+    "quest_reactive_discovershelter_v2": "シェルターの場所を発見する",
+    "quest_reactive_discoverfastfood_v2": "郊外ロケーションを発見する",
+    "quest_reactive_discoveremergencybuildings_v2": "市街地ロケーションを発見する",
+    "complete_exploration_1": "ゾーンを探索する",
+    "questcollect_survivoritemdata": "サバイバーを救助する",
+    "kill_husk": "ハスクを撃破",
+    "kill_husk_constructor_v2": "コンストラクターでハスクを倒す",
+    "kill_husk_melee": "近接武器でハスクを倒す",
+    "kill_husk_ninja_v2": "ニンジャでハスクを倒す",
+    "kill_husk_outlander_v2": "アウトランダーでハスクを倒す",
+    "kill_husk_assault": "アサルトライフルでハスクを倒す",
+    "kill_husk_pistol": "ピストルでハスクを倒す",
+    "kill_husk_shotgun": "ショットガンでハスクを倒す",
+    "kill_husk_smg": "SMGでハスクを倒す",
+    "kill_husk_sniper": "スナイパーライフルでハスクを倒す",
+    "kill_husk_commando_v2": "ソルジャーでハスクを倒す",
+    "kill_husk_trap": "トラップでハスクを倒す",
+    "complete_buildradar_1_diff2": "建築したレーダー塔",
+    "complete_primary": "ミッションクリア",
+    "complete_constructor": "コンストラクターでミッションをクリアする",
+    "complete_ninja": "ニンジャでミッションをクリアする",
+    "complete_outlander": "アウトランダーでミッションをクリアする",
+    "complete_commando": "ソルジャーでミッションをクリアする",
+    "daily_partyof50": "サバイバーを救助する",
+    "interact_safe": "開けた金庫",
+    "interact_treasurechest": "開けた宝箱"
   }
 }
