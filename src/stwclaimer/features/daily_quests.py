@@ -2,6 +2,24 @@ import profiles
 import core
 
 
+async def can_receive_mtx(manager: profiles.ProfileManager) -> bool:
+    profile = await manager.get_profile("common_core")
+    for item_id in profile["items"]:
+        if (
+            profile["items"][item_id]["templateId"].lower()
+            == "token:receivemtxcurrency"
+        ):
+            return True
+    return False
+
+
+async def get_quest_rerolls(manager: profiles.ProfileManager) -> int:
+    profile = await manager.get_profile("campaign")
+    attributes = profile["stats"]["attributes"]
+
+    return attributes.get("quest_manager", {}).get("dailyQuestRerolls", 0)
+
+
 def is_active_daily_quest(item: dict) -> bool:
     return (
         item["templateId"].lower().startswith("quest:daily_")
@@ -60,38 +78,3 @@ def get_quest_parts(ctx: core.Context, item: dict, receive_mtx: bool) -> str:
     rewards = ", ".join(rewards)
 
     return (name, objectives, rewards)
-
-
-def display_quests(ctx: core.Context, daily_quests: dict, receive_mtx: bool) -> None:
-    counter = 0
-
-    if not daily_quests:
-        print(ctx.ast.get_ui_str("daily_quests.noquests"))
-
-    for quest_id in daily_quests["daily_quest_items"]:
-        counter += 1
-        name, objectives, rewards = get_quest_parts(
-            ctx, daily_quests["daily_quest_items"][quest_id], receive_mtx
-        )
-
-        if quest_id in daily_quests["new_quest_ids"]:
-            quest_string = ctx.ast.get_ui_str("daily_quests.displaynew")
-        else:
-            quest_string = ctx.ast.get_ui_str("daily_quests.display")
-
-        print(quest_string.format(counter, name, objectives, rewards))
-
-    print()
-
-
-async def main(ctx: core.Context, manager: profiles.ProfileManager) -> None:
-    print(ctx.ast.get_ui_str("daily_quests.fetching"))
-
-    await manager.query_profile("campaign")
-    profile_updates = await manager.client_quest_login("campaign")
-    profile_changes = manager.get_profile_changes(profile_updates, "campaign")
-
-    daily_quests = get_daily_quests(manager, profile_changes)
-
-    receive_mtx = await manager.can_receive_mtx()
-    display_quests(ctx, daily_quests, receive_mtx)

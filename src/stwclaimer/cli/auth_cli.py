@@ -52,12 +52,8 @@ async def remove_account(ctx: core.Context) -> None:
     auth_json = auth.read_auth()
 
     while True:
-        options = []
-        for account_id, data in auth_json.items():
-            options.append(questionary.Choice(data["display_name"], account_id))
-
-        choice = await utils_cli.select(
-            ctx, ctx.ast.get_ui_str("auth_cli.remove_account.title"), options
+        choice = await utils_cli.select_account(
+            ctx, auth_json, ctx.ast.get_ui_str("auth_cli.remove_account.title")
         )
 
         if choice is False or choice is None:

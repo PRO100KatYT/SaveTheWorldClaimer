@@ -7,15 +7,10 @@ class ProfileManager:
         self.mcp = mcp_api
         self.cache = {}
 
-    async def can_receive_mtx(self) -> bool:
-        if not "common_core" in self.cache:
-            await self.query_profile("common_core")
-
-        items = self.cache["common_core"]["items"]
-        for item_id in items:
-            if items[item_id]["templateId"].lower() == "token:receivemtxcurrency":
-                return True
-        return False
+    async def get_profile(self, profile_id: str) -> dict:
+        if profile_id not in self.cache:
+            await self.query_profile(profile_id)
+        return self.cache[profile_id]
 
     def get_profile_rvn(self, profile_id: str) -> int:
         if not profile_id in self.cache:
@@ -101,3 +96,8 @@ class ProfileManager:
 
     async def client_quest_login(self, profile_id: str) -> dict:
         return await self.base_request("ClientQuestLogin", profile_id)
+
+    async def fort_reroll_daily_quest(self, profile_id: str, quest_id: str) -> dict:
+        return await self.base_request(
+            "FortRerollDailyQuest", profile_id, {"questId": quest_id}
+        )

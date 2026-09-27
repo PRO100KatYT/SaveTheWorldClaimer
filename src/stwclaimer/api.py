@@ -1,6 +1,8 @@
 import httpx
 from json import JSONDecodeError
 
+EPIC_OAUTH_BASIC_TOKEN = "basic M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU="
+
 
 class EpicAPI:
     def __init__(self):
@@ -33,9 +35,7 @@ class AuthAPI:
         self.epic = epic_api
 
     async def get_token_by_code(self, auth_code: str) -> dict:
-        req_headers = {
-            "Authorization": "basic M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU="
-        }
+        req_headers = {"Authorization": EPIC_OAUTH_BASIC_TOKEN}
 
         json_body = {
             "grant_type": "authorization_code",
@@ -52,9 +52,7 @@ class AuthAPI:
     async def get_token_by_device(
         self, account_id: str, device_id: str, secret: str
     ) -> dict:
-        req_headers = {
-            "Authorization": "basic M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU="
-        }
+        req_headers = {"Authorization": EPIC_OAUTH_BASIC_TOKEN}
 
         json_body = {
             "grant_type": "device_auth",

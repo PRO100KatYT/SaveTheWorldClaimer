@@ -36,7 +36,8 @@
   "menu.main_menu.title": "Menu Główne:",
   "menu.main_menu.exit": "Wyjdź",
   "menu.main_menu.start": "Uruchom program",
-  "menu.main_menu.manageaccounts": "Zarządzaj kontami",
+  "menu.main_menu.dailyquests": "Zadania Dnia",
+  "menu.main_menu.manageaccounts": "Konta",
   "auth_cli.menu.title": "Zarządzanie kontami:",
   "auth_cli.menu.addaccount": "Dodaj konto",
   "auth_cli.menu.listaccounts": "Wypisz dodane konta",
@@ -50,10 +51,11 @@
   "auth_cli.remove_account.title": "Wybierz konto do usunięcia:",
   "auth_cli.remove_account.confirmation": "Jesteś pewny(a), że chcesz usunąć konto {0} z programu?",
   "auth_cli.remove_account.success": "\nPomyślnie usunięto konto {0} z programu.\n",
-  "claimer.loop.loggingin": "\nLogowanie jako {0}...",
-  "claimer.loop.success": "Sukces!",
-  "daily_quests.fetching": "\nPozyskiwanie zadań dnia...\n",
-  "daily_quests.display": "{0}. {1} | Postęp: {2} | Nagrody: {3}",
-  "daily_quests.displaynew": "{0}. (Nowe!) {1} | Postęp: {2} | Nagrody: {3}",
-  "daily_quests.noquests": "Nie znaleziono aktywnych zadań dnia. Wróć jutro!"
+  "utils_cli.login.loggingin": "\nLogowanie jako {0}...",
+  "utils_cli.login.success": "Sukces!",
+  "daily_quests_cli.fetching": "\nPozyskiwanie zadań dnia...\n",
+  "daily_quests_cli.display": "{0}. {1} | Postęp: {2} | Nagrody: {3}",
+  "daily_quests_cli.displaynew": "{0}. (Nowe!) {1} | Postęp: {2} | Nagrody: {3}",
+  "daily_quests_cli.noquests": "Nie znaleziono aktywnych zadań dnia. Wróć jutro!",
+  "daily_quests_cli.select_account.title": "Wybierz konto do zarządzania zadaniami dnia:"
 }

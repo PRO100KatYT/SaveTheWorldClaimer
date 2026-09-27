@@ -35,7 +35,8 @@
   "menu.main_menu.title": "Main Menu:",
   "menu.main_menu.exit": "Exit",
   "menu.main_menu.start": "Start this program",
-  "menu.main_menu.manageaccounts": "Manage accounts",
+  "menu.main_menu.dailyquests": "Daily Quests",
+  "menu.main_menu.manageaccounts": "Accounts",
   "auth_cli.menu.title": "Account Management:",
   "auth_cli.menu.addaccount": "Add an account",
   "auth_cli.menu.listaccounts": "List accounts",
@@ -49,10 +50,11 @@
   "auth_cli.remove_account.title": "Select an account to remove:",
   "auth_cli.remove_account.confirmation": "Are you sure you want to remove {0} from the program?",
   "auth_cli.remove_account.success": "\nSuccessfully removed {0} from the program.\n",
-  "claimer.loop.loggingin": "\nLogging in as {0}...",
-  "claimer.loop.success": "Success!",
-  "daily_quests.fetching": "\nFetching daily quests...\n",
-  "daily_quests.display": "{0}. {1} | Progress: {2} | Rewards: {3}",
-  "daily_quests.displaynew": "{0}. (New!) {1} | Progress: {2} | Rewards: {3}",
-  "daily_quests.noquests": "No active daily challenges found. Come back tommorow!"
+  "utils_cli.login.loggingin": "\nLogging in as {0}...",
+  "utils_cli.login.success": "Success!",
+  "daily_quests_cli.fetching": "\nFetching daily quests...\n",
+  "daily_quests_cli.display": "{0}. {1} | Progress: {2} | Rewards: {3}",
+  "daily_quests_cli.displaynew": "{0}. (New!) {1} | Progress: {2} | Rewards: {3}",
+  "daily_quests_cli.noquests": "No active daily challenges found. Come back tommorow!",
+  "daily_quests_cli.select_account.title": "Select an account to manage daily quests:"
 }
