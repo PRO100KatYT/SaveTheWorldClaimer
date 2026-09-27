@@ -28,7 +28,7 @@ def get_daily_quests(manager: profiles.ProfileManager, profile_changes: list) ->
     return output
 
 
-def get_quest_parts(ctx: core.Context, item: dict) -> str:
+def get_quest_parts(ctx: core.Context, item: dict, receive_mtx: bool) -> str:
     name = ctx.ast.get_item_str(item["templateId"].lower())
     quest_data = ctx.ast.data["items"][item["templateId"].lower()]
 
@@ -46,10 +46,12 @@ def get_quest_parts(ctx: core.Context, item: dict) -> str:
         template_id = template_id.lower()
 
         if template_id.startswith("conditionalresource:"):
-            reward_names = [
-                ctx.ast.get_item_str(template_id)["PassedConditionItem"],
-                ctx.ast.get_item_str(template_id)["FailedConditionItem"],
-            ]
+            reward_names = [ctx.ast.get_item_str(template_id)["FailedConditionItem"]]
+
+            if receive_mtx:
+                reward_names.insert(
+                    0, ctx.ast.get_item_str(template_id)["PassedConditionItem"]
+                )
         else:
             reward_names = [ctx.ast.get_item_str(template_id)]
 
@@ -60,7 +62,7 @@ def get_quest_parts(ctx: core.Context, item: dict) -> str:
     return (name, objectives, rewards)
 
 
-def display_quests(ctx: core.Context, daily_quests: dict) -> None:
+def display_quests(ctx: core.Context, daily_quests: dict, receive_mtx: bool) -> None:
     counter = 0
 
     if not daily_quests:
@@ -69,7 +71,7 @@ def display_quests(ctx: core.Context, daily_quests: dict) -> None:
     for quest_id in daily_quests["daily_quest_items"]:
         counter += 1
         name, objectives, rewards = get_quest_parts(
-            ctx, daily_quests["daily_quest_items"][quest_id]
+            ctx, daily_quests["daily_quest_items"][quest_id], receive_mtx
         )
 
         if quest_id in daily_quests["new_quest_ids"]:
@@ -83,11 +85,13 @@ def display_quests(ctx: core.Context, daily_quests: dict) -> None:
 
 
 async def main(ctx: core.Context, manager: profiles.ProfileManager) -> None:
+    print(ctx.ast.get_ui_str("daily_quests.fetching"))
+
     await manager.query_profile("campaign")
     profile_updates = await manager.client_quest_login("campaign")
     profile_changes = manager.get_profile_changes(profile_updates, "campaign")
 
-    print(ctx.ast.get_ui_str("daily_quests.fetching"))
     daily_quests = get_daily_quests(manager, profile_changes)
 
-    display_quests(ctx, daily_quests)
+    receive_mtx = await manager.can_receive_mtx()
+    display_quests(ctx, daily_quests, receive_mtx)

@@ -7,6 +7,16 @@ class ProfileManager:
         self.mcp = mcp_api
         self.cache = {}
 
+    async def can_receive_mtx(self) -> bool:
+        if not "common_core" in self.cache:
+            await self.query_profile("common_core")
+
+        items = self.cache["common_core"]["items"]
+        for item_id in items:
+            if items[item_id]["templateId"].lower() == "token:receivemtxcurrency":
+                return True
+        return False
+
     def get_profile_rvn(self, profile_id: str) -> int:
         if not profile_id in self.cache:
             self.cache[profile_id] = {"commandRevision": -1}
