@@ -27,7 +27,9 @@ def is_active_daily_quest(item: dict) -> bool:
     )
 
 
-def get_daily_quests(manager: profiles.ProfileManager, profile_changes: list) -> dict:
+async def get_daily_quests(
+    manager: profiles.ProfileManager, profile_changes: list = []
+) -> dict:
     output = {"new_quest_ids": [], "daily_quest_items": {}}
 
     for change in profile_changes:
@@ -37,11 +39,13 @@ def get_daily_quests(manager: profiles.ProfileManager, profile_changes: list) ->
             continue
         output["new_quest_ids"].append(change["itemId"])
 
-    for guid, item in manager.cache["campaign"]["items"].items():
-        if not is_active_daily_quest(item):
+    profile = await manager.get_profile("campaign")
+
+    for guid in profile["items"]:
+        if not is_active_daily_quest(profile["items"][guid]):
             continue
 
-        output["daily_quest_items"][guid] = item
+        output["daily_quest_items"][guid] = profile["items"][guid]
 
     return output
 

@@ -57,5 +57,12 @@
   "daily_quests_cli.display": "{0}. {1} | Postęp: {2} | Nagrody: {3}",
   "daily_quests_cli.displaynew": "{0}. (Nowe!) {1} | Postęp: {2} | Nagrody: {3}",
   "daily_quests_cli.noquests": "Nie znaleziono aktywnych zadań dnia. Wróć jutro!",
-  "daily_quests_cli.select_account.title": "Wybierz konto do zarządzania zadaniami dnia:"
+  "daily_quests_cli.select_account.title": "Wybierz konto do zarządzania zadaniami dnia:",
+  "daily_quests_cli.select_daily_quest.title": "Wybierz zadanie, które chciał(a)byś wymienić:",
+  "daily_quests_cli.select_daily_quest.display": "{0} | Postęp: {1} | Nagrody: {2}",
+  "daily_quests_cli.select_daily_quest.displaynew": "(Nowe!) {0} | Postęp: {1} | Nagrody: {2}",
+  "daily_quests_cli.replace.confirmation": "Możesz wymienić jedno zadanie lub wyzwanie dzienne. Czy na pewno chcesz wymienić te zadanie?",
+  "daily_quests_cli.replace.progress": "Wymienianie zadania...",
+  "daily_quests_cli.replace.success": "Sukces!",
+  "daily_quests_cli.replace.norerolls": "Nie możesz dziś już wymienić żadnych Zadań dnia. Zajrzyj tu jutro!\nNaciśnij ENTER, aby kontynuować."
 }

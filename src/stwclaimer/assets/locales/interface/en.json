@@ -56,5 +56,12 @@
   "daily_quests_cli.display": "{0}. {1} | Progress: {2} | Rewards: {3}",
   "daily_quests_cli.displaynew": "{0}. (New!) {1} | Progress: {2} | Rewards: {3}",
   "daily_quests_cli.noquests": "No active daily challenges found. Come back tommorow!",
-  "daily_quests_cli.select_account.title": "Select an account to manage daily quests:"
+  "daily_quests_cli.select_account.title": "Select an account to manage daily quests:",
+  "daily_quests_cli.select_daily_quest.title": "Select the quest you'd like to replace:",
+  "daily_quests_cli.select_daily_quest.display": "{0} | Progress: {1} | Rewards: {2}",
+  "daily_quests_cli.select_daily_quest.displaynew": "(New!) {0} | Progress: {1} | Rewards: {2}",
+  "daily_quests_cli.replace.confirmation": "You can replace one quest or challenge each day. Are you sure you want to replace this quest?",
+  "daily_quests_cli.replace.progress": "Replacing the quest...",
+  "daily_quests_cli.replace.success": "Success!",
+  "daily_quests_cli.replace.norerolls": "You can't replace any more Daily Quests today. Come back tommorow!\nPress ENTER to continue."
 }
