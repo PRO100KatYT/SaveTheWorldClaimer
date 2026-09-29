@@ -131,6 +131,7 @@ async def menu(ctx: core.Context) -> None:
         mcp = api.McpAPI(choice, ctx.epic)
         manager = profiles.ProfileManager(mcp)
 
+        await manager.query_profile("campaign")
         profile_updates = await manager.client_quest_login("campaign")
         profile_changes = manager.get_profile_changes(profile_updates, "campaign")
 
