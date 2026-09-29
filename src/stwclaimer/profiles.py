@@ -13,11 +13,11 @@ class ProfileManager:
         return self.cache[profile_id]
 
     def get_profile_rvn(self, profile_id: str) -> int:
-        if not profile_id in self.cache:
+        if profile_id not in self.cache:
             self.cache[profile_id] = {"commandRevision": -1}
         return self.cache[profile_id]["commandRevision"]
 
-    def update_revisions_headers(self) -> None:
+    def set_revisions_headers(self) -> None:
         revisions = []
 
         for profile_id in self.cache:
@@ -33,6 +33,13 @@ class ProfileManager:
         }
 
         self.mcp.epic.session.headers.update(headers)
+
+    def update_profile_revisions(self, profile_updates: dict, profile_id: str) -> None:
+        profile_update = profile_updates[profile_id]
+        profile = self.cache[profile_id]
+
+        profile["rvn"] = profile_update["profileRevision"]
+        profile["commandRevision"] = profile_update["profileCommandRevision"]
 
     def process_profile_changes(self, profile_changes: list, profile_id: str) -> None:
         for entry in profile_changes:
@@ -61,9 +68,6 @@ class ProfileManager:
                 case "fullProfileUpdate":
                     self.cache[profile_id] = entry["profile"]
 
-                case _:
-                    return
-
     def get_profile_changes(self, profile_updates: dict, profile_id: str) -> list:
         return profile_updates.get(profile_id, {}).get("profileChanges", [])
 
@@ -71,7 +75,7 @@ class ProfileManager:
         self, operation: str, profile_id: str, json_body: dict = {}
     ) -> dict:
         rvn = self.get_profile_rvn(profile_id)
-        self.update_revisions_headers()
+        self.set_revisions_headers()
 
         res = await self.mcp.client_request(operation, profile_id, rvn, json_body)
 
@@ -88,6 +92,8 @@ class ProfileManager:
             profile_changes = self.get_profile_changes(profile_updates, res_profile_id)
 
             self.process_profile_changes(profile_changes, res_profile_id)
+
+            self.update_profile_revisions(profile_updates, res_profile_id)
 
         return profile_updates
 
