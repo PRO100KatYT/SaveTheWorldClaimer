@@ -239,7 +239,7 @@ def test_update_revisions_headers(get_test_manager):
     manager = get_test_manager
     manager.cache["athena"] = {"commandRevision": 2136}
 
-    manager.update_revisions_headers()
+    manager.set_revisions_headers()
 
     for entry in json.loads(
         manager.mcp.epic.session.headers["X-EpicGames-ProfileRevisions"]
