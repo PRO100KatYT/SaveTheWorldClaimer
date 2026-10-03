@@ -1,6 +1,7 @@
 from api import EpicAPI, AuthAPI
 from config import ConfigManager
 from assets import Assets
+from logger import Logger
 
 
 class Context:
@@ -8,10 +9,17 @@ class Context:
         self.epic = EpicAPI()
         self.auth = AuthAPI(self.epic)
         self.cfg = ConfigManager()
+
+        self.log = Logger(
+            self.cfg.global_config["show_date_time"],
+            self.cfg.global_config["colorful_display"],
+        )
+        self.cfg.add_listener("show_date_time", self.log.onrep_show_date_time)
+        self.cfg.add_listener("colorful_display", self.log.onrep_colorful_display)
+
         self.ast = Assets(
             self.cfg.global_config["ui_language"],
             self.cfg.global_config["items_language"],
         )
-
         self.cfg.add_listener("ui_language", self.ast.load_ui)
         self.cfg.add_listener("items_language", self.ast.load_items)
