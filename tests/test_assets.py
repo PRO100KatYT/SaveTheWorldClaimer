@@ -13,8 +13,8 @@ def test_init():
         "en", "pl", DATA_FILE_PATH, INTERFACE_BASE_PATH, ITEMS_BASE_PATH
     )
 
-    assert "main.login.success" in ast.interface
-    assert ast.interface["main.login.success"] == "Logged in successfully"
+    assert "main.login.success" in ast.ui
+    assert ast.ui["main.login.success"] == "Logged in successfully"
 
     assert "items" in ast.items
     assert "quest:daily_huskextermination_anyhero" in ast.items["items"]
@@ -24,15 +24,35 @@ def test_init():
     )
 
 
-def test_reload():
+def test_load_data():
     ast = assets.Assets(
-        "en", "pl", DATA_FILE_PATH, INTERFACE_BASE_PATH, ITEMS_BASE_PATH
+        "pl", "de", DATA_FILE_PATH, INTERFACE_BASE_PATH, ITEMS_BASE_PATH
     )
+    ast.load_data(DATA_FILE_PATH)
 
-    ast.reload("pl", "de", INTERFACE_BASE_PATH, ITEMS_BASE_PATH)
+    assert "items" in ast.data
+    assert "hero:hid_commando_gunheadshothw_vr_t01" in ast.data["items"]
 
-    assert "main.login.success" in ast.interface
-    assert ast.interface["main.login.success"] == "Zalogowano pomyślnie"
+    item = ast.data["items"]["hero:hid_commando_gunheadshothw_vr_t01"]
+    assert item["rarity"] == "epic"
+    assert item["type"] == "hero"
+
+
+def test_load_ui():
+    ast = assets.Assets(
+        "pl", "de", DATA_FILE_PATH, INTERFACE_BASE_PATH, ITEMS_BASE_PATH
+    )
+    ast.load_ui("pl", INTERFACE_BASE_PATH)
+
+    assert "main.login.success" in ast.ui
+    assert ast.ui["main.login.success"] == "Zalogowano pomyślnie"
+
+
+def test_load_items():
+    ast = assets.Assets(
+        "pl", "de", DATA_FILE_PATH, INTERFACE_BASE_PATH, ITEMS_BASE_PATH
+    )
+    ast.load_items("de", ITEMS_BASE_PATH)
 
     assert "items" in ast.items
     assert "quest:daily_huskextermination_anyhero" in ast.items["items"]

@@ -12,4 +12,6 @@ class Context:
             self.cfg.global_config["ui_language"],
             self.cfg.global_config["items_language"],
         )
-        self.cfg.reload_strings = self.ast.reload
+
+        self.cfg.add_listener("ui_language", self.ast.load_ui)
+        self.cfg.add_listener("items_language", self.ast.load_items)

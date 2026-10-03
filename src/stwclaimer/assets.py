@@ -18,10 +18,11 @@ class Assets:
         ui_path: Path = INTERFACE_BASE_PATH,
         items_path: Path = ITEMS_BASE_PATH,
     ):
-        self.interface = {}
-        self.items = {}
+        self.ui = {}
+        self.load_ui(ui_language, ui_path)
 
-        self.reload(ui_language, items_language, ui_path, items_path)
+        self.items = {}
+        self.load_items(items_language, items_path)
 
         self.data = {}
         self.load_data(data_file_path)
@@ -30,20 +31,18 @@ class Assets:
         with open(data_file_path, "r", encoding="utf-8") as file:
             self.data = json.load(file)
 
-    def reload(
-        self,
-        ui_language: str,
-        items_language: str,
-        ui_path: Path = INTERFACE_BASE_PATH,
-        items_path: Path = ITEMS_BASE_PATH,
-    ) -> None:
+    def load_ui(self, ui_language: str, ui_path: Path = INTERFACE_BASE_PATH) -> None:
         with open(ui_path / f"{ui_language}.json", "r", encoding="utf-8") as file:
-            self.interface = json.load(file)
+            self.ui = json.load(file)
+
+    def load_items(
+        self, items_language: str, items_path: Path = ITEMS_BASE_PATH
+    ) -> None:
         with open(items_path / f"{items_language}.json", "r", encoding="utf-8") as file:
             self.items = json.load(file)
 
     def get_ui_str(self, key: str) -> str:
-        return self.interface.get(key, key)
+        return self.ui.get(key, key)
 
     def get_type_str(self, item_type_lower: str) -> str:
         return self.items["types"].get(item_type_lower, item_type_lower)
