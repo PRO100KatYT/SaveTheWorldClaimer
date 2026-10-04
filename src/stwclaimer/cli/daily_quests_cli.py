@@ -11,7 +11,7 @@ def display_quests(ctx: core.Context, quests: dict, receive_mtx: bool) -> None:
     counter = 0
 
     if not quests:
-        print(ctx.ast.get_ui_str("daily_quests_cli.noquests"))
+        ctx.log.message(ctx.ast.get_ui_str("daily_quests_cli.noquests"))
 
     for quest_id in quests["daily_quest_items"]:
         counter += 1
@@ -24,16 +24,16 @@ def display_quests(ctx: core.Context, quests: dict, receive_mtx: bool) -> None:
         else:
             quest_string = ctx.ast.get_ui_str("daily_quests_cli.display")
 
-        print(quest_string.format(counter, name, objectives, rewards))
+        ctx.log.message(quest_string.format(counter, name, objectives, rewards))
 
-    print()
+    ctx.log.message()
 
 
 async def select_daily_quest(
     ctx: core.Context, quests: dict, receive_mtx: bool
 ) -> None:
     if not quests:
-        print(ctx.ast.get_ui_str("daily_quests_cli.noquests"))
+        ctx.log.message(ctx.ast.get_ui_str("daily_quests_cli.noquests"))
 
     options = []
 
@@ -63,7 +63,7 @@ async def select_daily_quest(
 
 
 async def main(ctx: core.Context, manager: profiles.ProfileManager) -> None:
-    print(ctx.ast.get_ui_str("daily_quests_cli.fetching"))
+    ctx.log.message(ctx.ast.get_ui_str("daily_quests_cli.fetching"))
 
     await manager.query_profile("campaign")
     profile_updates = await manager.client_quest_login("campaign")
@@ -83,11 +83,11 @@ async def select_and_replace(
         receive_mtx = await daily_quests.can_receive_mtx(manager)
         rerolls = await daily_quests.get_quest_rerolls(manager)
 
-        print()
+        ctx.log.message()
 
         if rerolls == 0:
             display_quests(ctx, quests, receive_mtx)
-            print(ctx.ast.get_ui_str("daily_quests_cli.replace.norerolls"))
+            ctx.log.message(ctx.ast.get_ui_str("daily_quests_cli.replace.norerolls"))
             input()
         else:
             quest_id = await select_daily_quest(ctx, quests, receive_mtx)
@@ -101,14 +101,16 @@ async def select_and_replace(
             if not confirmation:
                 continue
 
-            print(ctx.ast.get_ui_str("daily_quests_cli.replace.progress"), end=" ")
+            ctx.log.message(
+                ctx.ast.get_ui_str("daily_quests_cli.replace.progress"), end=" "
+            )
 
             profile_updates = await manager.fort_reroll_daily_quest(
                 "campaign", quest_id
             )
             profile_changes = manager.get_profile_changes(profile_updates, "campaign")
 
-            print(ctx.ast.get_ui_str("daily_quests_cli.replace.success"))
+            ctx.log.message(ctx.ast.get_ui_str("daily_quests_cli.replace.success"))
 
             continue
 

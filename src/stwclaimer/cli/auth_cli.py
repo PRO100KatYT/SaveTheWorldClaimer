@@ -6,7 +6,9 @@ from cli import utils_cli
 
 
 async def add_account(ctx: core.Context) -> None:
-    print(ctx.ast.get_ui_str("auth_cli.add_account.info").format(auth.AUTH_CODE_LINK))
+    ctx.log.message(
+        ctx.ast.get_ui_str("auth_cli.add_account.info").format(auth.AUTH_CODE_LINK)
+    )
     open_in_browser = await questionary.confirm(
         ctx.ast.get_ui_str("auth_cli.add_account.askbrowser")
     ).ask_async()
@@ -23,20 +25,20 @@ async def add_account(ctx: core.Context) -> None:
 
         try:
             display_name = await auth.add_account(ctx.auth, auth_code)
-            print(
+            ctx.log.message(
                 ctx.ast.get_ui_str("auth_cli.add_account.success").format(display_name)
             )
             break
         except ValueError as e:
-            print(e)
+            ctx.log.message(e)
 
 
 async def list_accounts(ctx: core.Context) -> None:
     auth_json = auth.read_auth()
-    print(ctx.ast.get_ui_str("auth_cli.list_accounts.title"))
+    ctx.log.message(ctx.ast.get_ui_str("auth_cli.list_accounts.title"))
     counter = 1
     for account_id in auth_json:
-        print(
+        ctx.log.message(
             auth_json[account_id]["display_name"],
             end=(
                 ",\n"
@@ -72,7 +74,7 @@ async def remove_account(ctx: core.Context) -> None:
         del auth_json[choice]
         auth.save_auth(auth_json)
 
-        print(
+        ctx.log.message(
             ctx.ast.get_ui_str("auth_cli.remove_account.success").format(display_name)
         )
 
@@ -93,6 +95,6 @@ async def menu(ctx: core.Context) -> None:
 
         if choice is False or choice is None:
             break
-        print()
+        ctx.log.message()
 
         await options[choice](ctx)

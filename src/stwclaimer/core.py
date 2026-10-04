@@ -12,10 +12,10 @@ class Context:
 
         self.log = Logger(
             self.cfg.global_config["show_date_time"],
-            self.cfg.global_config["colorful_display"],
+            self.cfg.global_config["display_colors"],
         )
         self.cfg.add_listener("show_date_time", self.log.onrep_show_date_time)
-        self.cfg.add_listener("colorful_display", self.log.onrep_colorful_display)
+        self.cfg.add_listener("display_colors", self.log.onrep_display_colors)
 
         self.ast = Assets(
             self.cfg.global_config["ui_language"],

@@ -7,11 +7,13 @@ async def login_with_printing(
     ctx: core.Context, auth_json: dict, account_id: str
 ) -> None:
     display_name = auth_json[account_id]["display_name"]
-    print(ctx.ast.get_ui_str("utils_cli.login.loggingin").format(display_name), end=" ")
+    ctx.log.message(
+        ctx.ast.get_ui_str("utils_cli.login.loggingin").format(display_name), end=" "
+    )
 
     await auth.login(ctx.auth, account_id, auth_json)
 
-    print(ctx.ast.get_ui_str("utils_cli.login.success"))
+    ctx.log.message(ctx.ast.get_ui_str("utils_cli.login.success"), hide_date_time=True)
 
 
 async def select(
