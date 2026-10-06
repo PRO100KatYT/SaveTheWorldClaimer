@@ -10,13 +10,8 @@ class Context:
         self.auth = AuthAPI(self.epic)
         self.cfg = ConfigManager()
 
-        self.log = Logger(
-            self.cfg.global_config["show_date_time"],
-            self.cfg.global_config["display_colors"],
-        )
+        self.log = Logger(self.cfg.global_config["show_date_time"])
         self.cfg.add_listener("show_date_time", self.log.onrep_show_date_time)
-        self.cfg.add_listener("display_colors", self.log.onrep_display_colors)
-
         self.ast = Assets(
             self.cfg.global_config["ui_language"],
             self.cfg.global_config["items_language"],

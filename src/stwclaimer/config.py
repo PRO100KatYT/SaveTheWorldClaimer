@@ -14,7 +14,6 @@ class ConfigManager:
             "items_language": "en",
             "open_free_llamas": True,
             "show_date_time": True,
-            "display_colors": True,
             "discord_webhook_url": "",
             "check_for_updates": True,
         }

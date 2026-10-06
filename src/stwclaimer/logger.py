@@ -3,16 +3,13 @@ from datetime import datetime
 
 
 class Logger:
-    def __init__(self, show_date_time: bool, display_colors: bool):
+    def __init__(self, show_date_time: bool):
         self.show_date_time = show_date_time
 
-        self.console = Console(no_color=not display_colors)
+        self.console = Console(highlight=False)
 
     def onrep_show_date_time(self, show_date_time: bool) -> None:
         self.show_date_time = show_date_time
-
-    def onrep_display_colors(self, display_colors: bool) -> None:
-        self.console.no_color = not display_colors
 
     def message(
         self, text: str = "", end: str = "\n", hide_date_time: bool = False
