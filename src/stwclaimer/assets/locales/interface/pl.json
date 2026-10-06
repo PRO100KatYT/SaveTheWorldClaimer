@@ -38,6 +38,7 @@
   "menu.main_menu.start": "Uruchom program",
   "menu.main_menu.dailyquests": "Zadania Dnia",
   "menu.main_menu.manageaccounts": "Konta",
+  "menu.main_menu.settings": "Ustawienia",
   "auth_cli.menu.title": "Zarządzanie kontami:",
   "auth_cli.menu.addaccount": "Dodaj konto",
   "auth_cli.menu.listaccounts": "Wypisz dodane konta",
@@ -64,5 +65,8 @@
   "daily_quests_cli.replace.confirmation": "Możesz wymienić jedno zadanie lub wyzwanie dzienne. Czy na pewno chcesz wymienić te zadanie?",
   "daily_quests_cli.replace.progress": "Wymienianie zadania...",
   "daily_quests_cli.replace.success": "Sukces!",
-  "daily_quests_cli.replace.norerolls": "Nie możesz dziś już wymienić żadnych Zadań dnia. Zajrzyj tu jutro!\nNaciśnij ENTER, aby kontynuować."
+  "daily_quests_cli.replace.norerolls": "Nie możesz dziś już wymienić żadnych Zadań dnia. Zajrzyj tu jutro!\nNaciśnij ENTER, aby kontynuować.",
+  "config_cli.menu.title": "Ustawienia",
+  "config_cli.menu.general": "Ustawienia Ogólne",
+  "config_cli.menu.account": "Ustawienia Kont"
 }

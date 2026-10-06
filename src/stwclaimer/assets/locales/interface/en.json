@@ -37,6 +37,7 @@
   "menu.main_menu.start": "Start this program",
   "menu.main_menu.dailyquests": "Daily Quests",
   "menu.main_menu.manageaccounts": "Accounts",
+  "menu.main_menu.settings": "Settings",
   "auth_cli.menu.title": "Account Management:",
   "auth_cli.menu.addaccount": "Add an account",
   "auth_cli.menu.listaccounts": "List accounts",
@@ -63,5 +64,8 @@
   "daily_quests_cli.replace.confirmation": "You can replace one quest or challenge each day. Are you sure you want to replace this quest?",
   "daily_quests_cli.replace.progress": "Replacing the quest...",
   "daily_quests_cli.replace.success": "Success!",
-  "daily_quests_cli.replace.norerolls": "You can't replace any more Daily Quests today. Come back tommorow!\nPress ENTER to continue."
+  "daily_quests_cli.replace.norerolls": "You can't replace any more Daily Quests today. Come back tommorow!\nPress ENTER to continue.",
+  "config_cli.menu.title": "Settings",
+  "config_cli.menu.general": "General Settings",
+  "config_cli.menu.account": "Account Settings"
 }

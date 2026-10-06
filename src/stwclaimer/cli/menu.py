@@ -1,5 +1,5 @@
 import os
-from cli import auth_cli, utils_cli, daily_quests_cli
+from cli import auth_cli, utils_cli, daily_quests_cli, config_cli
 from cli import claimer
 import core
 import questionary
@@ -19,6 +19,7 @@ async def main_menu(ctx: core.Context) -> None:
         "menu.main_menu.start": claimer.loop,
         "menu.main_menu.dailyquests": daily_quests_cli.menu,
         "menu.main_menu.manageaccounts": auth_cli.menu,
+        "menu.main_menu.settings": config_cli.menu,
     }
 
     while True:
