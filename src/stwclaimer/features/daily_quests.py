@@ -13,6 +13,21 @@ async def can_receive_mtx(manager: profiles.ProfileManager) -> bool:
     return False
 
 
+async def can_get_daily_quests(manager: profiles.ProfileManager) -> bool:
+    profile = await manager.get_profile("campaign")
+    for item_id in profile["items"]:
+        if (
+            profile["items"][item_id]["templateId"].lower()
+            == "quest:outpostquest_t1_l3"
+            and profile["items"][item_id]["attributes"]
+            .get("quest_state", "active")
+            .lower()
+            == "claimed"
+        ):
+            return True
+    return False
+
+
 async def get_quest_rerolls(manager: profiles.ProfileManager) -> int:
     profile = await manager.get_profile("campaign")
     attributes = profile["stats"]["attributes"]

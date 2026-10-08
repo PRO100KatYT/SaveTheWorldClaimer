@@ -10,7 +10,7 @@ import questionary
 def display_quests(ctx: core.Context, quests: dict, receive_mtx: bool) -> None:
     counter = 0
 
-    if not quests:
+    if not quests["daily_quest_items"]:
         ctx.log.message(ctx.ast.get_ui_str("daily_quests_cli.noquests"))
 
     for quest_id in quests["daily_quest_items"]:
@@ -65,7 +65,11 @@ async def select_daily_quest(
 async def main(ctx: core.Context, manager: profiles.ProfileManager) -> None:
     ctx.log.message(ctx.ast.get_ui_str("daily_quests_cli.fetching"))
 
-    await manager.query_profile("campaign")
+    daily_quests_unlocked = await daily_quests.can_get_daily_quests(manager)
+    if not daily_quests_unlocked:
+        ctx.log.message(ctx.ast.get_ui_str("daily_quests_cli.unavailable"))
+        return
+
     profile_updates = await manager.client_quest_login("campaign")
     profile_changes = manager.get_profile_changes(profile_updates, "campaign")
 
@@ -133,7 +137,12 @@ async def menu(ctx: core.Context) -> None:
         mcp = api.McpAPI(choice, ctx.epic)
         manager = profiles.ProfileManager(mcp)
 
-        await manager.query_profile("campaign")
+        daily_quests_unlocked = await daily_quests.can_get_daily_quests(manager)
+        if not daily_quests_unlocked:
+            ctx.log.message(ctx.ast.get_ui_str("daily_quests_cli.unavailable"))
+            input(ctx.ast.get_ui_str("daily_quests_cli.pressenter"))
+            continue
+
         profile_updates = await manager.client_quest_login("campaign")
         profile_changes = manager.get_profile_changes(profile_updates, "campaign")
 

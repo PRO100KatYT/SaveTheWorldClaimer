@@ -57,6 +57,8 @@
   "daily_quests_cli.fetching": "\nPozyskiwanie zadań dnia...\n",
   "daily_quests_cli.display": "{0}. {1} | Postęp: {2} | Nagrody: {3}",
   "daily_quests_cli.displaynew": "{0}. (Nowe!) {1} | Postęp: {2} | Nagrody: {3}",
+  "daily_quests_cli.unavailable": "Zadania dnia są niedostępne na tym koncie. Ukończ Zadanie \"Baza główna – obrona burzowej tarczy 3\", aby je odblokować.\n",
+  "daily_quests_cli.pressenter": "Naciśnij ENTER, aby kontynuować.\n",
   "daily_quests_cli.noquests": "Nie znaleziono aktywnych zadań dnia. Wróć jutro!",
   "daily_quests_cli.select_account.title": "Wybierz konto do zarządzania zadaniami dnia:",
   "daily_quests_cli.select_daily_quest.title": "Wybierz zadanie, które chciał(a)byś wymienić:",

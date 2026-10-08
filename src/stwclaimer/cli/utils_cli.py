@@ -17,7 +17,7 @@ async def login_with_printing(
 
 
 async def select(
-    ctx: core.Context, title: str, options: list, back_str: str = None
+    ctx: core.Context, title: str, options: list, back_str: str | None = None
 ) -> str:
     options = list(options)
     options.append(
