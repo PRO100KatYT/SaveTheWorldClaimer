@@ -69,5 +69,22 @@
   "daily_quests_cli.replace.norerolls": "You can't replace any more Daily Quests today. Come back tommorow!\nPress ENTER to continue.",
   "config_cli.menu.title": "Settings",
   "config_cli.menu.general": "General Settings",
-  "config_cli.menu.account": "Account Settings"
+  "config_cli.menu.account": "Account Settings",
+  "config_cli.general_menu.title": "Select a setting you'd like to change:",
+  "config_cli.general_menu.entry_value": "{0} (set to {1})",
+  "config_cli.general_menu.entry_disabled": "{0} (disabled)",
+  "config_cli.general_menu.select": "Description: {0}\n Select value:",
+  "config_cli.general_menu.input": "Description: {0}\n Enter value:",
+  "config.ui_language.display_name": "Interface Language",
+  "config.ui_language.description": "The language used for the program's user interface.",
+  "config.items_language.display_name": "Items Language",
+  "config.items_language.description": "The language used for Fortnite item names.",
+  "config.open_free_llamas.display_name": "Open free Llamas",
+  "config.open_free_llamas.description": "Claim and open free llamas from the Llama Shop.",
+  "config.show_date_time.display_name": "Show date and time",
+  "config.show_date_time.description": "Show current date and time before messages.",
+  "config.discord_webhook_url.display_name": "Discord webhook URL",
+  "config.discord_webhook_url.description": "Discord Webhook URL for sending program messages. Leave empty to disable.",
+  "config.check_for_updates.display_name": "Check for Updates",
+  "config.check_for_updates.description": "Automatically check for newer versions of the program on startup."
 }

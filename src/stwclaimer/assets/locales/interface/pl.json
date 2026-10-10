@@ -70,5 +70,22 @@
   "daily_quests_cli.replace.norerolls": "Nie możesz dziś już wymienić żadnych Zadań dnia. Zajrzyj tu jutro!\nNaciśnij ENTER, aby kontynuować.",
   "config_cli.menu.title": "Ustawienia",
   "config_cli.menu.general": "Ustawienia Ogólne",
-  "config_cli.menu.account": "Ustawienia Kont"
+  "config_cli.menu.account": "Ustawienia Kont",
+  "config_cli.general_menu.title": "Wybierz ustawienie, które chciał(a)byś zmienić:",
+  "config_cli.general_menu.entry_value": "{0} (ustawione na {1})",
+  "config_cli.general_menu.entry_disabled": "{0} (wyłączone)",
+  "config_cli.general_menu.select": "Opis: {0}\n Wybierz wartość:",
+  "config_cli.general_menu.input": "Opis: {0}\n Wpisz wartość:",
+  "config.ui_language.display_name": "Język interfejsu",
+  "config.ui_language.description": "Język używany przez interfejs użytkownika tego programu.",
+  "config.items_language.display_name": "Język przedmiotów",
+  "config.items_language.description": "Język używany dla nazw Fortnitowych przedmiotów.",
+  "config.open_free_llamas.display_name": "Otwieraj darmowe lamy",
+  "config.open_free_llamas.description": "Odbieraj i otwieraj darmowe lamy ze sklepu z lamami.",
+  "config.show_date_time.display_name": "Pokazuj datę i godzinę",
+  "config.show_date_time.description": "Pokazuj obecną datę i godzinę przed wiadomościami.",
+  "config.discord_webhook_url.display_name": "URL webhooka Discorda",
+  "config.discord_webhook_url.description": "URL webhooka Discorda do wysyłania wiadomości programu. Pozostaw puste, aby wyłączyć.",
+  "config.check_for_updates.display_name": "Sprawdzaj aktualizacje",
+  "config.check_for_updates.description": "Automatycznie wypatruj nowszych wersji programu przy jego starcie."
 }

@@ -17,16 +17,22 @@ async def login_with_printing(
 
 
 async def select(
-    ctx: core.Context, title: str, options: list, back_str: str | None = None
+    ctx: core.Context,
+    title: str,
+    options: list,
+    back_str: str | None = None,
+    add_back: bool = True,
+    start: str | None = None,
 ) -> str:
     options = list(options)
-    options.append(
-        questionary.Choice(
-            ctx.ast.get_ui_str("select.back") if back_str is None else back_str,
-            False,
-            shortcut_key="0",
+    if add_back:
+        options.append(
+            questionary.Choice(
+                ctx.ast.get_ui_str("select.back") if back_str is None else back_str,
+                False,
+                shortcut_key="0",
+            )
         )
-    )
 
     return await questionary.select(
         title,
@@ -35,6 +41,8 @@ async def select(
         pointer=">",
         use_shortcuts=True,
         instruction=" ",
+        default=start,
+        style=questionary.Style([("selected", "noreverse")]),
     ).ask_async()
 
 
@@ -46,3 +54,11 @@ async def select_account(ctx: core.Context, auth_json: dict, title: str) -> str:
     choice = await select(ctx, title, options)
 
     return choice
+
+
+def validate_type(entry, type) -> bool:
+    try:
+        type(entry)
+        return True
+    except ValueError:
+        return False
