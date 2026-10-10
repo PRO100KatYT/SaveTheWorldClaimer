@@ -120,3 +120,8 @@ class McpAPI:
             json={},
             params={"profileId": profile_id},
         )
+
+    async def get_catalog(self) -> dict:
+        return await self.epic.get(
+            "https://fngw-mcp-gc-livefn.ol.epicgames.com/fortnite/api/storefront/v2/catalog"
+        )

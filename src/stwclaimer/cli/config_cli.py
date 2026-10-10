@@ -34,7 +34,7 @@ async def change_setting(ctx: core.Context, option: str) -> None:
     ctx.cfg.set_global_value(option, new_value)
 
 
-async def general_menu(ctx: core.Context):
+async def general_menu(ctx: core.Context) -> None:
     last_selected_option = None
 
     while True:
@@ -57,7 +57,7 @@ async def general_menu(ctx: core.Context):
         choice = await utils_cli.select(
             ctx,
             ctx.ast.get_ui_str("config_cli.general_menu.title"),
-            [questionary.Choice(ctx.ast.get_ui_str(options[i]), i) for i in options],
+            [questionary.Choice(options[i], i) for i in options],
             start=last_selected_option,
         )
 
@@ -68,7 +68,7 @@ async def general_menu(ctx: core.Context):
         await change_setting(ctx, choice)
 
 
-async def account_menu(ctx: core.Context):
+async def account_menu(ctx: core.Context) -> None:
     return
 
 
