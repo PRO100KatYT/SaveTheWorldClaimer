@@ -3,7 +3,7 @@ import profiles
 
 
 async def get_free_llamas(manager: profiles.ProfileManager) -> list:
-    catalog = await manager.mcp.get_catalog()
+    catalog = await manager.mcp.epic.get_catalog()
 
     xray_storefront = {}
     for storefront in catalog["storefronts"]:

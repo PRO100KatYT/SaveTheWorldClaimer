@@ -1,4 +1,5 @@
 import httpx
+from datetime import datetime, timezone
 from json import JSONDecodeError
 
 EPIC_OAUTH_BASIC_TOKEN = "basic M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU="
@@ -7,6 +8,7 @@ EPIC_OAUTH_BASIC_TOKEN = "basic M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUx
 class EpicAPI:
     def __init__(self):
         self.session = httpx.AsyncClient()
+        self._catalog = {"expiration": "2021-11-08T19:34:00.000Z"}
 
     def set_access_token(self, access_token: str) -> None:
         self.session.headers.update({"Authorization": f"bearer {access_token}"})
@@ -28,6 +30,19 @@ class EpicAPI:
 
     async def get(self, *args, **kwargs) -> dict:
         return await self.request("get", *args, **kwargs)
+
+    async def get_catalog(self) -> dict:
+        expiration_date = datetime.fromisoformat(
+            self._catalog["expiration"].replace("Z", "+00:00")
+        )
+        current_date = current_date = datetime.now(timezone.utc)
+
+        if current_date > expiration_date:
+            self._catalog = await self.get(
+                "https://fngw-mcp-gc-livefn.ol.epicgames.com/fortnite/api/storefront/v2/catalog"
+            )
+
+        return self._catalog
 
 
 class AuthAPI:
@@ -119,9 +134,4 @@ class McpAPI:
             f"https://mcp-gc.live.fngw.ol.epicgames.com/fortnite/api/game/v2/profile/{account_id}/public/QueryPublicProfile",
             json={},
             params={"profileId": profile_id},
-        )
-
-    async def get_catalog(self) -> dict:
-        return await self.epic.get(
-            "https://fngw-mcp-gc-livefn.ol.epicgames.com/fortnite/api/storefront/v2/catalog"
         )
