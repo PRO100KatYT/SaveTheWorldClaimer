@@ -107,3 +107,28 @@ class ProfileManager:
         return await self.base_request(
             "FortRerollDailyQuest", profile_id, {"questId": quest_id}
         )
+
+    async def populate_prerolled_offers(self, profile_id: str) -> dict:
+        return await self.base_request("PopulatePrerolledOffers", profile_id)
+
+    async def purchase_catalog_entry(
+        self,
+        profile_id: str,
+        offer_id: str,
+        purchase_quantity: int,
+        currency: str,
+        currency_subtype: str,
+        expected_total_price: int,
+    ) -> dict:
+        return await self.base_request(
+            "PurchaseCatalogEntry",
+            profile_id,
+            json_body={
+                "offerId": offer_id,
+                "purchaseQuantity": purchase_quantity,
+                "currency": currency,
+                "currencySubType": currency_subtype,
+                "expectedTotalPrice": expected_total_price,
+                "gameContext": "fn",
+            },
+        )
