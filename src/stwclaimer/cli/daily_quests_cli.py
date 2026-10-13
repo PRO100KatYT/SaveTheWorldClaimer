@@ -114,7 +114,10 @@ async def select_and_replace(
             )
             profile_changes = manager.get_profile_changes(profile_updates, "campaign")
 
-            ctx.log.message(ctx.ast.get_ui_str("daily_quests_cli.replace.success"))
+            ctx.log.message(
+                ctx.ast.get_ui_str("daily_quests_cli.replace.success"),
+                hide_date_time=True,
+            )
 
             continue
 

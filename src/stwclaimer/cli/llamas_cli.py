@@ -3,6 +3,21 @@ import core
 import profiles
 
 
+async def open_llama_with_printing(
+    ctx: core.Context, manager: profiles.ProfileManager, offer: dict
+) -> None:
+    template_id = offer["itemGrants"][0]["templateId"].lower()
+    llama_name = ctx.ast.get_item_str(template_id)
+
+    ctx.log.message(
+        ctx.ast.get_ui_str("llamas_cli.main.opening").format(llama_name), end=" "
+    )
+
+    loot_result = await llamas.purchase_xray_llama(manager, offer)
+
+    ctx.log.message(ctx.ast.get_ui_str("llamas_cli.main.success"), hide_date_time=True)
+
+
 async def main(ctx: core.Context, manager: profiles.ProfileManager) -> None:
     if not ctx.cfg.global_config["open_free_llamas"]:
         return
@@ -25,4 +40,4 @@ async def main(ctx: core.Context, manager: profiles.ProfileManager) -> None:
 
     for offer in free_llama_offers:
         for _ in range(offer["num_left_to_buy"]):
-            loot_result = await llamas.purchase_xray_llama(manager, offer)
+            await open_llama_with_printing(ctx, manager, offer)
