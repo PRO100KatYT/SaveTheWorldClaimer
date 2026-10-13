@@ -7,17 +7,23 @@
       "many": "Nagród",
       "other": "Nagród"
     },
-    "freeLlamas": {
-      "one": "darmową Lamę",
-      "few": "darmowe Lamy",
-      "many": "darmowych Lam",
-      "other": "darmowych Lam"
+    "thereAre": {
+      "one": "Jest",
+      "few": "Są",
+      "many": "Jest",
+      "other": "Jest"
     },
-    "freeLlamasRecycle": {
-      "one": "darmowej Lamy",
-      "few": "darmowych Lam",
-      "many": "darmowych Lam",
-      "other": "darmowych Lam"
+    "available": {
+      "one": "dostępna",
+      "few": "dostępne",
+      "many": "dostępnych",
+      "other": "dostępnych"
+    },
+    "freeLlamas": {
+      "one": "darmowa lama",
+      "few": "darmowe lamy",
+      "many": "darmowych lam",
+      "other": "darmowych lam"
     },
     "minutes": {
       "one": "minutę",
@@ -68,6 +74,7 @@
   "daily_quests_cli.replace.progress": "Wymienianie zadania...",
   "daily_quests_cli.replace.success": "Sukces!",
   "daily_quests_cli.replace.norerolls": "Nie możesz dziś już wymienić żadnych Zadań dnia. Zajrzyj tu jutro!\nNaciśnij ENTER, aby kontynuować.",
+  "llamas_cli.main.available": "{0} {3} {1} {2}!",
   "config_cli.menu.title": "Ustawienia",
   "config_cli.menu.general": "Ustawienia Ogólne",
   "config_cli.menu.account": "Ustawienia Kont",

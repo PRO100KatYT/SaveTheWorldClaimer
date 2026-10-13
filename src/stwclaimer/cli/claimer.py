@@ -2,7 +2,7 @@ import auth
 import api
 import core
 import profiles
-from cli import daily_quests_cli, utils_cli
+from cli import daily_quests_cli, llamas_cli, utils_cli
 
 
 async def loop(ctx: core.Context) -> None:
@@ -14,3 +14,4 @@ async def loop(ctx: core.Context) -> None:
         manager = profiles.ProfileManager(mcp)
 
         await daily_quests_cli.main(ctx, manager)
+        await llamas_cli.main(ctx, manager)

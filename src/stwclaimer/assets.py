@@ -55,3 +55,14 @@ class Assets:
 
     def get_objective_str(self, objective_lower: str) -> str:
         return self.items["objectives"].get(objective_lower, objective_lower)
+
+    def get_plural_word(self, key: str, number: int) -> str:
+        if number == 1:
+            plural = "one"
+        elif number % 10 in [2, 3, 4] and not (12 <= (number % 100) <= 14):
+            plural = "few"
+        else:
+            plural = "many"
+
+        word = self.ui["words"][key]
+        return word.get(plural, word.get("other", key))

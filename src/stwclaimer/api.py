@@ -1,6 +1,7 @@
 import httpx
 from datetime import datetime, timezone
 from json import JSONDecodeError
+import utils
 
 EPIC_OAUTH_BASIC_TOKEN = "basic M2Y2OWU1NmM3NjQ5NDkyYzhjYzI5ZjFhZjA4YThhMTI6YjUxZWU5Y2IxMjIzNGY1MGE2OWVmYTY3ZWY1MzgxMmU="
 
@@ -32,12 +33,7 @@ class EpicAPI:
         return await self.request("get", *args, **kwargs)
 
     async def get_catalog(self) -> dict:
-        expiration_date = datetime.fromisoformat(
-            self._catalog["expiration"].replace("Z", "+00:00")
-        )
-        current_date = current_date = datetime.now(timezone.utc)
-
-        if current_date > expiration_date:
+        if utils.is_past_iso_date(self._catalog["expiration"]):
             self._catalog = await self.get(
                 "https://fngw-mcp-gc-livefn.ol.epicgames.com/fortnite/api/storefront/v2/catalog"
             )

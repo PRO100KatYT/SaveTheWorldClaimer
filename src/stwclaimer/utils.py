@@ -2,6 +2,7 @@ import sys
 import os
 import shutil
 from pathlib import Path
+from datetime import datetime, timezone, timedelta
 
 
 def base_path(exe_path: bool = True) -> Path:
@@ -27,3 +28,10 @@ def base_path(exe_path: bool = True) -> Path:
         base_dir = base_dir.parents[2]
 
     return base_dir
+
+
+def is_past_iso_date(iso_date: str, delta: timedelta = timedelta()) -> bool:
+    target_date = datetime.fromisoformat(iso_date.replace("Z", "+00:00"))
+    current_date = datetime.now(timezone.utc)
+
+    return current_date >= target_date + delta

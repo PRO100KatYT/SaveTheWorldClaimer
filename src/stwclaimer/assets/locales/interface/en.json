@@ -6,17 +6,23 @@
       "many": "Rewards",
       "other": "Rewards"
     },
-    "freeLlamas": {
-      "one": "Free Llama",
-      "few": "Free Llamas",
-      "many": "Free Llamas",
-      "other": "Free Llamas"
+    "thereAre": {
+      "one": "There is",
+      "few": "There are",
+      "many": "There are",
+      "other": "There are"
     },
-    "freeLlamasRecycle": {
-      "one": "Free Llama",
-      "few": "Free Llamas",
-      "many": "Free Llamas",
-      "other": "Free Llamas"
+    "available": {
+      "one": "available",
+      "few": "available",
+      "many": "available",
+      "other": "available"
+    },
+    "freeLlamas": {
+      "one": "free llama",
+      "few": "free llamas",
+      "many": "free llamas",
+      "other": "free llamas"
     },
     "minutes": {
       "one": "minute",
@@ -67,6 +73,7 @@
   "daily_quests_cli.replace.progress": "Replacing the quest...",
   "daily_quests_cli.replace.success": "Success!",
   "daily_quests_cli.replace.norerolls": "You can't replace any more Daily Quests today. Come back tommorow!\nPress ENTER to continue.",
+  "llamas_cli.main.available": "{0} {1} {2} {3}!",
   "config_cli.menu.title": "Settings",
   "config_cli.menu.general": "General Settings",
   "config_cli.menu.account": "Account Settings",

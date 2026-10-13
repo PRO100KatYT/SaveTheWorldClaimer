@@ -53,8 +53,10 @@ def get_offers_purchases_limits(catalog_entries: list) -> dict:
     for entry in catalog_entries:
         offer_id = entry["offerId"]
 
-        if "EventLimit" in entry["meta"]:
-            count_json[offer_id] += int(entry["meta"]["EventLimit"])
+        meta_info = entry.get("metaInfo", [])
+        for info in meta_info:
+            if info["key"].lower() == "eventlimit":
+                count_json[offer_id] += int(info["value"])
 
         for limit_type in ["dailyLimit", "weeklyLimit", "monthlyLimit"]:
             if not limit_type in entry:
@@ -70,9 +72,7 @@ def get_offers_purchases_limits(catalog_entries: list) -> dict:
 async def get_purchasable_offers_counts(
     manager: profiles.ProfileManager, catalog_entries: list
 ) -> dict:
-    purchases_quantities = await get_offers_purchases_quantities(
-        manager, catalog_entries
-    )
+    purchases_quantities = await get_offers_purchases_quantities(manager)
     purchases_limits = get_offers_purchases_limits(catalog_entries)
 
     count_json = defaultdict(int)
