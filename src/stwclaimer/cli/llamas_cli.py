@@ -3,6 +3,39 @@ import core
 import profiles
 
 
+def sort_loot_by_rarity(ctx: core.Context, loot_result: list) -> list:
+    weights = ctx.ast.data["rarity_weights"]
+    return sorted(
+        loot_result,
+        key=lambda item: weights.get(
+            ctx.ast.data.get("items", {})
+            .get(item["itemType"].lower(), {})
+            .get("rarity", "common"),
+            0,
+        ),
+    )
+
+
+def format_and_print_loot(ctx: core.Context, loot_result: list) -> None:
+    loot_result = sort_loot_by_rarity(ctx, loot_result)
+
+    counter = 0
+    for entry in loot_result:
+        counter += 1
+        template_id = entry["itemType"].lower()
+        item_data = ctx.ast.get_item_data(template_id)
+
+        rarity = ctx.ast.get_rarity_str(item_data["rarity"])
+        color = ctx.ast.get_rarity_color(item_data["rarity"])
+
+        item_type = ctx.ast.get_type_str(item_data["type"])
+        item_name = ctx.ast.get_item_str(template_id)
+
+        ctx.log.message(
+            f"{counter}: [{color}]{rarity} | {item_type}: {entry['quantity']}x {item_name}[/]"
+        )
+
+
 async def open_llama_with_printing(
     ctx: core.Context, manager: profiles.ProfileManager, offer: dict
 ) -> None:
@@ -16,6 +49,8 @@ async def open_llama_with_printing(
     loot_result = await llamas.purchase_xray_llama(manager, offer)
 
     ctx.log.message(ctx.ast.get_ui_str("llamas_cli.main.success"), hide_date_time=True)
+
+    format_and_print_loot(ctx, loot_result)
 
 
 async def main(ctx: core.Context, manager: profiles.ProfileManager) -> None:

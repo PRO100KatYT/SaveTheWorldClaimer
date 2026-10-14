@@ -1,6 +1,7 @@
 import utils
 from pathlib import Path
 import json
+from collections import defaultdict
 
 ASSETS_BASE_PATH = utils.base_path(False) / "assets"
 
@@ -41,6 +42,9 @@ class Assets:
         with open(items_path / f"{items_language}.json", "r", encoding="utf-8") as file:
             self.items = json.load(file)
 
+    def get_item_data(self, template_id_lower) -> dict:
+        return self.data["items"].get(template_id_lower, defaultdict(str))
+
     def get_ui_str(self, key: str) -> str:
         return self.ui.get(key, key)
 
@@ -49,6 +53,9 @@ class Assets:
 
     def get_rarity_str(self, rarity_lower: str) -> str:
         return self.items["rarities"].get(rarity_lower, rarity_lower)
+
+    def get_rarity_color(self, rarity_lower: str) -> str:
+        return self.items["rarity_colors"].get(rarity_lower, "#ffffff")
 
     def get_item_str(self, template_id_lower: str) -> str:
         return self.items["items"].get(template_id_lower, template_id_lower)

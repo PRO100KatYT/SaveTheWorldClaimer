@@ -1,6 +1,6 @@
 {
   "author": "This file was made by PRO100KatYT.",
-  "Item Power Levels": {
+  "item_power_levels": {
     "_c_t01": {
       "1": 1,
       "2": 2,
@@ -2233,6 +2233,23 @@
       "59": 156,
       "60": 157
     }
+  },
+  "rarity_weights": {
+    "common": 1,
+    "uncommon": 2,
+    "rare": 3,
+    "epic": 4,
+    "legendary": 5,
+    "mythic": 6
+  },
+  "rarity_colors": {
+    "note": "hand picked from old fortnite :)",
+    "common": "#91989e",
+    "uncommon": "#3a9a03",
+    "rare": "#007ed8",
+    "epic": "#9d41e4",
+    "legendary": "#d5660a",
+    "mythic": "#cca634"
   },
   "items": {
     "schematic:sid_floor_launcher_sr_t01": {
