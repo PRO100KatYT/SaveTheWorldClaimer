@@ -71,11 +71,51 @@ GLOBAL_CONFIG_DATA = {
     },
 }
 
+USER_CONFIG_DATA = {
+    "llama_loot_recycling": {
+        "recycle_weapons": {
+            "display_name": "config.recycle_weapons.display_name",
+            "description": "config.recycle_weapons.description",
+            "type": str,
+            "valid_values": ["off", "common", "uncommon", "rare", "epic"],
+            "default": "rare",
+        },
+        "recycle_traps": {
+            "display_name": "config.recycle_traps.display_name",
+            "description": "config.recycle_traps.description",
+            "type": str,
+            "valid_values": ["off", "common", "uncommon", "rare", "epic"],
+            "default": "rare",
+        },
+        "retire_survivors": {
+            "display_name": "config.retire_survivors.display_name",
+            "description": "config.retire_survivors.description",
+            "type": str,
+            "valid_values": ["off", "common", "uncommon", "rare", "epic"],
+            "default": "epic",
+        },
+        "retire_defenders": {
+            "display_name": "config.retire_defenders.display_name",
+            "description": "config.retire_defenders.description",
+            "type": str,
+            "valid_values": ["off", "common", "uncommon", "rare", "epic"],
+            "default": "epic",
+        },
+        "retire_heroes": {
+            "display_name": "config.retire_heroes.display_name",
+            "description": "config.retire_heroes.description",
+            "type": str,
+            "valid_values": ["off", "common", "uncommon", "rare", "epic"],
+            "default": "rare",
+        },
+    },
+}
+
 
 class ConfigManager:
     def __init__(self):
         self.global_config = self.get_default_global_config()
-        self.user_config = {}
+        self.user_config = defaultdict(dict)
         self._listeners = defaultdict(list)
 
         self.load_global_config()
@@ -88,6 +128,23 @@ class ConfigManager:
             global_config[option] = GLOBAL_CONFIG_DATA[option]["default"]
 
         return global_config
+
+    def get_user_config(self, account_id: str) -> dict:
+        def crawl(data_part: dict, config_part: dict) -> None:
+            for key in data_part:
+                if "type" in data_part[key]:
+                    if key not in config_part:
+                        config_part[key] = data_part[key]["default"]
+                else:
+                    if key not in config_part:
+                        config_part[key] = {}
+                    crawl(data_part[key], config_part[key])
+
+        crawl(USER_CONFIG_DATA, self.user_config[account_id])
+
+        self.save_user_config()
+
+        return self.user_config[account_id]
 
     def save_config(self, path: Path, config: dict) -> bool:
         try:
@@ -135,3 +192,13 @@ class ConfigManager:
         self.global_config[option] = value
         self.save_global_config()
         self.notify_listeners(option)
+
+    def set_user_value(self, account_id: str, path: list, value) -> None:
+        config_part = self.user_config[account_id]
+
+        for i in range(len(path) - 1):
+            config_part = config_part[path[i]]
+
+        config_part[path[-1]] = value
+
+        self.save_user_config()
