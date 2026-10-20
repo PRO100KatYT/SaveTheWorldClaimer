@@ -73,40 +73,43 @@ GLOBAL_CONFIG_DATA = {
 
 USER_CONFIG_DATA = {
     "llama_loot_recycling": {
-        "recycle_weapons": {
-            "display_name": "config.recycle_weapons.display_name",
-            "description": "config.recycle_weapons.description",
-            "type": str,
-            "valid_values": ["off", "common", "uncommon", "rare", "epic"],
-            "default": "rare",
-        },
-        "recycle_traps": {
-            "display_name": "config.recycle_traps.display_name",
-            "description": "config.recycle_traps.description",
-            "type": str,
-            "valid_values": ["off", "common", "uncommon", "rare", "epic"],
-            "default": "rare",
-        },
-        "retire_survivors": {
-            "display_name": "config.retire_survivors.display_name",
-            "description": "config.retire_survivors.description",
-            "type": str,
-            "valid_values": ["off", "common", "uncommon", "rare", "epic"],
-            "default": "epic",
-        },
-        "retire_defenders": {
-            "display_name": "config.retire_defenders.display_name",
-            "description": "config.retire_defenders.description",
-            "type": str,
-            "valid_values": ["off", "common", "uncommon", "rare", "epic"],
-            "default": "epic",
-        },
-        "retire_heroes": {
-            "display_name": "config.retire_heroes.display_name",
-            "description": "config.retire_heroes.description",
-            "type": str,
-            "valid_values": ["off", "common", "uncommon", "rare", "epic"],
-            "default": "rare",
+        "display_name": "config.llama_loot_recycling",
+        "content": {
+            "recycle_weapons": {
+                "display_name": "config.recycle_weapons.display_name",
+                "description": "config.recycle_weapons.description",
+                "type": str,
+                "valid_values": ["off", "common", "uncommon", "rare", "epic"],
+                "default": "rare",
+            },
+            "recycle_traps": {
+                "display_name": "config.recycle_traps.display_name",
+                "description": "config.recycle_traps.description",
+                "type": str,
+                "valid_values": ["off", "common", "uncommon", "rare", "epic"],
+                "default": "rare",
+            },
+            "retire_survivors": {
+                "display_name": "config.retire_survivors.display_name",
+                "description": "config.retire_survivors.description",
+                "type": str,
+                "valid_values": ["off", "common", "uncommon", "rare", "epic"],
+                "default": "epic",
+            },
+            "retire_defenders": {
+                "display_name": "config.retire_defenders.display_name",
+                "description": "config.retire_defenders.description",
+                "type": str,
+                "valid_values": ["off", "common", "uncommon", "rare", "epic"],
+                "default": "epic",
+            },
+            "retire_heroes": {
+                "display_name": "config.retire_heroes.display_name",
+                "description": "config.retire_heroes.description",
+                "type": str,
+                "valid_values": ["off", "common", "uncommon", "rare", "epic"],
+                "default": "rare",
+            },
         },
     },
 }
@@ -138,12 +141,13 @@ class ConfigManager:
                 else:
                     if key not in config_part:
                         config_part[key] = {}
-                    crawl(data_part[key], config_part[key])
+
+                    if "content" in data_part[key]:
+                        crawl(data_part[key]["content"], config_part[key])
 
         crawl(USER_CONFIG_DATA, self.user_config[account_id])
 
         self.save_user_config()
-
         return self.user_config[account_id]
 
     def save_config(self, path: Path, config: dict) -> bool:
