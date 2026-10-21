@@ -17,6 +17,8 @@ async def main():
 
     await menu.main_menu(ctx)
 
+    await ctx.epic.session.aclose()
+
     sys.exit()
 
 

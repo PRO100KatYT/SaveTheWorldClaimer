@@ -11,6 +11,10 @@ class EpicAPI:
         self.session = httpx.AsyncClient()
         self._catalog = {"expiration": "2021-11-08T19:34:00.000Z"}
 
+    def reset_headers(self) -> None:
+        self.session.headers.pop("Authorization", None)
+        self.session.headers.pop("X-EpicGames-ProfileRevisions", None)
+
     def set_access_token(self, access_token: str) -> None:
         self.session.headers.update({"Authorization": f"bearer {access_token}"})
 

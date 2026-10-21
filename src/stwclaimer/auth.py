@@ -65,4 +65,5 @@ async def login(auth_api: api.AuthAPI, account_id: str, auth_json: dict) -> None
 
     req_token = await auth_api.get_token_by_device(account_id, device_id, secret)
 
+    auth_api.epic.reset_headers()
     auth_api.epic.set_access_token(req_token["access_token"])
