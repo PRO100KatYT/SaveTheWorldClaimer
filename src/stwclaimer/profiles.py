@@ -12,6 +12,39 @@ class ProfileManager:
             await self.query_profile(profile_id)
         return self.cache[profile_id]
 
+    async def search_items(
+        self,
+        profile_id: str,
+        template_id_lower: str,
+        required_attributes: dict | None = None,
+    ) -> list:
+        profile = await self.get_profile(profile_id)
+
+        guids = []
+        for key in profile.get("items", {}):
+            item = profile["items"][key]
+
+            if item["templateId"].lower() != template_id_lower:
+                continue
+
+            if required_attributes:
+                correct_attributes = 0
+                for attribute in required_attributes:
+                    if attribute not in item["attributes"]:
+                        continue
+
+                    if required_attributes[attribute] == any or str(
+                        item["attributes"][attribute]
+                    ).lower() == str(required_attributes[attribute]):
+                        correct_attributes += 1
+
+                if correct_attributes != len(required_attributes):
+                    continue
+
+            guids.append(key)
+
+        return guids
+
     def get_profile_rvn(self, profile_id: str) -> int:
         if profile_id not in self.cache:
             self.cache[profile_id] = {"commandRevision": -1}

@@ -3,29 +3,16 @@ import core
 
 
 async def can_receive_mtx(manager: profiles.ProfileManager) -> bool:
-    profile = await manager.get_profile("common_core")
-    for item_id in profile["items"]:
-        if (
-            profile["items"][item_id]["templateId"].lower()
-            == "token:receivemtxcurrency"
-        ):
-            return True
-    return False
+    items = await manager.search_items("common_core", "token:receivemtxcurrency")
+    return len(items) > 0
 
 
 async def can_get_daily_quests(manager: profiles.ProfileManager) -> bool:
-    profile = await manager.get_profile("campaign")
-    for item_id in profile["items"]:
-        if (
-            profile["items"][item_id]["templateId"].lower()
-            == "quest:outpostquest_t1_l3"
-            and profile["items"][item_id]["attributes"]
-            .get("quest_state", "active")
-            .lower()
-            == "claimed"
-        ):
-            return True
-    return False
+    items = await manager.search_items(
+        "campaign", "quest:outpostquest_t1_l3", {"quest_state": "claimed"}
+    )
+
+    return len(items) > 0
 
 
 async def get_quest_rerolls(manager: profiles.ProfileManager) -> int:

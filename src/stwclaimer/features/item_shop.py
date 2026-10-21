@@ -9,19 +9,14 @@ async def get_offers_purchases_quantities(manager: profiles.ProfileManager) -> d
 
     count_json = defaultdict(int)
 
+    purchase_trackers = await manager.search_items(
+        "common_core", "eventpurchasetracker:generic_instance", {"event_purchases": any}
+    )
+
     common_core = await manager.get_profile("common_core")
 
-    for key in common_core["items"]:
-        if (
-            not common_core["items"][key]["templateId"].lower()
-            == "eventpurchasetracker:generic_instance"
-        ):
-            continue
-
+    for key in purchase_trackers:
         attributes = common_core["items"][key]["attributes"]
-
-        if not "event_purchases" in attributes:
-            continue
 
         for offer_id in attributes["event_purchases"]:
             count_json[offer_id] += attributes["event_purchases"][offer_id]
