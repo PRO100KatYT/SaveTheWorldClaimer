@@ -80,7 +80,7 @@ async def main(ctx: core.Context, manager: profiles.ProfileManager) -> None:
 
 
 async def select_and_replace(
-    ctx: core.Context, manager: profiles.ProfileManager, profile_changes: dict
+    ctx: core.Context, manager: profiles.ProfileManager, profile_changes: list
 ) -> None:
     while True:
         quests = await daily_quests.get_daily_quests(manager, profile_changes)

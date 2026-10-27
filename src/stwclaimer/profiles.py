@@ -45,6 +45,9 @@ class ProfileManager:
 
         return guids
 
+    def get_item_template_id(self, profile: dict, guid: str) -> str:
+        return profile["items"].get(guid, {"templateId": guid}).get("templateId")
+
     def get_profile_rvn(self, profile_id: str) -> int:
         if profile_id not in self.cache:
             self.cache[profile_id] = {"commandRevision": -1}
@@ -164,4 +167,9 @@ class ProfileManager:
                 "expectedTotalPrice": expected_total_price,
                 "gameContext": "fn",
             },
+        )
+
+    async def recycle_item_batch(self, profile_id: str, target_item_ids: list) -> dict:
+        return await self.base_request(
+            "RecycleItemBatch", profile_id, {"targetItemIds": target_item_ids}
         )

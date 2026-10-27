@@ -30,9 +30,12 @@ def is_active_daily_quest(item: dict) -> bool:
 
 
 async def get_daily_quests(
-    manager: profiles.ProfileManager, profile_changes: list = []
+    manager: profiles.ProfileManager, profile_changes: list = None
 ) -> dict:
     output = {"new_quest_ids": [], "daily_quest_items": {}}
+
+    if profile_changes is None:
+        profile_changes = []
 
     for change in profile_changes:
         if not change["changeType"] == "itemAdded":

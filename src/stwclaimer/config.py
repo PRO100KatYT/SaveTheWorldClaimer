@@ -75,35 +75,35 @@ USER_CONFIG_DATA = {
     "llama_loot_recycling": {
         "display_name": "config.llama_loot_recycling",
         "content": {
-            "recycle_weapons": {
+            "weapon": {
                 "display_name": "config.recycle_weapons.display_name",
                 "description": "config.recycle_weapons.description",
                 "type": str,
                 "valid_values": ["off", "common", "uncommon", "rare", "epic"],
                 "default": "rare",
             },
-            "recycle_traps": {
+            "trap": {
                 "display_name": "config.recycle_traps.display_name",
                 "description": "config.recycle_traps.description",
                 "type": str,
                 "valid_values": ["off", "common", "uncommon", "rare", "epic"],
                 "default": "rare",
             },
-            "retire_survivors": {
+            "survivor": {
                 "display_name": "config.retire_survivors.display_name",
                 "description": "config.retire_survivors.description",
                 "type": str,
                 "valid_values": ["off", "common", "uncommon", "rare", "epic"],
                 "default": "epic",
             },
-            "retire_defenders": {
+            "defender": {
                 "display_name": "config.retire_defenders.display_name",
                 "description": "config.retire_defenders.description",
                 "type": str,
                 "valid_values": ["off", "common", "uncommon", "rare", "epic"],
                 "default": "epic",
             },
-            "retire_heroes": {
+            "hero": {
                 "display_name": "config.retire_heroes.display_name",
                 "description": "config.retire_heroes.description",
                 "type": str,

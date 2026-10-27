@@ -57,3 +57,43 @@ async def purchase_xray_llama(manager: profiles.ProfileManager, offer: dict) -> 
         return []
 
     return notifications[0]["lootResult"]["items"]
+
+
+def get_items_to_recycle(
+    ctx: core.Context, manager: profiles.ProfileManager, items: list
+) -> list:
+    items_to_recycle = []
+
+    for entry in items:
+        template_id = entry["itemType"].lower()
+        data = ctx.ast.get_item_data(template_id)
+
+        rarity = data["rarity"]
+        weights = ctx.ast.data["rarity_weights"]
+        item_type = data["type"]
+
+        config = ctx.cfg.get_user_config(manager.mcp.account_id)["llama_loot_recycling"]
+
+        if item_type not in config:
+            continue
+
+        if config[item_type] == "off":
+            continue
+
+        if weights[rarity] > weights[config[item_type]]:
+            continue
+
+        items_to_recycle.append(entry)
+
+    return items_to_recycle
+
+
+async def recycle_llama_loot(
+    ctx: core.Context, manager: profiles.ProfileManager, items_to_recycle: list
+) -> list:
+    profile_updates = await manager.recycle_item_batch(
+        "campaign", [entry["itemGuid"] for entry in items_to_recycle]
+    )
+    profile_changes = manager.get_profile_changes(profile_updates, "campaign")
+
+    return profile_changes

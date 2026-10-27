@@ -76,6 +76,7 @@
   "llamas_cli.main.available": "{0} {1} {2} {3}!\n",
   "llamas_cli.main.opening": "Opening: {0}...",
   "llamas_cli.main.success": "Success!",
+  "llamas_cli.recycling.unavailable": "Item recycling is unavailable on this account. Complete the \"Mandatory Minimalism\" Quest in order to unlock it.\n",
   "config_cli.menu.title": "Settings",
   "config_cli.menu.general": "General Settings",
   "config_cli.menu.account": "Account Settings",
