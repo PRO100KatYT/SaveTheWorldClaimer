@@ -45,6 +45,7 @@ async def list_accounts(ctx: core.Context) -> None:
                 if counter % 3 == 0 and counter != len(auth_json)
                 else ("" if counter == len(auth_json) else ", ")
             ),
+            hide_date_time=counter % 3 != 1,
         )
         counter += 1
     input(ctx.ast.get_ui_str("auth_cli.list_accounts.pressenter"))
@@ -81,20 +82,40 @@ async def remove_account(ctx: core.Context) -> None:
 
 async def menu(ctx: core.Context) -> None:
     options = {
-        "auth_cli.menu.addaccount": add_account,
-        "auth_cli.menu.listaccounts": list_accounts,
-        "auth_cli.menu.removeaccount": remove_account,
+        "auth_cli.menu.addaccount": {
+            "function": add_account,
+            "needs_added_account": False,
+        },
+        "auth_cli.menu.listaccounts": {
+            "function": list_accounts,
+            "needs_added_account": True,
+        },
+        "auth_cli.menu.removeaccount": {
+            "function": remove_account,
+            "needs_added_account": True,
+        },
     }
 
     while True:
+        auth_json = auth.read_auth()
+
+        choices = []
+        for key in options:
+            if not options[key]["needs_added_account"]:
+                choices.append(questionary.Choice(ctx.ast.get_ui_str(key), key))
+                continue
+            if not auth_json:
+                continue
+            choices.append(questionary.Choice(ctx.ast.get_ui_str(key), key))
+
         choice = await utils_cli.select(
             ctx,
             ctx.ast.get_ui_str("auth_cli.menu.title"),
-            [questionary.Choice(ctx.ast.get_ui_str(i), i) for i in options],
+            choices,
         )
 
         if choice is False or choice is None:
             break
         ctx.log.message()
 
-        await options[choice](ctx)
+        await options[choice]["function"](ctx)
