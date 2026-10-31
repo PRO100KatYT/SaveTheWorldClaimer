@@ -10,7 +10,7 @@ def get_test_manager():
     profile_path = (
         pathlib.Path(__file__).parent / "jsons" / "profiles" / "campaign.json"
     )
-    with open(profile_path, "r") as file:
+    with open(profile_path, "r", encoding="utf-8") as file:
         profile = json.load(file)
 
     epic_api = api.EpicAPI()
@@ -218,7 +218,7 @@ def test_profile_changes_fullprofileupdate(get_test_manager):
     profile2_path = (
         pathlib.Path(__file__).parent / "jsons" / "profiles" / "campaign2.json"
     )
-    with open(profile2_path, "r") as file:
+    with open(profile2_path, "r", encoding="utf-8") as file:
         profile_changes[0]["profile"] = json.load(file)
 
     manager.process_profile_changes(profile_changes, "campaign")

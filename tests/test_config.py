@@ -54,7 +54,7 @@ def test_save_and_read_user_config():
 def test_read_non_json_global_config_file():
     cfg = config.ConfigManager()
 
-    with open(GLOBAL_CONFIG_PATH, "w") as file:
+    with open(GLOBAL_CONFIG_PATH, "w", encoding="utf-8") as file:
         file.write("e")
 
     cfg.load_global_config(GLOBAL_CONFIG_PATH)
@@ -66,7 +66,7 @@ def test_read_non_json_global_config_file():
 def test_read_non_json_user_config_file():
     cfg = config.ConfigManager()
 
-    with open(USER_CONFIG_PATH, "w") as file:
+    with open(USER_CONFIG_PATH, "w", encoding="utf-8") as file:
         file.write("e")
 
     cfg.load_user_config(USER_CONFIG_PATH)

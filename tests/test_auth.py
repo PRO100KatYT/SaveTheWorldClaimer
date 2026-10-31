@@ -23,7 +23,7 @@ def test_save_and_read_auth():
 
 
 def test_read_non_json_auth_file():
-    with open(AUTH_PATH, "w") as file:
+    with open(AUTH_PATH, "w", encoding="utf-8") as file:
         file.write("e")
 
     auth_json = auth.read_auth(AUTH_PATH)

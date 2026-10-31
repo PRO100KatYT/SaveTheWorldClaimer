@@ -152,7 +152,7 @@ class ConfigManager:
 
     def save_config(self, path: Path, config: dict) -> bool:
         try:
-            with open(path, "w") as file:
+            with open(path, "w", encoding="utf-8") as file:
                 json.dump(config, file, indent=2, ensure_ascii=False)
                 return True
         except PermissionError:
@@ -166,7 +166,7 @@ class ConfigManager:
 
     def load_config(self, path: Path, destination: dict, save_function) -> None:
         try:
-            with open(path, "r") as file:
+            with open(path, "r", encoding="utf-8") as file:
                 destination.update(json.load(file))
         except FileNotFoundError:
             save_function(path)

@@ -11,7 +11,7 @@ AUTH_CODE_LINK: str = (
 
 def save_auth(auth_json: dict, path: Path = AUTH_PATH) -> bool:
     try:
-        with open(path, "w") as file:
+        with open(path, "w", encoding="utf-8") as file:
             json.dump(auth_json, file, indent=2, ensure_ascii=False)
             return True
     except PermissionError:
@@ -20,7 +20,7 @@ def save_auth(auth_json: dict, path: Path = AUTH_PATH) -> bool:
 
 def read_auth(path: Path = AUTH_PATH) -> dict:
     try:
-        with open(path, "r") as file:
+        with open(path, "r", encoding="utf-8") as file:
             return json.load(file)
     except FileNotFoundError:
         save_auth({}, path)
