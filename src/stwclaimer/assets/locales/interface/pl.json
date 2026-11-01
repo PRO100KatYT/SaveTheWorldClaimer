@@ -78,6 +78,8 @@
   "llamas_cli.main.opening": "Otwieranie: {0}...",
   "llamas_cli.main.success": "Sukces!",
   "llamas_cli.recycling.unavailable": "Recykling przedmiotów jest niedostępny na tym koncie. Ukończ Zadanie \"Obowiązkowy minimalizm\", aby go odblokować.\n",
+  "llamas_cli.recycling.header": "Przeznaczanie do recyklingu następujących rzeczy:",
+  "llamas_cli.recycling.resources": "Zdobyte zasoby:",
   "config_cli.menu.title": "Ustawienia",
   "config_cli.menu.general": "Ustawienia Ogólne",
   "config_cli.menu.account": "Ustawienia Kont",

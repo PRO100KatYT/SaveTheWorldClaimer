@@ -36,6 +36,8 @@ def format_and_print_loot(ctx: core.Context, loot_result: list) -> None:
             f"{counter}: [{color}]{rarity} | {item_type}: {entry['quantity']}x {item_name}[/]"
         )
 
+    ctx.log.message()
+
 
 async def open_llama(
     ctx: core.Context, manager: profiles.ProfileManager, offer: dict, llama_loot: list
@@ -67,28 +69,25 @@ def format_resource_diff(resource_diff: dict) -> list:
 async def recycle_loot(
     ctx: core.Context, manager: profiles.ProfileManager, llama_loot: list
 ) -> None:
+    items_to_recycle = llamas.get_items_to_recycle(ctx, manager, llama_loot)
+    if not items_to_recycle:
+        return
+
     can_recycle_items = await inventory.can_recycle_items(manager)
     if not can_recycle_items:
         ctx.log.message(ctx.ast.get_ui_str("llamas_cli.recycling.unavailable"))
         return
 
-    items_to_recycle = llamas.get_items_to_recycle(ctx, manager, llama_loot)
-
-    if not items_to_recycle:
-        return
-
-    ctx.log.message("Recycling the following items:")
+    ctx.log.message(ctx.ast.get_ui_str("llamas_cli.recycling.header"))
     format_and_print_loot(ctx, items_to_recycle)
-    ctx.log.message()
 
     profile_changes = await llamas.recycle_llama_loot(ctx, manager, items_to_recycle)
 
     resource_diff = await inventory.filter_resource_diff(manager, ctx, profile_changes)
     diff_formatted = format_resource_diff(resource_diff)
 
-    ctx.log.message("Resources gained:")
+    ctx.log.message(ctx.ast.get_ui_str("llamas_cli.recycling.resources"))
     format_and_print_loot(ctx, diff_formatted)
-    ctx.log.message()
 
 
 async def main(ctx: core.Context, manager: profiles.ProfileManager) -> None:

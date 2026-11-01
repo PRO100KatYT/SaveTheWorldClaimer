@@ -55,7 +55,7 @@ class Assets:
         return self.items["rarities"].get(rarity_lower, rarity_lower)
 
     def get_rarity_color(self, rarity_lower: str) -> str:
-        return self.items["rarity_colors"].get(rarity_lower, "#ffffff")
+        return self.data["rarity_colors"].get(rarity_lower, "#ffffff")
 
     def get_item_str(self, template_id_lower: str) -> str:
         return self.items["items"].get(template_id_lower, template_id_lower)
