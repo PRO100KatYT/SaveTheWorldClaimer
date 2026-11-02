@@ -57,7 +57,7 @@
   "auth_cli.remove_account.title": "Select an account to remove:",
   "auth_cli.remove_account.confirmation": "Are you sure you want to remove {0} from the program?",
   "auth_cli.remove_account.success": "\nSuccessfully removed {0} from the program.\n",
-  "utils_cli.login.loggingin": "\nLogging in as {0}...",
+  "utils_cli.login.loggingin": "Logging in as {0}...",
   "utils_cli.login.success": "Success!",
   "daily_quests_cli.fetching": "\nFetching daily quests...\n",
   "daily_quests_cli.display": "{0}. {1} | Progress: {2} | Rewards: {3}",

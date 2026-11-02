@@ -11,6 +11,7 @@ async def main():
     menu.set_and_display_title(VERSION)
 
     ctx = core.Context()
+    asyncio.create_task(ctx.log.webhook_loop())
 
     if not auth.read_auth():
         await auth_cli.add_account(ctx)
@@ -18,6 +19,7 @@ async def main():
     await menu.main_menu(ctx)
 
     await ctx.epic.session.aclose()
+    await ctx.log.webhook_session.aclose()
 
     sys.exit()
 

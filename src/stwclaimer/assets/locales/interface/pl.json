@@ -58,7 +58,7 @@
   "auth_cli.remove_account.title": "Wybierz konto do usunięcia:",
   "auth_cli.remove_account.confirmation": "Jesteś pewny(a), że chcesz usunąć konto {0} z programu?",
   "auth_cli.remove_account.success": "\nPomyślnie usunięto konto {0} z programu.\n",
-  "utils_cli.login.loggingin": "\nLogowanie jako {0}...",
+  "utils_cli.login.loggingin": "Logowanie jako {0}...",
   "utils_cli.login.success": "Sukces!",
   "daily_quests_cli.fetching": "\nPozyskiwanie zadań dnia...\n",
   "daily_quests_cli.display": "{0}. {1} | Postęp: {2} | Nagrody: {3}",
