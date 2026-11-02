@@ -25,11 +25,7 @@ class Logger:
         self.webhook_url = webhook_url
 
     def message(
-        self,
-        text: str = "",
-        end: str = "\n",
-        hide_date_time: bool = False,
-        webhook_sendable: bool = False,
+        self, text: str = "", end: str = "\n", hide_date_time: bool = False
     ) -> None:
         if self.show_date_time and not hide_date_time:
             date = datetime.now().strftime("[%Y/%m/%d %H:%M:%S]")

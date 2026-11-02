@@ -1,5 +1,6 @@
 import api
 import json
+import utils
 
 
 class ProfileManager:
@@ -52,6 +53,14 @@ class ProfileManager:
         if profile_id not in self.cache:
             self.cache[profile_id] = {"commandRevision": -1}
         return self.cache[profile_id]["commandRevision"]
+
+    async def is_profile_locked(self, profile_id: str) -> bool:
+        profile = await self.get_profile(profile_id)
+        if "profileLockExpiration" not in profile:
+            return False
+        return not utils.is_past_iso_date(
+            self.cache[profile_id]["profileLockExpiration"]
+        )
 
     def set_revisions_headers(self) -> None:
         revisions = []
@@ -172,4 +181,18 @@ class ProfileManager:
     async def recycle_item_batch(self, profile_id: str, target_item_ids: list) -> dict:
         return await self.base_request(
             "RecycleItemBatch", profile_id, {"targetItemIds": target_item_ids}
+        )
+
+    async def disassemble_world_items(
+        self, profile_id: str, target_item_id_and_quantity_pairs: list
+    ) -> dict:
+        return await self.base_request(
+            "DisassembleWorldItems",
+            profile_id,
+            {"targetItemIdAndQuantityPairs": target_item_id_and_quantity_pairs},
+        )
+
+    async def destroy_world_items(self, profile_id: str, item_ids: list) -> dict:
+        return await self.base_request(
+            "DestroyWorldItems", profile_id, {"itemIds": item_ids}
         )
