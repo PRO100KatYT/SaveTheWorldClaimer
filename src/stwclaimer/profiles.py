@@ -49,6 +49,9 @@ class ProfileManager:
     def get_item_template_id(self, profile: dict, guid: str) -> str:
         return profile["items"].get(guid, {"templateId": guid}).get("templateId")
 
+    def get_type_from_template_id(self, template_id_lower: str) -> str:
+        return template_id_lower.split(":")[0]
+
     def get_profile_rvn(self, profile_id: str) -> int:
         if profile_id not in self.cache:
             self.cache[profile_id] = {"commandRevision": -1}

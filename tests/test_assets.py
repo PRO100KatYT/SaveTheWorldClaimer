@@ -60,3 +60,27 @@ def test_load_items():
         ast.items["items"]["quest:daily_huskextermination_anyhero"]
         == "Hüllenausrottung (Beliebiger Held)"
     )
+
+
+def test_get_item_power_level():
+    ast = assets.Assets(
+        "en", "pl", DATA_FILE_PATH, INTERFACE_BASE_PATH, ITEMS_BASE_PATH
+    )
+
+    power_level_1 = ast.get_item_power_level("wid_assault_auto_founders_sr_ore_t05", 50)
+    assert power_level_1 == 130
+
+    power_level_2 = ast.get_item_power_level("hid_commando_grenadegun_r_t04", 40)
+    assert power_level_2 == 89
+
+
+def test_get_plural_word():
+    ast = assets.Assets(
+        "pl", "pl", DATA_FILE_PATH, INTERFACE_BASE_PATH, ITEMS_BASE_PATH
+    )
+
+    assert ast.get_plural_word("freeLlamas", 0) == "darmowych lam"
+    assert ast.get_plural_word("freeLlamas", 1) == "darmowa lama"
+    assert ast.get_plural_word("freeLlamas", -21) == "darmowych lam"
+    assert ast.get_plural_word("freeLlamas", 37) == "darmowych lam"
+    assert ast.get_plural_word("freeLlamas", 2) == "darmowe lamy"

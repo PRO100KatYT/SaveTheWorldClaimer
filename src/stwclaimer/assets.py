@@ -45,6 +45,11 @@ class Assets:
     def get_item_data(self, template_id_lower) -> dict:
         return self.data["items"].get(template_id_lower, defaultdict(str))
 
+    def get_item_power_level(self, template_id_lower: str, level: int) -> int:
+        template_id = template_id_lower.replace("_crystal", "").replace("_ore", "")
+        str_to_check = "_" + "_".join(template_id.lower().split("_")[-2:])
+        return self.data["item_power_levels"].get(str_to_check, {}).get(f"{level}", -1)
+
     def get_ui_str(self, key: str) -> str:
         return self.ui.get(key, key)
 

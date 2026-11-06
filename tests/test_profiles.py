@@ -248,3 +248,16 @@ def test_update_revisions_headers(get_test_manager):
             manager.cache[entry["profileId"]]["commandRevision"]
             == entry["clientCommandRevision"]
         )
+
+
+def test_get_type_from_template_id(get_test_manager):
+    manager = get_test_manager
+
+    assert (
+        manager.get_type_from_template_id("hero:hid_commando_gunheadshothw_vr_t01")
+        == "hero"
+    )
+    assert (
+        manager.get_type_from_template_id("weapon:wid_assault_auto_founders_sr_ore_t05")
+        == "weapon"
+    )

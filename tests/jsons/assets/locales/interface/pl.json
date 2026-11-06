@@ -1,3 +1,11 @@
 {
+    "words": {
+        "freeLlamas": {
+            "one": "darmowa lama",
+            "few": "darmowe lamy",
+            "many": "darmowych lam",
+            "other": "darmowych lam"
+        }
+    },
     "main.login.success": "Zalogowano pomyślnie"
 }

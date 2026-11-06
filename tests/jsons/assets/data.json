@@ -1,4 +1,12 @@
 {
+    "item_power_levels": {
+        "_r_t04": {
+            "40": 89
+        },
+        "_sr_t05": {
+            "50": 130
+        }
+    },
     "items": {
         "hero:hid_commando_gunheadshothw_vr_t01": {
             "rarity": "epic",
