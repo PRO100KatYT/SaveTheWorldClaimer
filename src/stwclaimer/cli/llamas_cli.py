@@ -1,7 +1,7 @@
 from features import llamas
 import core
 import profiles
-from features import inventory
+from features import armory
 
 
 def sort_loot_by_rarity(ctx: core.Context, loot_result: list) -> list:
@@ -73,7 +73,7 @@ async def recycle_loot(
     if not items_to_recycle:
         return
 
-    can_recycle_items = await inventory.can_recycle_items(manager)
+    can_recycle_items = await armory.can_recycle_items(manager)
     if not can_recycle_items:
         ctx.log.message(ctx.ast.get_ui_str("llamas_cli.recycling.unavailable"))
         return
@@ -83,7 +83,7 @@ async def recycle_loot(
 
     profile_changes = await llamas.recycle_llama_loot(ctx, manager, items_to_recycle)
 
-    resource_diff = await inventory.filter_resource_diff(manager, ctx, profile_changes)
+    resource_diff = await armory.filter_resource_diff(manager, ctx, profile_changes)
     diff_formatted = format_resource_diff(resource_diff)
 
     ctx.log.message(ctx.ast.get_ui_str("llamas_cli.recycling.resources"))

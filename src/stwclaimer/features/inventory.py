@@ -1,43 +1,75 @@
 import core
 import profiles
-from collections import defaultdict
+
+TIERS = {
+    1: [],
+    2: ["t01"],
+    3: ["t01", "t02"],
+    4: ["t01", "t02", "t03"],
+    5: ["t01", "t02", "t03", "t04"],
+}
 
 
-async def can_recycle_items(manager: profiles.ProfileManager) -> bool:
-    items = await manager.search_items(
-        "campaign", "homebasenode:questreward_recyclecollection"
-    )
+async def save_backpack_snapshot(
+    ctx: core.Context, manager: profiles.ProfileManager
+) -> None:
+    theater0 = await manager.get_profile("theater0")
+    snapshot = []
 
-    return len(items) > 0
+    for guid in theater0["items"]:
+        template_id = manager.get_item_template_id(theater0, guid).lower()
+        item_type = manager.get_type_from_template_id(template_id)
+
+        if item_type in ["weapon", "trap"]:
+            snapshot.append(guid)
+
+    # Saving this as a string prevents it from taking a huge part of the file's vertical space
+    snapshot_str = ",".join(snapshot)
+
+    ctx.cfg.set_user_value(manager.mcp.account_id, ["backpack_snapshot"], snapshot_str)
 
 
-async def filter_resource_diff(
-    manager: profiles.ProfileManager, ctx: core.Context, profile_changes: list
-) -> dict:
-    recycle_resources = ctx.ast.data["recycle_resources"]
-    profile = await manager.get_profile("campaign")
+def read_cleaner_config(ctx: core.Context, manager: profiles.ProfileManager) -> tuple:
+    user_config = ctx.cfg.get_user_config(manager.mcp.account_id)[
+        "inventory_junk_cleaner"
+    ]
 
-    resource_diff = defaultdict(int)
+    snapshot_str = user_config["backpack_snapshot"]
+    snapshot = snapshot_str.split(",") if snapshot_str else []
 
-    for entry in profile_changes:
-        match entry["changeType"]:
-            case "itemQuantityChanged":
-                diff = entry["quantity"] - entry["oldQuantity"]
-                template_id = manager.get_item_template_id(
-                    profile, entry["itemId"]
-                ).lower()
+    return (snapshot, user_config["tier"], user_config["power_level"])
 
-                if not template_id in recycle_resources:
-                    continue
 
-                resource_diff[template_id] += diff
+async def search_for_items(
+    ctx: core.Context, manager: profiles.ProfileManager
+) -> tuple:
+    guids_to_recycle = []
+    guids_to_destroy = []
+    snapshot, tier_config, power_level_config = read_cleaner_config(ctx, manager)
 
-            case "itemAdded":
-                item = entry["item"]
+    profile = await manager.get_profile("theater0")
 
-                if not item["templateId"].lower() in recycle_resources:
-                    continue
+    for key in profile["items"]:
+        template_id, attributes, quantity = [
+            profile["items"][key].get("templateId", "").lower(),
+            profile["items"][key].get("attributes", {}),
+            profile["items"][key].get("quantity", 0),
+        ]
+        item_type = manager.get_type_from_template_id(template_id)
 
-                resource_diff[item["templateId"]] += item["quantity"]
+        if item_type == "ingredient":
+            item_tier = ctx.ast.data["items"].get(template_id, {}).get("tier", "")
+            if item_tier in TIERS[tier_config]:
+                guids_to_destroy.append(key)
+        elif (
+            item_type in ["weapon", "trap"]
+            and key not in snapshot
+            and (not template_id.startswith("weapon:buildingitemdata"))
+        ):
+            power_level = ctx.ast.get_item_power_level(
+                template_id, attributes.get("level", 50)
+            )
+            if power_level < power_level_config:
+                guids_to_recycle.append({"itemId": key, "quantity": quantity})
 
-    return resource_diff
+    return (guids_to_recycle, guids_to_destroy)
