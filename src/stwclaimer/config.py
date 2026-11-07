@@ -72,6 +72,33 @@ GLOBAL_CONFIG_DATA = {
 }
 
 USER_CONFIG_DATA = {
+    "inventory_junk_cleaner": {
+        "display_name": "config.inv_junk_cleaner",
+        "content": {
+            "backpack_snapshot": {
+                "display_name": "config.inv_junk_cleaner.snapshot.display_name",
+                "description": "config.inv_junk_cleaner.snapshot.description",
+                "type": str,
+                "valid_values": [],
+                "default": "",
+                "hidden": True,
+            },
+            "tier": {
+                "display_name": "config.inv_junk_cleaner.tier.display_name",
+                "description": "config.inv_junk_cleaner.tier.description",
+                "type": int,
+                "valid_values": [2, 3, 4, 5],
+                "default": 5,
+            },
+            "power_level": {
+                "display_name": "config.inv_junk_cleaner.power_level.display_name",
+                "description": "config.inv_junk_cleaner.power_level.description",
+                "type": int,
+                "valid_values": [],
+                "default": 130,
+            },
+        },
+    },
     "llama_loot_recycling": {
         "display_name": "config.llama_loot_recycling",
         "content": {

@@ -28,9 +28,16 @@ async def ask_for_new_value(ctx: core.Context, option_data: dict, current_value)
             ctx.ast.get_ui_str("config_cli.ask_for_value.input").format(
                 ctx.ast.get_ui_str(option_data["description"])
             ),
-            option_data["default"],
-            validate=lambda text: utils_cli.validate_type(text, option_data["type"]),
+            str(current_value),
+            validate=lambda text: (
+                True
+                if utils_cli.validate_type(text, option_data["type"])
+                else ctx.ast.get_ui_str("config_cli.invalid_input")
+            ),
         ).ask_async()
+
+        if new_value is not None:
+            new_value = option_data["type"](new_value)
 
     return new_value
 
@@ -99,6 +106,9 @@ async def account_menu(ctx: core.Context) -> None:
 
             options = {}
             for key in data_part:
+                if data_part[key].get("hidden", False):
+                    continue
+
                 display_name = ctx.ast.get_ui_str(data_part[key]["display_name"])
 
                 if "type" in data_part[key]:
