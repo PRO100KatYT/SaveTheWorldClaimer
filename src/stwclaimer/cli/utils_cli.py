@@ -62,3 +62,21 @@ def validate_type(entry, type) -> bool:
         return True
     except ValueError:
         return False
+
+
+def get_ordinal_suffix(number: int, lang: str) -> str:
+    if lang == "pl":
+        return "."
+
+    if 11 <= (number % 100) <= 13:
+        return "th"
+
+    last_digit = number % 10
+    if last_digit == 1:
+        return "st"
+    elif last_digit == 2:
+        return "nd"
+    elif last_digit == 3:
+        return "rd"
+    else:
+        return "th"
