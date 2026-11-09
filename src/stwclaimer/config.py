@@ -83,6 +83,13 @@ USER_CONFIG_DATA = {
                 "default": "",
                 "hidden": True,
             },
+            "enabled": {
+                "display_name": "config.inv_junk_cleaner.enabled.display_name",
+                "description": "config.inv_junk_cleaner.enabled.description",
+                "type": bool,
+                "valid_values": [True, False],
+                "default": False,
+            },
             "tier": {
                 "display_name": "config.inv_junk_cleaner.tier.display_name",
                 "description": "config.inv_junk_cleaner.tier.description",

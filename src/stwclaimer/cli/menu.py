@@ -1,9 +1,14 @@
 import os
-from cli import auth_cli, utils_cli, daily_quests_cli, config_cli
-from cli import claimer
 import core
 import questionary
 from datetime import datetime
+from cli import (
+    claimer,
+    auth_cli,
+    utils_cli,
+    daily_quests_cli,
+    config_cli,
+)
 
 
 def get_seasonal_greeting(ctx: core.Context) -> str:

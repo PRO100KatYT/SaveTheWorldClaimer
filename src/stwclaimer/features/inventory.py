@@ -26,26 +26,23 @@ async def save_backpack_snapshot(
     # Saving this as a string prevents it from taking a huge part of the file's vertical space
     snapshot_str = ",".join(snapshot)
 
-    ctx.cfg.set_user_value(manager.mcp.account_id, ["backpack_snapshot"], snapshot_str)
+    ctx.cfg.set_user_value(
+        manager.mcp.account_id,
+        ["inventory_junk_cleaner", "backpack_snapshot"],
+        snapshot_str,
+    )
 
 
-def read_cleaner_config(ctx: core.Context, manager: profiles.ProfileManager) -> tuple:
-    user_config = ctx.cfg.get_user_config(manager.mcp.account_id)[
-        "inventory_junk_cleaner"
-    ]
+async def search_for_items(
+    ctx: core.Context, manager: profiles.ProfileManager, user_config: dict
+) -> tuple:
+    guids_to_recycle = []
+    guids_to_destroy = []
 
     snapshot_str = user_config["backpack_snapshot"]
     snapshot = snapshot_str.split(",") if snapshot_str else []
 
-    return (snapshot, user_config["tier"], user_config["power_level"])
-
-
-async def search_for_items(
-    ctx: core.Context, manager: profiles.ProfileManager
-) -> tuple:
-    guids_to_recycle = []
-    guids_to_destroy = []
-    snapshot, tier_config, power_level_config = read_cleaner_config(ctx, manager)
+    tier_config, power_level_config = user_config["tier"], user_config["power_level"]
 
     profile = await manager.get_profile("theater0")
 
