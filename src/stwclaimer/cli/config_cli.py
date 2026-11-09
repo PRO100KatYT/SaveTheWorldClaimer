@@ -3,16 +3,16 @@ from cli import utils_cli
 import questionary
 import config
 import auth
-import config
 
 
 async def ask_for_new_value(ctx: core.Context, option_data: dict, current_value):
     if option_data["valid_values"]:
+        ctx.log.message(
+            ctx.ast.get_ui_str(option_data["description"]), hide_date_time=True
+        )
         new_value = await utils_cli.select(
             ctx,
-            ctx.ast.get_ui_str("config_cli.ask_for_value.select").format(
-                ctx.ast.get_ui_str(option_data["description"])
-            ),
+            ctx.ast.get_ui_str("config_cli.ask_for_value.select"),
             [
                 questionary.Choice(
                     str(i),
@@ -24,10 +24,11 @@ async def ask_for_new_value(ctx: core.Context, option_data: dict, current_value)
             add_back=False,
         )
     else:
+        ctx.log.message(
+            ctx.ast.get_ui_str(option_data["description"]), hide_date_time=True
+        )
         new_value = await questionary.text(
-            ctx.ast.get_ui_str("config_cli.ask_for_value.input").format(
-                ctx.ast.get_ui_str(option_data["description"])
-            ),
+            ctx.ast.get_ui_str("config_cli.ask_for_value.input"),
             str(current_value),
             validate=lambda text: (
                 True
