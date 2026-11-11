@@ -72,40 +72,6 @@ GLOBAL_CONFIG_DATA = {
 }
 
 USER_CONFIG_DATA = {
-    "inventory_junk_cleaner": {
-        "display_name": "config.inv_junk_cleaner",
-        "content": {
-            "backpack_snapshot": {
-                "display_name": "config.inv_junk_cleaner.snapshot.display_name",
-                "description": "config.inv_junk_cleaner.snapshot.description",
-                "type": str,
-                "valid_values": [],
-                "default": "",
-                "hidden": True,
-            },
-            "enabled": {
-                "display_name": "config.inv_junk_cleaner.enabled.display_name",
-                "description": "config.inv_junk_cleaner.enabled.description",
-                "type": bool,
-                "valid_values": [True, False],
-                "default": False,
-            },
-            "tier": {
-                "display_name": "config.inv_junk_cleaner.tier.display_name",
-                "description": "config.inv_junk_cleaner.tier.description",
-                "type": int,
-                "valid_values": [2, 3, 4, 5],
-                "default": 5,
-            },
-            "power_level": {
-                "display_name": "config.inv_junk_cleaner.power_level.display_name",
-                "description": "config.inv_junk_cleaner.power_level.description",
-                "type": int,
-                "valid_values": [],
-                "default": 130,
-            },
-        },
-    },
     "llama_loot_recycling": {
         "display_name": "config.llama_loot_recycling",
         "content": {
@@ -143,6 +109,348 @@ USER_CONFIG_DATA = {
                 "type": str,
                 "valid_values": ["off", "common", "uncommon", "rare", "epic"],
                 "default": "rare",
+            },
+        },
+    },
+    "inventory_junk_cleaner": {
+        "display_name": "config.inv_junk_cleaner",
+        "content": {
+            "backpack_snapshot": {
+                "display_name": "config.inv_junk_cleaner.snapshot.display_name",
+                "description": "config.inv_junk_cleaner.snapshot.description",
+                "type": str,
+                "valid_values": [],
+                "default": "",
+                "hidden": True,
+            },
+            "enabled": {
+                "display_name": "config.inv_junk_cleaner.enabled.display_name",
+                "description": "config.inv_junk_cleaner.enabled.description",
+                "type": bool,
+                "valid_values": [True, False],
+                "default": False,
+            },
+            "tier": {
+                "display_name": "config.inv_junk_cleaner.tier.display_name",
+                "description": "config.inv_junk_cleaner.tier.description",
+                "type": int,
+                "valid_values": [2, 3, 4, 5],
+                "default": 5,
+            },
+            "power_level": {
+                "display_name": "config.inv_junk_cleaner.power_level.display_name",
+                "description": "config.inv_junk_cleaner.power_level.description",
+                "type": int,
+                "valid_values": [],
+                "default": 130,
+            },
+        },
+    },
+    "item_shop_purchaser": {
+        "display_name": "config.item_shop_purchaser.display_name",
+        "content": {
+            "enabled": {
+                "display_name": "config.item_shop_purchaser.enabled.display_name",
+                "description": "config.item_shop_purchaser.enabled.description",
+                "type": bool,
+                "valid_values": [True, False],
+                "default": False,
+            },
+            "evolution_materials": {
+                "display_name": "config.item_shop_purchaser.evolution_materials.display_name",
+                "content": {
+                    "pure_drops_of_rain": {
+                        "display_name": "config.item_shop_purchaser.pure_drops_of_rain.display_name",
+                        "description": "config.item_shop_purchaser.pure_drops_of_rain.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": True,
+                        "eligible_shop_items": {
+                            "template_ids": ["accountresource:reagent_c_t01"]
+                        },
+                    },
+                    "lightning_bottles": {
+                        "display_name": "config.item_shop_purchaser.lightning_bottles.display_name",
+                        "description": "config.item_shop_purchaser.lightning_bottles.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": True,
+                        "eligible_shop_items": {
+                            "template_ids": ["accountresource:reagent_c_t02"]
+                        },
+                    },
+                    "eyes_of_the_storm": {
+                        "display_name": "config.item_shop_purchaser.eyes_of_the_storm.display_name",
+                        "description": "config.item_shop_purchaser.eyes_of_the_storm.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": True,
+                        "eligible_shop_items": {
+                            "template_ids": ["accountresource:reagent_c_t03"]
+                        },
+                    },
+                    "storm_shards": {
+                        "display_name": "config.item_shop_purchaser.storm_shards.display_name",
+                        "description": "config.item_shop_purchaser.storm_shards.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": True,
+                        "eligible_shop_items": {
+                            "template_ids": ["accountresource:reagent_c_t04"]
+                        },
+                    },
+                    "superchargers": {
+                        "display_name": "config.item_shop_purchaser.superchargers.display_name",
+                        "description": "config.item_shop_purchaser.superchargers.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": False,
+                        "eligible_shop_items": {
+                            "template_ids": [
+                                "accountresource:reagent_promotion_weapons",
+                                "accountresource:reagent_promotion_heroes",
+                                "accountresource:reagent_promotion_traps",
+                                "accountresource:reagent_promotion_survivors",
+                            ]
+                        },
+                    },
+                },
+            },
+            "flux": {
+                "display_name": "config.item_shop_purchaser.flux.display_name",
+                "content": {
+                    "legendary": {
+                        "display_name": "config.item_shop_purchaser.legendary_flux.display_name",
+                        "description": "config.item_shop_purchaser.legendary_flux.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": True,
+                        "eligible_shop_items": {
+                            "template_ids": ["accountresource:reagent_evolverarity_sr"]
+                        },
+                    },
+                    "epic": {
+                        "display_name": "config.item_shop_purchaser.epic_flux.display_name",
+                        "description": "config.item_shop_purchaser.epic_flux.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": True,
+                        "eligible_shop_items": {
+                            "template_ids": ["accountresource:reagent_evolverarity_vr"]
+                        },
+                    },
+                    "rare": {
+                        "display_name": "config.item_shop_purchaser.rare_flux.display_name",
+                        "description": "config.item_shop_purchaser.rare_flux.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": False,
+                        "eligible_shop_items": {
+                            "template_ids": ["accountresource:reagent_evolverarity_r"]
+                        },
+                    },
+                },
+            },
+            "perk_materials": {
+                "display_name": "config.item_shop_purchaser.perk_materials.display_name",
+                "content": {
+                    "legendary": {
+                        "display_name": "config.item_shop_purchaser.legendary_perkup.display_name",
+                        "description": "config.item_shop_purchaser.legendary_perkup.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": True,
+                        "eligible_shop_items": {
+                            "template_ids": [
+                                "accountresource:reagent_alteration_upgrade_sr"
+                            ]
+                        },
+                    },
+                    "epic": {
+                        "display_name": "config.item_shop_purchaser.epic_perkup.display_name",
+                        "description": "config.item_shop_purchaser.epic_perkup.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": True,
+                        "eligible_shop_items": {
+                            "template_ids": [
+                                "accountresource:reagent_alteration_upgrade_vr"
+                            ]
+                        },
+                    },
+                    "rare": {
+                        "display_name": "config.item_shop_purchaser.rare_perkup.display_name",
+                        "description": "config.item_shop_purchaser.rare_perkup.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": False,
+                        "eligible_shop_items": {
+                            "template_ids": [
+                                "accountresource:reagent_alteration_upgrade_r"
+                            ]
+                        },
+                    },
+                    "uncommon": {
+                        "display_name": "config.item_shop_purchaser.uncommon_perkup.display_name",
+                        "description": "config.item_shop_purchaser.uncommon_perkup.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": False,
+                        "eligible_shop_items": {
+                            "template_ids": [
+                                "accountresource:reagent_alteration_upgrade_uc"
+                            ]
+                        },
+                    },
+                    "re_perk": {
+                        "display_name": "config.item_shop_purchaser.re_perk.display_name",
+                        "description": "config.item_shop_purchaser.re_perk.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": False,
+                        "eligible_shop_items": {
+                            "template_ids": [
+                                "accountresource:reagent_alteration_generic"
+                            ]
+                        },
+                    },
+                },
+            },
+            "survivors": {
+                "display_name": "config.item_shop_purchaser.survivors.display_name",
+                "content": {
+                    "legendary": {
+                        "display_name": "config.item_shop_purchaser.legendary_survivors.display_name",
+                        "description": "config.item_shop_purchaser.legendary_survivors.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": True,
+                        "eligible_shop_items": {
+                            "starts_with": ["worker:"],
+                            "contains": ["_sr_"],
+                        },
+                    },
+                    "epic": {
+                        "display_name": "config.item_shop_purchaser.epic_survivors.display_name",
+                        "description": "config.item_shop_purchaser.epic_survivors.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": False,
+                        "eligible_shop_items": {
+                            "starts_with": ["worker:"],
+                            "contains": ["_vr_"],
+                        },
+                    },
+                },
+            },
+            "heroes": {
+                "display_name": "config.item_shop_purchaser.heroes.display_name",
+                "content": {
+                    "mythic_and_legendary": {
+                        "display_name": "config.item_shop_purchaser.mythic_and_legendary_heroes.display_name",
+                        "description": "config.item_shop_purchaser.mythic_and_legendary_heroes.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": False,
+                        "eligible_shop_items": {
+                            "starts_with": ["hero:"],
+                            "contains": ["_sr_"],
+                        },
+                    },
+                    "epic": {
+                        "display_name": "config.item_shop_purchaser.epic_heroes.display_name",
+                        "description": "config.item_shop_purchaser.epic_heroes.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": False,
+                        "eligible_shop_items": {
+                            "starts_with": ["hero:"],
+                            "contains": ["_vr_"],
+                        },
+                    },
+                },
+            },
+            "schematics": {
+                "display_name": "config.item_shop_purchaser.schematics.display_name",
+                "content": {
+                    "legendary": {
+                        "display_name": "config.item_shop_purchaser.legendary_schematics.display_name",
+                        "description": "config.item_shop_purchaser.legendary_schematics.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": False,
+                        "eligible_shop_items": {
+                            "starts_with": ["schematic:"],
+                            "contains": ["_sr_"],
+                        },
+                    },
+                    "epic": {
+                        "display_name": "config.item_shop_purchaser.epic_schematics.display_name",
+                        "description": "config.item_shop_purchaser.epic_schematics.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": False,
+                        "eligible_shop_items": {
+                            "starts_with": ["schematic:"],
+                            "contains": ["_vr_"],
+                        },
+                    },
+                },
+            },
+            "defenders": {
+                "display_name": "config.item_shop_purchaser.defenders.display_name",
+                "content": {
+                    "legendary": {
+                        "display_name": "config.item_shop_purchaser.legendary_defenders.display_name",
+                        "description": "config.item_shop_purchaser.legendary_defenders.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": True,
+                        "eligible_shop_items": {
+                            "starts_with": ["defender:"],
+                            "contains": ["_sr_"],
+                        },
+                    },
+                },
+            },
+            "slots": {
+                "display_name": "config.item_shop_purchaser.slots.display_name",
+                "content": {
+                    "armory": {
+                        "display_name": "config.item_shop_purchaser.armory_slots.display_name",
+                        "description": "config.item_shop_purchaser.armory_slots.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": True,
+                        "eligible_shop_items": {
+                            "template_ids": ["token:accountinventorybonus"]
+                        },
+                    },
+                    "hero_loadout": {
+                        "display_name": "config.item_shop_purchaser.hero_loadouts.display_name",
+                        "description": "config.item_shop_purchaser.hero_loadouts.description",
+                        "type": bool,
+                        "valid_values": [True, False],
+                        "default": False,
+                        "eligible_shop_items": {
+                            "template_ids": [
+                                "campaignheroloadout:purchaseabledefaultloadout"
+                            ]
+                        },
+                    },
+                },
+            },
+            "gold": {
+                "display_name": "config.item_shop_purchaser.gold.display_name",
+                "content": {
+                    "dont_spend_below": {
+                        "display_name": "config.item_shop_purchaser.dont_spend_below_gold.display_name",
+                        "description": "config.item_shop_purchaser.dont_spend_below_gold.description",
+                        "type": int,
+                        "valid_values": [],
+                        "default": 5000,
+                    },
+                },
             },
         },
     },

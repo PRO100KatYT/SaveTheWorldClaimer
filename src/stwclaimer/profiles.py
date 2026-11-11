@@ -54,7 +54,7 @@ class ProfileManager:
 
     def get_profile_rvn(self, profile_id: str) -> int:
         if profile_id not in self.cache:
-            return -1
+            self.cache[profile_id] = {"commandRevision": -1}
         return self.cache[profile_id]["commandRevision"]
 
     async def is_profile_locked(self, profile_id: str) -> bool:
