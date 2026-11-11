@@ -1,9 +1,6 @@
 from features import inventory
 import core
 import profiles
-import auth
-import api
-from cli import utils_cli
 
 
 async def assert_backpack_snapshot(
@@ -50,9 +47,11 @@ async def recycle_and_destroy_items(
                     failed += 1
 
             if failed:
-                ctx.ast.get_ui_str("junk_cleaner_cli.recycling_failed").format(
-                    len(guids_to_recycle),
-                    ctx.ast.get_plural_word("items", len(guids_to_recycle)),
+                ctx.log.message(
+                    ctx.ast.get_ui_str("junk_cleaner_cli.recycling_failed").format(
+                        failed,
+                        ctx.ast.get_plural_word("items", len(guids_to_recycle)),
+                    )
                 )
 
     if guids_to_destroy:

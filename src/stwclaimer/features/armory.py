@@ -35,9 +35,11 @@ async def filter_resource_diff(
             case "itemAdded":
                 item = entry["item"]
 
-                if not item["templateId"].lower() in recycle_resources:
+                template_id = item["templateId"].lower()
+
+                if not template_id in recycle_resources:
                     continue
 
-                resource_diff[item["templateId"]] += item["quantity"]
+                resource_diff[template_id] += item["quantity"]
 
     return resource_diff

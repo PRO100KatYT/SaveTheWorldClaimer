@@ -98,7 +98,11 @@ class McpAPI:
         self.epic = epic_api
 
     async def client_request(
-        self, operation: str, profile_id: str, rvn: int = -1, json_body: dict = {}
+        self,
+        operation: str,
+        profile_id: str,
+        rvn: int = -1,
+        json_body: dict | None = None,
     ) -> dict:
         if profile_id not in (
             "athena",
@@ -117,6 +121,9 @@ class McpAPI:
             "theater2",
         ):
             raise ValueError(f"{profile_id} is not a valid profile.")
+
+        if json_body is None:
+            json_body = {}
 
         return await self.epic.post(
             f"https://mcp-gc.live.fngw.ol.epicgames.com/fortnite/api/game/v2/profile/{self.account_id}/client/{operation}",

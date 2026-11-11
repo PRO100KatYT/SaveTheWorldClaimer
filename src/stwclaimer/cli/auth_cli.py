@@ -35,7 +35,9 @@ async def add_account(ctx: core.Context) -> None:
 
 async def list_accounts(ctx: core.Context) -> None:
     auth_json = auth.read_auth()
-    ctx.log.message(ctx.ast.get_ui_str("auth_cli.list_accounts.title"))
+    ctx.log.message(
+        ctx.ast.get_ui_str("auth_cli.list_accounts.title"), hide_date_time=True
+    )
     counter = 1
     for account_id in auth_json:
         ctx.log.message(
@@ -45,7 +47,7 @@ async def list_accounts(ctx: core.Context) -> None:
                 if counter % 3 == 0 and counter != len(auth_json)
                 else ("" if counter == len(auth_json) else ", ")
             ),
-            hide_date_time=counter % 3 != 1,
+            hide_date_time=True,
         )
         counter += 1
     input(ctx.ast.get_ui_str("auth_cli.list_accounts.pressenter"))

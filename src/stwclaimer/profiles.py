@@ -54,7 +54,7 @@ class ProfileManager:
 
     def get_profile_rvn(self, profile_id: str) -> int:
         if profile_id not in self.cache:
-            self.cache[profile_id] = {"commandRevision": -1}
+            return -1
         return self.cache[profile_id]["commandRevision"]
 
     async def is_profile_locked(self, profile_id: str) -> bool:
@@ -120,10 +120,13 @@ class ProfileManager:
         return profile_updates.get(profile_id, {}).get("profileChanges", [])
 
     async def base_request(
-        self, operation: str, profile_id: str, json_body: dict = {}
+        self, operation: str, profile_id: str, json_body: dict | None = None
     ) -> dict:
         rvn = self.get_profile_rvn(profile_id)
         self.set_revisions_headers()
+
+        if json_body is None:
+            json_body = {}
 
         res = await self.mcp.client_request(operation, profile_id, rvn, json_body)
 

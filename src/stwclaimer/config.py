@@ -3,8 +3,8 @@ from pathlib import Path
 import json
 from collections import defaultdict
 
-GLOBAL_CONFIG_PATH: Path = utils.base_path(False) / "config.json"
-USER_CONFIG_PATH: Path = utils.base_path(False) / "user_config.json"
+GLOBAL_CONFIG_PATH: Path = utils.base_path(True) / "config.json"
+USER_CONFIG_PATH: Path = utils.base_path(True) / "user_config.json"
 
 
 GLOBAL_CONFIG_DATA = {

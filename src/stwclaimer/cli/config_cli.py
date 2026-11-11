@@ -37,8 +37,10 @@ async def ask_for_new_value(ctx: core.Context, option_data: dict, current_value)
             ),
         ).ask_async()
 
-        if new_value is not None:
-            new_value = option_data["type"](new_value)
+    if new_value is not None:
+        new_value = option_data["type"](new_value)
+    else:
+        new_value = current_value
 
     return new_value
 

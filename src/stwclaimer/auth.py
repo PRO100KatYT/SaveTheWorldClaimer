@@ -3,7 +3,7 @@ from pathlib import Path
 import json
 import api
 
-AUTH_PATH: Path = utils.base_path(False) / "auth.json"
+AUTH_PATH: Path = utils.base_path(True) / "auth.json"
 AUTH_CODE_LINK: str = (
     "https://www.epicgames.com/id/logout?redirectUrl=https%3A%2F%2Fwww.epicgames.com%2Fid%2Flogin%3FredirectUrl%3Dhttps%253A%252F%252Fwww.epicgames.com%252Fid%252Fapi%252Fredirect%253FclientId%253D3f69e56c7649492c8cc29f1af08a8a12%2526responseType%253Dcode"
 )
