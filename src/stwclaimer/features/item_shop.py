@@ -226,7 +226,7 @@ async def get_affordable_purchase_quantity(
     unit_price = offer["prices"][0]["finalPrice"]
 
     return min(
-        left_to_buy, max(owned_gold - min_gold_threshold, 0) // max(unit_price, 0)
+        left_to_buy, max(owned_gold - min_gold_threshold, 0) // max(unit_price, 1)
     )
 
 

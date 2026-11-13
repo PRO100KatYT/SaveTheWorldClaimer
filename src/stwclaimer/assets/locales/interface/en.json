@@ -87,6 +87,8 @@
   "junk_cleaner_cli.recycling": "Recycling {0} backpack {1}...\n",
   "junk_cleaner_cli.recycling_failed": "Failed to recycle {0} {1}. Moving to the destroy list.\n",
   "junk_cleaner_cli.destroying": "Destroying {0} backpack {1}...\n",
+  "item_shop_cli.purchased": "Purchased: [{5}]{0} | {1}: {2}x {3}[/]",
+  "item_shop_cli.goldspent": "Spent {0} gold ({1} left).\n",
   "config_cli.menu.title": "Settings",
   "config_cli.menu.general": "General Settings",
   "config_cli.menu.account": "Account Settings",

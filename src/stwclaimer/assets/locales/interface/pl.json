@@ -88,6 +88,8 @@
   "junk_cleaner_cli.recycling": "Recykling {0} {1} z plecaka...\n",
   "junk_cleaner_cli.recycling_failed": "Nie udało się poddać recyklingowi {0} {1}. Zostaną dołączone do zniszczenia.\n",
   "junk_cleaner_cli.destroying": "Niszczenie {0} {1} z plecaka...\n",
+  "item_shop_cli.purchased": "Kupiono: [{5}]{0} | {1}: {2}x {3}[/]",
+  "item_shop_cli.goldspent": "Wydano {0} złota (pozostało: {1}).\n",
   "config_cli.menu.title": "Ustawienia",
   "config_cli.menu.general": "Ustawienia Ogólne",
   "config_cli.menu.account": "Ustawienia Kont",
