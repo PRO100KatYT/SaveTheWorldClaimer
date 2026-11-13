@@ -47,8 +47,8 @@ async def purchase_xray_llama(manager: profiles.ProfileManager, offer: dict) -> 
         profile_id="common_core",
         offer_id=offer["offerId"],
         purchase_quantity=1,
-        currency="GameItem",
-        currency_subtype="AccountResource:currency_xrayllama",
+        currency=offer["prices"][0]["currencyType"],
+        currency_subtype=offer["prices"][0]["currencySubType"],
         expected_total_price=0,
     )
 
