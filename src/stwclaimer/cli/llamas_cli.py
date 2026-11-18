@@ -52,7 +52,11 @@ async def open_llama(
     loot_items = await llamas.purchase_xray_llama(manager, offer)
     llama_loot.extend(loot_items)
 
-    ctx.log.message(ctx.ast.get_ui_str("llamas_cli.main.success"), hide_date_time=True)
+    ctx.log.message(
+        ctx.ast.get_ui_str("llamas_cli.main.success"),
+        hide_date_time=True,
+        exclude_from_webhooks=True,
+    )
 
     format_and_print_loot(ctx, loot_items)
 

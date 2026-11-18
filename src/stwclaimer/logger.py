@@ -1,4 +1,5 @@
 from rich.console import Console
+from rich.text import Text
 from datetime import datetime
 import asyncio
 import httpx
@@ -25,7 +26,11 @@ class Logger:
         self.webhook_url = webhook_url
 
     def message(
-        self, text: str = "", end: str = "\n", hide_date_time: bool = False
+        self,
+        text: str = "",
+        end: str = "\n",
+        hide_date_time: bool = False,
+        exclude_from_webhooks: bool = False,
     ) -> None:
         if self.show_date_time and not hide_date_time:
             date = datetime.now().strftime("[%Y/%m/%d %H:%M:%S]")
@@ -34,9 +39,10 @@ class Logger:
             ]
             text = "\n".join(lines)
 
-        if self.webhook_url and self._webhooks_enabled:
+        if self.webhook_url and self._webhooks_enabled and not exclude_from_webhooks:
             for line in text.split("\n"):
-                self.webhook_queue.put_nowait(line)
+                text_without_colors = Text.from_markup(line).plain
+                self.webhook_queue.put_nowait(text_without_colors)
 
         self.console.print(text, end=end)
 
@@ -51,9 +57,11 @@ class Logger:
             if text:
                 try:
                     await self.webhook_session.post(
-                        self.webhook_url, json={"content": text}
+                        self.webhook_url,
+                        params={"wait": "true"},
+                        json={"content": text},
                     )
                 except:
                     pass
 
-            await asyncio.sleep(0.7)
+            await asyncio.sleep(0.9)

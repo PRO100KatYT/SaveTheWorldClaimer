@@ -13,7 +13,11 @@ async def login_with_printing(
 
     await auth.login(ctx.auth, account_id, auth_json)
 
-    ctx.log.message(ctx.ast.get_ui_str("utils_cli.login.success"), hide_date_time=True)
+    ctx.log.message(
+        ctx.ast.get_ui_str("utils_cli.login.success"),
+        hide_date_time=True,
+        exclude_from_webhooks=True,
+    )
 
 
 async def select(

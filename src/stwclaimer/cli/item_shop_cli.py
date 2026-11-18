@@ -9,13 +9,14 @@ def print_purchase_info(ctx: core.Context, offer: dict, purchase_quantity: int) 
         quantity = purchase_quantity * item["quantity"]
         name = ctx.ast.get_item_str(template_id)
         item_data = ctx.ast.get_item_data(template_id)
-        rarity = ctx.ast.get_rarity_str(item_data.get("rarity", "???"))
+        rarity = item_data.get("rarity", "???")
+        rarity_str = ctx.ast.get_rarity_str(rarity)
         color = ctx.ast.get_rarity_color(rarity)
         item_type = ctx.ast.get_type_str(item_data.get("type", "???"))
 
         ctx.log.message(
             ctx.ast.get_ui_str("item_shop_cli.purchased").format(
-                rarity, item_type, quantity, name, color
+                rarity_str, item_type, quantity, name, color
             )
         )
 
